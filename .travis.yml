@@ -4,6 +4,6 @@ php:
   - '7.0'
 install:
   - composer install
-  - composer dumo-autoload
+  - composer dump-autoload
 script:
   - 
