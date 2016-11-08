@@ -1,7 +1,7 @@
 {
     "autoload": {
-        "classmap": [
-            "app/models"
-        ]
+        "psr-4": {
+            "Aluc\\": "app/Aluc"
+        }
     }
 }
