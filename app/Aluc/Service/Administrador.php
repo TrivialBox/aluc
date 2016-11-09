@@ -9,9 +9,6 @@ class Administrador extends Persona {
         parent::__construct($id, $nombre);
     }
 
-    public static function getNewInstace($id, $nombre) {
-    }
-
     public static function getInstance($id) {
     }
 }
