@@ -5,7 +5,7 @@ namespace Aluc\Service;
  *
  */
 class Usuario extends Persona {
-    function __construct($id, $nombre) {
-        parent::__construct($id, $nombre);
+    function __construct($id) {
+        parent::__construct($id);
     }
 }

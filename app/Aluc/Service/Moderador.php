@@ -6,8 +6,8 @@ namespace Aluc\Service;
  */
 class Moderador extends Usuario {
 
-    function __construct($id, $nombre) {
-        parent::__construct($id, $nombre);
+    function __construct($id) {
+        parent::__construct($id);
     }
 
     public function getAllLaboratorios() {

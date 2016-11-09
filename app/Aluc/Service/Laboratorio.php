@@ -1,12 +1,11 @@
 <?php
 namespace Aluc\Service;
 
-/**
- *
- */
-class Persona {
+class Laboratorio {
     public $id;
-    public $nombre;
+    public $capacidad;
+    public $descripcion;
+    public $horario;
 
     function __construct($id) {
         $this->id = $id;
