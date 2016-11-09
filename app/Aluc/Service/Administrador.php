@@ -2,7 +2,7 @@
 namespace Aluc\Service;
 
 /**
- *
+ * Usuario que puede crear nuevos moderadores en el sistema.
  */
 class Administrador extends Persona {
     protected function __construct($id, $nombre) {

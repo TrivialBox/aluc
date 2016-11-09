@@ -1,6 +1,9 @@
 <?php
 namespace Aluc\Service;
 
+/**
+ * Representación de un lector de códigos QR.
+ */
 class Lector {
     public $id;
     public $ip;

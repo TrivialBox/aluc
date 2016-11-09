@@ -1,6 +1,10 @@
 <?php
 namespace Aluc\Service;
 
+/**
+ * Representación de un laboratorio, el cual debe estar coordinado
+ * por al menos un moderador.
+ */
 class Laboratorio {
     public $id;
     public $nombre;
@@ -10,7 +14,10 @@ class Laboratorio {
 
     private $moderadores;
 
-    private function __construct($id, $nombre, $capacidad, $descripcion, Horario $horario, array $moderadores) {
+    private function __construct(
+        $id, $nombre, $capacidad, $descripcion, Horario $horario,
+        array $moderadores
+    ) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->capacidad = $capacidad;

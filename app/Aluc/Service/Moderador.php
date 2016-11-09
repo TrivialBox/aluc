@@ -2,7 +2,7 @@
 namespace Aluc\Service;
 
 /**
- *
+ * Usuario que asegura el correcto uso de las reservas.
  */
 class Moderador extends Persona {
     public $laboratorio_id;

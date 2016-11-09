@@ -2,7 +2,7 @@
 namespace Aluc\Service;
 
 /**
- *
+ * Representación de una reserva en el sistema.
  */
 class Reserva {
     public $id;

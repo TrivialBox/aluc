@@ -2,7 +2,7 @@
 namespace Aluc\Service;
 
 /**
- *
+ * Representación de una persona en el sistema.
  */
 abstract class Persona {
     public $id;

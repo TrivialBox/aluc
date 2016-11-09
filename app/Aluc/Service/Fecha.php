@@ -1,6 +1,9 @@
 <?php
 namespace Aluc\Service;
 
+/**
+ * Fecha de una reserva.
+ */
 class Fecha {
     public $fecha;
     public $hora_inicio;
