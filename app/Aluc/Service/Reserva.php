@@ -12,11 +12,31 @@ class Reserva {
     public $tipo_uso;
     public $estado;
     public $laboratorio_id;
-    private $fecha;
 
+    private $fecha;
     private $codigo_secreto;
 
-    function __construct($usuario_id, $laboratorio_id, $fecha) {
+    private function __construct(
+        $usuario_id, $laboratorio_id, $fecha, $usuario_id,
+        $descripcion, $numero_usuarios, $tipo_uso, $estado
+    ) {
+        $this->usuario_id = $usuario_id;
+        $this->laboratorio_id = $laboratorio_id;
+        $this->fecha = $fecha;
+    }
+
+    public static function getNewInstance(
+        $usuario_id, $laboratorio_id, $fecha, $usuario_id,
+        $descripcion, $numero_usuarios, $tipo_uso, $estado
+    ) {
+        return new self(
+            $usuario_id, $laboratorio_id, $fecha, $usuario_id,
+            $descripcion, $numero_usuarios, $tipo_uso, $estado
+        );
+    }
+
+    public static function getInstance($id) {
+        die('FALTA');
     }
 
     private function generarCodigoSecreto() {

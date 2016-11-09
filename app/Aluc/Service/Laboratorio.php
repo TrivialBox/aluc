@@ -7,7 +7,14 @@ class Laboratorio {
     public $descripcion;
     public $horario;
 
-    function __construct($id) {
+    private function __construct($id, $capacidad, $descripcion, Horario $horario) {
         $this->id = $id;
+        $this->capacidad = $capacidad;
+        $this->descripcion = $descripcion;
+        $this->horario = $horario;
+    }
+
+    public static function getInstance($id) {
+
     }
 }

@@ -5,10 +5,14 @@ namespace Aluc\Service;
  *
  */
 class Moderador extends Usuario {
-
-    function __construct($id) {
-        parent::__construct($id);
+    public static function getNewInstace($id, $nombre) {
+        return parent::getNewInstace($id, $nombre);
     }
+
+    public static function getInstance($id) {
+        die('FALTA');
+    }
+
 
     public function getAllLaboratorios() {
         die("FALTA HACER!");

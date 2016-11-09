@@ -5,7 +5,10 @@ namespace Aluc\Service;
  *
  */
 class Usuario extends Persona {
-    function __construct($id) {
-        parent::__construct($id);
+    public static function getNewInstace($id, $nombre) {
+        return parent::getNewInstace($id, $nombre);
+    }
+
+    public static function getInstance($id) {
     }
 }

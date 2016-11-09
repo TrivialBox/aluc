@@ -5,7 +5,11 @@ namespace Aluc\Service;
  *
  */
 class Administrador extends Moderador {
-    function __construct($id) {
-        parent::__construct($id);
+    public static function getNewInstace($id, $nombre) {
+        return parent::getNewInstace($id, $nombre);
+    }
+
+    public static function getInstance($id) {
+        die('FALTA');
     }
 }
