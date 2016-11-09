@@ -4,7 +4,7 @@ namespace Aluc\Service;
 /**
  *
  */
-class Administrador {
+class Administrador extends Moderador {
     function __construct($id, $nombre) {
         parent::__construct($id, $nombre);
     }
