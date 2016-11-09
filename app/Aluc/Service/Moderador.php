@@ -4,17 +4,21 @@ namespace Aluc\Service;
 /**
  *
  */
-class Moderador extends Usuario {
-    public static function getNewInstace($id, $nombre) {
-        return parent::getNewInstace($id, $nombre);
+class Moderador extends Persona {
+    public $laboratorio_id;
+
+    protected function __construct($id, $nombre, $laboratorio_id) {
+        parent::__construct($id, $nombre);
+        $this->laboratorio_id = $laboratorio_id;
+    }
+
+    public static function getNewInstace($id, $nombre, $laboratorio_id) {
+        return new self($id, $nombre, $laboratorio_id);
     }
 
     public static function getInstance($id) {
-        die('FALTA');
     }
 
-
-    public function getAllLaboratorios() {
-        die("FALTA HACER!");
+    public function getLaboratorio() {
     }
 }

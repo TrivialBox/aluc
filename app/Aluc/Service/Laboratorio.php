@@ -3,18 +3,35 @@ namespace Aluc\Service;
 
 class Laboratorio {
     public $id;
+    public $nombre;
     public $capacidad;
     public $descripcion;
     public $horario;
 
-    private function __construct($id, $capacidad, $descripcion, Horario $horario) {
+    private $moderadores;
+
+    private function __construct($id, $nombre, $capacidad, $descripcion, Horario $horario, array $moderadores) {
         $this->id = $id;
+        $this->nombre = $nombre;
         $this->capacidad = $capacidad;
         $this->descripcion = $descripcion;
         $this->horario = $horario;
+        $this->moderadores = $moderadores;
     }
 
     public static function getInstance($id) {
+
+    }
+
+    public function getModeradores() {
+
+    }
+
+    public function addModerador(Moderador $moderador) {
+
+    }
+
+    public function delModerador($id) {
 
     }
 }
