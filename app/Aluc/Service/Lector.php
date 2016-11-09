@@ -8,17 +8,19 @@ class Lector {
     public $id;
     public $ip;
     public $mac;
+    public $laboratorio_id;
 
     private $token;
 
-    private function __construct($id, $ip, $mac, $token) {
+    private function __construct($id, $ip, $mac, $token, $laboratorio_id) {
         $this->id = $id;
         $this->ip = $ip;
         $this->mac = $mac;
         $this->token = $token;
+        $this->laboratorio_id = $laboratorio_id;
     }
 
-    public static function getNewInstance($ip, $mac) {
+    public static function getNewInstance($ip, $mac, $laboratorio_id) {
 
     }
 
