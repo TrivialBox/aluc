@@ -16,24 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `moderadorLaboratorio`
---
-
-DROP TABLE IF EXISTS `moderadorLaboratorio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `moderadorLaboratorio` (
-  `id_moderador` varchar(10) NOT NULL,
-  `id_laboratorio` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_moderador`,`id_laboratorio`),
-  UNIQUE KEY `id_moderador_UNIQUE` (`id_moderador`),
-  KEY `fk_moderadorLaboratorio_2_idx` (`id_laboratorio`),
-  CONSTRAINT `fk_moderadorLaboratorio_1` FOREIGN KEY (`id_moderador`) REFERENCES `moderador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_moderadorLaboratorio_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `moderadorLaboratorio`
 --
 
@@ -51,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-11 14:22:31
+-- Dump completed on 2016-11-11 14:50:26

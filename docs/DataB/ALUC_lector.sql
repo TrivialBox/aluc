@@ -16,25 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `lector`
---
-
-DROP TABLE IF EXISTS `lector`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `lector` (
-  `id` varchar(10) NOT NULL,
-  `ip` varchar(55) DEFAULT NULL,
-  `mac` varchar(70) DEFAULT NULL,
-  `token` varchar(100) DEFAULT NULL,
-  `id_laboratorio` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_lector_1_idx` (`id_laboratorio`),
-  CONSTRAINT `fk_lector_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `lector`
 --
 
@@ -52,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-11 14:22:31
+-- Dump completed on 2016-11-11 14:50:26
