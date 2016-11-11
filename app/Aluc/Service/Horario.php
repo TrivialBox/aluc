@@ -1,6 +1,9 @@
 <?php
 namespace Aluc\Service;
 
+/**
+ * Horario dividido en dos jornadas.
+ */
 class Horario {
     public $jornada_1;
     public $jornada_2;
