@@ -10,6 +10,6 @@ install:
   - composer install
   - composer dump-autoload
 before_script:
-  - mysqladmin -u root -p '' password 'root1234'
+  - mysqladmin -u root password 'root1234'
 script:
   - phpunit
