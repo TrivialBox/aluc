@@ -76,17 +76,40 @@ class Database {
     private function cat_values($array) {
         // TODO sanitizar consulta
         $keys = array_keys($array);
-        $values = array();
-        foreach (array_values($array) as $value) {
-            $values[] = "'{$value}'";
-        }
+        $values = $this->quote_string(array_values($array));
         return array(
             'keys' => $keys,
             'values' => $values
         );
     }
 
-    public function select() {
+    private function quote_string($array) {
+        $values = array();
+        foreach ($array as $value) {
+            $values[] = "'{$value}'";
+        }
+        return $values;
+    }
+
+    public function select($table_name, $columns = "*", $where = null, $order = null) {
+        if ($columns !== '*') {
+            $columns = $this->quote_string($columns);
+            $columns = implode(',', $columns);
+        }
+        $sql = "SELECT {$columns} FROM {$table_name}";
+        if ($where != null) {
+            $sql .= " WHERE {$where}";
+        }
+        if ($order != null) {
+            $sql .= " ORDER BY {$order}";
+        }
+        $result = $this->query($sql);
+        $iterator = function ($result) {
+            while ($row = $result->fetch_assoc()) {
+                yield $row;
+            }
+        };
+        return $iterator($result);
     }
 
     public function delete() {
