@@ -2,8 +2,14 @@ language: php
 php:
   - '5.6'
   - '7.0'
+services:
+  - mysql
+before_install:
+  - mysql -e "create database IF NOT EXISTS ALUC;" -u root
 install:
   - composer install
   - composer dump-autoload
+before_script:
+  - mysqladmin -u root -p '' password 'root1234'
 script:
   - phpunit
