@@ -15,4 +15,24 @@ class ModeradorDao {
         }
         return static::$instance;
     }
+
+    public function save($obj){
+        $this->database->insert("moderador",$obj);
+
+        //impelemtar un template para retorna
+        return $obj;
+    }
+
+    public function get($cedula){
+        $retur = $this->database->select("modelador","*","cedula = ".$cedula,null);
+        //implementar el template
+        return $retur;
+    }
+
+    public function getList(){
+        $retur = $this->database->select("modelador","*",null,"asc");
+
+        //implemntar el template
+        return $retur;
+    }
 }
