@@ -34,7 +34,7 @@ class Laboratorio {
 
     }
 
-    public function addModerador(Moderador $moderador) {
+    public function addModerador($id) {
 
     }
 
