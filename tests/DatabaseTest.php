@@ -5,5 +5,6 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
     public function testConexion() {
         $db = new Database();
         $db->connect();
+        $this->assertEmpty($db->error());
     }
 }

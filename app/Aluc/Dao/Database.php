@@ -55,6 +55,10 @@ class Database {
         return $this->conn->query($sql);
     }
 
+    public function error() {
+        return $this->conn->error;
+    }
+
     public function insert($table_name, $values) {
         $items = $this->cat_values($values);
         $values = implode(',', $items['values']);
@@ -64,7 +68,7 @@ class Database {
 
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al insertar {$values}. {$this->conn->error}"
+                "Error al insertar {$values}. {$this->error()}"
             );
         }
     }

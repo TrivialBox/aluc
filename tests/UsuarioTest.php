@@ -15,4 +15,3 @@ class UsuarioTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($actual, $esperado);
     }
 }
-?>

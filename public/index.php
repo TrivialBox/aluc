@@ -9,4 +9,3 @@ $valores = array(
 );
 
 TemplateGenerator::generate($valores, 'template_ejemplo.php');
-
