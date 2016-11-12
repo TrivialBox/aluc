@@ -91,7 +91,7 @@ class Database {
         return $values;
     }
 
-    public function select($table_name, $columns = "*", $where = null, $order = null) {
+    public function select($table_name, $columns = '*', $where = null, $order = null) {
         if ($columns !== '*') {
             $columns = $this->quote_string($columns);
             $columns = implode(',', $columns);
