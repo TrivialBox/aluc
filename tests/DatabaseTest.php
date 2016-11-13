@@ -1,6 +1,6 @@
 <?php
-use Aluc\Dao\Database;
 use PHPUnit\Framework\TestCase;
+use Aluc\Dao\Database;
 
 class DatabaseTest extends Testcase {
     public function testConexion() {

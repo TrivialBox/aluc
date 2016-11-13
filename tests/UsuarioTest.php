@@ -1,7 +1,6 @@
 <?php
-// use PHPUnit\Framework\TestCase;
-use Aluc\Modulo\Usuario;
 use PHPUnit\Framework\TestCase;
+use Aluc\Modulo\Usuario;
 
 class UsuarioTest extends Testcase {
     private $usuario;
