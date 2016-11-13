@@ -1,12 +1,12 @@
 <?php
-namespace Aluc\Service;
+namespace Aluc\Tools;
 
 define('TEMPLATES_PATH', __DIR__ . '/../../../resources/templates');
 
 class TemplateGenerator {
     public static function generate(array $values, $template_name) {
         extract($values);
-        include TEMPLATES_PATH . "/$template_name";
+        include TEMPLATES_PATH . "/{$template_name}";
     }
 }
 
