@@ -1,3 +1,7 @@
+<?php
+
+
+?>
 <div>
     <!-- Lista de todos los moderadores -->
     <div>
@@ -28,9 +32,9 @@
     <div>
         <h2>Agregar nuevo moderador</h2>
         <form action="" method="post">
-            <label>ID</label>
+            <label for="id">ID</label>
             <br>
-            <input type="text" name="id">
+            <input type="text" name="id" id="id">
             <br>
             <input type="submit" value="Agregar">
         </form>
