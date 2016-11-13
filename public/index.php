@@ -13,9 +13,14 @@ function home() {
     echo 'Página de inicio';
 }
 
+function not_found() {
+    include '404.html';
+}
+
 Urls::serve_request(
     array(
         '/^\/$/' => 'home',
-        '/^\/admin\/moderadores$/i' => 'moderadores'
+        '/^\/admin\/moderadores$/i' => 'moderadores',
+        '/.*/' => 'not_found'
     )
 );
