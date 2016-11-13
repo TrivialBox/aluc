@@ -5,8 +5,6 @@ class Urls {
     private static function get_url() {
         $base_url = static::get_current_uri();
         return $base_url;
-        // $routes = array();
-        // $routes = explode('/', $base_url);
     }
 
     private static function get_current_uri() {
