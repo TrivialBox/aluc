@@ -1,7 +1,3 @@
-<?php
-
-
-?>
 <div>
     <!-- Lista de todos los moderadores -->
     <div>
