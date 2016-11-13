@@ -10,7 +10,7 @@ class Urls {
     }
 
     private static function get_current_uri() {
-        // Copy % paste, no tocar!
+        // Copy & paste, no tocar!
         $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
         $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
         if (strstr($uri, '?')) {
