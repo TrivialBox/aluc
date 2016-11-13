@@ -25,6 +25,7 @@ class Urls {
         foreach ($urls as $url => $func) {
             if (preg_match($url, $base_url)) {
                 $func();
+                break;
             }
         }
     }
