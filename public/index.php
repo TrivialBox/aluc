@@ -2,13 +2,11 @@
 include_once '../app/init.php';
 
 use Aluc\Tools\Urls;
+use Aluc\Views\ModeradoresView;
 
 
-function funcion_saludar() {
-    if (isset($_GET['user']))
-    echo "Hola {$_GET['user']}";
-    else
-        echo "no :(";
+function moderadores() {
+    ModeradoresView::getInstance()->listAll()->render();
 }
 
 function home() {
@@ -18,6 +16,6 @@ function home() {
 Urls::serve_request(
     array(
         '/^\/$/' => 'home',
-        '/^\/admin\/moderadores$/i' => 'funcion_saludar'
+        '/^\/admin\/moderadores$/i' => 'moderadores'
     )
 );
