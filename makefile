@@ -10,3 +10,6 @@ update:
 
 class:
 	composer dump-autoload
+
+doc:
+	vendor/bin/apigen generate --config=apigen.yaml
