@@ -17,7 +17,7 @@ class ModeradoresView {
 
     public static function getInstance() {
         if (static::$instance == null) {
-            static::$instance = new self();
+            static::$instance = new static();
         }
         return static::$instance;
     }
