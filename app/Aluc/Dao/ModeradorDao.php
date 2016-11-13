@@ -1,6 +1,8 @@
 <?php
 namespace Aluc\Dao;
 
+use Aluc\Service\Moderador;
+
 class ModeradorDao {
     private $database;
     private static $instance;
@@ -17,22 +19,53 @@ class ModeradorDao {
     }
 
     public function save($obj){
-        $this->database->insert("moderador",$obj);
 
-        //impelemtar un template para retorna
+        $datos = array();
+        $nombre = get_class($obj);
+        if($nombre=="Moderador"){
+            $datos["id"]=$obj->id;
+            $datos["nombre"]=$obj->nombre;
+            $datos["id_laboratorio"]=$obj->id_laboratorio;
+            $this->database->insert("moderador",$datos);
+        }else{
+            die("Este onjeto no pertenece a esta clase.");
+        }
+
+
         return $obj;
     }
 
     public function get($cedula){
-        $retur = $this->database->select("modelador","*","cedula = ".$cedula,null);
-        //implementar el template
-        return $retur;
+        $retur = $this->database->select("moderador","*","cedula = {$cedula}",null);
+        $id = $retur[0];
+        $nombre = $retur[1];
+        $id_lab = $retur[2];
+        $moderador = Moderador::getNewInstace($id,$nombre,$id_lab);
+        return $moderador;
     }
 
+    public function del($cedula,$id_laboratorio){
+        $this->database->delete("moderador","cedula = {$cedula} and id_laboratorio = {$id_laboratorio} ");
+    }
     public function getList(){
-        $retur = $this->database->select("modelador","*",null,"asc");
+        //TODO realizar un array de objetos pra retornar doto por medio de iterador
+        $retur = $this->database->select("moderador","*",null,"asc");
+        $array = ArrayObject();
 
-        //implemntar el template
-        return $retur;
+        foreach ($retur as $valor){
+            $id = $valor[0];
+            $nombre = $valor[1];
+            $id_lab = $valor[2];
+            $moderador = Moderador::getNewInstace($id,$nombre,$id_lab);
+            $array->append($moderador);
+        }
+        unset($array);
+        $iterator = function ($array) {
+            while ($row = $array->fetch_assoc()) {
+                yield $row;
+            }
+        };
+        return 1;
+        //TODO en el retorno hacer que regrese
     }
 }

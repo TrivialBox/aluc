@@ -112,9 +112,26 @@ class Database {
         return $iterator($result);
     }
 
-    public function delete() {
+    public function delete($table_name, $where = null) {
+        $sql = "DELETE {$table_name}";
+        if ($where != null) {
+            $sql .= " WHERE {$where}";
+        }
+        $this->query($sql);
+        return 1;
     }
 
-    public function update() {
+    public function update($table_name, $columns = '*', $where = null, $values) {
+        $sql = "DELETE {$table_name} SET ";
+        foreach ($values as $key => $value){
+            $sql.="{$key} = {$value}, ";
+        }
+        unset($values);
+        $sql=substr($sql,0,strlen($sql)-2);  //corto la ultima coma con su respectivo espacio
+        $sql .= " WHERE {$where}";
+
+        $resul = $this->query($sql);
+
+
     }
 }
