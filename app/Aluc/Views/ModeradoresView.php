@@ -24,6 +24,7 @@ class ModeradoresView {
 
     public function render() {
         TemplateGenerator::generate($this->data, $this->template);
+        return $this;
     }
 
     public function listAll() {
