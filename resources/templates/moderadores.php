@@ -27,7 +27,7 @@
     </div>
     <div>
         <h2>Agregar nuevo moderador</h2>
-        <form>
+        <form action="" method="post">
             <label>ID</label>
             <br>
             <input type="text" name="id">
