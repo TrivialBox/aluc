@@ -76,24 +76,28 @@ class Database {
     private function cat_values($array) {
         // TODO sanitizar consulta
         $keys = array_keys($array);
-        $values = $this->quote_string(array_values($array));
+        $values = $this->quote_array_string(array_values($array));
         return array(
             'keys' => $keys,
             'values' => $values
         );
     }
 
-    private function quote_string($array) {
+    private function quote_array_string($array) {
         $values = array();
         foreach ($array as $value) {
-            $values[] = "'{$value}'";
+            $values[] = $this->quote_string($value);
         }
         return $values;
     }
 
+    private function quote_string($str) {
+        return "'{$str}'";
+    }
+
     public function select($table_name, $columns = '*', $where = null, $order = null) {
         if ($columns !== '*') {
-            $columns = $this->quote_string($columns);
+            $columns = $this->quote_array_string($columns);
             $columns = implode(',', $columns);
         }
         $sql = "SELECT {$columns} FROM {$table_name}";
@@ -112,26 +116,21 @@ class Database {
         return $iterator($result);
     }
 
-    public function delete($table_name, $where = null) {
-        $sql = "DELETE {$table_name}";
-        if ($where != null) {
-            $sql .= " WHERE {$where}";
-        }
+    public function delete($table_name, $where) {
+        $sql = "DELETE FROM {$table_name}
+                WHERE {$where}
+        ";
         $this->query($sql);
-        return 1;
     }
 
-    public function update($table_name, $columns = '*', $where = null, $values) {
-        $sql = "DELETE {$table_name} SET ";
-        foreach ($values as $key => $value){
-            $sql.="{$key} = {$value}, ";
+    public function update($table_name, $columns, $where) {
+        $sql = "UPDATE {$table_name}";
+        $columns_set = array();
+        foreach ($columns as $key => $value){
+            $columns_set[] = $this->quote_string($key) . '=' . $this->quote_string($value);
         }
-        unset($values);
-        $sql=substr($sql,0,strlen($sql)-2);  //corto la ultima coma con su respectivo espacio
+        $sql .= " SET {implode(',', $columns_set)}";
         $sql .= " WHERE {$where}";
-
-        $resul = $this->query($sql);
-
-
+        $this->query($sql);
     }
 }
