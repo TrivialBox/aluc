@@ -4,12 +4,11 @@ php:
   - '7.0'
 services:
   - mysql
-before_install:
-  - mysql -e "create database IF NOT EXISTS ALUC;" -u root
 install:
   - composer install
   - composer dump-autoload
 before_script:
+  - mysql -e "create database IF NOT EXISTS ALUC;" -u root
   - mysql -u root ALUC < database/DDL.sql
   - mysqladmin -u root password '1234'
 script:
