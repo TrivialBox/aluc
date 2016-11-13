@@ -15,7 +15,7 @@ class Laboratorio {
     private $moderadores;
 
     private function __construct(
-        $id, $nombre, $capacidad, $descripcion, Horario $horario,
+        $id, $nombre, $capacidad, $descripcion, $horario,
         array $moderadores
     ) {
         $this->id = $id;
