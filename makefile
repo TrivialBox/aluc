@@ -1,5 +1,5 @@
 PHP = php
-TEST_RUNNER = phpunit
+TEST_RUNNER = ./vendor/bin/phpunit
 
 test:
 	$(TEST_RUNNER)

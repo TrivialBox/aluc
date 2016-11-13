@@ -12,4 +12,4 @@ before_script:
   - mysql -u root ALUC < database/DDL.sql
   - mysqladmin -u root password '1234'
 script:
-  - phpunit
+  - make test
