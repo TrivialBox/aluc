@@ -1,11 +1,15 @@
 <?php
 include_once '../app/init.php';
 
-/**
- * The following function will strip the script name from URL.
- * (copy/paste, no tocar!)
-*/
-function getCurrentUri() {
+function get_url() {
+    $base_url = get_current_uri();
+    return $base_url;
+    // $routes = array();
+    // $routes = explode('/', $base_url);
+}
+
+function get_current_uri() {
+    // Copy % paste, no tocar!
     $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
     $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
     if (strstr($uri, '?')) {
@@ -15,18 +19,22 @@ function getCurrentUri() {
     return $uri;
 }
 
-$base_url = getCurrentUri();
-$routes = array();
-$routes = explode('/', $base_url);
-
-/*
-Now, $routes will contain all the routes. $routes[0] will correspond to first route (/).
-*/
-
-if($routes[1] == 'admin') {
-    if ($routes[2] == 'moderadores') {
-        echo 'Administrar Moreadores :)';
+function serve_request($urls) {
+    $base_url = get_url();
+    foreach ($urls as $url => $func) {
+        if (preg_match($url, $base_url)) {
+            $func();
+        }
     }
-} else {
-    echo "Página de Inicio";
 }
+
+serve_request(
+    array(
+        '/^\/admin\/moderadores/i' => 'funcion_saludar'
+    )
+);
+
+function funcion_saludar() {
+    echo 'Hola mundo';
+}
+
