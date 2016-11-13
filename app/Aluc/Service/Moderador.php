@@ -21,4 +21,6 @@ class Moderador extends Persona {
 
     public function getLaboratorio() {
     }
+    public static function getAll() {
+    }
 }
