@@ -5,8 +5,8 @@ test:
 	$(TEST_RUNNER)
 
 update:
-	composer install;
-	composer update;
+	composer install
+	composer update
 
 class:
 	composer dump-autoload
