@@ -1,8 +1,8 @@
 <?php
-// use PHPUnit\Framework\TestCase;
-use Aluc\Modulo\Usuario as Usuario;
+use PHPUnit\Framework\TestCase;
+use Aluc\Modulo\Usuario;
 
-class UsuarioTest extends PHPUnit_Framework_TestCase {
+class UsuarioTest extends Testcase {
     private $usuario;
 
     public function setUp() {

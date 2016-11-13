@@ -1,0 +1,10 @@
+source:
+    - ./app/
+
+destination: ./docs
+
+title: ALUC
+
+templateTheme: bootstrap
+
+tree: yes

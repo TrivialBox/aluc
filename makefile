@@ -1,5 +1,5 @@
 PHP = php
-TEST_RUNNER = phpunit
+TEST_RUNNER = ./vendor/bin/phpunit
 
 test:
 	$(TEST_RUNNER)
@@ -10,3 +10,6 @@ update:
 
 class:
 	composer dump-autoload
+
+doc:
+	vendor/bin/apigen generate --config=apigen.yaml
