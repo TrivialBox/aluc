@@ -33,7 +33,7 @@ class ModeradorDao {
             "cedula = {$cedula}"
         )->next();
         $id = $result['id'];
-        throw new Exception(
+        throw new \Exception(
             "FALTA CONSULTAR DE LAS OTRAS TABLAS
             LA INFORMACIÓN DEL MODERADOR"
         );
