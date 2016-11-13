@@ -1,0 +1,8 @@
+source:
+    - ./app/
+
+destination: ./docs
+
+templateTheme: bootstrap
+
+tree: yes
