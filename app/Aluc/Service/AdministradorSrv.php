@@ -54,11 +54,13 @@ class AdministradorSrv {
     public static function moderadores_nuevo() {
         $view = null;
         try {
-            if (Tools::check_session('admin') && Tools::check_method('post')) {
-                $id = Tools::clean_string($_POST['id']);
-                $laboratorio_id = Tools::clean_string($_POST['laboratorio_id']);
-                echo $id . " - " . $laboratorio_id;
-                // TODO: Mandar a crear un moderador
+            if (Tools::check_session('admin')) {
+                if (Tools::check_method('post')) {
+                    $id = Tools::clean_string($_POST['id']);
+                    $laboratorio_id = Tools::clean_string($_POST['laboratorio_id']);
+                    echo $id . " - " . $laboratorio_id;
+                    // TODO: Mandar a crear un moderador
+                }
                 $view = self::$view_moderador->listAll();
             } else {
                 $view = self::$view_general->error404();
