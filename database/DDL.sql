@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `ALUC` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `ALUC`;
 -- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: ALUC
@@ -32,16 +30,6 @@ CREATE TABLE `administrador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `administrador`
---
-
-LOCK TABLES `administrador` WRITE;
-/*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
-INSERT INTO `administrador` VALUES ('0105036032');
-/*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `horario`
 --
 
@@ -61,16 +49,6 @@ CREATE TABLE `horario` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `horario`
---
-
-LOCK TABLES `horario` WRITE;
-/*!40000 ALTER TABLE `horario` DISABLE KEYS */;
-INSERT INTO `horario` VALUES ('1','1','2');
-/*!40000 ALTER TABLE `horario` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `jornada`
 --
 
@@ -84,16 +62,6 @@ CREATE TABLE `jornada` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jornada`
---
-
-LOCK TABLES `jornada` WRITE;
-/*!40000 ALTER TABLE `jornada` DISABLE KEYS */;
-INSERT INTO `jornada` VALUES ('1','07:00:00','13:00:00'),('2','15:00:00','19:00:00');
-/*!40000 ALTER TABLE `jornada` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `laboratorio`
@@ -115,16 +83,6 @@ CREATE TABLE `laboratorio` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `laboratorio`
---
-
-LOCK TABLES `laboratorio` WRITE;
-/*!40000 ALTER TABLE `laboratorio` DISABLE KEYS */;
-INSERT INTO `laboratorio` VALUES ('Ma1','Laboratorio de Máquinas',15,'Cerca al patio de ing','1');
-/*!40000 ALTER TABLE `laboratorio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `lector`
 --
 
@@ -144,15 +102,6 @@ CREATE TABLE `lector` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lector`
---
-
-LOCK TABLES `lector` WRITE;
-/*!40000 ALTER TABLE `lector` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lector` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `moderador`
 --
 
@@ -170,16 +119,6 @@ CREATE TABLE `moderador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `moderador`
---
-
-LOCK TABLES `moderador` WRITE;
-/*!40000 ALTER TABLE `moderador` DISABLE KEYS */;
-INSERT INTO `moderador` VALUES ('0105006324','Ma1');
-/*!40000 ALTER TABLE `moderador` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `reserva`
 --
 
@@ -187,24 +126,14 @@ DROP TABLE IF EXISTS `reserva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reserva` (
-  `id` varchar(10) NOT NULL,
+  `id` int(100) NOT NULL AUTO_INCREMENT,
   `n_usuarios` int(11) DEFAULT NULL,
   `descripcion` varchar(60) DEFAULT NULL,
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `reserva`
---
-
-LOCK TABLES `reserva` WRITE;
-/*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES ('1',10,'prueba','clases','cod_aqui'),('2',14,'clase','clases','cod'),('3',7,'practica','individual','codigo');
-/*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `reservacion`
@@ -214,7 +143,7 @@ DROP TABLE IF EXISTS `reservacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservacion` (
-  `id_reserva` varchar(10) NOT NULL,
+  `id_reserva` int(100) NOT NULL AUTO_INCREMENT,
   `id_laboratorio` varchar(10) NOT NULL,
   `id_usuario` varchar(10) NOT NULL,
   `estado` varchar(45) DEFAULT NULL,
@@ -225,20 +154,9 @@ CREATE TABLE `reservacion` (
   KEY `fk_new_table_1_idx` (`id_usuario`),
   KEY `fk_new_table_2_idx` (`id_laboratorio`),
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_new_table_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_new_table_3` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_new_table_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `reservacion`
---
-
-LOCK TABLES `reservacion` WRITE;
-/*!40000 ALTER TABLE `reservacion` DISABLE KEYS */;
-INSERT INTO `reservacion` VALUES ('1','Ma1','0105006324','Reservado','2016-11-14','07:00:00','09:00:00');
-/*!40000 ALTER TABLE `reservacion` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `usuario`
@@ -253,16 +171,6 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuario`
---
-
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('0105006324','Juan Perez'),('0105036032','Carlos Calle');
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `view_administrador`
@@ -383,4 +291,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-14 16:40:10
+-- Dump completed on 2016-11-14 18:22:07
