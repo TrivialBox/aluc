@@ -8,26 +8,27 @@ use Aluc\Dao\ModeradorDao;
  * Usuario que asegura el correcto uso de las reservas.
  */
 class Moderador extends Persona {
-    public $laboratorio_id;
+    public $id_laboratorio;
 
-    protected function __construct($id, $nombre, $laboratorio_id) {
+    protected function __construct($id, $id_laboratorio, $nombre) {
         parent::__construct($id, $nombre);
-        $this->laboratorio_id = $laboratorio_id;
+        $this->id_laboratorio = $id_laboratorio;
     }
 
 
-    public static function getNewInstace($id, $nombre, $laboratorio_id) {
-        return new self($id, $nombre, $laboratorio_id);
+    public static function getNewInstace($id, $id_laboratorio) {
+
+        return new self($id, $id_laboratorio);
     }
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
-            //return new Moderador($array[0]["id"],$array[0]['nombre'], $array[0]['id_laboratorio']);
-            return new Moderador($array[0]["id"],"Priscila Cedillo", "3883");
+            return new Moderador($array[0]["id"], $array[0]['id_laboratorio'], $array[0]['nombre']);
+
         }else {
             $moderadores = array();
             foreach ($array as $fila){
-                array_push($moderadores,new Moderador($fila['id'], $fila['nombre'], $fila['id_laboratorio']));
+                array_push($moderadores,new Moderador($fila['id'], $fila['id_laboratorio'], $fila['nombre']));
             }
             return $moderadores;
         }
@@ -39,9 +40,17 @@ class Moderador extends Persona {
     }
 
     public function getLaboratorio() {
+
     }
     public static function getAll($order_atribute = null) {
-        return Moderador::get_object(ModeradorDao::getInstance()->getAll($order_atribute), false);
+        return Moderador::get_object(ModeradorDao::getInstance()->getAll($order_atribute),false);
     }
 
+    public function save($object, $is_save){
+        ModeradorDao::getInstance()->save($object, $is_save);
+    }
+
+    public function delete(){
+        echo "hola mudno";
+    }
 }

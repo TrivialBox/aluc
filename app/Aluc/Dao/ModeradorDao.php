@@ -9,6 +9,10 @@ class ModeradorDao {
 
     private function __construct() {
         $this->database = new Database();
+        $this->database->connect();
+    }
+    function __destruct(){
+        $this->database->disconnect();
     }
 
     public static function getInstance() {
@@ -17,14 +21,27 @@ class ModeradorDao {
         }
         return static::$instance;
     }
+    private function convertObjectArray($object){
+        $array = [
+            'id' => $object->id,
+            'id_laboratorio' => $object->id_laboratorio
+        ];
 
-    public function save($obj){
-        return $this->database->insert("insert_moderador",$obj);
+        return $array;
+    }
+    public function save($object, $type_save = true){
+        if ($type_save){
+            return $this->database->insert("moderador", $this->convertObjectArray($object));
+        } else {
+            return $this->database->update('moderador',$this->convertObjectArray($object),$object->id);
+
+        }
+
     }
 
-    public function get($cedula){
-        $where = "id = " . "'" . $cedula . "'";
-        $moderador = $this->database->select("moderador", "*", $where, null);
+    public function get($id){
+        $where = "id = " . "'" . $id . "'";
+        $moderador = $this->database->select("view_moderador", "*", $where, null);
         return $moderador;
     }
 

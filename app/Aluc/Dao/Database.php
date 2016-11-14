@@ -61,7 +61,6 @@ class Database {
     }
 
     public function call($procedure_name, $values) {
-        $this->connect();
         $items = $this->quote_array_string($values);
         $values = implode(',', $items);
 
@@ -78,8 +77,7 @@ class Database {
         $items = $this->cat_values($values);
         $keys = implode(',', $items['keys']);
         $values = implode(',', $items['values']);
-        $sql = "INSERT INTO {$table_name}
-                ({$keys}) VALUES ({$values})";
+        $sql = "INSERT INTO {$table_name} ({$keys}) VALUES ({$values})";
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al insertar {$values}. {$this->error()}"
@@ -88,8 +86,9 @@ class Database {
     }
 
     private function cat_values($array) {
-        // TODO sanitizar consulta
+        echo var_dump($array) . "<br>";
         $keys = array_keys($array);
+        echo "keys" . $keys;
         $values = $this->quote_array_string(array_values($array));
         return array(
             'keys' => $keys,
@@ -132,12 +131,24 @@ class Database {
 
     public function update($view_name, $columns, $where) {
         $sql = "UPDATE {$view_name}";
+        echo "colunm" . var_dump($columns) . "<br>";
         $columns_set = array();
         foreach ($columns as $key => $value){
-            $columns_set[] = $this->quote_string($key) . '=' . $this->quote_string($value);
+            array_push($columns_set,$key . '=' . $this->quote_string($value));
+
         }
-        $sql .= " SET {implode(',', $columns_set)}";
-        $sql .= " WHERE {$where}";
-        $this->query($sql);
+        echo var_dump($columns_set);
+        $sql .= " SET " . implode(',', $columns_set);
+        $sql .= " WHERE = {$this->quote_string($where)}";
+        echo "<br>" . "sql ---->  " . $sql . "<br>";
+        if (!$this->query($sql)) {
+            throw new \Exception(
+                "Error al actualizar {$values}. {$this->error()}"
+            );
+        }
     }
+
+
+
+
 }
