@@ -25,6 +25,9 @@ Urls::serve_request(
         '/^\/admin\/moderadores$/i' => function() {
             return AdministradorSrv::moderadores();
         },
+        '/^\/admin\/moderadores\/nuevo$/i' => function() {
+            return AdministradorSrv::moderadores_nuevo();
+        },
         '/.*/' => function() {
             return ErrorSrv::error404();
         }
