@@ -4,7 +4,7 @@ namespace Aluc\Dao;
 define('CONFIG_FILE', __DIR__ . '/../../../config/database.json');
 
 /**
- *
+ * Clase para interactuar con la base de datos.
  */
 class Database {
     private $host;

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class Aluc\Views\ModeradoresView</title>
+	<title>Class Aluc\Views\GeneralView | ALUC</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
@@ -14,7 +14,7 @@
 	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">Overview</a>
+				<a href="index.html" class="navbar-brand">ALUC</a>
 			</div>
 			<div class="collapse navbar-collapse">
 
@@ -85,7 +85,9 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li class="active"><a href="class-Aluc.Views.ModeradoresView.html">ModeradoresView</a></li>
+				<li class="active"><a href="class-Aluc.Views.GeneralView.html">GeneralView</a></li>
+				<li><a href="class-Aluc.Views.ModeradorView.html">ModeradorView</a></li>
+				<li><a href="class-Aluc.Views.View.html">View</a></li>
 			</ul>
 
 
@@ -101,10 +103,28 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class ModeradoresView</h1>
+	<h1>Class GeneralView</h1>
 
 
+	<div class="description">
+	<p>Clase encargada de representar todas las vistas
+comunes del sistema.</p>
+	</div>
 
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-Aluc.Views.View.html"><span>Aluc\Views\View</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Aluc\Views\GeneralView</span></b>			
+			
+			
+		</dd>
+	</dl>
 
 
 
@@ -119,7 +139,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Views.html">Views</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Views.ModeradoresView.html#9-38" title="Go to source code">Aluc/Views/ModeradoresView.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Views.GeneralView.html#4-27" title="Go to source code">Aluc/Views/GeneralView.php</a>
 		<br>
 	</div>
 
@@ -128,35 +148,6 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><h2>Methods summary</h2></div>
 			<table class="summary table table-bordered table-striped methods" id="methods">
-		<tr data-order="__construct" id="___construct">
-
-			<td class="attributes"><code>
-				 protected 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Aluc.Views.ModeradoresView.html#14-16" title="Go to source code">__construct</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="getInstance" id="_getInstance">
 
 			<td class="attributes"><code>
@@ -168,7 +159,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Views.ModeradoresView.html#18-23" title="Go to source code">getInstance</a>( )</code>
+			<code><a href="source-class-Aluc.Views.GeneralView.html#11-16" title="Go to source code">getInstance</a>( )</code>
 
 			<div class="description short">
 				
@@ -186,7 +177,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="render" id="_render">
+		<tr data-order="error404" id="_error404">
 
 			<td class="attributes"><code>
 				 public 
@@ -196,8 +187,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_render">#</a>
-			<code><a href="source-class-Aluc.Views.ModeradoresView.html#25-28" title="Go to source code">render</a>( )</code>
+			<a class="anchor" href="#_error404">#</a>
+			<code><a href="source-class-Aluc.Views.GeneralView.html#18-21" title="Go to source code">error404</a>( )</code>
 
 			<div class="description short">
 				
@@ -215,7 +206,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="listAll" id="_listAll">
+		<tr data-order="error403" id="_error403">
 
 			<td class="attributes"><code>
 				 public 
@@ -225,8 +216,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_listAll">#</a>
-			<code><a href="source-class-Aluc.Views.ModeradoresView.html#30-37" title="Go to source code">listAll</a>( )</code>
+			<a class="anchor" href="#_error403">#</a>
+			<code><a href="source-class-Aluc.Views.GeneralView.html#23-26" title="Go to source code">error403</a>( )</code>
 
 			<div class="description short">
 				
@@ -247,11 +238,34 @@
 			</table>
 		</div>
 
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Aluc.Views.View.html#methods">Aluc\Views\View</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Aluc.Views.View.html#___construct">__construct()</a></code>, 
+				<code><a href="class-Aluc.Views.View.html#_render">render()</a></code>
+			</p>
+		</div>
 
 
 
 
 
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+		</div>
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Properties inherited from <a href="class-Aluc.Views.View.html#properties">Aluc\Views\View</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Aluc.Views.View.html#$data"><var>$data</var></a></code>, 
+				<code><a href="class-Aluc.Views.View.html#$template"><var>$template</var></a></code>
+			</p>
+		</div>
 
 
 
@@ -261,10 +275,10 @@
 	</div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+		ALUC API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
 <script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?1a66ab242c07568a28057be28c4b3dd177d03f8f"></script>
+<script src="elementlist.js?73473ae0093b819ba6ff35cb34a9ee9a74ceebca"></script>
 </body>
 </html>

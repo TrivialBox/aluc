@@ -9,6 +9,8 @@ use Aluc\Service\ErrorSrv;
 
 function home() {
     echo 'Página de inicio';
+    echo '</br>';
+    echo 'No hay plata para un diseñador';
 }
 
 
