@@ -52,7 +52,7 @@ class Database {
         }
     }
 
-    public function query($sql) {
+    private function query($sql) {
         return $this->conn->query($sql);
     }
 
@@ -109,12 +109,12 @@ class Database {
         return "'{$string}'";
     }
 
-    public function select($table_name, $columns = '*', $where = null, $order = null) {
+    public function select($view_name, $columns = '*', $where = null, $order = null) {
         if ($columns !== '*') {
             $columns = $this->quote_array_string($columns);
             $columns = implode(',', $columns);
         }
-        $sql = "SELECT {$columns} FROM {$table_name}";
+        $sql = "SELECT {$columns} FROM {$view_name}";
         if ($where != null) {
             $sql .= " WHERE {$where}";
         }
