@@ -37,6 +37,7 @@ CREATE TABLE `administrador` (
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+INSERT INTO `administrador` VALUES ('0105036032');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,6 +66,7 @@ CREATE TABLE `horario` (
 
 LOCK TABLES `horario` WRITE;
 /*!40000 ALTER TABLE `horario` DISABLE KEYS */;
+INSERT INTO `horario` VALUES ('1','1','2');
 /*!40000 ALTER TABLE `horario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,6 +91,7 @@ CREATE TABLE `jornada` (
 
 LOCK TABLES `jornada` WRITE;
 /*!40000 ALTER TABLE `jornada` DISABLE KEYS */;
+INSERT INTO `jornada` VALUES ('1','07:00:00','13:00:00'),('2','15:00:00','19:00:00');
 /*!40000 ALTER TABLE `jornada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +120,7 @@ CREATE TABLE `laboratorio` (
 
 LOCK TABLES `laboratorio` WRITE;
 /*!40000 ALTER TABLE `laboratorio` DISABLE KEYS */;
+INSERT INTO `laboratorio` VALUES ('Ma1','Laboratorio de Máquinas',15,'Cerca al patio de ing','1');
 /*!40000 ALTER TABLE `laboratorio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +161,11 @@ DROP TABLE IF EXISTS `moderador`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `moderador` (
   `id` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_laboratorio` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`,`id_laboratorio`),
+  KEY `fk_moderador_2_idx` (`id_laboratorio`),
+  CONSTRAINT `fk_moderador_1` FOREIGN KEY (`id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_moderador_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -167,34 +175,8 @@ CREATE TABLE `moderador` (
 
 LOCK TABLES `moderador` WRITE;
 /*!40000 ALTER TABLE `moderador` DISABLE KEYS */;
+INSERT INTO `moderador` VALUES ('0105006324','Ma1');
 /*!40000 ALTER TABLE `moderador` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `moderadorLaboratorio`
---
-
-DROP TABLE IF EXISTS `moderadorLaboratorio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `moderadorLaboratorio` (
-  `id_moderador` varchar(10) NOT NULL,
-  `id_laboratorio` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_moderador`,`id_laboratorio`),
-  UNIQUE KEY `id_moderador_UNIQUE` (`id_moderador`),
-  KEY `fk_moderadorLaboratorio_2_idx` (`id_laboratorio`),
-  CONSTRAINT `fk_moderadorLaboratorio_1` FOREIGN KEY (`id_moderador`) REFERENCES `moderador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_moderadorLaboratorio_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `moderadorLaboratorio`
---
-
-LOCK TABLES `moderadorLaboratorio` WRITE;
-/*!40000 ALTER TABLE `moderadorLaboratorio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `moderadorLaboratorio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +202,7 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES ('1',45,'prueba','a','asdasf');
+INSERT INTO `reserva` VALUES ('1',10,'prueba','clases','cod_aqui'),('2',14,'clase','clases','cod'),('3',7,'practica','individual','codigo');
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,6 +236,7 @@ CREATE TABLE `reservacion` (
 
 LOCK TABLES `reservacion` WRITE;
 /*!40000 ALTER TABLE `reservacion` DISABLE KEYS */;
+INSERT INTO `reservacion` VALUES ('1','Ma1','0105006324','Reservado','2016-11-14','07:00:00','09:00:00');
 /*!40000 ALTER TABLE `reservacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,8 +260,119 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES ('0105006324','Juan Perez'),('0105036032','Carlos Calle');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `view_administrador`
+--
+
+DROP TABLE IF EXISTS `view_administrador`;
+/*!50001 DROP VIEW IF EXISTS `view_administrador`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_administrador` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `view_moderador`
+--
+
+DROP TABLE IF EXISTS `view_moderador`;
+/*!50001 DROP VIEW IF EXISTS `view_moderador`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_moderador` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `id_laboratorio`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `view_reserva`
+--
+
+DROP TABLE IF EXISTS `view_reserva`;
+/*!50001 DROP VIEW IF EXISTS `view_reserva`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_reserva` AS SELECT 
+ 1 AS `id`,
+ 1 AS `id_usuario`,
+ 1 AS `id_laboratorio`,
+ 1 AS `descripcion`,
+ 1 AS `n_usuarios`,
+ 1 AS `tipo_uso`,
+ 1 AS `estado`,
+ 1 AS `fecha`,
+ 1 AS `hora_inicio`,
+ 1 AS `codigo_secreto`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping events for database 'ALUC'
+--
+
+--
+-- Dumping routines for database 'ALUC'
+--
+
+--
+-- Final view structure for view `view_administrador`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_administrador`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_administrador` AS select `usuario`.`id` AS `id`,`usuario`.`nombre` AS `nombre` from (`usuario` join `administrador` on((`usuario`.`id` = `administrador`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_moderador`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_moderador`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_moderador` AS select `usuario`.`id` AS `id`,`usuario`.`nombre` AS `nombre`,`moderador`.`id_laboratorio` AS `id_laboratorio` from (`usuario` join `moderador` on((`usuario`.`id` = `moderador`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_reserva`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_reserva`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_reserva` AS select `reserva`.`id` AS `id`,`reservacion`.`id_usuario` AS `id_usuario`,`reservacion`.`id_laboratorio` AS `id_laboratorio`,`reserva`.`descripcion` AS `descripcion`,`reserva`.`n_usuarios` AS `n_usuarios`,`reserva`.`tipo_uso` AS `tipo_uso`,`reservacion`.`estado` AS `estado`,`reservacion`.`fecha` AS `fecha`,`reservacion`.`hora_inicio` AS `hora_inicio`,`reservacion`.`hora_fin` AS `codigo_secreto` from (`reserva` join `reservacion`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -289,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-11 15:44:41
+-- Dump completed on 2016-11-14 16:40:10
