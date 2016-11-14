@@ -30,6 +30,12 @@ Urls::serve_request(
         '/^\/admin\/moderadores\/nuevo$/i' => function() {
             return AdministradorSrv::moderadores_nuevo();
         },
+        '/^\/admin\/lectores$/i' => function() {
+            return AdministradorSrv::lectores();
+        },
+        '/^\/admin\/lectores\/nuevo$/i' => function() {
+            return AdministradorSrv::lectores_nuevo();
+        },
         '/.*/' => function() {
             return ErrorSrv::error404();
         }
