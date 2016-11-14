@@ -78,8 +78,8 @@ class Database {
         $items = $this->cat_values($values);
         $keys = implode(',', $items['keys']);
         $values = implode(',', $items['values']);
-        $sql = "INSERT INTO {$table_name}
-                ({$keys}) VALUES ({$values})";
+        $sql = "INSERT INTO {$table_name} " .
+            "({$keys}) VALUES ({$values})";
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al insertar {$values}. {$this->error()}"
@@ -126,9 +126,8 @@ class Database {
     }
 
     public function delete($table_name, $where) {
-        $sql = "DELETE FROM {$table_name}
-                WHERE {$where}
-        ";
+        $sql = "DELETE FROM {$table_name} " .
+            "WHERE {$where}";
         $this->query($sql);
     }
 
