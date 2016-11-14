@@ -125,15 +125,13 @@ class Database {
         return $result;
     }
 
-    public function delete($table_name, $where) {
-        $sql = "DELETE FROM {$table_name}
-                WHERE {$where}
-        ";
+    public function delete($view_name, $where) {
+        $sql = "DELETE FROM {$view_name} WHERE {$where}";
         $this->query($sql);
     }
 
-    public function update($table_name, $columns, $where) {
-        $sql = "UPDATE {$table_name}";
+    public function update($view_name, $columns, $where) {
+        $sql = "UPDATE {$view_name}";
         $columns_set = array();
         foreach ($columns as $key => $value){
             $columns_set[] = $this->quote_string($key) . '=' . $this->quote_string($value);
