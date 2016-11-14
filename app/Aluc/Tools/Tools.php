@@ -7,8 +7,7 @@ namespace Aluc\Tools;
  */
 class Tools {
     public  static function check_session($type) {
-        // TODO: sacar el true, sólo para pruebas
-        return true || isset($_SESSION['id']) && !empty($_SESSION['id']) &&
+        return isset($_SESSION['id']) && !empty($_SESSION['id']) &&
         isset($_SESSION['type']) && $_SESSION['type'] === $type;
     }
 

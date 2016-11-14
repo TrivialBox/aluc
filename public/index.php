@@ -6,6 +6,8 @@ use Aluc\Tools\Urls;
 use Aluc\Service\AdministradorSrv;
 use Aluc\Service\ErrorSrv;
 
+$_SESSION['id'] = '1234';
+$_SESSION['type'] = 'admin';
 
 function home() {
     echo 'Página de inicio';
