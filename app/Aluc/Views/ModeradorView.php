@@ -1,19 +1,15 @@
 <?php
 namespace Aluc\Views;
 
-
 use Aluc\Service\Laboratorio;
 use Aluc\Service\Moderador;
-use Aluc\Tools\TemplateGenerator;
 
-class ModeradoresView {
-    private $data;
-    private $template;
+/**
+ * Clase encargada de representar todos los objetos
+ * relacionados a la clase Moderador.
+ */
+class ModeradorView extends View {
     private static $instance = null;
-
-    protected function __construct() {
-
-    }
 
     public static function getInstance() {
         if (static::$instance == null) {
@@ -22,11 +18,11 @@ class ModeradoresView {
         return static::$instance;
     }
 
-    public function render() {
-        TemplateGenerator::generate($this->data, $this->template);
-        return $this;
-    }
-
+    /**
+     * Lista de todos los moderadores de todos los laboratorios.
+     * Además se puede agregar un nuevo moderador a un laboratorio
+     * existente.
+     */
     public function listAll() {
         $moderadores = Moderador::getAll();
         $this->data = array(

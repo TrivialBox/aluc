@@ -1,45 +1,31 @@
 <?php
 namespace Aluc\Dao;
 
-use Aluc\Service\Moderador;
+
 
 class ModeradorDao {
     private $database;
-    private static $instance;
+    private static $instance = null;
 
-    protected function __construct() {
+    private function __construct() {
         $this->database = new Database();
     }
 
     public static function getInstance() {
-        if (!isset(static::$instance)) {
-            static::$instance = new static();
+        if (static::$instance == null) {
+            static::$instance = new self();
         }
         return static::$instance;
     }
 
-    public function save(Moderador $obj){
-        $datos = array();
-        $datos["id"] = $obj->id;
-        $datos["nombre"] = $obj->nombre;
-        $datos["id_laboratorio"] = $obj->id_laboratorio;
-        $this->database->insert("moderador", $datos);
+    public function save($obj){
+        return $this->database->insert("insert_moderador",$obj);
     }
 
     public function get($cedula){
-        $result = $this->database->select(
-            'moderador',
-            '*',
-            "cedula = {$cedula}"
-        )->next();
-        $id = $result['id'];
-        throw new Exception(
-            "FALTA CONSULTAR DE LAS OTRAS TABLAS
-            LA INFORMACIÓN DEL MODERADOR"
-        );
-        $nombre = $result[1];  // Consultar de la  tabla persona/usuario
-        $id_lab = $result[2];  // Consultar de la tabla moderadorLaboratorio
-        return Moderador::getNewInstace($id, $nombre, $id_lab);
+        $where = "id = " . "'" . $cedula . "'";
+        $moderador = $this->database->select("moderador", "*", $where, null);
+        return $moderador;
     }
 
     public function del($cedula, $id_laboratorio){
@@ -61,6 +47,18 @@ class ModeradorDao {
             $id_lab = $valor[2];
             $moderador = Moderador::getNewInstace($id, $nombre, $id_lab);
             yield $moderador;
+    public function getAll($order_atribute){
+        $order_by = null;
+
+        if ($order_atribute != null){
+            $order_by = $order_atribute . " asc";
         }
+        /* si se usa una vista especificar el nombre el el primer parametro del metodo select
+        *  de igual manera si es una tabla solo poner el nombre de la tabla
+        */
+        $list_moderador = $this->database->select("moderador", "*", null, $order_by);
+
+        return $list_moderador;
+
     }
 }

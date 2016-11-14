@@ -4,7 +4,7 @@ namespace Aluc\Dao;
 define('CONFIG_FILE', __DIR__ . '/../../../config/database.json');
 
 /**
- *
+ * Clase para interactuar con la base de datos.
  */
 class Database {
     private $host;
@@ -38,6 +38,7 @@ class Database {
             $this->name,
             $this->port
         );
+        $this->conn->set_charset("utf8");
         if ($this->conn->connect_error) {
             throw new \Exception(
                 "Conexión fallida. {$this->conn->connect_error}"
@@ -59,13 +60,26 @@ class Database {
         return $this->conn->error;
     }
 
+    public function call($procedure_name, $values) {
+        $this->connect();
+        $items = $this->quote_array_string($values);
+        $values = implode(',', $items);
+
+        $sql = "CALL {$procedure_name($values)}";
+
+        if (!$this->query($sql)) {
+            throw new \Exception(
+                "Error al insertar {$values}. {$this->error()}"
+            );
+        }
+    }
+
     public function insert($table_name, $values) {
         $items = $this->cat_values($values);
-        $values = implode(',', $items['values']);
         $keys = implode(',', $items['keys']);
+        $values = implode(',', $items['values']);
         $sql = "INSERT INTO {$table_name}
                 ({$keys}) VALUES ({$values})";
-
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al insertar {$values}. {$this->error()}"
@@ -91,8 +105,8 @@ class Database {
         return $values;
     }
 
-    private function quote_string($str) {
-        return "'{$str}'";
+    private function quote_string($string) {
+        return "'{$string}'";
     }
 
     public function select($table_name, $columns = '*', $where = null, $order = null) {
@@ -107,13 +121,8 @@ class Database {
         if ($order != null) {
             $sql .= " ORDER BY {$order}";
         }
-        $result = $this->query($sql);
-        $iterator = function ($result) {
-            while ($row = $result->fetch_assoc()) {
-                yield $row;
-            }
-        };
-        return $iterator($result);
+        $result = $this->query($sql)->fetch_all(MYSQLI_ASSOC);
+        return $result;
     }
 
     public function delete($table_name, $where) {

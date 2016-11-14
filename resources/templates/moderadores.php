@@ -27,10 +27,14 @@
     </div>
     <div>
         <h2>Agregar nuevo moderador</h2>
-        <form action="" method="post">
+        <form action="/admin/moderadores/nuevo" method="post">
             <label for="id">ID</label>
             <br>
             <input type="text" name="id" id="id">
+            <br>
+            <label for="laboratorio_id">Laboratorio ID</label>
+            <br>
+            <input type="text" name="laboratorio_id" id="laboratorio_id">
             <br>
             <input type="submit" value="Agregar">
         </form>

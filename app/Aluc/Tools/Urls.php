@@ -1,6 +1,11 @@
 <?php
 namespace Aluc\Tools;
 
+
+/**
+ * Clase encargada de realizar URL routing
+ * usando expresiones regulares.
+ */
 class Urls {
     private static function get_url() {
         $base_url = static::get_current_uri();
