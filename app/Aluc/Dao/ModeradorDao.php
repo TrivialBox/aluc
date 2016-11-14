@@ -48,6 +48,7 @@ class ModeradorDao {
             "cedula = {$cedula} and id_laboratorio = {$id_laboratorio}"
         );
     }
+
     public function getList(){
         $result = $this->database->select(
             'moderador',
