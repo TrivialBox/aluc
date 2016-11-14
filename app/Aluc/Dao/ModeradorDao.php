@@ -33,29 +33,7 @@ class ModeradorDao
         return $moderador;
     }
 
-    public function del($cedula, $id_laboratorio)
-    {
-        $this->database->delete(
-            'moderador',
-            "cedula = {$cedula} and id_laboratorio = {$id_laboratorio}"
-        );
-    }
-    public function getList(){
-        $result = $this->database->select(
-            'moderador',
-            '*'
-        );
-        foreach ($result as $valor) {
-            // TODO: lo mismo que la recuperar un solo moderador
-            $id = $valor[0];
-            $nombre = $valor[1];
-            $id_lab = $valor[2];
-            $moderador = Moderador::getNewInstace($id, $nombre, $id_lab);
-            yield $moderador;
-        }
-    }
-    public function getAll($order_atribute)
-    {
+    public function getAll($order_atribute){
         $order_by = null;
         if ($order_atribute != null) {
         $order_by = $order_atribute . " asc";
