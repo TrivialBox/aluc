@@ -28,6 +28,13 @@ class Lector {
 
     }
 
+    public static function getAll() {
+    }
+
+    public function getLaboratorio() {
+
+    }
+
     public function getToken() {
         return $this->token;
     }

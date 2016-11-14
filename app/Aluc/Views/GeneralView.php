@@ -16,12 +16,18 @@ class GeneralView extends View {
     }
 
     public function error404() {
-        $this->template = '404.php';
+        $this->setTemplate(
+            null,
+            '404.php'
+        );
         return $this;
     }
 
     public function error403() {
-        $this->template = '403.php';
+        $this->setTemplate(
+            null,
+            '403.php'
+        );
         return $this;
     }
 }

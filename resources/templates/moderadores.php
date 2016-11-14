@@ -13,11 +13,13 @@
             <tbody>
             <?php
                 foreach ($moderadores as $moderador) {
+                    $laboratorio = $moderador->getLaboratorio();
                     echo "
                     <tr>
                     <td>{$moderador->id}</td>
                     <td>{$moderador->nombre}</td>
-                    <td>{$moderador->laboratorio_id}</td>
+                    <td>{$moderador->get}</td>
+                    <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
                     </tr>
                     ";
                 }

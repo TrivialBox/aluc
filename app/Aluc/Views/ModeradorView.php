@@ -25,10 +25,11 @@ class ModeradorView extends View {
      */
     public function listAll() {
         $moderadores = Moderador::getAll();
-        $this->data = array(
-            'moderadores' => $moderadores
+        $this->setTemplate([
+                'moderadores' => $moderadores
+            ],
+            'moderadores.php'
         );
-        $this->template = 'moderadores.php';
         return $this;
     }
 }

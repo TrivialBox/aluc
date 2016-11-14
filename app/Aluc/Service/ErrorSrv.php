@@ -5,7 +5,7 @@ use Aluc\Views\GeneralView;
 
 
 /**
- * Clase que contiene todas las funcionalidades de /.
+ * Clase que maneja todas las solicitudes a /error
  */
 class ErrorSrv {
     private static $view_general;
