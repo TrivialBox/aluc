@@ -60,22 +60,31 @@ class Database {
         return $this->conn->error;
     }
 
-    public function insert($procedure_name, $values) {
+    public function call($procedure_name, $values) {
         $this->connect();
-        $items = $this->cat_values($values);
-        $values = implode(',', $items['values']);
-        //$keys = implode(',', $items['keys']);
+        $items = $this->quote_array_string($values);
+        $values = implode(',', $items);
 
-        $sql = "CALL $procedure_name({$values})";
+        $sql = "CALL {$procedure_name($values)}";
 
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al insertar {$values}. {$this->error()}"
             );
-        }else {
-            return "elemento insertado";
         }
-        $this->disconnect();
+    }
+
+    public function insert($table_name, $values) {
+        $items = $this->cat_values($values);
+        $keys = implode(',', $items['keys']);
+        $values = implode(',', $items['values']);
+        $sql = "INSERT INTO {$table_name}
+                ({$keys}) VALUES ({$values})";
+        if (!$this->query($sql)) {
+            throw new \Exception(
+                "Error al insertar {$values}. {$this->error()}"
+            );
+        }
     }
 
     private function cat_values($array) {
@@ -96,10 +105,11 @@ class Database {
         return $values;
     }
 
+    private function quote_string($string) {
+        return "'{$string}'";
+    }
 
     public function select($view_name, $columns = '*', $where = null, $order = null) {
-        $this->connect();
-
         if ($columns !== '*') {
             $columns = $this->quote_array_string($columns);
             $columns = implode(',', $columns);
@@ -112,7 +122,6 @@ class Database {
             $sql .= " ORDER BY {$order}";
         }
         $result = $this->query($sql)->fetch_all(MYSQLI_ASSOC);
-        $this->disconnect();
         return $result;
     }
 
