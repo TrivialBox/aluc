@@ -38,6 +38,7 @@ class Database {
             $this->name,
             $this->port
         );
+        $this->conn->set_charset("utf8");
         if ($this->conn->connect_error) {
             throw new \Exception(
                 "Conexión fallida. {$this->conn->connect_error}"
@@ -51,7 +52,7 @@ class Database {
         }
     }
 
-    public function query($sql) {
+    private function query($sql) {
         return $this->conn->query($sql);
     }
 
@@ -59,18 +60,22 @@ class Database {
         return $this->conn->error;
     }
 
-    public function insert($table_name, $values) {
+    public function insert($procedure_name, $values) {
+        $this->connect();
         $items = $this->cat_values($values);
         $values = implode(',', $items['values']);
-        $keys = implode(',', $items['keys']);
-        $sql = "INSERT INTO {$table_name}
-                ({$keys}) VALUES ({$values})";
+        //$keys = implode(',', $items['keys']);
+
+        $sql = "CALL $procedure_name({$values})";
 
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al insertar {$values}. {$this->error()}"
             );
+        }else {
+            return "elemento insertado";
         }
+        $this->disconnect();
     }
 
     private function cat_values($array) {
@@ -91,29 +96,24 @@ class Database {
         return $values;
     }
 
-    private function quote_string($str) {
-        return "'{$str}'";
-    }
 
-    public function select($table_name, $columns = '*', $where = null, $order = null) {
+    public function select($view_name, $columns = '*', $where = null, $order = null) {
+        $this->connect();
+
         if ($columns !== '*') {
             $columns = $this->quote_array_string($columns);
             $columns = implode(',', $columns);
         }
-        $sql = "SELECT {$columns} FROM {$table_name}";
+        $sql = "SELECT {$columns} FROM {$view_name}";
         if ($where != null) {
             $sql .= " WHERE {$where}";
         }
         if ($order != null) {
             $sql .= " ORDER BY {$order}";
         }
-        $result = $this->query($sql);
-        $iterator = function ($result) {
-            while ($row = $result->fetch_assoc()) {
-                yield $row;
-            }
-        };
-        return $iterator($result);
+        $result = $this->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $this->disconnect();
+        return $result;
     }
 
     public function delete($table_name, $where) {
