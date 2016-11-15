@@ -42,6 +42,7 @@ class Moderador extends Persona {
     public function getLaboratorio() {
         return Laboratorio::getInstance($this->id_laboratorio);
     }
+
     public static function getAll($order_atribute = null) {
         return Moderador::get_object(
             ModeradorDao::getInstance()->getAll($order_atribute),
