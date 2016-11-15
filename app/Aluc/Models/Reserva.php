@@ -1,5 +1,5 @@
 <?php
-namespace Aluc\Service;
+namespace Aluc\Models;
 
 /**
  * Representación de una reserva en el sistema.

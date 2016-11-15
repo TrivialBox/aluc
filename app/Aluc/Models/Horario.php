@@ -1,5 +1,5 @@
 <?php
-namespace Aluc\Service;
+namespace Aluc\Models;
 
 /**
  * Horario dividido en dos jornadas.

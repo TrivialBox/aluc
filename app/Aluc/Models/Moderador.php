@@ -1,6 +1,6 @@
 <?php
 
-namespace Aluc\Service;
+namespace Aluc\Models;
 
 use Aluc\Dao\ModeradorDao;
 

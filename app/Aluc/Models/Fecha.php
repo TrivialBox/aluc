@@ -1,5 +1,5 @@
 <?php
-namespace Aluc\Service;
+namespace Aluc\Models;
 
 /**
  * Fecha de una reserva.

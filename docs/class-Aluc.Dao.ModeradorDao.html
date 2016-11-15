@@ -62,8 +62,8 @@
 							Dao						</a>
 							</li>
 					<li>
-						<a href="namespace-Aluc.Modulo.html">
-							Modulo						</a>
+						<a href="namespace-Aluc.Models.html">
+							Models						</a>
 							</li>
 					<li>
 						<a href="namespace-Aluc.Service.html">
@@ -86,6 +86,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Aluc.Dao.Database.html">Database</a></li>
+				<li><a href="class-Aluc.Dao.LaboratorioDao.html">LaboratorioDao</a></li>
 				<li class="active"><a href="class-Aluc.Dao.ModeradorDao.html">ModeradorDao</a></li>
 			</ul>
 
@@ -120,7 +121,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Dao.html">Dao</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Dao.ModeradorDao.html#6-66" title="Go to source code">Aluc/Dao/ModeradorDao.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Dao.ModeradorDao.html#6-62" title="Go to source code">Aluc/Dao/ModeradorDao.php</a>
 		<br>
 	</div>
 
@@ -129,18 +130,18 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><h2>Methods summary</h2></div>
 			<table class="summary table table-bordered table-striped methods" id="methods">
-		<tr data-order="__construct" id="___construct">
+		<tr data-order="__destruct" id="___destruct">
 
 			<td class="attributes"><code>
-				 protected 
+				 public 
 				
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#10-12" title="Go to source code">__construct</a>( )</code>
+			<a class="anchor" href="#___destruct">#</a>
+			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#14-16" title="Go to source code">__destruct</a>( )</code>
 
 			<div class="description short">
 				
@@ -169,7 +170,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#14-19" title="Go to source code">getInstance</a>( )</code>
+			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#18-23" title="Go to source code">getInstance</a>( )</code>
 
 			<div class="description short">
 				
@@ -198,7 +199,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_save">#</a>
-			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#21-27" title="Go to source code">save</a>( <span><code><a href="class-Aluc.Service.Moderador.html">Aluc\Service\Moderador</a></code> <var>$obj</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#32-40" title="Go to source code">save</a>( <span> <var>$object</var></span>, <span> <var>$type_save</var> = <span class="php-keyword1">true</span></span> )</code>
 
 			<div class="description short">
 				
@@ -227,7 +228,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_get">#</a>
-			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#29-43" title="Go to source code">get</a>( <span> <var>$cedula</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#42-46" title="Go to source code">get</a>( <span> <var>$id</var></span> )</code>
 
 			<div class="description short">
 				
@@ -245,7 +246,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="del" id="_del">
+		<tr data-order="getAll" id="_getAll">
 
 			<td class="attributes"><code>
 				 public 
@@ -255,8 +256,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_del">#</a>
-			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#45-50" title="Go to source code">del</a>( <span> <var>$cedula</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
+			<a class="anchor" href="#_getAll">#</a>
+			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#48-56" title="Go to source code">getAll</a>( <span> <var>$order_atribute</var></span> )</code>
 
 			<div class="description short">
 				
@@ -274,7 +275,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="getList" id="_getList">
+		<tr data-order="delete" id="_delete">
 
 			<td class="attributes"><code>
 				 public 
@@ -284,8 +285,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_getList">#</a>
-			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#52-65" title="Go to source code">getList</a>( )</code>
+			<a class="anchor" href="#_delete">#</a>
+			<code><a href="source-class-Aluc.Dao.ModeradorDao.html#58-61" title="Go to source code">delete</a>( <span> <var>$id</var></span> )</code>
 
 			<div class="description short">
 				
@@ -324,6 +325,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?73473ae0093b819ba6ff35cb34a9ee9a74ceebca"></script>
+<script src="elementlist.js?39a4ff92ae9d0775b65d82a2b5f28c77fab29e87"></script>
 </body>
 </html>
