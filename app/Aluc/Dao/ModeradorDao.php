@@ -31,12 +31,12 @@ class ModeradorDao {
     }
     public function save($object, $type_save = true){
         if ($type_save){
-            return $this->database->insert("moderador", $this->convertObjectArray($object));
+            $this->database->insert("moderador", $this->convertObjectArray($object));
         } else {
             $where = " id = '{$object->id}'";
-            return $this->database->update('moderador',$this->convertObjectArray($object), $where);
-
+            $this->database->update('moderador',$this->convertObjectArray($object), $where);
         }
+        return $this->get($object->id);
     }
 
     public function get($id){

@@ -49,7 +49,12 @@ class Moderador extends Persona {
     }
 
     public function save() {
-        ModeradorDao::getInstance()->save($this, $this->is_save);
+        $obj = static::get_object(
+            ModeradorDao::getInstance()->save($this, $this->is_save)
+        );
+        $this->id = $obj->id;
+        $this->id_laboratorio = $obj->id_laboratorio;
+        $this->nombre = $obj->nombre;
         return $this;
     }
 
