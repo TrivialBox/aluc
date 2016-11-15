@@ -3,6 +3,9 @@ namespace Aluc\Models;
 
 /**
  * Horario dividido en dos jornadas.
+ * joranda1 y jornada2 son reutilizados
+ * de la clase Fecha, pero sin usar su
+ * atributo fecha.
  */
 class Horario {
     public $jornada1;

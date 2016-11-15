@@ -1,6 +1,11 @@
 <?php
 namespace Aluc\Views;
 
+
+/**
+ * Clase encargada de representar todas
+ * las vistas comunes del Administrador.
+ */
 class AdministradorView  extends View {
     private static $instance = null;
 
