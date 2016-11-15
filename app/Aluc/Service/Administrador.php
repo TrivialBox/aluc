@@ -11,4 +11,14 @@ class Administrador extends Persona {
 
     public static function getInstance($id) {
     }
+
+    public function save()
+    {
+        // TODO: Implement save() method.
+    }
+
+    public function delete()
+    {
+        // TODO: Implement delete() method.
+    }
 }

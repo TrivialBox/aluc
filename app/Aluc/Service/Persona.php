@@ -4,7 +4,7 @@ namespace Aluc\Service;
 /**
  * Representación de una persona en el sistema.
  */
-abstract class Persona {
+abstract class Persona implements DBItem {
     public $id;
     public $nombre;
 
