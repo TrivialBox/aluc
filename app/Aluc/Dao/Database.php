@@ -86,9 +86,7 @@ class Database {
     }
 
     private function cat_values($array) {
-        echo var_dump($array) . "<br>";
         $keys = array_keys($array);
-        echo "keys" . $keys;
         $values = $this->quote_array_string(array_values($array));
         return array(
             'keys' => $keys,
@@ -122,11 +120,10 @@ class Database {
         }
         $sql = "SELECT {$columns} FROM {$table_name}";
 
-
-
         if ($where != null) {
             $sql .= " WHERE {$where}";
         }
+
         if ($order != null) {
             $sql .= " ORDER BY {$order}";
         }
@@ -137,26 +134,28 @@ class Database {
 
     public function delete($view_name, $where) {
         $sql = "DELETE FROM {$view_name} WHERE {$where}";
-        $this->query($sql);
+        if (!$this->query($sql)) {
+            throw new \Exception(
+                "Error al eliminar {$values}. {$this->error()}"
+            );
+        }
     }
 
     public function update($view_name, $columns, $where) {
         $sql = "UPDATE {$view_name}";
-        echo "colunm" . var_dump($columns) . "<br>";
         $columns_set = array();
         foreach ($columns as $key => $value){
             array_push($columns_set,$key . '=' . $this->quote_string($value));
-
         }
-        echo var_dump($columns_set);
         $sql .= " SET " . implode(',', $columns_set);
-        $sql .= " WHERE = {$this->quote_string($where)}";
-        echo "<br>" . "sql ---->  " . $sql . "<br>";
+        $sql .= " WHERE {$where}";
+        echo "sql =  $sql";
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al actualizar {$values}. {$this->error()}"
             );
         }
+
     }
 
 
