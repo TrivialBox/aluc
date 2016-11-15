@@ -50,6 +50,7 @@ class Moderador extends Persona {
 
     public function save() {
         ModeradorDao::getInstance()->save($this, $this->is_save);
+        return $this;
     }
 
     public function delete(){
