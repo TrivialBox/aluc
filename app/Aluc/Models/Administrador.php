@@ -1,10 +1,10 @@
 <?php
-namespace Aluc\Service;
+namespace Aluc\Models;
 
 /**
- * Usuario que puede hacer reservas en el sistema.
+ * Usuario que puede crear nuevos moderadores en el sistema.
  */
-class Usuario extends Persona {
+class Administrador extends Persona {
     protected function __construct($id, $nombre) {
         parent::__construct($id, $nombre);
     }

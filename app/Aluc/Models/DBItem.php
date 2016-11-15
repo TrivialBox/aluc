@@ -1,5 +1,5 @@
 <?php
-namespace Aluc\Service;
+namespace Aluc\Models;
 
 /**
  * Representación de un item o tabla de la base de datos.
