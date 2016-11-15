@@ -10,8 +10,8 @@ use Aluc\Dao\ModeradorDao;
 class Moderador extends Persona {
     public $id_laboratorio;
 
-    protected function __construct($id, $id_laboratorio, $nombre) {
-        parent::__construct($id, $nombre);
+    protected function __construct($id, $id_laboratorio, $nombre, $is_save = true) {
+        parent::__construct($id, $nombre, $is_save);
         $this->id_laboratorio = $id_laboratorio;
     }
 
@@ -23,12 +23,12 @@ class Moderador extends Persona {
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
-            return new Moderador($array[0]["id"], $array[0]['id_laboratorio'], $array[0]['nombre']);
+            return new Moderador($array[0]["id"], $array[0]['id_laboratorio'], $array[0]['nombre'], false);
 
         }else {
             $moderadores = array();
             foreach ($array as $fila){
-                array_push($moderadores,new Moderador($fila['id'], $fila['id_laboratorio'], $fila['nombre']));
+                array_push($moderadores,new Moderador($fila['id'], $fila['id_laboratorio'], $fila['nombre'], false));
             }
             return $moderadores;
         }
@@ -48,8 +48,8 @@ class Moderador extends Persona {
         );
     }
 
-    public function save($is_save) {
-        ModeradorDao::getInstance()->save($this, $is_save);
+    public function save() {
+        ModeradorDao::getInstance()->save($this, $this->is_save);
     }
 
     public function delete(){
