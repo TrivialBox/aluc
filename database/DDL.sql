@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ALUC` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ALUC`;
 -- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: ALUC
@@ -37,15 +39,15 @@ DROP TABLE IF EXISTS `horario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `horario` (
-  `id` varchar(10) NOT NULL,
-  `id_jornada1` varchar(10) DEFAULT NULL,
-  `id_jornada2` varchar(10) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jornada1` int(11) DEFAULT NULL,
+  `id_jornada2` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_horario_1_idx` (`id_jornada1`),
   KEY `fk_horario_2_idx` (`id_jornada2`),
   CONSTRAINT `fk_horario_1` FOREIGN KEY (`id_jornada1`) REFERENCES `jornada` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_horario_2` FOREIGN KEY (`id_jornada2`) REFERENCES `jornada` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,11 +58,11 @@ DROP TABLE IF EXISTS `jornada`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `jornada` (
-  `id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `hora_apertura` time DEFAULT NULL,
   `hora_cierre` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,15 +73,15 @@ DROP TABLE IF EXISTS `laboratorio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `laboratorio` (
-  `id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `capacidad` int(11) DEFAULT NULL,
   `descripcion` varchar(70) DEFAULT NULL,
-  `id_horario` varchar(10) DEFAULT NULL,
+  `id_horario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_laboratorio_2_idx` (`id_horario`),
-  CONSTRAINT `fk_laboratorio_2` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `fk_laboratorio_1_idx` (`id_horario`),
+  CONSTRAINT `fk_laboratorio_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,15 +92,14 @@ DROP TABLE IF EXISTS `lector`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lector` (
-  `id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_laboratorio` varchar(10) DEFAULT NULL,
   `ip` varchar(55) DEFAULT NULL,
   `mac` varchar(70) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
-  `id_laboratorio` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_lector_1_idx` (`id_laboratorio`),
-  CONSTRAINT `fk_lector_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `fk_lector_1_idx` (`id_laboratorio`)
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,9 +113,21 @@ CREATE TABLE `moderador` (
   `id` varchar(10) NOT NULL,
   `id_laboratorio` varchar(10) NOT NULL,
   PRIMARY KEY (`id`,`id_laboratorio`),
-  KEY `fk_moderador_2_idx` (`id_laboratorio`),
-  CONSTRAINT `fk_moderador_1` FOREIGN KEY (`id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_moderador_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_moderador_1` FOREIGN KEY (`id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `prueba`
+--
+
+DROP TABLE IF EXISTS `prueba`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prueba` (
+  `cupos` int(11) NOT NULL,
+  `ocupados` int(11) NOT NULL,
+  `valor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -132,7 +145,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +157,7 @@ DROP TABLE IF EXISTS `reservacion`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservacion` (
   `id_reserva` int(100) NOT NULL AUTO_INCREMENT,
-  `id_laboratorio` varchar(10) NOT NULL,
+  `id_laboratorio` int(11) NOT NULL,
   `id_usuario` varchar(10) NOT NULL,
   `estado` varchar(45) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -152,10 +165,11 @@ CREATE TABLE `reservacion` (
   `hora_fin` time DEFAULT NULL,
   PRIMARY KEY (`id_reserva`,`id_laboratorio`,`id_usuario`),
   KEY `fk_new_table_1_idx` (`id_usuario`),
-  KEY `fk_new_table_2_idx` (`id_laboratorio`),
+  KEY `fk_reservacion_1_idx` (`id_laboratorio`),
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_new_table_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,6 +197,25 @@ SET character_set_client = utf8;
 /*!50001 CREATE VIEW `view_administrador` AS SELECT 
  1 AS `id`,
  1 AS `nombre`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `view_laboratorio`
+--
+
+DROP TABLE IF EXISTS `view_laboratorio`;
+/*!50001 DROP VIEW IF EXISTS `view_laboratorio`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_laboratorio` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `capacidad`,
+ 1 AS `descripcion`,
+ 1 AS `j1_hora_apertura`,
+ 1 AS `j1_hora_cierre`,
+ 1 AS `j2_hora_apertura`,
+ 1 AS `j2_hora_cierre`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -227,6 +260,70 @@ SET character_set_client = @saved_cs_client;
 --
 -- Dumping routines for database 'ALUC'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `insertar_reserva` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_reserva`(
+						
+						IN Sid_usuario varchar(10),
+						IN Sid_laboratorio INT(11),
+						IN Sdescripcion varchar(60),		
+						IN Sn_usuarios int(11),
+						IN Stipo_uso varchar(45),
+						IN Sestado varchar(45),
+						IN Sfecha DATE,
+						IN Shora_inicio TIME,
+						IN Shora_fin TIME,
+						IN Scodigo_secreto varchar(100))
+BEGIN
+    /*Variables para el desarrollo*/
+	declare cupos int;
+    declare ocupados int;
+    declare valor int;
+    
+    /*declaracion de las excepsiones*/
+    
+    
+    start transaction;
+    
+    SELECT capacidad into cupos
+		from laboratorio 
+		where id = Sid_laboratorio;
+                    
+    SELECT sum(n_usuarios) into ocupados
+		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
+		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and 
+		TIMESTAMP(fecha,hora_inicio) 
+		between TIMESTAMP(fecha,hora_inicio) 
+		and TIMESTAMP(fecha,hora_fin);
+    
+    set valor = cupos - ocupados;
+    insert into prueba values(cupos, ocupados, valor);
+    if (valor > 0 and Sn_usuarios <= valor) then
+		INSERT INTO ALUC.reserva  
+			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto);
+        INSERT INTO ALUC.reservacion 
+			values(NULL, Sid_laboratorio,Sid_usuario, Sestado, Sfecha, Shora_inicio, Shora_fin);
+		commit;
+	else
+		signal sqlstate "45000" set message_text = "No hay cupos ";
+	end if;
+    
+    
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `view_administrador`
@@ -242,6 +339,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `view_administrador` AS select `usuario`.`id` AS `id`,`usuario`.`nombre` AS `nombre` from (`usuario` join `administrador` on((`usuario`.`id` = `administrador`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_laboratorio`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_laboratorio`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_laboratorio` AS select `l`.`id` AS `id`,`l`.`nombre` AS `nombre`,`l`.`capacidad` AS `capacidad`,`l`.`descripcion` AS `descripcion`,`j`.`hora_apertura` AS `j1_hora_apertura`,`j`.`hora_cierre` AS `j1_hora_cierre`,`j2`.`hora_apertura` AS `j2_hora_apertura`,`j2`.`hora_cierre` AS `j2_hora_cierre` from (((`laboratorio` `l` join `horario` `h` on((`l`.`id_horario` = `h`.`id`))) join `jornada` `j` on((`h`.`id_jornada1` = `j`.`id`))) join `jornada` `j2` on((`h`.`id_jornada2` = `j2`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -291,4 +406,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-14 18:22:07
+-- Dump completed on 2016-11-15  3:15:11
