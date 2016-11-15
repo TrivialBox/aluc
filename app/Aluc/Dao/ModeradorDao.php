@@ -54,7 +54,7 @@ class ModeradorDao {
         /* si se usa una vista especificar el nombre el el primer parametro del metodo select
         *  de igual manera si es una tabla solo poner el nombre de la tabla
         */
-        $list_moderador = $this->database->select("moderador", "*", null, $order_by);
+        $list_moderador = $this->database->select("view_moderador", "*", null, $order_by);
 
         return $list_moderador;
 
