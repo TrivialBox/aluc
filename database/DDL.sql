@@ -93,12 +93,13 @@ DROP TABLE IF EXISTS `lector`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lector` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_laboratorio` varchar(10) DEFAULT NULL,
+  `id_laboratorio` int(11) DEFAULT NULL,
   `ip` varchar(55) DEFAULT NULL,
   `mac` varchar(70) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_lector_1_idx` (`id_laboratorio`)
+  KEY `fk_lector_1_idx` (`id_laboratorio`),
+  CONSTRAINT `fk_lector_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -391,4 +392,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-15  5:58:35
+-- Dump completed on 2016-11-15  6:12:33
