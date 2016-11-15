@@ -191,7 +191,7 @@ class AdministradorSrv {
                 $lector->save();
             },
             function () {
-                return self::$view_moderador->listAll();
+                return self::$view_lector_qr->listAll();
             },
             function () {
                 return self::$view_general->error404();
