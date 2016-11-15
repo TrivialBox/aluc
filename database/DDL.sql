@@ -47,7 +47,7 @@ CREATE TABLE `horario` (
   KEY `fk_horario_2_idx` (`id_jornada2`),
   CONSTRAINT `fk_horario_1` FOREIGN KEY (`id_jornada1`) REFERENCES `jornada` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_horario_2` FOREIGN KEY (`id_jornada2`) REFERENCES `jornada` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `jornada` (
   `hora_apertura` time DEFAULT NULL,
   `hora_cierre` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +81,7 @@ CREATE TABLE `laboratorio` (
   PRIMARY KEY (`id`),
   KEY `fk_laboratorio_1_idx` (`id_horario`),
   CONSTRAINT `fk_laboratorio_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,13 +93,14 @@ DROP TABLE IF EXISTS `lector`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lector` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_laboratorio` varchar(10) DEFAULT NULL,
+  `id_laboratorio` int(11) DEFAULT NULL,
   `ip` varchar(55) DEFAULT NULL,
   `mac` varchar(70) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_lector_1_idx` (`id_laboratorio`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
+  KEY `fk_lector_1_idx` (`id_laboratorio`),
+  CONSTRAINT `fk_lector_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,20 +119,6 @@ CREATE TABLE `moderador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `prueba`
---
-
-DROP TABLE IF EXISTS `prueba`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `prueba` (
-  `cupos` int(11) NOT NULL,
-  `ocupados` int(11) NOT NULL,
-  `valor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `reserva`
 --
 
@@ -145,7 +132,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +156,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +292,6 @@ BEGIN
 		and TIMESTAMP(fecha,hora_fin);
     
     set valor = cupos - ocupados;
-    insert into prueba values(cupos, ocupados, valor);
     if (valor > 0 and Sn_usuarios <= valor) then
 		INSERT INTO ALUC.reserva  
 			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto);
@@ -406,4 +392,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-15  3:15:11
+-- Dump completed on 2016-11-15  6:12:33
