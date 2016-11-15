@@ -40,4 +40,8 @@ class ModeradorTest extends TestCase {
             'jornada2' => new Fecha(null, '15:00', '17:00')
         ];
     }
+
+    public function tearDown() {
+        Moderador::getInstance($this->getUser()['id'])->delete();
+    }
 }
