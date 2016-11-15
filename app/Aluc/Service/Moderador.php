@@ -35,21 +35,21 @@ class Moderador extends Persona {
     }
 
     public static function getInstance($id) {
-
         return Moderador::get_object(ModeradorDao::getInstance()->get($id));
     }
 
     public function getLaboratorio() {
-
         return Laboratorio::getInstance($this->id_laboratorio);
-
     }
     public static function getAll($order_atribute = null) {
-        return Moderador::get_object(ModeradorDao::getInstance()->getAll($order_atribute),false);
+        return Moderador::get_object(
+            ModeradorDao::getInstance()->getAll($order_atribute),
+            false
+        );
     }
 
-    public function save($object, $is_save){
-        ModeradorDao::getInstance()->save($object, $is_save);
+    public function save($is_save) {
+        ModeradorDao::getInstance()->save($this, $is_save);
     }
 
     public function delete(){
