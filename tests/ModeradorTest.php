@@ -15,8 +15,8 @@ class ModeradorTest extends TestCase {
         self::assertEquals($lab->nombre, $values['nombre_lab']);
         self::assertEquals($lab->capacidad, $values['capacidad_lab']);
         self::assertEquals($lab->descripcion, $values['descripcion_lab']);
-        self::assertEquals($horario->jornada1, $values['joranada1']);
-        self::assertEquals($horario->jornada2, $values['joranada2']);
+        self::assertEquals($horario->jornada1, $values['jornada1']);
+        self::assertEquals($horario->jornada2, $values['jornada2']);
     }
 
     public function testCreateValidModerador() {
