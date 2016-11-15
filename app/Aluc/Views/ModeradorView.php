@@ -1,12 +1,12 @@
 <?php
 namespace Aluc\Views;
 
-use Aluc\Service\Laboratorio;
-use Aluc\Service\Moderador;
+use Aluc\Models\Laboratorio;
+use Aluc\Models\Moderador;
 
 /**
  * Clase encargada de representar todos los objetos
- * relacionados a la clase Moderador.
+ * relacionados con la clase Moderador.
  */
 class ModeradorView extends View {
     private static $instance = null;

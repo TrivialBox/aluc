@@ -1,8 +1,12 @@
 <?php
 namespace Aluc\Views;
 
-use Aluc\Service\Lector;
+use Aluc\Models\Lector;
 
+/**
+ * Clase encargada de representar todos los objetos
+ * relacionados con la clase LectoresQr.
+ */
 class LectorQrView extends View {
     private static $instance = null;
 
