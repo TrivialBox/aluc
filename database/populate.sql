@@ -1,3 +1,4 @@
+-- Usuarios
 USE ALUC;
 INSERT INTO usuario (id, nombre) VALUES ('1400567572', 'MONCAYO TELLO ANDREA FERNANDA');
 INSERT INTO usuario (id, nombre) VALUES ('0105108336', 'MONGE LLIVISACA CARLOS GREGORIO');
@@ -301,3 +302,24 @@ INSERT INTO usuario (id, nombre) VALUES ('0105850945', 'SANCHEZ AUCAY ANDRES ISM
 INSERT INTO usuario (id, nombre) VALUES ('0104967864', 'SANCHEZ AYORA CHRISTIAN EDUARDO');
 INSERT INTO usuario (id, nombre) VALUES ('0105070353', 'SANCHEZ BELTRAN JORGE DAMIAN');
 INSERT INTO usuario (id, nombre) VALUES ('1400967715', 'SANCHEZ CALLE JASSON RUBEN');
+
+-- Jornadas
+INSERT INTO jornada (id, hora_apertura, hora_cierre) VALUES ('0', '07:00', '13:00');
+INSERT INTO jornada (id, hora_apertura, hora_cierre) VALUES ('1', '09:00', '13:00');
+
+INSERT INTO jornada (id, hora_apertura, hora_cierre) VALUES ('2', '15:00', '17:00');
+INSERT INTO jornada (id, hora_apertura, hora_cierre) VALUES ('3', '15:30', '17:30');
+
+-- Horarios
+INSERT INTO horario (id, id_jornada1, id_jornada2) VALUES ('0', '0', '2');
+INSERT INTO horario (id, id_jornada1, id_jornada2) VALUES ('1', '0', '3');
+INSERT INTO horario (id, id_jornada1, id_jornada2) VALUES ('2', '1', '2');
+INSERT INTO horario (id, id_jornada1, id_jornada2) VALUES ('3', '1', '3');
+
+-- Laboratorios
+INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('0', 'Lab. Física', '15', 'Laboratorio de física para clases de física.', '0');
+INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('1', 'Lab. Química', '20', 'Laboratorio de química para clases de química.', '1');
+INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('2', 'Lab. Suelos', '10', 'Laboratorio de suelos para los de civil.', '2');
+INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('3', 'Lab. Máquinas', '12', 'Laboratorio de máquinas para los de civil.', '3');
+INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('4', 'Lab. de computo', '25', 'Laboratorio que en realidad son salas de computo.', '0');
+INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('5', 'Lab. de python', '10', 'Laboratorio de python, con la ayuda de Guido Van Rossum.', '1');
