@@ -53,6 +53,6 @@ class Moderador extends Persona {
     }
 
     public function delete(){
-        echo "hola mudno";
+        ModeradorDao::getInstance()->delete($this->id);
     }
 }
