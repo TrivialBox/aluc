@@ -37,7 +37,7 @@ class ModeradorTest extends TestCase {
 
 
     /**
-     * @expectedException Exception
+     * @expectedException /Exception
     */
     public function testCreateInvalidModerador() {
         Moderador::getNewInstace('1d3n0v1l1d0', '2');
@@ -52,6 +52,11 @@ class ModeradorTest extends TestCase {
 
         $mod_expected = $this->getUser();
         $mod_expected['id_laboratorio'] = '2';
+        $mod_expected['nombre_lab'] = 'Lab. Química';
+        $mod_expected['capacidad_lab'] = 20;
+        $mod_expected['descripcion_lab'] = 'Laboratorio de química para clases de química.';
+        $mod_expected['jornada1'] = new Fecha(null, '07:00:00','13:00:00');
+        $mod_expected['jornada2'] = new Fecha(null, '15:30:00', '17:30:00');
 
         $this->assertEqualsObject($mod_original, $mod_expected);
     }
