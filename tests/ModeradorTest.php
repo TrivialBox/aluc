@@ -60,7 +60,7 @@ class ModeradorTest extends TestCase {
         $this->assertEqualsObject($mod_original, $mod_expected);
     }
 
-    private function testGetAllModeradores() {
+    public function testGetAllModeradores() {
         $this->createModeradores();
         $num_elements = 0;
         $all_moderadores = $this->getUsers();
