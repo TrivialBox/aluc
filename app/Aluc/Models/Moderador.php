@@ -10,7 +10,7 @@ use Aluc\Dao\ModeradorDao;
 class Moderador extends Persona {
     public $id_laboratorio;
 
-    protected function __construct($id, $id_laboratorio, $nombre, $is_save = true) {
+    protected function __construct($id, $id_laboratorio, $nombre = null, $is_save = true) {
         parent::__construct($id, $nombre, $is_save);
         $this->id_laboratorio = $id_laboratorio;
     }
