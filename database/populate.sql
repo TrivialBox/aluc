@@ -322,7 +322,7 @@ INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES 
 INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('4', 'Lab. Máquinas', '12', 'Laboratorio de máquinas para los de civil.', '4');
 INSERT INTO laboratorio (id, nombre, capacidad, descripcion, id_horario) VALUES ('5', 'Lab. de computo', '25', 'Laboratorio que en realidad son salas de computo.', '1');
 
---Administradores
+-- Administradores
 INSERT INTO administrador (id) VALUES ('0105070353');
 INSERT INTO administrador (id) VALUES ('1400967715');
 
@@ -340,7 +340,7 @@ INSERT INTO moderador (id, id_laboratorio) VALUES ('0104035514', '5');
 INSERT INTO moderador (id, id_laboratorio) VALUES ('0105513402', '5');
 INSERT INTO moderador (id, id_laboratorio) VALUES ('0106816952', '5');
 
---Lectores
+-- Lectores
 
 
 -- Reservas
