@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>f87fbbe8-3dd0-4784-8f58-be5b819e2e0b</OriginalElement>
+  <nodes>
+    <node x="0.0" y="759.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.VIEW:ALUC.view_reserva</node>
+    <node x="644.8333333333334" y="155.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.horario</node>
+    <node x="169.0" y="573.5">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.moderador</node>
+    <node x="349.0" y="759.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.VIEW:ALUC.view_laboratorio</node>
+    <node x="161.33333333333337" y="346.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.usuario</node>
+    <node x="358.0" y="513.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.reservacion</node>
+    <node x="891.0" y="759.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.VIEW:ALUC.view_moderador</node>
+    <node x="0.0" y="585.5">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.administrador</node>
+    <node x="650.0" y="759.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.lector</node>
+    <node x="624.8333333333334" y="310.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.laboratorio</node>
+    <node x="230.0" y="1076.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.VIEW:ALUC.view_administrador</node>
+    <node x="644.8333333333334" y="0.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.jornada</node>
+    <node x="400.83333333333337" y="310.0">f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.reserva</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.laboratorio" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.horario">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.reservacion" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.laboratorio">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.horario" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.jornada">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.lector" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.laboratorio">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.reservacion" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.reserva">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.moderador" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.usuario">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.administrador" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.usuario">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.reservacion" target="f87fbbe8-3dd0-4784-8f58-be5b819e2e0b.TABLE:ALUC.usuario">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6645454545454546" x="508.0013679890561" y="481.16005471956225" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Key columns</Category>
+  </Categories>
+</Diagram>
+
