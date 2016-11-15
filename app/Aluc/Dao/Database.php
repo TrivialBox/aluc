@@ -103,6 +103,13 @@ class Database {
         }
         return $values;
     }
+    private function quote_array($array){
+        $values = array();
+        foreach ($array as $value) {
+            $values[] = $value;
+        }
+        return $values;
+    }
 
     private function quote_string($string) {
         return "'{$string}'";
@@ -110,16 +117,20 @@ class Database {
 
     public function select($table_name, $columns = '*', $where = null, $order = null) {
         if ($columns !== '*') {
-            $columns = $this->quote_array_string($columns);
+            $columns = $this->quote_array($columns);
             $columns = implode(',', $columns);
         }
         $sql = "SELECT {$columns} FROM {$table_name}";
+
+
+
         if ($where != null) {
             $sql .= " WHERE {$where}";
         }
         if ($order != null) {
             $sql .= " ORDER BY {$order}";
         }
+
         $result = $this->query($sql)->fetch_all(MYSQLI_ASSOC);
         return $result;
     }

@@ -1,5 +1,6 @@
 <?php
 namespace Aluc\Service;
+use Aluc\Dao\LaboratorioDao;
 
 /**
  * Representación de un laboratorio, el cual debe estar coordinado
@@ -26,8 +27,25 @@ class Laboratorio {
         $this->moderadores = $moderadores;
     }
 
-    public static function getInstance($id) {
+    private static function get_object($array, $get_element = true){
 
+        if ($get_element){
+
+            return new Laboratorio($array[0]["id"],$array[0]["nombre"],$array[0]["capacidad"],
+                $array[0]["descripcion"],$array[0]["id_horario"],$array[0]["id_moderadores"]);
+
+
+        }else {
+            $moderadores = array();
+            foreach ($array as $fila){
+                //array_push($moderadores,new Moderador($fila['id'], $fila['id_laboratorio'], $fila['nombre']));
+            }
+            return $moderadores;
+        }
+    }
+
+    public static function getInstance($id) {
+        return Laboratorio::get_object(LaboratorioDao::getInstance()->get($id));
     }
 
     public function getModeradores() {

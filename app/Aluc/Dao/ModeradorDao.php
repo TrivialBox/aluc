@@ -49,7 +49,7 @@ class ModeradorDao {
         $order_by = null;
 
         if ($order_atribute != null){
-            $order_by = $order_atribute . " asc";
+            $order_by =  "order by " . $order_atribute . " asc";
         }
         /* si se usa una vista especificar el nombre el el primer parametro del metodo select
         *  de igual manera si es una tabla solo poner el nombre de la tabla
@@ -58,5 +58,8 @@ class ModeradorDao {
 
         return $list_moderador;
 
+    }
+    public function delete($where){
+        $this->database->delete("moderador", $where);
     }
 }
