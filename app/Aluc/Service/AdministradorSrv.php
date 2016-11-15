@@ -1,6 +1,7 @@
 <?php
 namespace Aluc\Service;
 
+use Aluc\Views\AdministradorView;
 use Aluc\Views\LectorQrView;
 use Aluc\Views\ModeradorView;
 use Aluc\Views\GeneralView;
@@ -14,11 +15,13 @@ class AdministradorSrv {
     private static $view_moderador;
     private static $view_general;
     private static $view_lector_qr;
+    private static $view_administrador;
 
     public static function init() {
         static::$view_moderador = ModeradorView::getInstance();
         static::$view_general = GeneralView::getInstance();
         static::$view_lector_qr = LectorQrView::getInstance();
+        static::$view_administrador = AdministradorView::getInstance();
     }
 
     private static function admin_do($func, $view_success, $view_error) {
@@ -62,7 +65,14 @@ class AdministradorSrv {
      * de administración.
      */
     public static function home() {
-        // TODO: página principal del administrador
+        self::admin_go(
+            function () {
+                return self::$view_administrador->home();
+            },
+            function () {
+                return self::$view_general->error404();
+            }
+        );
     }
 
     /**
