@@ -36,8 +36,8 @@ class ModeradorTest extends TestCase {
             'nombre_lab' => 'Lab. Física',
             'capacidad_lab' => 15,
             'descripcion_lab' => 'Laboratorio de física para clases de física.',
-            'jornada1' => new Fecha(null, '07:00', '13:00'),
-            'jornada2' => new Fecha(null, '15:00', '17:00')
+            'jornada1' => new Fecha(null, '07:00:00', '13:00:00'),
+            'jornada2' => new Fecha(null, '15:00:00', '17:00:00')
         ];
     }
 
