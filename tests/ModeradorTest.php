@@ -29,7 +29,7 @@ class ModeradorTest extends TestCase {
         self::assertEquals($horario->jornada2, $values['jornada2']);
     }
 
-    private function testCreateValidModerador() {
+    public function testCreateValidModerador() {
         $expected = $this->getUser();
         $actual = $this->moderador;
         $this->assertEqualsObject($actual, $expected);
