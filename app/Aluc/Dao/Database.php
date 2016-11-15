@@ -149,7 +149,6 @@ class Database {
         }
         $sql .= " SET " . implode(',', $columns_set);
         $sql .= " WHERE {$where}";
-        echo "sql =  $sql";
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al actualizar {$values}. {$this->error()}"
