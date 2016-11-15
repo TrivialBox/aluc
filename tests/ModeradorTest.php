@@ -35,12 +35,18 @@ class ModeradorTest extends TestCase {
         $this->assertEqualsObject($actual, $expected);
     }
 
+    /**
+     * @expectedException Exception
+    */
+    public function testCreateModeradorInvalidId() {
+        Moderador::getNewInstace('1234567890', '2')->save();
+    }
 
     /**
-     * @expectedException /Exception
-    */
-    public function testCreateInvalidModerador() {
-        Moderador::getNewInstace('1d3n0v1l1d0', '2');
+     * @expectedException Exception
+     */
+    public function testCreateModeradorInvalidLaboratorio() {
+        Moderador::getNewInstace('0105631808', '10')->save();
     }
 
     public function testEditModerador() {
