@@ -1,6 +1,7 @@
 <?php
 namespace Aluc\Service;
 
+use Aluc\Models\Moderador;
 use Aluc\Views\AdministradorView;
 use Aluc\Views\LectorQrView;
 use Aluc\Views\ModeradorView;
