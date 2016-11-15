@@ -136,7 +136,7 @@ class Database {
         $sql = "DELETE FROM {$view_name} WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al eliminar {$values}. {$this->error()}"
+                "Error al eliminar {$this->error()}"
             );
         }
     }
@@ -151,7 +151,7 @@ class Database {
         $sql .= " WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al actualizar {$values}. {$this->error()}"
+                "Error al actualizar {$this->error()}"
             );
         }
 

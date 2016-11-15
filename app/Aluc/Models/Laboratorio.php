@@ -31,9 +31,13 @@ class Laboratorio {
     private static function get_object($array, $get_element = true){
 
         if ($get_element){
+            $jordana1 = new Fecha(null,$array[0]["j1_hora_apertura"],$array[0]["j1_hora_cierre"]);
+            $jornada2 = new Fecha(null,$array[0]["j2_hora_apertura"],$array[0]["j2_hora_cierre"]);
 
-            return new Laboratorio($array[0]["id"],$array[0]["nombre"],$array[0]["capacidad"],
-                $array[0]["descripcion"],$array[0]["id_horario"],$array[0]["id_moderadores"]);
+            $horario = new Horario($jordana1,$jornada2);
+
+            return new Laboratorio($array[0]["id"], $array[0]["nombre"], $array[0]["capacidad"],
+                $array[0]["descripcion"], $horario, $array[0]["id_moderadores"]);
 
 
         }else {
