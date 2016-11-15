@@ -32,7 +32,7 @@ class ModeradorTest extends TestCase {
         return [
             'id' => '0105751473',
             'nombre' => 'MOYANO DUTÁN JOSÉ ALFREDO',
-            'id_laboratorio' => 0,
+            'id_laboratorio' => 1,
             'nombre_lab' => 'Lab. Física',
             'capacidad_lab' => 15,
             'descripcion_lab' => 'Laboratorio de física para clases de física.',
