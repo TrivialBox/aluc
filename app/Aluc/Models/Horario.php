@@ -12,7 +12,7 @@ class Horario {
     public $jornada2;
 
     public function __construct(Fecha $jornada1, Fecha $jornada2) {
-        $this->jornada_1 = $jornada1;
-        $this->jornada_2 = $jornada2;
+        $this->jornada1 = $jornada1;
+        $this->jornada2 = $jornada2;
     }
 }
