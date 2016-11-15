@@ -12,7 +12,7 @@ abstract class Persona implements DBItem {
     protected function __construct($id, $nombre, $is_save) {
         $this->id = $id;
         $this->nombre = $nombre;
-        $this->is_save = $is_save && true;
+        $this->is_save = $this->is_save && $is_save;
     }
 
 }
