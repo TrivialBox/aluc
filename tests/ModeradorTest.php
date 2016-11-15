@@ -3,7 +3,17 @@ use Aluc\Models\Fecha;
 use PHPUnit\Framework\TestCase;
 use Aluc\Models\Moderador;
 
+
 class ModeradorTest extends TestCase {
+    private $moderador;
+
+    public function setUp() {
+        $user = $this->getUser();
+        $this->moderador = Moderador::getNewInstace(
+            $user['id'],
+            $user['id_laboratorio']
+        )->save();
+    }
 
     public function assertEqualsObject(Moderador $obj, $values) {
         $lab = $obj->getLaboratorio();
@@ -21,11 +31,29 @@ class ModeradorTest extends TestCase {
 
     public function testCreateValidModerador() {
         $expected = $this->getUser();
-        $actual = Moderador::getNewInstace(
-            $expected['id'],
-            $expected['id_laboratorio']
-        )->save();
+        $actual = $this->moderador;
         $this->assertEqualsObject($actual, $expected);
+    }
+
+
+    /**
+     * @expectedException Exception
+    */
+    public function testCreateInvalidModerador() {
+        Moderador::getNewInstace('1d3n0v1l1d0', '2');
+    }
+
+    public function testEditModerador() {
+        $mod_original = Moderador::getInstance($this->getUser()['id']);
+        $mod_original->id_laboratorio = '2';
+        $mod_original->save();
+
+        $mod_original = Moderador::getInstance($this->getUser()['id']);
+
+        $mod_expected = $this->getUser();
+        $mod_expected['id_laboratorio'] = '2';
+
+        $this->assertEqualsObject($mod_original, $mod_expected);
     }
 
     private function getUser() {
