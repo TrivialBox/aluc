@@ -62,8 +62,8 @@
 							Dao						</a>
 							</li>
 					<li>
-						<a href="namespace-Aluc.Modulo.html">
-							Modulo						</a>
+						<a href="namespace-Aluc.Models.html">
+							Models						</a>
 							</li>
 					<li class="active">
 						<a href="namespace-Aluc.Service.html">
@@ -85,24 +85,11 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Aluc.Service.Administrador.html">Administrador</a></li>
 				<li class="active"><a href="class-Aluc.Service.AdministradorSrv.html">AdministradorSrv</a></li>
 				<li><a href="class-Aluc.Service.ErrorSrv.html">ErrorSrv</a></li>
-				<li><a href="class-Aluc.Service.Fecha.html">Fecha</a></li>
-				<li><a href="class-Aluc.Service.Horario.html">Horario</a></li>
-				<li><a href="class-Aluc.Service.Laboratorio.html">Laboratorio</a></li>
-				<li><a href="class-Aluc.Service.Lector.html">Lector</a></li>
-				<li><a href="class-Aluc.Service.Moderador.html">Moderador</a></li>
 				<li><a href="class-Aluc.Service.ModeradorSrv.html">ModeradorSrv</a></li>
-				<li><a href="class-Aluc.Service.Persona.html">Persona</a></li>
-				<li><a href="class-Aluc.Service.Reserva.html">Reserva</a></li>
-				<li><a href="class-Aluc.Service.Usuario.html">Usuario</a></li>
 			</ul>
 
-			<h3>Interfaces</h3>
-			<ul>
-				<li><a href="class-Aluc.Service.DBItem.html">DBItem</a></li>
-			</ul>
 
 
 
@@ -119,6 +106,9 @@
 	<h1>Class AdministradorSrv</h1>
 
 
+	<div class="description">
+	<p>Clase que maneja todas las solicitudes a /admin</p>
+	</div>
 
 
 
@@ -134,7 +124,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Service.html">Service</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Service.AdministradorSrv.html#8-47" title="Go to source code">Aluc/Service/AdministradorSrv.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Service.AdministradorSrv.html#10-258" title="Go to source code">Aluc/Service/AdministradorSrv.php</a>
 		<br>
 	</div>
 
@@ -154,7 +144,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_init">#</a>
-			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#15-18" title="Go to source code">init</a>( )</code>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#18-22" title="Go to source code">init</a>( )</code>
 
 			<div class="description short">
 				
@@ -183,14 +173,18 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_home">#</a>
-			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#25-27" title="Go to source code">home</a>( )</code>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#57-66" title="Go to source code">home</a>( )</code>
 
 			<div class="description short">
-				
+				<p>/admin</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>/admin</p>
+
+<p>Muestra la página principal del administrador
+desde la cual tiene acceso a varias herramientas
+de administración.</p>
 
 
 
@@ -212,16 +206,249 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_moderadores">#</a>
-			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#29-46" title="Go to source code">moderadores</a>( )</code>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#68-83" title="Go to source code">moderadores</a>( )</code>
 
 			<div class="description short">
-				<p>Muestra una lista de todos los moderadores.
-Sólo el administrador</p>
+				<p>/admin/moderadores</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Muestra una lista de todos los moderadores.
-Sólo el administrador</p>
+				<p>/admin/moderadores</p>
+
+<p>Muestra una lista de todos los moderadores.
+Sólo el administrador tiene acceso.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="moderadores_nuevo" id="_moderadores_nuevo">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_moderadores_nuevo">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#86-108" title="Go to source code">moderadores_nuevo</a>( )</code>
+
+			<div class="description short">
+				<p>/admin/moderadores/nuevo</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>/admin/moderadores/nuevo</p>
+
+<p>Crea un nuevo moderador.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="moderadores_actualizar" id="_moderadores_actualizar">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_moderadores_actualizar">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#110-133" title="Go to source code">moderadores_actualizar</a>( )</code>
+
+			<div class="description short">
+				<p>/admin/moderadores/actualizar</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>/admin/moderadores/actualizar</p>
+
+<p>Editar la información de un moderador.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="moderadores_eliminar" id="_moderadores_eliminar">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_moderadores_eliminar">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#136-157" title="Go to source code">moderadores_eliminar</a>( )</code>
+
+			<div class="description short">
+				<p>/admin/moderadores/eliminar</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>/admin/moderadores/eliminar</p>
+
+<p>Elimina un moderador del sistema.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="lectores" id="_lectores">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_lectores">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#159-174" title="Go to source code">lectores</a>( )</code>
+
+			<div class="description short">
+				<p>/admin/lectores</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>/admin/lectores</p>
+
+<p>Muestra una lista de todos los lectores QR.
+Sólo el administrador tiene acceso.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="lectores_nuevo" id="_lectores_nuevo">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_lectores_nuevo">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#177-200" title="Go to source code">lectores_nuevo</a>( )</code>
+
+			<div class="description short">
+				<p>/admin/lectores/nuevo</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>/admin/lectores/nuevo</p>
+
+<p>Crea un nuevo lector QR.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="lectores_actualizar" id="_lectores_actualizar">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_lectores_actualizar">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#202-235" title="Go to source code">lectores_actualizar</a>( )</code>
+
+			<div class="description short">
+				<p>/admin/lectores/actualizar</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>/admin/lectores/actualizar</p>
+
+<p>Edita la información de un lector.
+Si el valor de new_token es true se genera un nuevo
+token para el lector.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="lectores_eliminar" id="_lectores_eliminar">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_lectores_eliminar">#</a>
+			<code><a href="source-class-Aluc.Service.AdministradorSrv.html#237-257" title="Go to source code">lectores_eliminar</a>( )</code>
+
+			<div class="description short">
+				<p>Elimina un lector del sistema.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Elimina un lector del sistema.
+La petición se debe hacer vía post.
+Sólo un administrador puede realizar esta acción.</p>
 
 
 
@@ -253,6 +480,6 @@ Sólo el administrador</p>
 	</div>
 </div>
 <script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?73473ae0093b819ba6ff35cb34a9ee9a74ceebca"></script>
+<script src="elementlist.js?39a4ff92ae9d0775b65d82a2b5f28c77fab29e87"></script>
 </body>
 </html>
