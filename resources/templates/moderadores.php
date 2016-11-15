@@ -18,7 +18,6 @@
                     <tr>
                     <td>{$moderador->id}</td>
                     <td>{$moderador->nombre}</td>
-                    <td>{$moderador->get}</td>
                     <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
                     </tr>
                     ";
