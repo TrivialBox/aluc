@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 14/11/16
- * Time: 20:26
- */
+
 
 namespace Aluc\Dao;
 
