@@ -33,10 +33,10 @@ class ModeradorDao {
         if ($type_save){
             return $this->database->insert("moderador", $this->convertObjectArray($object));
         } else {
-            return $this->database->update('moderador',$this->convertObjectArray($object),$object->id);
+            $where = " id = '{$object->id}'";
+            return $this->database->update('moderador',$this->convertObjectArray($object), $where);
 
         }
-
     }
 
     public function get($id){
@@ -47,19 +47,16 @@ class ModeradorDao {
 
     public function getAll($order_atribute){
         $order_by = null;
-
         if ($order_atribute != null){
             $order_by =  "order by " . $order_atribute . " asc";
         }
-        /* si se usa una vista especificar el nombre el el primer parametro del metodo select
-        *  de igual manera si es una tabla solo poner el nombre de la tabla
-        */
         $list_moderador = $this->database->select("view_moderador", "*", null, $order_by);
 
         return $list_moderador;
-
     }
-    public function delete($where){
+
+    public function delete($id){
+        $where = "id = " . "'" . $id . "'";
         $this->database->delete("moderador", $where);
     }
 }
