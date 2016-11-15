@@ -15,7 +15,7 @@ class ModeradorTest extends TestCase {
         )->save();
     }
 
-    public function assertEqualsObject(Moderador $obj, $values) {
+    private function assertEqualsObject(Moderador $obj, $values) {
         $lab = $obj->getLaboratorio();
         $horario = $lab->horario;
         self::assertEquals($obj->id, $values['id']);
@@ -29,7 +29,7 @@ class ModeradorTest extends TestCase {
         self::assertEquals($horario->jornada2, $values['jornada2']);
     }
 
-    public function testCreateValidModerador() {
+    private function testCreateValidModerador() {
         $expected = $this->getUser();
         $actual = $this->moderador;
         $this->assertEqualsObject($actual, $expected);
@@ -60,7 +60,7 @@ class ModeradorTest extends TestCase {
         $this->assertEqualsObject($mod_original, $mod_expected);
     }
 
-    private function testGetAllModeradores() {
+    public function testGetAllModeradores() {
         $this->createModeradores();
         $num_elements = 0;
         $all_moderadores = $this->getUsers();
