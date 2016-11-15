@@ -3,6 +3,7 @@
 namespace Aluc\Models;
 
 use Aluc\Dao\ModeradorDao;
+use Aluc\Models\Laboratorio;
 
 /**
  * Usuario que asegura el correcto uso de las reservas.
