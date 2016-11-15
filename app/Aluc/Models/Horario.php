@@ -5,11 +5,11 @@ namespace Aluc\Models;
  * Horario dividido en dos jornadas.
  */
 class Horario {
-    public $jornada_1;
-    public $jornada_2;
+    public $jornada1;
+    public $jornada2;
 
-    public function __construct(Fecha $jornada_1, Fecha $jornada_2) {
-        $this->jornada_1 = $jornada_1;
-        $this->jornada_2 = $jornada_2;
+    public function __construct(Fecha $jornada1, Fecha $jornada2) {
+        $this->jornada_1 = $jornada1;
+        $this->jornada_2 = $jornada2;
     }
 }
