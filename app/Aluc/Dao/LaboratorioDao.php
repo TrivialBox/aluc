@@ -27,7 +27,7 @@ class LaboratorioDao{
         $where_lab = "id = " . "'" . $id . "'";
         $where_mod = "id_laboratorio = " . "'" . $id . "'";
 
-        $laboratorio = $this->data_base->select("laboratorio", "*", $where_lab, null);
+        $laboratorio = $this->data_base->select("view_laboratorio", "*", $where_lab, null);
         $id_moderadores = $this->data_base->select("moderador", ["id"], $where_mod, null);
 
         $laboratorio[0]['id_moderadores'] = $id_moderadores;
