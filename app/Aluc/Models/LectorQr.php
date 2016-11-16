@@ -4,7 +4,7 @@ namespace Aluc\Models;
 /**
  * Representación de un lector de códigos QR.
  */
-class Lector {
+class LectorQr {
     public $id;
     public $ip;
     public $mac;
