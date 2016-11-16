@@ -13,7 +13,6 @@ class LectorQr {
     private $token;
 
     private function __construct($id, $ip, $mac, $token, $laboratorio_id) {
-        $this->id = $id;
         $this->ip = $ip;
         $this->mac = $mac;
         $this->token = $token;
@@ -24,7 +23,7 @@ class LectorQr {
 
     }
 
-    public static function getInstance($id) {
+    public static function getInstance($mac) {
 
     }
 
