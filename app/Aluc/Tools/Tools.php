@@ -15,6 +15,19 @@ class Tools {
         return $_SERVER['REQUEST_METHOD'] === strtoupper($method);
     }
 
+    public static function clean_element($element) {
+         if (is_array($element)) {
+             $arr = [];
+            foreach ($element as $key => $value) {
+                $arr[$key] = static::clean_string($value);
+            }
+            return $arr;
+        } else if (is_string($element)) {
+            return static::clean_string($element);
+        }
+        return $element;
+    }
+
     public static function clean_string($string) {
         // No queremos inyecciones de jeiquers!
         $string = trim($string);

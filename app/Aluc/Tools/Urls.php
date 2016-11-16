@@ -23,11 +23,27 @@ class Urls {
         return $uri;
     }
 
+    private static function getData() {
+        $data = [];
+        $method = static::getMethod();
+        if ($method == 'post') {
+            $data = Tools::clean_element($_POST);
+        } else if ($method == 'get') {
+            $data = Tools::clean_element($_GET);
+        }
+        return $data;
+    }
+
+    private static function getMethod() {
+        return strtolower($_SERVER['REQUEST_METHOD']);
+    }
+
     public static function serve_request($urls) {
         $base_url = static::get_url();
+        $data = static::getData();
         foreach ($urls as $url => $func) {
             if (preg_match($url, $base_url)) {
-                $func();
+                $func($data);
                 break;
             }
         }

@@ -14,9 +14,10 @@ class ErrorSrv {
         static::$view_general = GeneralView::getInstance();
     }
 
-    public static function error404() {
-        $view = self::$view_general->error404();
-        $view->render();
+    public static function error404($data) {
+        self::$view_general
+            ->error404()
+            ->render();
     }
 }
 
