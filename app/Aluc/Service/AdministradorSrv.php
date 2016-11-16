@@ -1,7 +1,7 @@
 <?php
 namespace Aluc\Service;
 
-use Aluc\Models\Lector;
+use Aluc\Models\LectorQr;
 use Aluc\Models\Moderador;
 use Aluc\Views\AdministradorView;
 use Aluc\Views\LectorQrView;
@@ -212,7 +212,7 @@ class AdministradorSrv {
                     $ip = $data['ip'];
                     $mac = $data['mac'];
                     $laboratorio_id = $data['laboratorio_id'];
-                    $lector = Lector::getNewInstance($ip, $mac, $laboratorio_id);
+                    $lector = LectorQr::getNewInstance($ip, $mac, $laboratorio_id);
                     $lector->save();
                 }
                 self::$view_lector_qr
@@ -246,7 +246,7 @@ class AdministradorSrv {
                     $mac = $data['mac'];
                     $laboratorio_id = $data['laboratorio_id'];
                     $new_token = strtolower($data['new_token']) === 'true';
-                    $lector = Lector::getInstance($id);
+                    $lector = LectorQr::getInstance($id);
                     $lector->ip = $ip;
                     $lector->mac = $mac;
                     $lector->laboratorio_id = $laboratorio_id;
@@ -279,7 +279,7 @@ class AdministradorSrv {
                 if (!empty($data) and Tools::check_method('post')) {
                     $id = $data['id'];
                     $laboratorio_id = $data['laboratorio_id'];
-                    $lector = Lector::getInstance($id, $laboratorio_id);
+                    $lector = LectorQr::getInstance($id, $laboratorio_id);
                     $lector->delete();
                 }
                 self::$view_lector_qr

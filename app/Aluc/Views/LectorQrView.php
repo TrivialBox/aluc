@@ -1,7 +1,7 @@
 <?php
 namespace Aluc\Views;
 
-use Aluc\Models\Lector;
+use Aluc\Models\LectorQr;
 
 /**
  * Clase encargada de representar todos los objetos
@@ -18,7 +18,7 @@ class LectorQrView extends View {
     }
 
     public function listAll($data = []) {
-        $data['lectores'] = Lector::getAll();
+        $data['lectores'] = LectorQr::getAll();
         $this->setTemplate(
             $data,
             'lectores.php'
