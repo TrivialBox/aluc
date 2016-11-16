@@ -12,6 +12,16 @@ class LectorQr {
 
     private $token;
 
+    /**
+     * Santos cara de la buena y reveranda verga, solo creando las clases,
+     * por lo menos deja haciendo.
+     * postadata --> vales verga jajajaja
+     * @param $id
+     * @param $ip
+     * @param $mac
+     * @param $token
+     * @param $laboratorio_id
+     */
     private function __construct($id, $ip, $mac, $token, $laboratorio_id) {
         $this->ip = $ip;
         $this->mac = $mac;
