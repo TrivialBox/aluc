@@ -12,15 +12,15 @@
             </thead>
             <tbody>
             <?php
-                foreach ($moderadores as $moderador) {
+                foreach ($get('moderadores') as $moderador) {
                     $laboratorio = $moderador->getLaboratorio();
-                    echo "
+                    echo <<<TAG
                     <tr>
                     <td>{$moderador->id}</td>
                     <td>{$moderador->nombre}</td>
                     <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
                     </tr>
-                    ";
+TAG;
                 }
             ?>
             </tbody>

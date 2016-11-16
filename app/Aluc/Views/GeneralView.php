@@ -15,17 +15,17 @@ class GeneralView extends View {
         return static::$instance;
     }
 
-    public function error404() {
+    public function error404($data = []) {
         $this->setTemplate(
-            null,
+            $data,
             '404.php'
         );
         return $this;
     }
 
-    public function error403() {
+    public function error403($data = []) {
         $this->setTemplate(
-            null,
+            $data,
             '403.php'
         );
         return $this;

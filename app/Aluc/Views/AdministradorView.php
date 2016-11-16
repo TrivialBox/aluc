@@ -16,9 +16,9 @@ class AdministradorView  extends View {
         return static::$instance;
     }
 
-    public function home() {
+    public function home($data = []) {
         $this->setTemplate(
-            null,
+            $data,
             'admin_home.php'
         );
         return $this;

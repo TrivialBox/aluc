@@ -22,12 +22,13 @@ class ModeradorView extends View {
      * Lista de todos los moderadores de todos los laboratorios.
      * Además se puede agregar un nuevo moderador a un laboratorio
      * existente.
+     * @param array $data
+     * @return $this
      */
-    public function listAll() {
-        $moderadores = Moderador::getAll();
-        $this->setTemplate([
-                'moderadores' => $moderadores
-            ],
+    public function listAll($data = []) {
+        $data['moderadores'] = Moderador::getAll();
+        $this->setTemplate(
+            $data,
             'moderadores.php'
         );
         return $this;

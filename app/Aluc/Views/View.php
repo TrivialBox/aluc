@@ -21,7 +21,7 @@ abstract class View {
         return $this;
     }
 
-    public function setTemplate($data, $template) {
+    protected function setTemplate($data, $template) {
         $this->data = $data;
         $this->template = $template;
     }

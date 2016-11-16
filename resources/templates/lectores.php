@@ -14,7 +14,7 @@
             </thead>
             <tbody>
             <?php
-            foreach ($lectores as $lector) {
+            foreach ($get('lectores') as $lector) {
                 $laboratorio = $lector->getLaboratorio();
                 echo "
                     <tr>
