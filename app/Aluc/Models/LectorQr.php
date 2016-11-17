@@ -12,14 +12,14 @@ class LectorQr {
 
     private $token;
 
-    private function __construct($id, $ip, $mac, $token, $laboratorio_id) {
+    private function __construct($mac, $ip, $token, $laboratorio_id) {
         $this->ip = $ip;
         $this->mac = $mac;
         $this->token = $token;
         $this->laboratorio_id = $laboratorio_id;
     }
 
-    public static function getNewInstance($ip, $mac, $laboratorio_id) {
+    public static function getNewInstance($mac, $ip, $laboratorio_id) {
 
     }
 

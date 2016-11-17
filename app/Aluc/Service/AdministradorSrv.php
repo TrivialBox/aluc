@@ -209,10 +209,10 @@ class AdministradorSrv {
         self::admin_do(
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
-                    $ip = $data['ip'];
                     $mac = $data['mac'];
+                    $ip = $data['ip'];
                     $laboratorio_id = $data['laboratorio_id'];
-                    $lector = LectorQr::getNewInstance($ip, $mac, $laboratorio_id);
+                    $lector = LectorQr::getNewInstance($mac, $ip, $laboratorio_id);
                     $lector->save();
                 }
                 self::$view_lector_qr
@@ -241,14 +241,13 @@ class AdministradorSrv {
         self::admin_do(
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
-                    $id = $data['id'];
                     $ip = $data['ip'];
                     $mac = $data['mac'];
                     $laboratorio_id = $data['laboratorio_id'];
                     $new_token = strtolower($data['new_token']) === 'true';
-                    $lector = LectorQr::getInstance($id);
-                    $lector->ip = $ip;
+                    $lector = LectorQr::getInstance($mac);
                     $lector->mac = $mac;
+                    $lector->ip = $ip;
                     $lector->laboratorio_id = $laboratorio_id;
                     if ($new_token) {
                         $lector->renovarToken();
@@ -277,9 +276,9 @@ class AdministradorSrv {
         self::admin_do(
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
-                    $id = $data['id'];
+                    $mac = $data['mac'];
                     $laboratorio_id = $data['laboratorio_id'];
-                    $lector = LectorQr::getInstance($id, $laboratorio_id);
+                    $lector = LectorQr::getInstance($mac);
                     $lector->delete();
                 }
                 self::$view_lector_qr
