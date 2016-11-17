@@ -7,19 +7,16 @@ namespace Aluc\Tools;
  * usando expresiones regulares.
  */
 class Urls {
-    private static function get_url() {
-        $base_url = static::get_current_uri();
-        return $base_url;
-    }
-
-    private static function get_current_uri() {
+    private static function getUri() {
         // Copy & paste, no tocar!
         $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
         $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
         if (strstr($uri, '?')) {
             $uri = substr($uri, 0, strpos($uri, '?'));
         }
-        $uri = '/' . trim($uri, '/');
+        // $uri = '/' . trim($uri, '/');
+        $uri = trim($uri, '/');
+        $uri .= empty($uri) ? '' : '/';
         return $uri;
     }
 
@@ -38,14 +35,23 @@ class Urls {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
-    public static function serve_request($urls) {
-        $base_url = static::get_url();
-        $data = static::getData();
+    public static function matchRequest($base_url, $urls, $data) {
         foreach ($urls as $url => $func) {
             if (preg_match($url, $base_url)) {
-                $func($data);
+                if (is_array($func)) {
+                    $base_url = preg_replace($url, '', $base_url);
+                    self::matchRequest($base_url, $func, $data);
+                } else {
+                    $func($data);
+                }
                 break;
             }
         }
+    }
+
+    public static function serve_request($urls) {
+        $base_url = static::getUri();
+        $data = static::getData();
+        self::matchRequest($base_url, $urls, $data);
     }
 }

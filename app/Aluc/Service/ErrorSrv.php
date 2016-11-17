@@ -19,6 +19,14 @@ class ErrorSrv {
             ->error404()
             ->render();
     }
+
+    public static function urls() {
+        $class_name =  __CLASS__;
+        return [
+            '/^404$/i' => "{$class_name}:error404",
+            '/^.*$/i' => "{$class_name}::error404",
+        ];
+    }
 }
 
 ErrorSrv::init();

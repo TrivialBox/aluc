@@ -293,6 +293,22 @@ class AdministradorSrv {
             }
         );
     }
+
+    public static function urls() {
+        $class_name =  __CLASS__;
+        return [
+            '/^$/i' => "{$class_name}::home",
+            '/^moderadores\/$/i' => "{$class_name}::moderadores",
+            '/^moderadores\/nuevo\/$/i' => "{$class_name}::moderadores_nuevo",
+            '/^moderadores\/actualizar\/$/i' => "{$class_name}::moderadores_actualizar",
+            '/^moderadores\/eliminar\/$/i' => "{$class_name}::moderadores_eliminar",
+
+            '/^lectores\/$/i' => "{$class_name}::lectores",
+            '/^lectores\/nuevo\/$/i' => "{$class_name}::lectores_nuevo",
+            '/^lectores\/actualizar\/$/i' => "{$class_name}::lectores_actualizar",
+            '/^lectores\/eliminar\/$/i' => "{$class_name}::lectores_eliminar",
+        ];
+    }
 }
 
 AdministradorSrv::init();

@@ -6,9 +6,9 @@ namespace Aluc\Tools;
  * Herramientas de uso general para todo el sistema.
  */
 class Tools {
-    public  static function check_session($type) {
+    public  static function check_session(...$type) {
         return isset($_SESSION['id']) && !empty($_SESSION['id']) &&
-        isset($_SESSION['type']) && $_SESSION['type'] === $type;
+        isset($_SESSION['type']) && in_array($_SESSION['type'], $type);
     }
 
     public  static function check_method($method) {
