@@ -19,5 +19,5 @@ Urls::serve_request([
     '/^$/' => 'home',
     '/^admin\//i' => AdministradorSrv::urls(),
     '/^error\//i' => ErrorSrv::urls(),
-    '/.*/' => ErrorSrv::urls()
+    '/.*/' => ErrorSrv::url404()
 ]);
