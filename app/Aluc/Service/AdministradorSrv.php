@@ -31,9 +31,7 @@ class AdministradorSrv {
             if (Tools::check_session('admin')) {
                 $func();
             } else {
-                self::$view_general
-                    ->error404()
-                    ->render();
+                ErrorSrv::redirect404();
             }
         } catch (\Exception $e) {
             $error($e);
@@ -241,8 +239,8 @@ class AdministradorSrv {
         self::admin_do(
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
-                    $ip = $data['ip'];
                     $mac = $data['mac'];
+                    $ip = $data['ip'];
                     $laboratorio_id = $data['laboratorio_id'];
                     $new_token = strtolower($data['new_token']) === 'true';
                     $lector = LectorQr::getInstance($mac);
@@ -277,7 +275,6 @@ class AdministradorSrv {
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
                     $mac = $data['mac'];
-                    $laboratorio_id = $data['laboratorio_id'];
                     $lector = LectorQr::getInstance($mac);
                     $lector->delete();
                 }
@@ -293,19 +290,26 @@ class AdministradorSrv {
         );
     }
 
+    /**
+     * URLS para el direccionamiento (url routing).
+     * @return array
+     */
     public static function urls() {
         $class_name =  __CLASS__;
         return [
             '/^$/i' => "{$class_name}::home",
-            '/^moderadores\/$/i' => "{$class_name}::moderadores",
-            '/^moderadores\/nuevo\/$/i' => "{$class_name}::moderadores_nuevo",
-            '/^moderadores\/actualizar\/$/i' => "{$class_name}::moderadores_actualizar",
-            '/^moderadores\/eliminar\/$/i' => "{$class_name}::moderadores_eliminar",
-
-            '/^lectores\/$/i' => "{$class_name}::lectores",
-            '/^lectores\/nuevo\/$/i' => "{$class_name}::lectores_nuevo",
-            '/^lectores\/actualizar\/$/i' => "{$class_name}::lectores_actualizar",
-            '/^lectores\/eliminar\/$/i' => "{$class_name}::lectores_eliminar",
+            '/^moderadores\//i' => [
+                '/^$/i' => "{$class_name}::moderadores",
+                '/^nuevo\/$/i' => "{$class_name}::moderadores_nuevo",
+                '/^actualizar\/$/i' => "{$class_name}::moderadores_actualizar",
+                '/^eliminar\/$/i' => "{$class_name}::moderadores_eliminar",
+            ],
+            '/^lectores\//i' => [
+                '/^$/i' => "{$class_name}::lectores",
+                '/^nuevo\/$/i' => "{$class_name}::lectores_nuevo",
+                '/^actualizar\/$/i' => "{$class_name}::lectores_actualizar",
+                '/^eliminar\/$/i' => "{$class_name}::lectores_eliminar",
+            ]
         ];
     }
 }
