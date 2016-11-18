@@ -51,7 +51,7 @@ class Urls {
         return false;
     }
 
-    public static function serve_request($urls) {
+    public static function serveRequest($urls) {
         $base_url = static::getUri();
         $data = static::getData();
         self::matchRequest($base_url, $urls, $data);
