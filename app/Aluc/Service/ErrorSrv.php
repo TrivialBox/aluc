@@ -1,6 +1,7 @@
 <?php
 namespace Aluc\Service;
 
+use Aluc\Tools\Urls;
 use Aluc\Views\GeneralView;
 
 
@@ -20,12 +21,21 @@ class ErrorSrv {
             ->render();
     }
 
+    public static function redirect404($data = null) {
+        echo "Redireccionando...";
+        Urls::redirect('/error/404');
+    }
+
     public static function urls() {
         $class_name =  __CLASS__;
         return [
-            '/^404$/i' => "{$class_name}:error404",
-            '/^.*$/i' => "{$class_name}::error404",
+            '/^404\/$/i' => "{$class_name}::error404",
         ];
+    }
+
+    public static function url404() {
+        $class_name =  __CLASS__;
+        return "{$class_name}::redirect404";
     }
 }
 

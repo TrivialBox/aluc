@@ -14,7 +14,6 @@ class Urls {
         if (strstr($uri, '?')) {
             $uri = substr($uri, 0, strpos($uri, '?'));
         }
-        // $uri = '/' . trim($uri, '/');
         $uri = trim($uri, '/');
         $uri .= empty($uri) ? '' : '/';
         return $uri;
@@ -35,23 +34,30 @@ class Urls {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
-    public static function matchRequest($base_url, $urls, $data) {
+    private static function matchRequest($base_url, $urls, $data) {
         foreach ($urls as $url => $func) {
             if (preg_match($url, $base_url)) {
                 if (is_array($func)) {
-                    $base_url = preg_replace($url, '', $base_url);
-                    self::matchRequest($base_url, $func, $data);
+                    $new_base_url = preg_replace($url, '', $base_url);
+                    if (self::matchRequest($new_base_url, $func, $data)) {
+                        return true;
+                    }
                 } else {
                     $func($data);
+                    return true;
                 }
-                break;
             }
         }
+        return false;
     }
 
     public static function serve_request($urls) {
         $base_url = static::getUri();
         $data = static::getData();
         self::matchRequest($base_url, $urls, $data);
+    }
+
+    public static function redirect($url) {
+        header('Location: ' . $url, true, 303);
     }
 }
