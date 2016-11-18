@@ -15,7 +15,7 @@ function home() {
     echo 'No hay plata para un diseñador';
 }
 
-Urls::serve_request([
+Urls::serveRequest([
     '/^$/' => 'home',
     '/^admin\//i' => AdministradorSrv::urls(),
     '/^error\//i' => ErrorSrv::urls(),
