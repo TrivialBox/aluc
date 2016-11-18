@@ -304,7 +304,7 @@ class AdministradorSrv {
                 '/^actualizar\/$/i' => "{$class_name}::moderadores_actualizar",
                 '/^eliminar\/$/i' => "{$class_name}::moderadores_eliminar",
             ],
-            '/^lectores\//i' => [
+            '/^lectoresqr\//i' => [
                 '/^$/i' => "{$class_name}::lectores",
                 '/^nuevo\/$/i' => "{$class_name}::lectores_nuevo",
                 '/^actualizar\/$/i' => "{$class_name}::lectores_actualizar",
