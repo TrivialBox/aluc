@@ -4,6 +4,8 @@
 namespace Aluc\Dao;
 
 
+use Aluc\Common\AlucException;
+
 class LaboratorioDao{
     private $database;
     private static $instance= null;
@@ -23,6 +25,12 @@ class LaboratorioDao{
         $where_lab = "id = " . "'" . $id . "'";
         $laboratorio = $this->database->select("view_laboratorio", "*", $where_lab, null);
 
+        if (count($laboratorio) === 0){
+            throw new AlucException(
+                Database::getMgs(5000,$this->getModel()),
+                "el laboratorio no se entuentra en la base de datos"
+            );
+        }
         return $laboratorio;
     }
 
@@ -42,5 +50,11 @@ class LaboratorioDao{
 
         return $list_laboratorio;
 
+    }
+    private function getModel(){
+        return [
+            'elemento_null' => ['laboratorio','registrado']
+
+        ];
     }
 }
