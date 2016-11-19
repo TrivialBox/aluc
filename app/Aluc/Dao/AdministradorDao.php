@@ -12,10 +12,6 @@ class AdministradorDao{
         $this->data_base = new Database();
         $this->data_base->connect();
     }
-    function __destruct(){
-        $this->data_base->disconnect();
-
-    }
 
     /**
      * Metodo para obtener la clase instanciada.

@@ -9,11 +9,8 @@ class LaboratorioDao{
     private static $instance= null;
 
     private function __construct(){
-        $this->data_base = new Database();
-        $this->data_base->connect();
-    }
-    function __destruct(){
-        $this->data_base->disconnect();
+        $this->database = new Database();
+        $this->database->connect();
     }
 
     public static function getInstance(){
@@ -24,14 +21,14 @@ class LaboratorioDao{
     }
     public function  get($id){
         $where_lab = "id = " . "'" . $id . "'";
-        $laboratorio = $this->data_base->select("view_laboratorio", "*", $where_lab, null);
+        $laboratorio = $this->database->select("view_laboratorio", "*", $where_lab, null);
 
         return $laboratorio;
     }
 
     public function getModeradores($id){
         $where_mod = "id_laboratorio = " . "'" . $id . "'";
-        $lista_moderadores = $this->data_base->select("moderador", ["id"], $where_mod, null);
+        $lista_moderadores = $this->database->select("moderador", ["id"], $where_mod, null);
         return $lista_moderadores;
     }
 

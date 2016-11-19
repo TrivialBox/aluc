@@ -54,8 +54,7 @@ class Laboratorio {
     }
 
     public function getModeradores() {
-        $lista_moderadores = LaboratorioDao::getInstance()->getModeradores($this->id);
-        return Moderador::get_object($lista_moderadores, false);
+        return LaboratorioDao::getInstance()->getModeradores($this->id);
     }
 
     public static function getAll($order_atribute = null){

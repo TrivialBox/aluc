@@ -10,9 +10,6 @@ class ModeradorDao {
         $this->database = new Database();
         $this->database->connect();
     }
-    function __destruct(){
-        $this->database->disconnect();
-    }
 
     public static function getInstance() {
         if (static::$instance == null) {

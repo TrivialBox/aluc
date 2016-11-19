@@ -29,6 +29,9 @@ class Database {
         $this->name = $config['name'];
         $this->port = $config['port'];
     }
+    function __destruct(){
+        $this->disconnect();
+    }
 
     public function connect() {
         $this->conn = new \mysqli(
