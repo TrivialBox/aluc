@@ -111,8 +111,8 @@ DROP TABLE IF EXISTS `moderador`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `moderador` (
   `id` varchar(10) NOT NULL,
-  `id_laboratorio` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`id_laboratorio`),
+  `id_laboratorio` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `fk_moderador_2_idx` (`id_laboratorio`),
   CONSTRAINT `fk_moderador_1` FOREIGN KEY (`id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_moderador_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -393,4 +393,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-18 19:37:52
+-- Dump completed on 2016-11-19 11:01:13
