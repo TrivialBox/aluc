@@ -38,7 +38,7 @@ class LaboratorioDao{
         if ($order_atribute != null) {
             $order_by = "order by " . $order_atribute . " asc";
         }
-        $list_laboratorio = $this->database->select("laboratorio", "*", null, $order_by);
+        $list_laboratorio = $this->database->select("view_laboratorio", "*", null, $order_by);
 
         return $list_laboratorio;
 
