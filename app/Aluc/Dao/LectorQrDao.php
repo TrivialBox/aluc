@@ -10,11 +10,11 @@ class LectorQrDao {
 
     private function __construct(){
         $this->database = new Database();
-        $this->database = $this->database->connect();
+        $this->database->connect();
     }
 
     public static function getInstance(){
-        if(static::$instance == null){
+        if(static::$instance == null) {
             static::$instance = new self();
         }
         return static::$instance;
