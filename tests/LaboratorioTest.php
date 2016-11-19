@@ -48,8 +48,8 @@ class LaboratorioTest extends TestCase {
             count($moderadores),
             count($usuarios)
         );
-        foreach ($moderadores as $moderador) {
-            $this->assertContains($moderador->id, $usuarios);
+        foreach ($moderadores as $moderador_id) {
+            $this->assertArrayHasKey($moderador_id, $usuarios);
         }
         ModeradorTest::deleteModeradores();
     }
