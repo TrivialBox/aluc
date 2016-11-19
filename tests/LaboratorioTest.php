@@ -1,10 +1,11 @@
 <?php
 use Aluc\Models\Fecha;
 use Aluc\Models\Laboratorio;
+use Aluc\Models\Moderador;
 use PHPUnit\Framework\TestCase;
 
+
 class LaboratorioTest extends TestCase {
-    private $laboratorio;
 
     private function assertEqualsObject(Laboratorio $obj, $values) {
         $horario = $obj->horario;
@@ -38,7 +39,29 @@ class LaboratorioTest extends TestCase {
     }
 
     public function testGetModeradores() {
-        $this->markTestIncomplete();
+        $lab_id = 6;
+        $this->createModeradoresForLab($lab_id);
+        $laboratorio = Laboratorio::getInstance($lab_id);
+        $moderadores = $laboratorio->getModeradores();
+        $usuarios = ModeradorTest::getUsers();
+        $this->assertEquals(
+            count($moderadores),
+            count($usuarios)
+        );
+        foreach ($moderadores as $moderador) {
+            $this->assertContains($moderador->id, $usuarios);
+        }
+        ModeradorTest::deleteModeradores();
+    }
+
+    private function createModeradoresForLab($lab_id) {
+        $lab = $this->getLabs()[$lab_id];
+        foreach (ModeradorTest::getUsers() as $user) {
+            Moderador::getNewInstace(
+                $user['id'],
+                $lab_id
+            )->save();
+        }
     }
 
     private function getLabs() {
