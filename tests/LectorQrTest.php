@@ -14,7 +14,7 @@ class LectorQrTest extends TestCase {
         $lector = LectorQr::getInstance($mac);
         $this->assertEquals($lector->mac, $mac);
         $this->assertEquals($lector->ip, $ip);
-        $this->assertEquals($lector->laboratorio_id, $lab_id);
+        $this->assertEquals($lector->id_laboratorio, $lab_id);
         $this->assertEquals($lector->getToken(), $token);
         $lector->delete();
     }
@@ -54,13 +54,13 @@ class LectorQrTest extends TestCase {
         $lector = LectorQr::getNewInstance($mac, $ip, $lab_id)->save();
         $token = $lector->getToken();
         $lector->ip = $new_ip;
-        $lector->laboratorio_id = $new_lab_id;
+        $lector->id_laboratorio = $new_lab_id;
         $lector->save();
 
         $lector = LectorQr::getInstance($mac);
         $this->assertEquals($lector->mac, $mac);
         $this->assertEquals($lector->ip, $new_ip);
-        $this->assertEquals($lector->laboratorio_id, $new_lab_id);
+        $this->assertEquals($lector->id_laboratorio, $new_lab_id);
         $this->assertEquals($lector->getToken(), $token);
 
         $lector->delete();
