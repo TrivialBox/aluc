@@ -2,7 +2,8 @@
 
 namespace ALUC\Dao;
 
-class LectorDao{
+
+class LectorQrDao {
 
     private $database;
     private static $instance = null;
@@ -13,7 +14,7 @@ class LectorDao{
     }
 
     public static function getInstance(){
-        if(static::$instance==null){
+        if(static::$instance == null){
             static::$instance = new self();
         }
         return static::$instance;
@@ -32,16 +33,17 @@ class LectorDao{
 
     public function save($object, $type_save = true){
         if ($type_save){
-            $this->database->insert("lector", $this->convertObjectArray($object));
+            var_dump($object);
+            $this->database->insert('lector', $this->convertObjectArray($object));
         } else {
             $where = " mac = '{$object->mac}'";
-            $this->database->update('lector',$this->convertObjectArray($object), $where);
+            $this->database->update('lector', $this->convertObjectArray($object), $where);
         }
         return $this->get($object->mac);
     }
 
     public function get($mac){
-        $where = "mac = " . "'" . $mac . "'";
+        $where = "mac = '{$mac}'";
         $lectorQr = $this->database->select("lector", "*", $where, null);
         return $lectorQr;
     }
@@ -60,7 +62,5 @@ class LectorDao{
         $where = "mac = " . "'" . $mac . "'";
         $this->database->delete("lector", $where);
     }
-
 }
 
-?>
