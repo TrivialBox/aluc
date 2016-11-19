@@ -33,6 +33,7 @@ class ModeradorTest extends TestCase {
         $expected = self::getUsers()['0105751473'];
         $actual = $this->moderador->save();
         $this->assertEqualsObject($actual, $expected);
+        $actual->delete();
     }
 
     /**
