@@ -5,7 +5,7 @@ namespace Aluc\Dao;
 
 
 class LaboratorioDao{
-    private $data_base;
+    private $database;
     private static $instance= null;
 
     private function __construct(){
@@ -25,7 +25,7 @@ class LaboratorioDao{
     public function  get($id){
         $where_lab = "id = " . "'" . $id . "'";
         $laboratorio = $this->data_base->select("view_laboratorio", "*", $where_lab, null);
-        
+
         return $laboratorio;
     }
 
