@@ -21,7 +21,7 @@ class LectorQrView extends View {
         $data['lectores'] = LectorQr::getAll();
         $this->setTemplate(
             $data,
-            'lectores.php'
+            'lectoresqr.php'
         );
         return $this;
     }
