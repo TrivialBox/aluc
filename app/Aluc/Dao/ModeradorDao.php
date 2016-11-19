@@ -2,7 +2,6 @@
 namespace Aluc\Dao;
 
 
-
 class ModeradorDao {
     private $database;
     private static $instance = null;

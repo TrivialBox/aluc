@@ -18,7 +18,6 @@ class Moderador extends Persona {
 
 
     public static function getNewInstace($id, $id_laboratorio) {
-
         return new self($id, $id_laboratorio);
     }
 
