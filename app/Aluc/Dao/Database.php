@@ -63,6 +63,10 @@ class Database {
         return $this->conn->error;
     }
 
+    public function errno() {
+        return $this->conn->errno;
+    }
+
     public function call($procedure_name, $values) {
         $items = $this->quote_array_string($values);
         $values = implode(',', $items);
