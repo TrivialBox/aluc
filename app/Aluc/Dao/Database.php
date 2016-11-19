@@ -77,7 +77,7 @@ class Database {
     }
 
     public function insert($table_name, $values) {
-        $items = $this->cat_values($values);
+        $items = $this->catValues($values);
         $keys = implode(',', $items['keys']);
         $values = implode(',', $items['values']);
         $sql = "INSERT INTO {$table_name} ({$keys}) VALUES ({$values})";
@@ -88,7 +88,7 @@ class Database {
         }
     }
 
-    private function cat_values($array) {
+    private function catValues($array) {
         $keys = array_keys($array);
         $values = $this->quote_array_string(array_values($array));
         return array(
@@ -104,13 +104,6 @@ class Database {
         }
         return $values;
     }
-    private function quote_array($array){
-        $values = array();
-        foreach ($array as $value) {
-            $values[] = $value;
-        }
-        return $values;
-    }
 
     private function quote_string($string) {
         return "'{$string}'";
@@ -118,7 +111,6 @@ class Database {
 
     public function select($table_name, $columns = '*', $where = null, $order = null) {
         if ($columns !== '*') {
-            $columns = $this->quote_array($columns);
             $columns = implode(',', $columns);
         }
         $sql = "SELECT {$columns} FROM {$table_name}";
