@@ -75,7 +75,7 @@ class Database {
 
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al insertar {$values}. {$this->error()}"
+                "Error al insertar {$values}. {$this->error()}", $this->errno()
             );
         }
     }
@@ -87,7 +87,7 @@ class Database {
         $sql = "INSERT INTO {$table_name} ({$keys}) VALUES ({$values})";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al insertar {$values}. {$this->error()}"
+                "Error al insertar {$values}. {$this->error()}", $this->errno()
             );
         }
     }
@@ -135,7 +135,7 @@ class Database {
         $sql = "DELETE FROM {$view_name} WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al eliminar {$this->error()}"
+                "Error al eliminar {$this->error()}", $this->errno()
             );
         }
     }
@@ -150,10 +150,25 @@ class Database {
         $sql .= " WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al actualizar {$this->error()}"
+                "Error al actualizar {$this->error()}", $this->errno()
             );
         }
+    }
 
+    public static function getMgs($code, $data) {
+        switch ($code) {
+            // Clave foránea no existente
+            case 1452:
+                return "El {$data['clave_foranea'][0]} no se encuentra {$data['clave_foranea'][1]}";
+            // clave primaria duplicada
+            case 1062:
+                return "El {$data['clave_pk_duplicate'][0]} ya existe";
+            //cuando un elemento no se encuentra registrado en la base de datos.
+            case 5000:
+                return "El {$data['elemento_null'][0]} no se encuentra {$data['elemento_null'][1]}";
+            default:
+                return "No se puede agregar su moderador";
+        }
     }
 
 

@@ -32,6 +32,12 @@ class AdministradorDao{
     public function get($id){
         $where = "id = " . "'" . $id . "'";
         $admin = $this->database->select("view_administador", "*", $where, null);
+        if (count($admin) === 0){
+            throw new AlucException(
+                Database::getMgs(5000,$this->getModel()),
+                "el administrador no se entuentra en la base de datos"
+            );
+        }
         return $admin;
     }
 
@@ -51,6 +57,12 @@ class AdministradorDao{
 
         return $list_admin;
 
+    }
+    private function getModel(){
+        return [
+            'elemento_null' => ['Administrador','registrado']
+
+        ];
     }
 
 }
