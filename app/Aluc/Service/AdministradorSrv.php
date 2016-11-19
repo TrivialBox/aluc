@@ -244,7 +244,6 @@ class AdministradorSrv {
                     $laboratorio_id = $data['laboratorio_id'];
                     $new_token = strtolower($data['new_token']) === 'true';
                     $lector = LectorQr::getInstance($mac);
-                    $lector->mac = $mac;
                     $lector->ip = $ip;
                     $lector->laboratorio_id = $laboratorio_id;
                     if ($new_token) {
