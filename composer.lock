@@ -4,9 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a0d62e495bf5a0485c03e9fa288e44f",
-    "content-hash": "81e3b7431ad412d66a811fe510dc2363",
-    "packages": [],
+    "hash": "62a091bf1bb894f24dbd728d11c27cf7",
+    "content-hash": "c9edd603b203d151e8dfb7c5eb680ecd",
+    "packages": [
+        {
+            "name": "sinergi/token",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sinergi/token.git",
+                "reference": "c1c84108048245804671aa6fb7b82df6f1123275"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sinergi/token/zipball/c1c84108048245804671aa6fb7b82df6f1123275",
+                "reference": "c1c84108048245804671aa6fb7b82df6f1123275",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sinergi\\Token\\": "src/Token/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com",
+                    "homepage": "http://gabrielbull.com/"
+                }
+            ],
+            "description": "PHP library to generate random strings",
+            "keywords": [
+                "hexa",
+                "id",
+                "php",
+                "random",
+                "string",
+                "token",
+                "uuid"
+            ],
+            "time": "2014-05-24 13:27:57"
+        }
+    ],
     "packages-dev": [
         {
             "name": "andrewsville/php-token-reflection",

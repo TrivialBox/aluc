@@ -7,5 +7,8 @@
     "require-dev": {
         "apigen/apigen": "^4.1",
         "phpunit/phpunit": "^5.6"
+    },
+    "require": {
+        "sinergi/token": "^0.1.0"
     }
 }
