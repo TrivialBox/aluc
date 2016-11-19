@@ -1,7 +1,8 @@
 <?php
 namespace Aluc\Models;
-use ALUC\Dao\LectorDao;
+use Aluc\Dao\LectorQrDao;
 use Sinergi\Token\StringGenerator;
+
 
 /**
  * Representación de un lector de códigos QR.
@@ -14,37 +15,40 @@ class LectorQr {
 
     private $token;
 
-    private function __construct($mac, $ip, $id_laboratorio, $token) {
+    private $is_save = true;
+
+    private function __construct($mac, $ip, $id_laboratorio, $token, $is_save = true) {
         $this->ip = $ip;
         $this->mac = $mac;
         $this->token = $token;
         $this->laboratorio_id = $id_laboratorio;
+
+        $this->is_save = $this->is_save && $is_save;
     }
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
-            return new LectorQr($array[0]["mac"],$array[0]["ip"], $array[0]['id_laboratorio'], $array[0]['token']);
-
-        }else {
-            $LectoresQr = array();
+            return new LectorQr($array[0]["mac"], $array[0]["ip"], $array[0]['id_laboratorio'], $array[0]['token'], false);
+        } else {
+            $LectoresQr = [];
             foreach ($array as $fila){
-                array_push($LectoresQr,new LectorQr($fila["mac"],$fila["ip"], $fila['id_laboratorio'], $fila['token']));
+                $LectoresQr[] = new LectorQr($fila["mac"],$fila["ip"], $fila['id_laboratorio'], $fila['token'], false);
             }
             return $LectoresQr;
         }
     }
 
     public static function getNewInstance($mac, $ip, $id_laboratorio) {
-        return new self($mac, $ip, $id_laboratorio,self::generarToken());
+        return new self($mac, $ip, $id_laboratorio, self::generarToken());
     }
 
     public static function getInstance($mac) {
-        return LectorQr::get_object(LectorDao::getInstance()->get($mac));
+        return LectorQr::get_object(LectorQrDao::getInstance()->get($mac));
     }
 
     public static function getAll($order_atribute = null) {
         return LectorQr::get_object(
-            LectorDao::getInstance()->getAll($order_atribute),
+            LectorQrDao::getInstance()->getAll($order_atribute),
             false
         );
     }
@@ -55,7 +59,7 @@ class LectorQr {
 
     public function save() {
         $obj = static::get_object(
-            LectorDao::getInstance()->save($this, $this->is_save)
+            LectorQrDao::getInstance()->save($this, $this->is_save)
         );
         $this->mac = $obj->mac;
         $this->ip = $obj->ip;
@@ -66,7 +70,7 @@ class LectorQr {
     }
 
     public function delete(){
-        LectorDao::getInstance()->delete($this->mac);
+        LectorQrDao::getInstance()->delete($this->mac);
     }
 
     public function getToken() {
