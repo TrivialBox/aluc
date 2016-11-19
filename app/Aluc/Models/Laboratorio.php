@@ -34,16 +34,13 @@ class Laboratorio {
     }
     private static function get_object($array, $get_element = true){
         if ($get_element){
-
-
             return new Laboratorio($array[0]["id"], $array[0]["nombre"], $array[0]["capacidad"],
                 $array[0]["descripcion"], Laboratorio::createHorario($array));
 
-
         }else {
             $moderadores = array();
-            foreach ($array as $fila){
 
+            foreach ($array as $fila){
                 array_push($moderadores,new Laboratorio($fila[0]["id"], $fila[0]["nombre"], $fila[0]["capacidad"],
                     $fila[0]["descripcion"], Laboratorio::createHorario($fila)));
             }
