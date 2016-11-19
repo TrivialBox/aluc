@@ -22,7 +22,7 @@ class Moderador extends Persona {
         return new self($id, $id_laboratorio);
     }
 
-    private static function get_object($array, $get_element = true){
+    public static function get_object($array, $get_element = true){
         if ($get_element){
             return new Moderador($array[0]["id"], $array[0]['id_laboratorio'], $array[0]['nombre'], false);
 
