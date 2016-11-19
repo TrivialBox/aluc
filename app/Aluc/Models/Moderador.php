@@ -56,6 +56,7 @@ class Moderador extends Persona {
         $this->id = $obj->id;
         $this->id_laboratorio = $obj->id_laboratorio;
         $this->nombre = $obj->nombre;
+        $this->is_save = false;
         return $this;
     }
 
