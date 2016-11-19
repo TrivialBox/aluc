@@ -9,8 +9,8 @@ class LectorQrDao {
     private static $instance = null;
 
     private function __construct(){
-        $database = new Database();
-        $database->connect();
+        $this->database = new Database();
+        $this->database = $this->database->connect();
     }
 
     public static function getInstance(){
@@ -31,9 +31,8 @@ class LectorQrDao {
         return $array;
     }
 
-    public function save($object, $type_save = true){
-        if ($type_save){
-            var_dump($object);
+    public function save($object, $type_save = true) {
+        if ($type_save) {
             $this->database->insert('lector', $this->convertObjectArray($object));
         } else {
             $where = " mac = '{$object->mac}'";

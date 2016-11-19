@@ -21,18 +21,18 @@ class LectorQr {
         $this->ip = $ip;
         $this->mac = $mac;
         $this->token = $token;
-        $this->laboratorio_id = $id_laboratorio;
+        $this->id_laboratorio = $id_laboratorio;
 
         $this->is_save = $this->is_save && $is_save;
     }
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
-            return new LectorQr($array[0]["mac"], $array[0]["ip"], $array[0]['id_laboratorio'], $array[0]['token'], false);
+            return new LectorQr($array[0]["mac"], $array[0]["ip"], $array[0]['id_laboratorio'], $array[0]['token']);
         } else {
             $LectoresQr = [];
             foreach ($array as $fila){
-                $LectoresQr[] = new LectorQr($fila["mac"],$fila["ip"], $fila['id_laboratorio'], $fila['token'], false);
+                $LectoresQr[] = new LectorQr($fila["mac"], $fila["ip"], $fila['id_laboratorio'], $fila['token'], false);
             }
             return $LectoresQr;
         }
