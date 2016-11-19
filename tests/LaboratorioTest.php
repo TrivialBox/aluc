@@ -50,7 +50,6 @@ class LaboratorioTest extends TestCase {
                 count($usuarios)
             );
             foreach ($moderadores as $moderador_id) {
-                echo $moderador_id;
                 $this->assertArrayHasKey($moderador_id, $usuarios);
             }
         } finally {
