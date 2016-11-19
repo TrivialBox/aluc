@@ -8,11 +8,11 @@ class ModeradorTest extends TestCase {
     private $moderador;
 
     public function setUp() {
-        $user = $this->getUser();
+        $user = $this->getUsers()['0105751473'];
         $this->moderador = Moderador::getNewInstace(
             $user['id'],
             $user['id_laboratorio']
-        )->save();
+        );
     }
 
     private function assertEqualsObject(Moderador $obj, $values) {
@@ -30,8 +30,8 @@ class ModeradorTest extends TestCase {
     }
 
     public function testCreateValidModerador() {
-        $expected = $this->getUser();
-        $actual = $this->moderador;
+        $expected = $this->getUsers()['0105751473'];
+        $actual = $this->moderador->save();
         $this->assertEqualsObject($actual, $expected);
     }
 
@@ -50,12 +50,11 @@ class ModeradorTest extends TestCase {
     }
 
     public function testEditModerador() {
-        $mod_original = Moderador::getInstance($this->getUser()['id']);
+        $mod_original = $this->moderador->save();
         $mod_original->id_laboratorio = '2';
         $mod_original->save();
-        $mod_original = Moderador::getInstance($this->getUser()['id']);
 
-        $mod_expected = $this->getUser();
+        $mod_expected = $this->getUsers()['0105751473'];
         $mod_expected['id_laboratorio'] = '2';
         $mod_expected['nombre_lab'] = 'Lab. Química';
         $mod_expected['capacidad_lab'] = 20;
@@ -83,9 +82,6 @@ class ModeradorTest extends TestCase {
 
     private function createModeradores() {
         foreach ($this->getUsers() as $id => $user) {
-            if ($id === '0105751473') {
-                continue;
-            }
             Moderador::getNewInstace(
                 $user['id'],
                 $user['id_laboratorio']
@@ -95,26 +91,10 @@ class ModeradorTest extends TestCase {
 
     private function deleteModeradores() {
         foreach ($this->getUsers() as $id => $user) {
-            if ($id === '0105751473') {
-                continue;
-            }
             Moderador::getInstance(
                 $user['id']
             )->delete();
         }
-    }
-
-    private function getUser() {
-        return [
-            'id' => '0105751473',
-            'nombre' => 'MOYANO DUTÁN JOSÉ ALFREDO',
-            'id_laboratorio' => 1,
-            'nombre_lab' => 'Lab. Física',
-            'capacidad_lab' => 15,
-            'descripcion_lab' => 'Laboratorio de física para clases de física.',
-            'jornada1' => new Fecha(null, '07:00:00', '13:00:00'),
-            'jornada2' => new Fecha(null, '15:00:00', '17:00:00')
-        ];
     }
 
     private function getUsers() {
@@ -162,6 +142,10 @@ class ModeradorTest extends TestCase {
     }
 
     public function tearDown() {
-        Moderador::getInstance($this->getUser()['id'])->delete();
+        try {
+            $user = Moderador::getInstance('0105751473')->delete();
+        } catch (\Exception $e) {
+            // Nada ha pasado aquí
+        }
     }
 }
