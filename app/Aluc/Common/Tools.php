@@ -1,5 +1,5 @@
 <?php
-namespace Aluc\Tools;
+namespace Aluc\Common;
 
 
 /**

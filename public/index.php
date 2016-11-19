@@ -4,7 +4,7 @@ include_once '../app/init.php';
 
 use Aluc\Service\AdministradorSrv;
 use Aluc\Service\ErrorSrv;
-use Aluc\Tools\Urls;
+use Aluc\Common\Urls;
 
 $_SESSION['id'] = '1234';
 $_SESSION['type'] = 'admin';

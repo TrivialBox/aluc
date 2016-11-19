@@ -7,7 +7,7 @@ use Aluc\Views\AdministradorView;
 use Aluc\Views\LectorQrView;
 use Aluc\Views\ModeradorView;
 use Aluc\Views\GeneralView;
-use Aluc\Tools\Tools;
+use Aluc\Common\Tools;
 
 
 /**

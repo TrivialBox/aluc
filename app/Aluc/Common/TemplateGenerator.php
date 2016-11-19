@@ -1,5 +1,5 @@
 <?php
-namespace Aluc\Tools;
+namespace Aluc\Common;
 
 define('TEMPLATES_PATH', __DIR__ . '/../../../resources/templates');
 
