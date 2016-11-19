@@ -4,7 +4,7 @@ namespace Aluc\Models;
 /**
  * Representación de una persona en el sistema.
  */
-abstract class Persona implements DBItem {
+abstract class Persona  {
     public $id;
     public $nombre;
     protected $is_save = true;
