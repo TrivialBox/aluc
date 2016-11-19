@@ -32,6 +32,7 @@ class Laboratorio {
 
         return $horario;
     }
+
     private static function get_object($array, $get_element = true){
         if ($get_element){
             return new Laboratorio($array[0]["id"], $array[0]["nombre"], $array[0]["capacidad"],
@@ -57,7 +58,7 @@ class Laboratorio {
         return Moderador::get_object($lista_moderadores, false);
     }
 
-    public function getAll($order_atribute = null){
+    public static function getAll($order_atribute = null){
         return Laboratorio::get_object(LaboratorioDao::getInstance()->getAll($order_atribute), false);
     }
 
