@@ -9,10 +9,13 @@ class LectorQrTest extends TestCase {
         $ip = '0.0.0.0';
         $lab_id = '6';
         $lector = LectorQr::getNewInstance($mac, $ip, $lab_id)->save();
+        $token = $lector->getToken();
+
         $lector = LectorQr::getInstance($mac);
         $this->assertEquals($lector->mac, $mac);
         $this->assertEquals($lector->ip, $ip);
         $this->assertEquals($lector->laboratorio_id, $lab_id);
+        $this->assertEquals($lector->getToken(), $token);
         $lector->delete();
     }
 
@@ -49,12 +52,30 @@ class LectorQrTest extends TestCase {
         $new_ip = '0.0.0.1';
         $new_lab_id = '3';
         $lector = LectorQr::getNewInstance($mac, $ip, $lab_id)->save();
+        $token = $lector->getToken();
         $lector->ip = $new_ip;
         $lector->laboratorio_id = $new_lab_id;
         $lector->save();
 
         $lector = LectorQr::getInstance($mac);
+        $this->assertEquals($lector->mac, $mac);
         $this->assertEquals($lector->ip, $new_ip);
         $this->assertEquals($lector->laboratorio_id, $new_lab_id);
+        $this->assertEquals($lector->getToken(), $token);
+
+        $lector->delete();
+    }
+
+    public function testUpdateToken() {
+        $ip = '0.0.0.0';
+        $mac = 'e8:91:21:8c:e8:2d';
+        $lab_id = '6';
+        $lector = LectorQr::getNewInstance($mac, $ip, $lab_id)->save();
+        $token = $lector->getToken();
+
+        $lector = LectorQr::getInstance($mac);
+        $lector->renovarToken();
+        $this->assertEquals($lector->getToken(), $token);
+        $lector->delete();
     }
 }
