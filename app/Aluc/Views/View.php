@@ -1,7 +1,7 @@
 <?php
 namespace Aluc\Views;
 
-use Aluc\Tools\TemplateGenerator;
+use Aluc\Common\TemplateGenerator;
 
 
 /**

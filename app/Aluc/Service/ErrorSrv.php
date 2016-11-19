@@ -1,7 +1,7 @@
 <?php
 namespace Aluc\Service;
 
-use Aluc\Tools\Urls;
+use Aluc\Common\Urls;
 use Aluc\Views\GeneralView;
 
 
