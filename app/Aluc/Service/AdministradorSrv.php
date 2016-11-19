@@ -126,8 +126,8 @@ class AdministradorSrv {
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
                     $id = $data['id'];
-                    $laboratorio_id = $data['laboratorio_id'];
                     $moderador = Moderador::getInstance($id);
+                    $laboratorio_id = $data['laboratorio_id'];
                     $moderador->id_laboratorio = $laboratorio_id;
                     $moderador->save();
                 }
@@ -240,17 +240,34 @@ class AdministradorSrv {
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
                     $mac = $data['mac'];
-                    $ip = $data['ip'];
-                    $laboratorio_id = $data['laboratorio_id'];
-                    $new_token = strtolower($data['new_token']) === 'true';
                     $lector = LectorQr::getInstance($mac);
-                    $lector->ip = $ip;
-                    $lector->laboratorio_id = $laboratorio_id;
-                    if ($new_token) {
-                        $lector->renovarToken();
+                    if (array_key_exists('ip', $data)) {
+                        $lector->ip = $data['ip'];
+                    }
+                    if (array_key_exists('laboratorio_id', $data)) {
+                        $lector->laboratorio_id = $data['laboratorio_id'];
                     }
                     $lector->save();
                 }
+                self::$view_lector_qr
+                    ->listAll()
+                    ->render();
+            },
+            function ($e) {
+                self::$view_general
+                    ->error404()
+                    ->render();
+            }
+        );
+    }
+
+    public static function lectores_actualizar_token($data) {
+        self::admin_do(
+            function () use ($data) {
+                $mac = $data['mac'];
+                $lector = LectorQr::getInstance($mac);
+                $lector->renovarToken();
+                $lector->save();
                 self::$view_lector_qr
                     ->listAll()
                     ->render();
@@ -307,6 +324,7 @@ class AdministradorSrv {
                 '/^$/i' => "{$class_name}::lectores",
                 '/^nuevo\/$/i' => "{$class_name}::lectores_nuevo",
                 '/^actualizar\/$/i' => "{$class_name}::lectores_actualizar",
+                '/^actualizar-token\/$/i' => "{$class_name}::lectores_actualizar_token",
                 '/^eliminar\/$/i' => "{$class_name}::lectores_eliminar",
             ]
         ];
