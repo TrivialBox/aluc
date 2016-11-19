@@ -59,7 +59,6 @@ class LaboratorioTest extends TestCase {
     }
 
     private function createModeradoresForLab($lab_id) {
-        $lab = $this->getLabs()[$lab_id];
         foreach (ModeradorTest::getUsers() as $user) {
             Moderador::getNewInstace(
                 $user['id'],
