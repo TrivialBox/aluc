@@ -39,19 +39,23 @@ class LaboratorioTest extends TestCase {
     }
 
     public function testGetModeradores() {
-        $lab_id = 6;
-        $this->createModeradoresForLab($lab_id);
-        $laboratorio = Laboratorio::getInstance($lab_id);
-        $moderadores = $laboratorio->getModeradores();
-        $usuarios = ModeradorTest::getUsers();
-        $this->assertEquals(
-            count($moderadores),
-            count($usuarios)
-        );
-        foreach ($moderadores as $moderador_id) {
-            $this->assertArrayHasKey($moderador_id, $usuarios);
+        try {
+            $lab_id = 6;
+            $this->createModeradoresForLab($lab_id);
+            $laboratorio = Laboratorio::getInstance($lab_id);
+            $moderadores = $laboratorio->getModeradores();
+            $usuarios = ModeradorTest::getUsers();
+            $this->assertEquals(
+                count($moderadores),
+                count($usuarios)
+            );
+            foreach ($moderadores as $moderador_id) {
+                echo $moderador_id;
+                $this->assertArrayHasKey($moderador_id, $usuarios);
+            }
+        } finally {
+            ModeradorTest::deleteModeradores();
         }
-        ModeradorTest::deleteModeradores();
     }
 
     private function createModeradoresForLab($lab_id) {

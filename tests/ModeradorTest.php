@@ -91,9 +91,13 @@ class ModeradorTest extends TestCase {
 
     public static function deleteModeradores() {
         foreach (self::getUsers() as $id => $user) {
-            Moderador::getInstance(
-                $user['id']
-            )->delete();
+            try {
+                Moderador::getInstance(
+                    $user['id']
+                )->delete();
+            } catch (\Exception $e) {
+                // Nada por aquí
+            }
         }
     }
 
