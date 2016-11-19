@@ -23,14 +23,9 @@ class LaboratorioDao{
         return static::$instance;
     }
     public function  get($id){
-
         $where_lab = "id = " . "'" . $id . "'";
-
-
         $laboratorio = $this->data_base->select("view_laboratorio", "*", $where_lab, null);
-
-
-        //$laboratorio[0]['id_moderadores'] = lista_moderadores;
+        
         return $laboratorio;
     }
 
