@@ -40,7 +40,7 @@ class LaboratorioDao{
         return $lista_moderadores;
     }
 
-    public function getAll($order_atribute = null){
+    public function getAll($order_atribute){
         $order_by = null;
 
         if ($order_atribute != null) {
