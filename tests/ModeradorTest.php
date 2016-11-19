@@ -8,7 +8,7 @@ class ModeradorTest extends TestCase {
     private $moderador;
 
     public function setUp() {
-        $user = $this->getUsers()['0105751473'];
+        $user = self::getUsers()['0105751473'];
         $this->moderador = Moderador::getNewInstace(
             $user['id'],
             $user['id_laboratorio']
@@ -30,7 +30,7 @@ class ModeradorTest extends TestCase {
     }
 
     public function testCreateValidModerador() {
-        $expected = $this->getUsers()['0105751473'];
+        $expected = self::getUsers()['0105751473'];
         $actual = $this->moderador->save();
         $this->assertEqualsObject($actual, $expected);
     }
@@ -54,7 +54,7 @@ class ModeradorTest extends TestCase {
         $mod_original->id_laboratorio = '2';
         $mod_original->save();
 
-        $mod_expected = $this->getUsers()['0105751473'];
+        $mod_expected = self::getUsers()['0105751473'];
         $mod_expected['id_laboratorio'] = '2';
         $mod_expected['nombre_lab'] = 'Lab. Química';
         $mod_expected['capacidad_lab'] = 20;
@@ -66,9 +66,9 @@ class ModeradorTest extends TestCase {
     }
 
     public function testGetAllModeradores() {
-        $this->createModeradores();
+        self::createModeradores();
         $num_elements = 0;
-        $all_moderadores = $this->getUsers();
+        $all_moderadores = self::getUsers();
         foreach (Moderador::getAll() as $moderador) {
             $this->assertEqualsObject(
                 $moderador,
@@ -77,11 +77,11 @@ class ModeradorTest extends TestCase {
             $num_elements++;
         }
         $this->assertEquals(count($all_moderadores), $num_elements);
-        $this->deleteModeradores();
+        self::deleteModeradores();
     }
 
-    private function createModeradores() {
-        foreach ($this->getUsers() as $id => $user) {
+    public static function createModeradores() {
+        foreach (self::getUsers() as $id => $user) {
             Moderador::getNewInstace(
                 $user['id'],
                 $user['id_laboratorio']
@@ -89,15 +89,15 @@ class ModeradorTest extends TestCase {
         }
     }
 
-    private function deleteModeradores() {
-        foreach ($this->getUsers() as $id => $user) {
+    public static function deleteModeradores() {
+        foreach (self::getUsers() as $id => $user) {
             Moderador::getInstance(
                 $user['id']
             )->delete();
         }
     }
 
-    private function getUsers() {
+    public static function getUsers() {
         return [
             '0105751473' => [
                 'id' => '0105751473',
