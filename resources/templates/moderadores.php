@@ -3,9 +3,7 @@
         <?php
         include 'header.php';
         ?>
-        <script src="/js/moderadores.js"></script>
     </head>
-
 <body>
 <div>
     <!-- Lista de todos los moderadores -->
@@ -83,7 +81,7 @@ TAG;
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button id="add_moderador" onclick="addModerador()" class="btn btn-primary">Agregar</button>
+            <button id="add_moderador" class="btn btn-primary">Agregar</button>
           </div>
         </div>
       </div>
@@ -91,6 +89,8 @@ TAG;
 
 </div>
 
+<!-- Recursos adicionales
+<script src="/js/moderadores.js"></script>
 <?php
 include 'resources.php';
 ?>
