@@ -32,7 +32,7 @@
             Nuevo
         </button>
 
-        <table class="table table-striped">
+        <table id="table-moderadores" class="table table-striped">
             <thead>
             <tr>
                 <th>ID</th>
@@ -51,13 +51,15 @@
                     <td>{$moderador->nombre}</td>
                     <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
                     <td>
-                        <button type="button" class="btn btn-warning">
-                            Editar
-                        </button>
-                        
-                        <button type="button" class="btn btn-danger">
-                            Eliminar
-                        </button>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-warning">
+                                Editar
+                            </button>
+                            
+                            <button type="button" class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </div>
                     </td>
                     </tr>
 TAG;
@@ -84,29 +86,28 @@ TAG;
                 Agregar Moderador
             </h4>
           </div>
+            <form id="form-add-moderador" method="post">
           <div class="modal-body">
-              <form>
                   <div class="form-group">
                       <label for="id">ID del Usuario</label>
-                      <input type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
+                      <input required type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
                       <small class="form-text text-muted">
                           El id puede ser un número de cedula.
                       </small>
                   </div>
                   <div class="form-group">
                       <label for="id_laboratorio">ID del Laboratorio</label>
-                      <input type="text" class="form-control" name="id_laboratorio" id="id_laboratorio" placeholder="Ingrese el id del laboratorio">
+                      <input required type="text" class="form-control" name="id_laboratorio" id="id_laboratorio" placeholder="Ingrese el id del laboratorio">
                   </div>
-              </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 Cancelar
             </button>
-            <button id="add_moderador" class="btn btn-primary">
+            <button type="submit" id="add_moderador" class="btn btn-primary">
                 Agregar
             </button>
-
+            </form>
           </div>
         </div>
       </div>

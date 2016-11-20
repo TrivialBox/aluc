@@ -7,3 +7,7 @@
     border-radius:0px
 }
 
+.alert-fixed .alert {
+    width: 50%;
+    margin: auto;
+}

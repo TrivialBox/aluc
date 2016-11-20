@@ -1,8 +1,6 @@
 var timeOutAlert = 0;
 
-$('#add_moderador').on(
-    "click",
-    function () {
+$('#form-add-moderador').submit(function (e) {
         $.post(
             "/admin/moderadores/nuevo",
             $('form').serialize(),
@@ -17,12 +15,25 @@ $('#add_moderador').on(
                         3000
                     );
                 } else {
-                    $('#addModerador').hide();
+                    var alertBootstrap = $('#successAlert');
                     $('#successAlertMessage').html('Nuevo moderador agregado.');
-                    $('#successAlert').show();
+                    alertBootstrap.show();
+                    timeOutAlert = window.setTimeout(function () {
+                            alertBootstrap.hide();
+                        },
+                        3000
+                    );
+                    $('#table-moderadores tbody tr:first').before('<tr>' +
+                        '<td>'+ data['id'] + '</td>' +
+                        '<td>' + data['nombre'] + '</td>' +
+                        '<td>' + data['laboratorio']['nombre'] + '(' + data['laboratorio']['id'] + ')' + '</td>' +
+                        '<td>' + '<button type="button" class="btn btn-warning">Editar</button> <button type="button" class="btn btn-danger"> Eliminar </button>' +'</td>' +
+                        '</tr>');
+                    $('#addModerador').modal('hide');
                 }
             }
         );
+        e.preventDefault();
     }
 );
 
