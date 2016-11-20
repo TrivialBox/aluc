@@ -21,7 +21,7 @@ class TemplateGenerator {
             if (array_key_exists($key, $data)) {
                 return $data[$key];
             } else {
-                return "";
+                return false;
             }
         };
         include TEMPLATES_PATH . "/{$template_name}";
