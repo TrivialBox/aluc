@@ -19,5 +19,8 @@ populate_db:
 	mysql -u root -p$(DB_PASS) ALUC < database/DDL.sql
 	mysql -u root -p$(DB_PASS) ALUC < database/populate.sql
 
+populate_extras:
+	mysql -u root -p$(DB_PASS) ALUC < database/populate_extras.sql
+
 doc:
 	vendor/bin/apigen generate --config=apigen.yaml

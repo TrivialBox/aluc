@@ -33,4 +33,20 @@ class ModeradorView extends View {
         );
         return $this;
     }
+
+    public function json(Moderador $obj) {
+        $lab = $obj->getLaboratorio();
+        $this->setTemplate(
+            [
+                'id' => $obj->id,
+                'nombre' => $obj->nombre,
+                'laboratorio' => [
+                    'id' => $lab->id,
+                    'nombre' => $lab->nombre
+                ]
+            ],
+            'json/json.php'
+        );
+        return $this;
+    }
 }

@@ -8,3 +8,6 @@ composer_2.phar
 
 # IDE
 .idea
+
+# bower
+/public/bower_components

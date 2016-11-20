@@ -13,10 +13,16 @@ define('TEMPLATES_PATH', __DIR__ . '/../../../resources/templates');
 class TemplateGenerator {
     public static function generate($data, $template_name) {
         $show = function ($key) use ($data){
-            echo $data[$key];
+            if (array_key_exists($key, $data)) {
+                echo $data[$key];
+            }
         };
         $get = function ($key) use ($data) {
-            return $data[$key];
+            if (array_key_exists($key, $data)) {
+                return $data[$key];
+            } else {
+                return false;
+            }
         };
         include TEMPLATES_PATH . "/{$template_name}";
     }

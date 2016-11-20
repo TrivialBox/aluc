@@ -1,5 +1,6 @@
 <?php
 namespace Aluc\Views;
+use Aluc\Common\AlucException;
 
 /**
  * Clase encargada de representar todas las vistas
@@ -29,5 +30,21 @@ class GeneralView extends View {
             '403.php'
         );
         return $this;
+    }
+
+    public function error_json($description) {
+        $this->setTemplate(
+            [
+                'status' => 'error',
+                'description' => $description
+            ],
+            'json/json.php'
+        );
+        return $this;
+    }
+
+    public function error_json_default($e) {
+        $msg = $e instanceof AlucException ? $e->short_message : 'Ups, algo salió mal' . $e->getMessage();
+        return $this->error_json($msg);
     }
 }
