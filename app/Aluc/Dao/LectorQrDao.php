@@ -81,7 +81,12 @@ class LectorQrDao {
 
     public function delete($mac){
         $where = "mac = " . "'" . $mac . "'";
-        $this->database->delete("lector", $where);
+        try{
+            $this->database->delete("lector", $where);
+
+        }catch (\Exception $e){
+            throw new AlucException('El Lector no se puede eliminar', $e->getMessage());
+        }
     }
 
     private function getModel(){
