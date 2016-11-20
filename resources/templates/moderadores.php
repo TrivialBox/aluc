@@ -1,9 +1,12 @@
 <html>
-    <head>
-        <?php
-        include 'header.php';
-        ?>
-    </head>
+<head>
+    <?php
+    include 'header.php';
+    ?>
+    <title>
+        Administrar moderadores
+    </title>
+</head>
 <body>
 <div>
     <!-- Lista de todos los moderadores -->
@@ -12,6 +15,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
             Nuevo
         </button>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -50,9 +54,10 @@ TAG;
             Nuevo
         </button>
     </div>
+    <!-- Fin lista de moderadores -->
 
 
-    <!-- Modal -->
+    <!-- Modal para agregar moderador -->
     <div class="modal fade" id="addModerador" tabindex="-1" role="dialog" aria-labelledby="modalAddModerador" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -65,27 +70,33 @@ TAG;
             </h4>
           </div>
           <div class="modal-body">
-                  <form>
-                      <div class="form-group">
-                          <label for="id">ID del Usuario</label>
-                          <input type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
-                          <small id="emailHelp" class="form-text text-muted">
-                              El id puede ser un número de cedula.
-                          </small>
-                      </div>
-                      <div class="form-group">
-                          <label for="laboratorio_id">ID del Laboratorio</label>
-                          <input type="text" class="form-control" name="laboratorio_id" id="laboratorio_id" placeholder="Ingrese el id del laboratorio">
-                      </div>
-                  </form>
+              <form>
+                  <div class="form-group">
+                      <label for="id">ID del Usuario</label>
+                      <input type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
+                      <small id="emailHelp" class="form-text text-muted">
+                          El id puede ser un número de cedula.
+                      </small>
+                  </div>
+                  <div class="form-group">
+                      <label for="laboratorio_id">ID del Laboratorio</label>
+                      <input type="text" class="form-control" id="laboratorio_id" placeholder="Ingrese el id del laboratorio">
+                  </div>
+              </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button id="add_moderador" class="btn btn-primary">Agregar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cancelar
+            </button>
+            <button id="add_moderador" class="btn btn-primary">
+                Agregar
+            </button>
+
           </div>
         </div>
       </div>
     </div>
+    <!-- Fin de modal para agregar moderador -->
 
 </div>
 
