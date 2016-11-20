@@ -89,7 +89,7 @@ TAG;
 
 </div>
 
-<!-- Recursos adicionales
+<!-- Recursos adicionales -->
 <script src="/js/moderadores.js"></script>
 <?php
 include 'resources.php';
