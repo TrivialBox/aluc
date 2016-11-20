@@ -17,5 +17,8 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js?bc893"></script>
+
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/css/custom.css">
+

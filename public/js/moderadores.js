@@ -56,7 +56,7 @@ $('#form-add-moderador').submit(function (e) {
                         },
                         3000
                     );
-                    $('#table-moderadores tbody tr:first').before('<tr>' +
+                    $('#table-moderadores tbody').append('<tr>' +
                         '<td>'+ data['id'] + '</td>' +
                         '<td>' + data['nombre'] + '</td>' +
                         '<td>' + data['laboratorio']['nombre'] + '(' + data['laboratorio']['id'] + ')' + '</td>' +
@@ -75,3 +75,7 @@ $('.alert .close').click(function (e) {
     window.clearTimeout(timeOutAlert);
 });
 
+
+Mousetrap.bind('n', function () {
+    $('#btn-add-moderador').trigger('click');
+});
