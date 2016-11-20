@@ -71,9 +71,10 @@ TAG;
         <?php
         if (empty($get('moderadores'))) {
             echo <<<TAG
-            <h3 class="text-center">
+            <h2 class="text-center">
             <span class="glyphicon glyphicon-info-sign"></span>
-            </br>
+            </h2>
+            <h3 class="text-center">
             Nada por aquí
             </h3>
             <p class="text-center">
