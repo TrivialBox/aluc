@@ -1,17 +1,33 @@
+var timeOutAlert = 0;
+
 $('#add_moderador').on(
     "click",
     function () {
-        var id = $('#id').val();
-        var laboratorio_id = $('#laboratorio_id').val();
         $.post(
             "/admin/moderadores/nuevo",
-            {
-                'id': id,
-                'laboratorio_id': laboratorio_id
-            },
+            $('form').serialize(),
             function (data, status) {
-                alert(data);
+                if (data['status'] && data['status'] === 'error') {
+                    $('#wrongAlertMessage').html(data['description']);
+                    var alert_wrong = $('#wrongAlert');
+                    alert_wrong.show();
+                    timeOutAlert = window.setTimeout(function () {
+                            alert_wrong.hide();
+                        },
+                        3000
+                    );
+                } else {
+                    $('#addModerador').hide();
+                    $('#successAlertMessage').html('Nuevo moderador agregado.');
+                    $('#successAlert').show();
+                }
             }
         );
     }
 );
+
+$('.alert .close').click(function (e) {
+    $('.alert').hide();
+    window.clearTimeout(timeOutAlert);
+});
+
