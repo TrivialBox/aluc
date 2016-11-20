@@ -164,14 +164,18 @@ class AdministradorSrv {
                     $id = $data['id'];
                     $moderador = Moderador::getInstance($id);
                     $moderador->delete();
+                    self::$view_general
+                        ->success_json()
+                        ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
                 }
-                self::$view_moderador
-                    ->listAll()
-                    ->render();
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );

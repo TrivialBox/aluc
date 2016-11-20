@@ -32,6 +32,17 @@ class GeneralView extends View {
         return $this;
     }
 
+    public function success_json($msj = "") {
+        $this->setTemplate(
+            [
+                'status' => 'success',
+                'description' => $msj
+            ],
+            'json/json.php'
+        );
+        return $this;
+    }
+
     public function error_json($description) {
         $this->setTemplate(
             [
