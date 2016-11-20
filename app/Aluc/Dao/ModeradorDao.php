@@ -84,7 +84,7 @@ class ModeradorDao {
 
     private function getModel(){
         return [
-            'clave_foranea' => ['usuario o moderador','registrado'],
+            'clave_foranea' => ['usuario o laboratorio','registrado'],
             'clave_pk_duplicate' => ['moderador'],
             'elemento_null' => ['moderador','registrado']
 
