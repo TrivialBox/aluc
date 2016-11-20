@@ -8,6 +8,22 @@
     </title>
 </head>
 <body>
+
+<div class="alert-fixed">
+    <div id="wrongAlert" class="alert alert-danger fade in" role="alert" hidden>
+        <button type="button" class="close">
+            <span>&times;</span>
+        </button>
+        <span id="wrongAlertMessage"></span>
+    </div>
+    <div id="successAlert" class="alert alert-success fade in" role="alert" hidden>
+        <button type="button" class="close">
+            <span>&times;</span>
+        </button>
+        <span id="successAlertMessage"></span>
+    </div>
+</div>
+
 <div>
     <!-- Lista de todos los moderadores -->
     <div class="container">
@@ -56,7 +72,6 @@ TAG;
     </div>
     <!-- Fin lista de moderadores -->
 
-
     <!-- Modal para agregar moderador -->
     <div class="modal fade" id="addModerador" tabindex="-1" role="dialog" aria-labelledby="modalAddModerador" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -74,13 +89,13 @@ TAG;
                   <div class="form-group">
                       <label for="id">ID del Usuario</label>
                       <input type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
-                      <small id="emailHelp" class="form-text text-muted">
+                      <small class="form-text text-muted">
                           El id puede ser un número de cedula.
                       </small>
                   </div>
                   <div class="form-group">
-                      <label for="laboratorio_id">ID del Laboratorio</label>
-                      <input type="text" class="form-control" id="laboratorio_id" placeholder="Ingrese el id del laboratorio">
+                      <label for="id_laboratorio">ID del Laboratorio</label>
+                      <input type="text" class="form-control" name="id_laboratorio" id="id_laboratorio" placeholder="Ingrese el id del laboratorio">
                   </div>
               </form>
           </div>
@@ -97,7 +112,6 @@ TAG;
       </div>
     </div>
     <!-- Fin de modal para agregar moderador -->
-
 </div>
 
 <!-- Recursos adicionales -->
