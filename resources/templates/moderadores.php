@@ -27,12 +27,13 @@
 <div>
     <!-- Lista de todos los moderadores -->
     <div class="container">
+        <div >
         <h2>Moderadores</h2>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
             Nuevo
         </button>
-
-        <table id="table-moderadores" class="table table-striped">
+        </div>
+        <table id="table-moderadores" class="table table-hover table-">
             <thead>
             <tr>
                 <th>ID</th>
@@ -52,11 +53,11 @@
                     <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-warning">
+                            <button type="button" class="btn btn-warning" data-toggle="modal" target="#edit-moderador">
                                 Editar
                             </button>
                             
-                            <button type="button" class="btn btn-danger">
+                            <button value="{$moderador->id}" type="button" class="btn btn-danger btn-delete-mod">
                                 Eliminar
                             </button>
                         </div>
@@ -67,19 +68,15 @@ TAG;
             ?>
             </tbody>
         </table>
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
-            Nuevo
-        </button>
     </div>
     <!-- Fin lista de moderadores -->
 
     <!-- Modal para agregar moderador -->
-    <div class="modal fade" id="addModerador" tabindex="-1" role="dialog" aria-labelledby="modalAddModerador" aria-hidden="true">
+    <div class="modal fade" id="addModerador" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title" id="modalAddModerador">
@@ -111,9 +108,8 @@ TAG;
           </div>
         </div>
       </div>
-    </div>
-    <!-- Fin de modal para agregar moderador -->
 </div>
+<!-- Fin de modal para agregar moderador -->
 
 <!-- Recursos adicionales -->
 <script src="/js/moderadores.js"></script>
