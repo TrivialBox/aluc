@@ -1,6 +1,6 @@
 <?php
 
-namespace ALUC\Dao;
+namespace Aluc\Dao;
 
 
 class LectorQrDao {
