@@ -63,7 +63,6 @@ class Laboratorio {
     }
 
     public function getModeradores() {
-
         return $this->convertArray(LaboratorioDao::getInstance()->getModeradores($this->id));
     }
 
