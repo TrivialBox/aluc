@@ -29,7 +29,7 @@
     <div class="container">
         <div >
         <h2>Moderadores</h2>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
+        <button id="btn-add-moderador" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
             Nuevo
         </button>
         </div>
@@ -47,27 +47,42 @@
             foreach ($get('moderadores') as $moderador) {
                 $laboratorio = $moderador->getLaboratorio();
                 echo <<<TAG
-                    <tr>
-                    <td>{$moderador->id}</td>
-                    <td>{$moderador->nombre}</td>
-                    <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
-                    <td>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-warning" data-toggle="modal" target="#edit-moderador">
-                                Editar
-                            </button>
-                            
-                            <button value="{$moderador->id}" type="button" class="btn btn-danger btn-delete-mod">
-                                Eliminar
-                            </button>
-                        </div>
-                    </td>
-                    </tr>
+                <tr>
+                <td>{$moderador->id}</td>
+                <td>{$moderador->nombre}</td>
+                <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" target="#edit-moderador">
+                            Editar
+                        </button>
+                        
+                        <button value="{$moderador->id}" type="button" class="btn btn-danger btn-delete-mod">
+                            Eliminar
+                        </button>
+                    </div>
+                </td>
+                </tr>
 TAG;
             }
             ?>
             </tbody>
         </table>
+        <?php
+        if (empty($get('moderadores'))) {
+            echo <<<TAG
+            <h3 class="text-center">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            </br>
+            Nada por aquí
+            </h3>
+            <p class="text-center">
+            Agrega nuevos moderadores presionando el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>
+            </p>
+TAG;
+
+        }
+        ?>
     </div>
     <!-- Fin lista de moderadores -->
 
