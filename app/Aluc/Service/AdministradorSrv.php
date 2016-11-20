@@ -1,6 +1,7 @@
 <?php
 namespace Aluc\Service;
 
+use Aluc\Common\AlucException;
 use Aluc\Models\LectorQr;
 use Aluc\Models\Moderador;
 use Aluc\Views\AdministradorView;
@@ -95,19 +96,23 @@ class AdministradorSrv {
     public static function moderadores_nuevo($data) {
         self::admin_do (
             function () use ($data) {
-                if (!empty($data) and Tools::check_method('post')) {
-                    $id = $data['id'];
-                    $laboratorio_id = $data['laboratorio_id'];
-                    $moderador = Moderador::getNewInstace($id, $laboratorio_id);
-                    $moderador->save();
-                }
-                self::$view_moderador
-                    ->listAll()
-                    ->render();
+                 if (!empty($data) and Tools::check_method('post')) {
+                     $id = $data['id'];
+                     $id_laboratorio = $data['id_laboratorio'];
+                     $moderador = Moderador::getNewInstace($id, $id_laboratorio);
+                     $moderador->save();
+                     self::$view_moderador
+                         ->json($moderador)
+                         ->render();
+                 } else {
+                     self::$view_general
+                         ->error404()
+                         ->render();
+                 }
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );
@@ -127,8 +132,8 @@ class AdministradorSrv {
                 if (!empty($data) and Tools::check_method('post')) {
                     $id = $data['id'];
                     $moderador = Moderador::getInstance($id);
-                    $laboratorio_id = $data['laboratorio_id'];
-                    $moderador->id_laboratorio = $laboratorio_id;
+                    $id_laboratorio = $data['id_laboratorio'];
+                    $moderador->id_laboratorio = $id_laboratorio;
                     $moderador->save();
                 }
                 self::$view_moderador
@@ -209,8 +214,8 @@ class AdministradorSrv {
                 if (!empty($data) and Tools::check_method('post')) {
                     $mac = $data['mac'];
                     $ip = $data['ip'];
-                    $laboratorio_id = $data['laboratorio_id'];
-                    $lector = LectorQr::getNewInstance($mac, $ip, $laboratorio_id);
+                    $id_laboratorio = $data['id_laboratorio'];
+                    $lector = LectorQr::getNewInstance($mac, $ip, $id_laboratorio);
                     $lector->save();
                 }
                 self::$view_lector_qr
@@ -244,8 +249,8 @@ class AdministradorSrv {
                     if (array_key_exists('ip', $data)) {
                         $lector->ip = $data['ip'];
                     }
-                    if (array_key_exists('laboratorio_id', $data)) {
-                        $lector->laboratorio_id = $data['laboratorio_id'];
+                    if (array_key_exists('id_laboratorio', $data)) {
+                        $lector->id_laboratorio = $data['id_laboratorio'];
                     }
                     $lector->save();
                 }
