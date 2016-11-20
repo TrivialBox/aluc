@@ -1,43 +1,101 @@
+<html>
+    <head>
+        <?php
+        include 'header.php';
+        ?>
+        <script src="/js/moderadores.js"></script>
+    </head>
+
+<body>
 <div>
     <!-- Lista de todos los moderadores -->
-    <div>
-        <h2>Lista de Moderadores</h2>
-        <table width="100%">
+    <div class="container">
+        <h2>Moderadores</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
+            Nuevo
+        </button>
+        <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Laboratorio</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Laboratorio</th>
+                <th>Acción</th>
+            </tr>
             </thead>
             <tbody>
             <?php
-                foreach ($get('moderadores') as $moderador) {
-                    $laboratorio = $moderador->getLaboratorio();
-                    echo <<<TAG
+            foreach ($get('moderadores') as $moderador) {
+                $laboratorio = $moderador->getLaboratorio();
+                echo <<<TAG
                     <tr>
                     <td>{$moderador->id}</td>
                     <td>{$moderador->nombre}</td>
                     <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            Editar
+                        </button>
+                        
+                        <button type="button" class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </td>
                     </tr>
 TAG;
-                }
+            }
             ?>
             </tbody>
         </table>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
+            Nuevo
+        </button>
     </div>
-    <div>
-        <h2>Agregar nuevo moderador</h2>
-        <form action="/admin/moderadores/nuevo" method="post">
-            <label for="id">ID</label>
-            <br>
-            <input type="text" name="id" id="id">
-            <br>
-            <label for="laboratorio_id">Laboratorio ID</label>
-            <br>
-            <input type="text" name="laboratorio_id" id="laboratorio_id">
-            <br>
-            <input type="submit" value="Agregar">
-        </form>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModerador" tabindex="-1" role="dialog" aria-labelledby="modalAddModerador" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalAddModerador">
+                Agregar Moderador
+            </h4>
+          </div>
+          <div class="modal-body">
+                  <form>
+                      <div class="form-group">
+                          <label for="id">ID del Usuario</label>
+                          <input type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
+                          <small id="emailHelp" class="form-text text-muted">
+                              El id puede ser un número de cedula.
+                          </small>
+                      </div>
+                      <div class="form-group">
+                          <label for="laboratorio_id">ID del Laboratorio</label>
+                          <input type="text" class="form-control" name="laboratorio_id" id="laboratorio_id" placeholder="Ingrese el id del laboratorio">
+                      </div>
+                  </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button id="add_moderador" onclick="addModerador()" class="btn btn-primary">Agregar</button>
+          </div>
+        </div>
+      </div>
     </div>
+
 </div>
+
+<?php
+include 'resources.php';
+?>
+
+</body>
+
+</html>
+
