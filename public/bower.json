@@ -1,0 +1,21 @@
+{
+  "name": "aluc",
+  "homepage": "https://github.com/trivialbox/aluc",
+  "authors": [
+    "Santos Gallegos <santos_g@outlook.com>"
+  ],
+  "description": "Administrador de Laboratorios de la Universidad de Cuenca",
+  "main": "index.php",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
