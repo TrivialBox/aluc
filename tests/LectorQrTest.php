@@ -75,7 +75,7 @@ class LectorQrTest extends TestCase {
 
         $lector = LectorQr::getInstance($mac);
         $lector->renovarToken();
-        $this->assertEquals($lector->getToken(), $token);
+        $this->assertNotEquals($lector->getToken(), $token);
         $lector->delete();
     }
 }
