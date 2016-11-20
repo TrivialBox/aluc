@@ -1,5 +1,6 @@
 <?php
 namespace Aluc\Models;
+use Aluc\Common\AlucException;
 use Aluc\Dao\LectorQrDao;
 use Sinergi\Token\StringGenerator;
 
@@ -43,6 +44,7 @@ class LectorQr {
     }
 
     public static function getInstance($mac) {
+        self::validarMac($mac);
         return LectorQr::get_object(LectorQrDao::getInstance()->get($mac));
     }
 
@@ -57,7 +59,29 @@ class LectorQr {
         return Laboratorio::getInstance($this->id_laboratorio);
     }
 
+    private static function validarMac($mac){
+        if (!preg_match('/([a-fA-F0-9]{2}[:|\-]?){6}/', $mac)){
+            throw new AlucException(
+                "La mac que ingreso es invalida",
+                "La mac que ingreso es invalida"
+            );
+        }
+    }
+    private static function validarIp($ip){
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+            throw new AlucException(
+                "La ip que ingreso es invalida",
+                "La ip que ingreso es invalida"
+            );
+        }
+    }
+    private function validarEstado(){
+        self::validarMac($this->mac);
+        self::validarIp($this->ip);
+
+    }
     public function save() {
+        $this->validarEstado();
         $obj = static::get_object(
             LectorQrDao::getInstance()->save($this, $this->is_save)
         );
@@ -66,6 +90,7 @@ class LectorQr {
         $this->id_laboratorio = $obj->id_laboratorio;
         $this->token = $obj->getToken();
         $this->is_save = false;
+
         return $this;
     }
 

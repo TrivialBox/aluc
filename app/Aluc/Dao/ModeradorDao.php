@@ -77,7 +77,7 @@ class ModeradorDao {
         try{
             $this->database->delete("moderador", $where);
         }catch (\Exception $e){
-            throw new AlucException('Moderador eliminado', $e->getMessage());
+            throw new AlucException('El moderador no se puede eliminar', $e->getMessage());
         }
 
     }
