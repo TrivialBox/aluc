@@ -1,3 +1,6 @@
+<?php
+use Aluc\Common\TemplateGenerator;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,33 +46,11 @@
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($get('moderadores') as $moderador) {
-                        $laboratorio = $moderador->getLaboratorio();
-                        echo <<<TAG
-                        <tr data-id="{$moderador->id}">
-                        <td>
-                            {$moderador->id}
-                        </td>
-                        <td>
-                            {$moderador->nombre}
-                        </td>
-                        <td>
-                            {$laboratorio->nombre} ({$laboratorio->id})
-                        </td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
-                                    Editar
-                                </button>
-
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm-delete-moderador">
-                                    Eliminar
-                                </button>
-                            </div>
-                        </td>
-                        </tr>
-TAG;
-                    }
+                    TemplateGenerator::generate([
+                            'moderadores' => $get('moderadores')
+                        ],
+                        'moderadores_list.php'
+                    );
                     ?>
                     </tbody>
                 </table>
@@ -77,20 +58,12 @@ TAG;
 
                 <?php
                 if (empty($get('moderadores'))) {
-                    echo <<<'TAG'
-                    <div class="container tip-container">
-                        <h2 class="">
-                            <span class="glyphicon glyphicon-info-sign text-muted"></span>
-                            <br/>
-                            Nada por aquí.
-                        </h2>
-                        <small>
-                            <span class="glyphicon glyphicon-ok text-muted"></span>
-                            Agrega nuevos moderadores con el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>.
-                        </small>
-                        </div>
-                    </div>
-TAG;
+                    TemplateGenerator::generate([
+                            'title' => 'Nada por aquí.',
+                            'tip' => 'Agrega nuevos moderadores con el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>.'
+                        ],
+                        'tip_container.php'
+                    );
                 }
                 ?>
 
