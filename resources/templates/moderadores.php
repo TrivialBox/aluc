@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <?php
@@ -8,132 +9,200 @@
     </title>
 </head>
 <body>
+    <!-- Aquí iría el el navbar... si tuviera uno -->
 
-<div class="alert-fixed">
-    <div id="wrongAlert" class="alert alert-danger fade in" role="alert" hidden>
-        <button type="button" class="close">
-            <span>&times;</span>
-        </button>
-        <span id="wrongAlertMessage"></span>
-    </div>
-    <div id="successAlert" class="alert alert-success fade in" role="alert" hidden>
-        <button type="button" class="close">
-            <span>&times;</span>
-        </button>
-        <span id="successAlertMessage"></span>
-    </div>
-</div>
-
-<div>
-    <!-- Lista de todos los moderadores -->
+    <!-- contenedor principal -->
     <div class="container">
-        <div >
-        <h2>Moderadores</h2>
-        <button id="btn-add-moderador" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModerador">
-            Nuevo
-        </button>
-        </div>
-        <table id="table-moderadores" class="table table-hover table-">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Laboratorio</th>
-                <th>Acción</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach ($get('moderadores') as $moderador) {
-                $laboratorio = $moderador->getLaboratorio();
-                echo <<<TAG
-                <tr>
-                <td>{$moderador->id}</td>
-                <td>{$moderador->nombre}</td>
-                <td>{$laboratorio->nombre} ({$laboratorio->id})</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" target="#edit-moderador">
-                            Editar
+        <div class="row">
+            <!-- sidebar -->
+            <div class="col-sm-3">
+                Sidebar
+            </div>
+            <!-- END sidebar -->
+
+            <!-- main content -->
+            <div class="col-sm-9">
+                <div class="page-header clearfix">
+                    <h1>
+                        <span>Moderadores</span>
+                        <button id="btn-add-moderador" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-moderador">
+                            Nuevo
                         </button>
-                        
-                        <button value="{$moderador->id}" type="button" class="btn btn-danger btn-delete-mod">
-                            Eliminar
+                    </h1>
+                </div>
+
+                <!-- Tabla editable de moderadores -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID </th>
+                            <th>Nombre</th>
+                            <th>Laboratorio</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($get('moderadores') as $moderador) {
+                        $laboratorio = $moderador->getLaboratorio();
+                        echo <<<TAG
+                        <tr>
+                        <td val="{$moderador->id}">
+                            {$moderador->id}
+                        </td>
+                        <td>
+                            {$moderador->nombre}
+                        </td>
+                        <td val="{$laboratorio->id}">
+                            {$laboratorio->nombre} ({$laboratorio->id})
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
+                                    Editar
+                                </button>
+
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm-delete-moderador">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </td>
+                        </tr>
+TAG;
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                <!-- END Tabla editable de moderadores -->
+
+            </div>
+            <!-- END main content -->
+
+        </div>
+    </div>
+
+    <!-- Contenedor de alertas -->
+    <div id='container-alert' class="alert-fixed"></div>
+
+    <!-- Modal add-moderador -->
+    <div class="modal fade in" tabindex="-1" role="dialog" id="modal-add-moderador">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        Agregar Moderador
+                    </h4>
+                </div>
+
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id">Id del Usuario</label>
+                            <input required="required" id="id" type="text" name="id" placeholder="Ingrese el id del usuario" class="form-control">
+                            <small class="form-text text-muted">
+                                El id puede ser el número de cédula.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_laboratorio">Id del Laboratorio</label>
+                            <input required="required" pattern="\d*" type="text" id="id_laboratorio" name="id_laboratorio" placeholder="Ingrese el id del laboratorio" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="submit" id="submit-add-moderador" class="btn btn-primary">
+                            Agregar
                         </button>
                     </div>
-                </td>
-                </tr>
-TAG;
-            }
-            ?>
-            </tbody>
-        </table>
-        <?php
-        if (empty($get('moderadores'))) {
-            echo <<<TAG
-            <h2 class="text-center">
-            <span class="glyphicon glyphicon-info-sign"></span>
-            </h2>
-            <h3 class="text-center">
-            Nada por aquí
-            </h3>
-            <p class="text-center">
-            Agrega nuevos moderadores presionando el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>
-            </p>
-TAG;
-
-        }
-        ?>
-    </div>
-    <!-- Fin lista de moderadores -->
-
-    <!-- Modal para agregar moderador -->
-    <div class="modal fade" id="addModerador" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="modalAddModerador">
-                Agregar Moderador
-            </h4>
-          </div>
-            <form id="form-add-moderador" method="post">
-          <div class="modal-body">
-                  <div class="form-group">
-                      <label for="id">ID del Usuario</label>
-                      <input required type="text" class="form-control" name="id" id="id" placeholder="Ingrese el id del usuario">
-                      <small class="form-text text-muted">
-                          El id puede ser un número de cedula.
-                      </small>
-                  </div>
-                  <div class="form-group">
-                      <label for="id_laboratorio">ID del Laboratorio</label>
-                      <input required type="text" class="form-control" name="id_laboratorio" id="id_laboratorio" placeholder="Ingrese el id del laboratorio">
-                  </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                Cancelar
-            </button>
-            <button type="submit" id="add_moderador" class="btn btn-primary">
-                Agregar
-            </button>
-            </form>
-          </div>
+                </form>
+            </div>
         </div>
-      </div>
-</div>
-<!-- Fin de modal para agregar moderador -->
+    </div>
+    <!-- END modal add-moderador -->
+
+    <!-- Modal edit-moderador -->
+    <div class="modal fade in" tabindex="-1" role="dialog" id="modal-edit-moderador">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        Editar Moderador
+                    </h4>
+                </div>
+
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id">Id del Usuario</label>
+                            <input required="required" id="id" type="text" name="id" class="form-control" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_laboratorio">Id del Laboratorio</label>
+                            <input required="required" pattern="\d*" type="text" id="id_laboratorio" name="id_laboratorio" placeholder="Ingrese el id del laboratorio" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="submit" id="submit-actualizar-moderador" class="btn btn-primary">
+                            Actualizar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END modal add-moderador -->
+
+    <!-- Modal confirm-delete-moderador -->
+    <div class="modal fade in" tabindex="-1" role="dialog" id="modal-confirm-delete-moderador">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        ¿Eliminar Moderador <span id="id-moderador" class="text-danger"></span>?
+                    </h4>
+                </div>
+
+                <form>
+                    <input value="1234567890" type="hidden" id="id" name="id">
+                    <div class="modal-body bg-warning">
+                        Al eliminar un moderador este podrá seguir usando el sistema,
+                        pero no tendrá acceso a la zona administrativa. Esta acción
+                        es <strong>irreversible</strong>.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            No, conservar moderador
+                        </button>
+                        <button type="submit" id="submit-delete-moderador" class="btn btn-danger">
+                            Si, eliminar moderador
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 <!-- Recursos adicionales -->
-<script src="/js/moderadores.js"></script>
 <?php
 include 'resources.php';
 ?>
+<script src="/js/moderadores/modals.js"></script>
+<script src="/js/moderadores/shortcuts.js"></script>
 
 </body>
-
 </html>
-
