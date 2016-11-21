@@ -9,3 +9,9 @@ $('#modal-confirm-delete-moderador').on(
     function () {
         $('#modal-confirm-delete-moderador .btn-secondary').focus();
 });
+
+$('#modal-edit-moderador').on(
+    'shown.bs.modal',
+    function () {
+        $('#modal-edit-moderador #id_laboratorio').focus();
+});
