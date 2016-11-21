@@ -341,3 +341,10 @@ class AdministradorSrv {
 }
 
 AdministradorSrv::init();
+
+/* ¿Dónde está Alicia?       */
+/*                 Si la ves */
+/*  ()()      dile que estoy */
+/*  ('.')        esperándola */
+/*  (()()              aquí. */
+/* *(_()()                   */
