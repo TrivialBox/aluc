@@ -214,7 +214,12 @@ TAG;
             </div>
         </div>
     </div>
+    <!-- END modal-confirm-delete-moderador -->
 
+    <!-- Loader -->
+    <div class="loader-container modal" hidden="hidden">
+        <div class="loader"></div>
+    </div>
 
 <!-- Recursos adicionales -->
 <?php

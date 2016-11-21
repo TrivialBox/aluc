@@ -5,7 +5,7 @@ function sendRequestModeradores(form, action, success) {
             'url': "/admin/moderadores/" + action,
             'data': $(this).serialize(),
             'beforeSend': function () {
-                // Mostar mensaje de cargando o bloquear formularios
+                $('.loader-container').show();
             },
             'success': function (data, status) {
                 if (data.status && data.status === 'error') {
@@ -18,7 +18,7 @@ function sendRequestModeradores(form, action, success) {
                 showAlert('alert-danger', 'Ups, algo inesperado ocurrió.');
             },
             'complete': function () {
-                // ocultar mensaje de cargando
+                $('.loader-container').hide();
             }
         });
         e.preventDefault();
