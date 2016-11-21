@@ -130,7 +130,7 @@ use Aluc\Common\TemplateGenerator;
                     </h4>
                 </div>
 
-                <form>
+                <form id="form-edit-moderador">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="id">Id del Usuario</label>

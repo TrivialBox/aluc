@@ -135,14 +135,18 @@ class AdministradorSrv {
                     $id_laboratorio = $data['id_laboratorio'];
                     $moderador->id_laboratorio = $id_laboratorio;
                     $moderador->save();
+                    self::$view_moderador
+                        ->getList(['id' => $id])
+                        ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
                 }
-                self::$view_moderador
-                    ->listAll()
-                    ->render();
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );

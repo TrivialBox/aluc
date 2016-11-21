@@ -16,5 +16,7 @@ $('#modal-confirm-delete-moderador').on(
 $('#modal-edit-moderador').on(
     'shown.bs.modal',
     function (e) {
+        var id = $(e.relatedTarget).parent().parent().parent().data('id');
+        $('#form-edit-moderador #id').val(id);
         $('#modal-edit-moderador #id_laboratorio').focus();
 });

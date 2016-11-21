@@ -44,11 +44,10 @@ class ModeradorView extends View {
      */
     public function getList($filters) {
         $moderadores = [];
-        if (arrayHasKey('id', $filters)) {
+        if (array_key_exists('id', $filters)) {
             $moderadores[] = Moderador::getInstance($filters['id']);
         }
-        $this->setTemplate(
-            [
+        $this->setTemplate([
                 'moderadores' => $moderadores
             ],
             'moderadores_list.php'

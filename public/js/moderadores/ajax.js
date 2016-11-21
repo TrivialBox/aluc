@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 function sendRequestModeradores(form, action, success) {
     $(form).submit(function (e) {
         $.ajax({
@@ -55,6 +57,10 @@ function addNewRowModerador(moderador) {
     $('.tip-container').remove();
 }
 
+function deleteRowModerador(id) {
+    $('table tbody [data-id="' + id + '"]').remove();
+}
+
 sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
     showAlert('alert-success', 'Nuevo moderador agregado.');
     addNewRowModerador(data);
@@ -65,6 +71,14 @@ sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
 sendRequestModeradores('#form-delete-moderador', 'eliminar', function (data, status) {
     showAlert('alert-success', 'Moderador eliminado.');
     var id = $('#form-delete-moderador #id').val();
-    $('table tbody [data-id="' + id + '"]').remove();
+    deleteRowModerador(id);
     $('#modal-confirm-delete-moderador').modal('hide');
+});
+
+sendRequestModeradores('#form-edit-moderador', 'actualizar', function (data, status) {
+    showAlert('alert-success', 'Moderador actualizado.');
+    var id = $('#form-edit-moderador #id').val();
+    deleteRowModerador(id);
+    $('table tbody').prepend(data);
+    $('#modal-edit-moderador').modal('hide');
 });
