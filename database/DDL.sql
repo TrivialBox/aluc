@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ALUC` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ALUC`;
 -- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: ALUC
@@ -118,6 +120,21 @@ CREATE TABLE `moderador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `prueba`
+--
+
+DROP TABLE IF EXISTS `prueba`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prueba` (
+  `cupos` int(11) DEFAULT NULL,
+  `ocupados` int(11) DEFAULT NULL,
+  `valor` int(11) DEFAULT NULL,
+  `pruebacol` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `reserva`
 --
 
@@ -131,7 +148,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +172,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,11 +290,52 @@ BEGIN
 	declare cupos int;
     declare ocupados int;
     declare valor int;
-    
-    /*declaracion de las excepsiones*/
-    
+    declare tipo varchar(45);
+    declare horas int;
+    declare horas_peticion int;
+    declare bandera int;
     
     start transaction;
+    
+    /*Validar que no haya clases Excluyente*/
+    SELECT tipo_uso into tipo
+		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
+		where id_laboratorio = Sid_laboratorio and estado = "Reservado" 
+        and TIMESTAMP(fecha,hora_fin) 
+		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+		and TIMESTAMP(Sfecha,Shora_fin) group by (tipo_uso);
+        
+	if (tipo = "Clases") then
+		signal sqlstate "45000" set message_text = "Hay clases,no puede ingresar";
+    end if;
+    
+    /*Validacion que las horas que ingrese este dentro de los rango del laboratorio*/
+    select id into bandera
+    from view_laboratorio 
+		where id = Sid_laboratorio
+        and ((Shora_inicio + interval 1 minute between j1_hora_apertura and j1_hora_cierre) 
+		and (Shora_fin - interval 1 minute between j1_hora_apertura and j1_hora_cierre))
+		or ((Shora_inicio + interval 1 minute between j2_hora_apertura and j2_hora_cierre) 
+		and (Shora_fin - interval 1 minute between j2_hora_apertura and j2_hora_cierre));
+    
+    if (bandera) then
+		set bandera=bandera;
+    else
+		signal sqlstate "45000" set message_text = "No disponible el laboratorio";
+    end if;
+    
+    /*validar que no se exceda de 2 horas diarias en sus reservaciones*/
+    select sum(timediff(hora_fin,hora_inicio))  into horas
+		from reserva join reservacion on reserva.id = reservacion.id_reserva
+		where id_usuario = Sid_usuario and fecha = Sfecha;
+    
+    set horas_peticion = timediff(Shora_fin,Shora_inicio);
+    if ((horas + horas_peticion) > "20000") then
+		signal sqlstate "45000" set message_text = "Excede las horas permitidas";
+    end if;
+    
+    
+    set valor = 0;
     
     SELECT capacidad into cupos
 		from laboratorio 
@@ -285,13 +343,15 @@ BEGIN
                     
     SELECT ifnull(sum(n_usuarios),0) into ocupados
 		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
-		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and 
+		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and tipo_uso !="Clases" and 
 		TIMESTAMP(fecha,hora_inicio) 
-		between TIMESTAMP(fecha,hora_inicio) 
-		and TIMESTAMP(fecha,hora_fin);
+		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+		and TIMESTAMP(Sfecha,Shora_fin);
     
     set valor = cupos - ocupados;
-    if (valor > 0 and Sn_usuarios <= valor) then
+    
+    insert into prueba values(cupos,ocupados,valor,tipo);
+    if (valor > 0 and Sn_usuarios <= valor ) then
 		INSERT INTO ALUC.reserva  
 			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto);
         INSERT INTO ALUC.reservacion 
@@ -391,4 +451,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-20 10:22:23
+-- Dump completed on 2016-11-20 22:46:07
