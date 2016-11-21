@@ -10,9 +10,12 @@ function createAlert(type, msg) {
         'data-dismiss': 'alert',
         'html': '<span>&times;</span>'
     });
+    var icon = type === 'alert-success' ? 'glyphicon-ok' : 'glyphicon-warning-sign';
     var alertMessage = $('<span>', {
         'class': 'alert-message',
-        'html': '<span class="glyphicon glyphicon-ok text-muted"></span> ' + msg
+        'html': `
+            <span class="glyphicon ${icon} text-muted"></span> ${msg}
+            `
     });
     alertBootstrap.append(closeButton);
     alertBootstrap.append(alertMessage);

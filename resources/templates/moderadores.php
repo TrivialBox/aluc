@@ -46,18 +46,18 @@
                     foreach ($get('moderadores') as $moderador) {
                         $laboratorio = $moderador->getLaboratorio();
                         echo <<<TAG
-                        <tr>
-                        <td value="{$moderador->id}">
+                        <tr data-id="{$moderador->id}">
+                        <td>
                             {$moderador->id}
                         </td>
                         <td>
                             {$moderador->nombre}
                         </td>
-                        <td value="{$laboratorio->id}">
+                        <td>
                             {$laboratorio->nombre} ({$laboratorio->id})
                         </td>
                         <td>
-                            <div value="{$moderador->id}" class="btn-group" role="group">
+                            <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
                                     Editar
                                 </button>
@@ -195,8 +195,8 @@ TAG;
                     </h4>
                 </div>
 
-                <form>
-                    <input value="1234567890" type="hidden" id="id" name="id">
+                <form id="form-delete-moderador">
+                    <input value="" type="hidden" id="id" name="id">
                     <div class="modal-body bg-warning">
                         Al eliminar un moderador este podrá seguir usando el sistema,
                         pero no tendrá acceso a la zona administrativa. Esta acción

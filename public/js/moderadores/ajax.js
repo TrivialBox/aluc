@@ -16,30 +16,31 @@ function sendRequestModeradores(form, action, success) {
 }
 
 function addNewRowModerador(moderador) {
-    var newRow = $('<tr>');
-    newRow.append($('<td>', {
-        'value': moderador.id,
-        'html': moderador.id
-    }));
-    newRow.append($('<td>', {
-        'html': moderador.nombre
-    }));
-    laboratorio = moderador.laboratorio;
-    newRow.append($('<td>', {
-        'value': laboratorio.id,
-        'html': laboratorio.nombre + '(' + laboratorio.id + ')'
-    }));
-    newRow.append($('<td>', {
+    var laboratorio = moderador.laboratorio;
+    var newRow = $('<tr>', {
+        'data-id': moderador.id,
         'html': `
-            <div value=${moderador.id} class="btn-group" role="group">
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
-                    Editar
-                </button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm-delete-moderador">
-                    Eliminar
-                </button>
-            </div>`
-    }));
+            <td>
+                ${moderador.id}
+            </td>
+            <td>
+                ${moderador.nombre}
+            </td>
+            <td>
+                ${laboratorio.nombre} (${laboratorio.id})
+            </td>
+            <td>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
+                        Editar
+                    </button>
+
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm-delete-moderador">
+                        Eliminar
+                    </button>
+                </div>
+            </td>`
+    });
     $('table tbody').prepend(newRow);
     $('.tip-container').remove();
 }
@@ -48,4 +49,12 @@ sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
     showAlert('alert-success', 'Nuevo moderador agregado.');
     addNewRowModerador(data);
     $('#modal-add-moderador').modal('hide');
+});
+
+
+sendRequestModeradores('#form-delete-moderador', 'eliminar', function (data, status) {
+    showAlert('alert-success', 'Moderador eliminado.');
+    var id = $('#form-delete-moderador #id').val();
+    $('table tbody [data-id="' + id + '"]').remove();
+    $('#modal-confirm-delete-moderador').modal('hide');
 });
