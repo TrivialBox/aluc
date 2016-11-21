@@ -182,6 +182,38 @@ class AdministradorSrv {
     }
 
     /**
+     * /admin/moderadores/filtrar
+     *
+     * Regresa todos los moderadores que coinciden
+     * con los criterios de búsqueda.
+     * La petición se hace vía get.
+     * Sólo el administrador puede realizar esta acción.
+     * @param $data
+     */
+    public static function moderadores_filtrar($data) {
+        self::admin_do(
+            function () use ($data) {
+                $id = $data['id'];
+                if (Tools::check_method('get')) {
+                    // TODO: falta implementar
+                    self::$view_moderador
+                        ->listAll(['id' => $id])
+                        ->render();
+                } else if (Tools::check_method('post')) {
+                    self::$view_moderador
+                        ->getList(['id' => $id])
+                        ->render();
+                }
+            },
+            function ($e) {
+                self::$view_general
+                    ->error404()
+                    ->render();
+            }
+        );
+    }
+
+    /**
      * /admin/lectores
      *
      * Muestra una lista de todos los lectores QR.
@@ -328,6 +360,7 @@ class AdministradorSrv {
                 '/^nuevo\/$/i' => "{$class_name}::moderadores_nuevo",
                 '/^actualizar\/$/i' => "{$class_name}::moderadores_actualizar",
                 '/^eliminar\/$/i' => "{$class_name}::moderadores_eliminar",
+                '/^filtrar\/$/i' => "{$class_name}::moderadores_filtrar",
             ],
             '/^lectores-?qr\//i' => [
                 '/^$/i' => "{$class_name}::lectores",

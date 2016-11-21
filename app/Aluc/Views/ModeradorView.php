@@ -34,6 +34,28 @@ class ModeradorView extends View {
         return $this;
     }
 
+
+    /**
+     * Lista todos los moderadores que
+     * coincidad con los criterios de
+     * búscquera en forma de columnas html.
+     * @param $filters
+     * @return $this
+     */
+    public function getList($filters) {
+        $moderadores = [];
+        if (arrayHasKey('id', $filters)) {
+            $moderadores[] = Moderador::getInstance($filters['id']);
+        }
+        $this->setTemplate(
+            [
+                'moderadores' => $moderadores
+            ],
+            'moderadores_list.php'
+        );
+        return $this;
+    }
+
     public function json(Moderador $obj) {
         $lab = $obj->getLaboratorio();
         $this->setTemplate(
