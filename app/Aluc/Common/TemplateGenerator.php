@@ -24,6 +24,9 @@ class TemplateGenerator {
                 return false;
             }
         };
+        $set = function ($key, $value) use ($data) {
+            $data[$key] = $value;
+        };
         include TEMPLATES_PATH . "/{$template_name}";
     }
 }
