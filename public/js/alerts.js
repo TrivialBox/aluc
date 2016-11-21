@@ -1,24 +1,19 @@
+/*jshint esversion: 6 */
+
 function createAlert(type, msg) {
-    var alertBootstrap = $('<div>', {
-        'class': 'alert fade in alert-dismissible' + ' ' + type,
-        'role': 'alert',
-        'hidden': 'hidden'
-    });
-    var closeButton = $('<button>', {
-        'class': 'close',
-        'type': 'button',
-        'data-dismiss': 'alert',
-        'html': '<span>&times;</span>'
-    });
     var icon = type === 'alert-success' ? 'glyphicon-ok' : 'glyphicon-warning-sign';
-    var alertMessage = $('<span>', {
-        'class': 'alert-message',
+    var alertBootstrap = $('<div>', {
+        'class': `alert ${type} fade in alert-dismissible`,
+        'role': 'alert',
+        'hidden': 'hidden',
         'html': `
-            <span class="glyphicon ${icon} text-muted"></span> ${msg}
-            `
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            <span class="alert-message">
+                <span class="glyphicon ${icon} text-muted"></span> ${msg}
+            </span>`
     });
-    alertBootstrap.append(closeButton);
-    alertBootstrap.append(alertMessage);
     $('#container-alert').append(alertBootstrap);
     return alertBootstrap;
 }
