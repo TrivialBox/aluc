@@ -1,16 +1,26 @@
 function sendRequestModeradores(form, action, success) {
     $(form).submit(function (e) {
-        $.post(
-            "/admin/moderadores/" + action,
-            $(this).serialize(),
-            function (data, status) {
+        $.ajax({
+            'type': 'post',
+            'url': "/admin/moderadores/" + action,
+            'data': $(this).serialize(),
+            'beforeSend': function () {
+                // Mostar mensaje de cargando o bloquear formularios
+            },
+            'success': function (data, status) {
                 if (data.status && data.status === 'error') {
                     showAlert('alert-danger', data.description);
                 } else {
                     success(data, status);
                 }
+            },
+            'error': function () {
+                showAlert('alert-danger', 'Ups, algo inesperado ocurrió.');
+            },
+            'complete': function () {
+                // ocultar mensaje de cargando
             }
-        );
+        });
         e.preventDefault();
     });
 }
