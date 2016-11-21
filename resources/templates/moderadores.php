@@ -47,17 +47,17 @@
                         $laboratorio = $moderador->getLaboratorio();
                         echo <<<TAG
                         <tr>
-                        <td val="{$moderador->id}">
+                        <td value="{$moderador->id}">
                             {$moderador->id}
                         </td>
                         <td>
                             {$moderador->nombre}
                         </td>
-                        <td val="{$laboratorio->id}">
+                        <td value="{$laboratorio->id}">
                             {$laboratorio->nombre} ({$laboratorio->id})
                         </td>
                         <td>
-                            <div class="btn-group" role="group">
+                            <div value="{$moderador->id}" class="btn-group" role="group">
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
                                     Editar
                                 </button>
@@ -74,6 +74,25 @@ TAG;
                     </tbody>
                 </table>
                 <!-- END Tabla editable de moderadores -->
+
+                <?php
+                if (empty($get('moderadores'))) {
+                    echo <<<'TAG'
+                    <div class="container tip-container">
+                        <h2 class="">
+                            <span class="glyphicon glyphicon-info-sign text-muted"></span>
+                            <br/>
+                            Nada por aquí.
+                        </h2>
+                        <small>
+                            <span class="glyphicon glyphicon-ok text-muted"></span>
+                            Agrega nuevos moderadores con el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>.
+                        </small>
+                        </div>
+                    </div>
+TAG;
+                }
+                ?>
 
             </div>
             <!-- END main content -->
@@ -97,7 +116,7 @@ TAG;
                     </h4>
                 </div>
 
-                <form>
+                <form id="form-add-moderador">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="id">Id del Usuario</label>
@@ -203,6 +222,7 @@ include 'resources.php';
 ?>
 <script src="/js/moderadores/modals.js"></script>
 <script src="/js/moderadores/shortcuts.js"></script>
+<script src="/js/moderadores/ajax.js"></script>
 
 </body>
 </html>

@@ -12,7 +12,7 @@ function createAlert(type, msg) {
     });
     var alertMessage = $('<span>', {
         'class': 'alert-message',
-        'html': msg
+        'html': '<span class="glyphicon glyphicon-ok text-muted"></span> ' + msg
     });
     alertBootstrap.append(closeButton);
     alertBootstrap.append(alertMessage);
