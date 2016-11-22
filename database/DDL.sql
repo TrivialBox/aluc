@@ -159,6 +159,27 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ALUC`.`reservacion_BEFORE_UPDATE` BEFORE UPDATE ON `reservacion` FOR EACH ROW
+BEGIN
+	if OLD.estado = 'cancelado' and NEW.estado != 'cancelado' then
+		set NEW.estado = 'cancelado';
+        signal sqlstate "45000" set message_text = "110000";
+    end if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `usuario`
@@ -311,7 +332,7 @@ BEGIN
 		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
 		and TIMESTAMP(Sfecha,Shora_fin) group by (tipo_uso);
         
-	if (tipo = "Clases") then
+	if (tipo = "clases") then
 		signal sqlstate "45000" set message_text = "50000";
     end if;
     
@@ -435,7 +456,7 @@ BEGIN
 		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
 		and TIMESTAMP(Sfecha,Shora_fin) group by (tipo_uso);
         
-	if (tipo = "Clases") then
+	if (tipo = "clases") then
 		signal sqlstate "45000" set message_text = "50000";
     end if;
     
@@ -580,4 +601,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-22  2:08:37
+-- Dump completed on 2016-11-22  2:55:58
