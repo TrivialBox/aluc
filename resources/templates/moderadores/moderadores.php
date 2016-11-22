@@ -35,7 +35,7 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de moderadores -->
-                <table class="table table-hover">
+                <table class="table table-hover table-condensed">
                     <thead>
                         <tr>
                             <th>ID </th>
@@ -58,12 +58,7 @@ use Aluc\Common\TemplateGenerator;
 
                 <?php
                 if (empty($get('moderadores'))) {
-                    TemplateGenerator::generate([
-                            'title' => 'Nada por aquí.',
-                            'tip' => 'Agrega nuevos moderadores con el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>.'
-                        ],
-                        'common/tip_container.php'
-                    );
+                    TemplateGenerator::generate([], 'moderadores/tip_container.php');
                 }
                 ?>
 
@@ -186,18 +181,10 @@ use Aluc\Common\TemplateGenerator;
     </div>
     <!-- END modal-confirm-delete-moderador -->
 
-
-    <!-- Contenedor de alertas -->
-    <div id='container-alert' class="alert-fixed"></div>
-
-    <!-- Loader -->
-    <div class="loader-container modal" hidden="hidden">
-        <div class="loader"></div>
-    </div>
-
 <!-- Recursos adicionales -->
 <?php
-    TemplateGenerator::generate([], 'common/resources.php');
+    TemplateGenerator::generate([], 'common/html_resources.php');
+    TemplateGenerator::generate([], 'common/js_resources.php');
 ?>
 <script src="/js/moderadores/modals.js"></script>
 <script src="/js/moderadores/shortcuts.js"></script>

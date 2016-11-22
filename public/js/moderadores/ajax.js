@@ -1,30 +1,12 @@
 /*jshint esversion: 6 */
 
 function sendRequestModeradores(form, action, success) {
-    $(form).submit(function (e) {
-        $.ajax({
-            'type': 'post',
-            'url': "/admin/moderadores/" + action,
-            'data': $(this).serialize(),
-            'beforeSend': function () {
-                $('.loader-container').show();
-            },
-            'success': function (data, status) {
-                if (data.status && data.status === 'error') {
-                    showAlert('alert-danger', data.description);
-                } else {
-                    success(data, status);
-                }
-            },
-            'error': function () {
-                showAlert('alert-danger', 'Ups, algo inesperado ocurrió.');
-            },
-            'complete': function () {
-                $('.loader-container').hide();
-            }
-        });
-        e.preventDefault();
-    });
+    sendRequest(
+        form,
+        'post',
+        "/admin/moderadores/" + action,
+        success
+    );
 }
 
 function deleteRowModerador(id) {
@@ -36,6 +18,7 @@ sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
     $('table tbody').prepend(data);
     $('.tip-container').remove();
     $('#modal-add-moderador').modal('hide');
+    $('#form-add-moderador')[0].reset();
 });
 
 

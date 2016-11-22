@@ -8,4 +8,5 @@
 <script src="https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js?bc893"></script>
 
 <!-- Common -->
-<script src="/js/alerts.js"></script>
+<script src="/js/common/alerts.js"></script>
+<script src="/js/common/ajax.js"></script>
