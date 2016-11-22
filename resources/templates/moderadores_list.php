@@ -2,7 +2,7 @@
 foreach ($get('moderadores') as $moderador) {
     $laboratorio = $moderador->getLaboratorio();
     echo <<<TAG
-    <tr data-id="{$moderador->id}">
+    <tr data-id="{$moderador->id}" data-laboratorio-id="{$laboratorio->id}">
     <td>
         {$moderador->id}
     </td>
