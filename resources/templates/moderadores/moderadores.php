@@ -49,7 +49,7 @@ use Aluc\Common\TemplateGenerator;
                     TemplateGenerator::generate([
                             'moderadores' => $get('moderadores')
                         ],
-                        'moderadores/moderadores_list.php'
+                        'moderadores/moderadores-list.php'
                     );
                     ?>
                     </tbody>
@@ -58,7 +58,7 @@ use Aluc\Common\TemplateGenerator;
 
                 <?php
                 if (empty($get('moderadores'))) {
-                    TemplateGenerator::generate([], 'moderadores/tip_container.php');
+                    TemplateGenerator::generate([], 'moderadores/tip-container.php');
                 }
                 ?>
 
@@ -183,8 +183,8 @@ use Aluc\Common\TemplateGenerator;
 
 <!-- Recursos adicionales -->
 <?php
-    TemplateGenerator::generate([], 'common/html_resources.php');
-    TemplateGenerator::generate([], 'common/js_resources.php');
+    TemplateGenerator::generate([], 'common/html-resources.php');
+    TemplateGenerator::generate([], 'common/js-resources.php');
 ?>
 <script src="/js/moderadores/modals.js"></script>
 <script src="/js/moderadores/shortcuts.js"></script>

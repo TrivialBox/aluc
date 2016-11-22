@@ -14,7 +14,7 @@ function deleteRowModerador(id) {
 }
 
 sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
-    showAlert('alert-success', 'Nuevo moderador agregado.');
+    showAlert('alert-success', 'Moderador agregado.');
     $('table tbody').prepend(data);
     $('.tip-container').remove();
     $('#modal-add-moderador').modal('hide');

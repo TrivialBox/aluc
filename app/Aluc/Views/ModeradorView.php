@@ -37,8 +37,8 @@ class ModeradorView extends View {
 
     /**
      * Lista todos los moderadores que
-     * coincidad con los criterios de
-     * búscquera en forma de columnas html.
+     * coincidan con los criterios de
+     * búsqueda en forma de columnas html.
      * @param $filters
      * @return $this
      */
@@ -50,15 +50,14 @@ class ModeradorView extends View {
         $this->setTemplate([
                 'moderadores' => $moderadores
             ],
-            'moderadores/moderadores_list.php'
+            'moderadores/moderadores-list.php'
         );
         return $this;
     }
 
     public function json(Moderador $obj) {
         $lab = $obj->getLaboratorio();
-        $this->setTemplate(
-            [
+        $this->setTemplate([
                 'id' => $obj->id,
                 'nombre' => $obj->nombre,
                 'laboratorio' => [
