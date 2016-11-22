@@ -54,3 +54,13 @@ $('#modal-confirm-update-token-lector-qr').on(
     function (e) {
         $('#modal-confirm-update-token-lector-qr .btn-secondary').focus();
 });
+
+// Show and hide tokens
+$('table').on(
+    'click',
+    '.collapse-token',
+    function () {
+        console.log('hola');
+        $(this).parent().parent().parent().find('.collapse').collapse('toggle');
+    }
+);

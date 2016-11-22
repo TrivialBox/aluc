@@ -16,7 +16,7 @@ foreach ($get('lectores_qr') as $lector) {
         <div class="row">
             <div class="col-xm-2">
                 <div class="btn-group btn-group-sm">
-                    <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse-token" data-placement="top" title="Mostrar/Ocultar token">
+                    <button class="btn btn-secondary collapse-token" type="button" data-placement="top" title="Mostrar/Ocultar token">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </button>
                     <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modal-confirm-update-token-lector-qr" data-placement="top" title="Renovar token">
@@ -24,7 +24,7 @@ foreach ($get('lectores_qr') as $lector) {
                     </button>
                 </div>
             </div>
-            <div class="collapse col-xm-10" id="collapse-token">
+            <div class="collapse col-xm-10 token-hidden">
                 <small class="text-muted">
                     {$lector->getToken()}
                 </small>
