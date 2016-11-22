@@ -120,6 +120,21 @@ CREATE TABLE `moderador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `prueba`
+--
+
+DROP TABLE IF EXISTS `prueba`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prueba` (
+  `cupos` int(11) DEFAULT NULL,
+  `ocupados` int(11) DEFAULT NULL,
+  `valor` int(11) DEFAULT NULL,
+  `pruebacol` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `reserva`
 --
 
@@ -133,7 +148,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +172,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -304,6 +319,7 @@ BEGIN
     declare Rrango int;
     declare dias int;
     declare Rid_usuario varchar(10);
+    declare Rhora_inicio time;
     
     
     start transaction;
@@ -323,22 +339,25 @@ BEGIN
 		signal sqlstate "45000" set message_text = "90000";
     end if;
     
+    if (Stipo_uso != 'clases' ) then
+		
+		/*Validar que no haya clases Excluyente*/
+		SELECT tipo_uso into tipo
+			FROM reserva join reservacion on reserva.id = reservacion.id_reserva
+			where id_laboratorio = Sid_laboratorio and estado = "reservado" 
+			and TIMESTAMP(fecha,hora_fin) 
+			between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+			and TIMESTAMP(Sfecha,Shora_fin);
+			
+		if (tipo = "clases") then
+			signal sqlstate "45000" set message_text = "50000";
+		end if;
+	end if;
     
-    /*Validar que no haya clases Excluyente*/
-    SELECT tipo_uso into tipo
-		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
-		where id_laboratorio = Sid_laboratorio and estado = "Reservado" 
-        and TIMESTAMP(fecha,hora_fin) 
-		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
-		and TIMESTAMP(Sfecha,Shora_fin) group by (tipo_uso);
-        
-	if (tipo = "clases") then
-		signal sqlstate "45000" set message_text = "50000";
-    end if;
     
     /*sacar el id para comprobar que existe*/
     select id into bandera
-    from view_laboratorio 
+    from laboratorio
 		where id = Sid_laboratorio;
 	if (bandera) then
 		set bandera=bandera;
@@ -351,10 +370,10 @@ BEGIN
     select id into bandera
     from view_laboratorio 
 		where id = Sid_laboratorio
-        and ((Shora_inicio + interval 1 minute between j1_hora_apertura and j1_hora_cierre) 
+        and (((Shora_inicio + interval 1 minute between j1_hora_apertura and j1_hora_cierre) 
 		and (Shora_fin - interval 1 minute between j1_hora_apertura and j1_hora_cierre))
 		or ((Shora_inicio + interval 1 minute between j2_hora_apertura and j2_hora_cierre) 
-		and (Shora_fin - interval 1 minute between j2_hora_apertura and j2_hora_cierre));
+		and (Shora_fin - interval 1 minute between j2_hora_apertura and j2_hora_cierre)));
     
     if (bandera) then
 		set bandera=bandera;
@@ -383,9 +402,20 @@ BEGIN
     
     /*declaracion de las excepsiones*/
     set valor = 0;
-    select n_usuarios into Rn_usuarios
-    from view_reserva 
-    where id = Sid;
+    set Rn_usuarios = 0;
+    select id_laboratorio into bandera
+		from view_reserva 
+        where id = Sid;
+	
+    select hora_inicio into Rhora_inicio
+		from reservacion 
+		where id_reserva = Sid;
+	if(bandera = Sid_laboratorio and Rhora_inicio = Shora_inicio)then
+		select n_usuarios into Rn_usuarios
+		from view_reserva 
+		where id = Sid;
+    end if;
+    
     
     SELECT capacidad into cupos
 		from laboratorio 
@@ -393,13 +423,13 @@ BEGIN
                     
     SELECT ifnull(sum(n_usuarios),0) into ocupados
 		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
-		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and tipo_uso !="Clases" and 
+		where id_laboratorio = Sid_laboratorio  and estado = "reservado" and 
 		TIMESTAMP(fecha,hora_inicio + interval 1 minute) 
 		between TIMESTAMP(Sfecha,Shora_inicio)  
 		and TIMESTAMP(Sfecha,Shora_fin);
     
     set valor = cupos - ocupados + Rn_usuarios;
-    
+    insert into prueba values(cupos,ocupados,valor,Rn_usuarios);
     if (valor > 0 and Sn_usuarios <= valor ) then
 		Update ALUC.reserva  
 			set n_usuarios = Sn_usuarios, descripcion = Sdescripcion,
@@ -611,4 +641,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-22  6:10:34
+-- Dump completed on 2016-11-22  7:31:14
