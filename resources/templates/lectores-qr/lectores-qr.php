@@ -123,7 +123,7 @@ use Aluc\Common\TemplateGenerator;
                       <span>&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        Editar lector
+                        Editar Lector
                     </h4>
                 </div>
 
