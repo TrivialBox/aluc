@@ -256,14 +256,18 @@ class AdministradorSrv {
                     $id_laboratorio = $data['id_laboratorio'];
                     $lector = LectorQr::getNewInstance($mac, $ip, $id_laboratorio);
                     $lector->save();
+                    self::$view_lector_qr
+                         ->getList(['mac' => $mac])
+                         ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
                 }
-                self::$view_lector_qr
-                    ->listAll()
-                    ->render();
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );
@@ -292,14 +296,18 @@ class AdministradorSrv {
                         $lector->id_laboratorio = $data['id_laboratorio'];
                     }
                     $lector->save();
+                    self::$view_lector_qr
+                        ->getList(['mac' => $mac])
+                        ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
                 }
-                self::$view_lector_qr
-                    ->listAll()
-                    ->render();
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );

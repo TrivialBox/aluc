@@ -21,7 +21,7 @@ function createAlert(type, msg) {
 function showAlert(type, msg) {
     var alertBootstrap = createAlert(type, msg);
     alertBootstrap.show();
-    alertBootstrap.delay(3000).slideUp(300, function () {
+    alertBootstrap.delay(3500).slideUp(300, function () {
         $(this).alert('close');
     });
 }

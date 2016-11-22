@@ -18,10 +18,30 @@ class LectorQrView extends View {
     }
 
     public function listAll($data = []) {
-        $data['lectores'] = LectorQr::getAll();
+        $data['lectores_qr'] = LectorQr::getAll();
         $this->setTemplate(
             $data,
-            'lectoresqr.php'
+            'lectores-qr/lectores-qr.php'
+        );
+        return $this;
+    }
+
+    /**
+     * Lista todos los lectores QR que
+     * coincidan con los criterios de
+     * búsqueda en forma de columnas html.
+     * @param $filters
+     * @return $this
+     */
+    public function getList($filters) {
+        $lectores_qr = [];
+        if (array_key_exists('mac', $filters)) {
+            $lectores_qr[] = LectorQr::getInstance($filters['mac']);
+        }
+        $this->setTemplate([
+                'lectores_qr' => $lectores_qr
+            ],
+            'lectores-qr/lectores-qr-list.php'
         );
         return $this;
     }
