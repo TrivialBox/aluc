@@ -29,7 +29,7 @@ class LectorQr {
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
-            return new LectorQr($array[0]["mac"], $array[0]["ip"], $array[0]['id_laboratorio'], $array[0]['token']);
+            return new LectorQr($array[0]["mac"], $array[0]["ip"], $array[0]['id_laboratorio'], $array[0]['token'], false);
         } else {
             $LectoresQr = [];
             foreach ($array as $fila){
