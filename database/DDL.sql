@@ -336,6 +336,17 @@ BEGIN
 		signal sqlstate "45000" set message_text = "50000";
     end if;
     
+    /*sacar el id para comprobar que existe*/
+    select id into bandera
+    from view_laboratorio 
+		where id = Sid_laboratorio;
+	if (bandera) then
+		set bandera=bandera;
+    else
+		signal sqlstate "45000" set message_text = "1452";
+    end if;
+    
+    
     /*Validacion que las horas que ingrese este dentro de los rango del laboratorio*/
     select id into bandera
     from view_laboratorio 
@@ -600,4 +611,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-22  4:47:05
+-- Dump completed on 2016-11-22  6:10:34
