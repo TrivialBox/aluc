@@ -142,15 +142,12 @@ class Database {
 
     public function update($view_name, $columns, $where) {
         $sql = "UPDATE {$view_name}";
-
-
         $columns_set = array();
         foreach ($columns as $key => $value){
             array_push($columns_set,$key . '=' . $this->quote_string($value));
         }
         $sql .= " SET " . implode(',', $columns_set);
         $sql .= " WHERE {$where}";
-        echo $sql;
         if (!$this->query($sql)) {
             throw new \Exception(
                 "Error al actualizar {$this->error()}", $this->errno()
@@ -170,7 +167,7 @@ class Database {
             case 5000:
                 return "El {$data['elemento_null'][0]} no se encuentra {$data['elemento_null'][1]}";
             default:
-                return "No se puede agregar su moderador {$data}";
+                return "No se puede agregar su moderador";
         }
     }
 
