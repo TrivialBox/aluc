@@ -5,7 +5,7 @@ use Aluc\Common\TemplateGenerator;
 <html>
 <head>
     <?php
-    include 'header.php';
+        TemplateGenerator::generate([], 'common/header.php');
     ?>
     <title>
         Administrar moderadores
@@ -49,7 +49,7 @@ use Aluc\Common\TemplateGenerator;
                     TemplateGenerator::generate([
                             'moderadores' => $get('moderadores')
                         ],
-                        'moderadores_list.php'
+                        'moderadores/moderadores_list.php'
                     );
                     ?>
                     </tbody>
@@ -62,7 +62,7 @@ use Aluc\Common\TemplateGenerator;
                             'title' => 'Nada por aquí.',
                             'tip' => 'Agrega nuevos moderadores con el botón <code>Nuevo</code> ó presionando <kbd>n</kbd>.'
                         ],
-                        'tip_container.php'
+                        'common/tip_container.php'
                     );
                 }
                 ?>
@@ -197,7 +197,7 @@ use Aluc\Common\TemplateGenerator;
 
 <!-- Recursos adicionales -->
 <?php
-include 'resources.php';
+    TemplateGenerator::generate([], 'common/resources.php');
 ?>
 <script src="/js/moderadores/modals.js"></script>
 <script src="/js/moderadores/shortcuts.js"></script>

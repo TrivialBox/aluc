@@ -29,7 +29,7 @@ class ModeradorView extends View {
         $data['moderadores'] = Moderador::getAll();
         $this->setTemplate(
             $data,
-            'moderadores.php'
+            'moderadores/moderadores.php'
         );
         return $this;
     }
@@ -50,7 +50,7 @@ class ModeradorView extends View {
         $this->setTemplate([
                 'moderadores' => $moderadores
             ],
-            'moderadores_list.php'
+            'moderadores/moderadores_list.php'
         );
         return $this;
     }
