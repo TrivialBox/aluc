@@ -480,7 +480,6 @@ BEGIN
     
     set valor = cupos - ocupados;
     
-    insert into prueba values(cupos,ocupados,valor,tipo);
     if (valor > 0 and Sn_usuarios <= valor ) then
 		INSERT INTO ALUC.reserva  
 			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto);
@@ -581,4 +580,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-22  1:11:19
+-- Dump completed on 2016-11-22  2:08:37
