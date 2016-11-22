@@ -102,7 +102,7 @@ class AdministradorSrv {
                      $moderador = Moderador::getNewInstace($id, $id_laboratorio);
                      $moderador->save();
                      self::$view_moderador
-                         ->json($moderador)
+                         ->getList(['id' => $id])
                          ->render();
                  } else {
                      self::$view_general
@@ -197,15 +197,14 @@ class AdministradorSrv {
     public static function moderadores_filtrar($data) {
         self::admin_do(
             function () use ($data) {
-                $id = $data['id'];
-                if (Tools::check_method('get')) {
-                    // TODO: falta implementar
+                if (!empty($data) and Tools::check_method('post')) {
+                    $id = $data['id'];
                     self::$view_moderador
-                        ->listAll(['id' => $id])
+                        ->getAll(['id' => $id])
                         ->render();
-                } else if (Tools::check_method('post')) {
-                    self::$view_moderador
-                        ->getList(['id' => $id])
+                } else {
+                    self::$view_general
+                        ->error404()
                         ->render();
                 }
             },

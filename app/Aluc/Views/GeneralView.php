@@ -33,8 +33,7 @@ class GeneralView extends View {
     }
 
     public function success_json($msj = "") {
-        $this->setTemplate(
-            [
+        $this->setTemplate([
                 'status' => 'success',
                 'description' => $msj
             ],
@@ -44,8 +43,7 @@ class GeneralView extends View {
     }
 
     public function error_json($description) {
-        $this->setTemplate(
-            [
+        $this->setTemplate([
                 'status' => 'error',
                 'description' => $description
             ],

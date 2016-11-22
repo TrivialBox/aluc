@@ -27,43 +27,14 @@ function sendRequestModeradores(form, action, success) {
     });
 }
 
-function addNewRowModerador(moderador) {
-    var laboratorio = moderador.laboratorio;
-    var newRow = $('<tr>', {
-        'data-id': moderador.id,
-        'html': `
-            <td>
-                ${moderador.id}
-            </td>
-            <td>
-                ${moderador.nombre}
-            </td>
-            <td>
-                ${laboratorio.nombre} (${laboratorio.id})
-            </td>
-            <td>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
-                        Editar
-                    </button>
-
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm-delete-moderador">
-                        Eliminar
-                    </button>
-                </div>
-            </td>`
-    });
-    $('table tbody').prepend(newRow);
-    $('.tip-container').remove();
-}
-
 function deleteRowModerador(id) {
     $('table tbody [data-id="' + id + '"]').remove();
 }
 
 sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
     showAlert('alert-success', 'Nuevo moderador agregado.');
-    addNewRowModerador(data);
+    $('table tbody').prepend(data);
+    $('.tip-container').remove();
     $('#modal-add-moderador').modal('hide');
 });
 

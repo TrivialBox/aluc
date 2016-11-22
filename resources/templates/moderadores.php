@@ -73,9 +73,6 @@ use Aluc\Common\TemplateGenerator;
         </div>
     </div>
 
-    <!-- Contenedor de alertas -->
-    <div id='container-alert' class="alert-fixed"></div>
-
     <!-- Modal add-moderador -->
     <div class="modal fade in" tabindex="-1" role="dialog" id="modal-add-moderador">
         <div class="modal-dialog">
@@ -188,6 +185,10 @@ use Aluc\Common\TemplateGenerator;
         </div>
     </div>
     <!-- END modal-confirm-delete-moderador -->
+
+
+    <!-- Contenedor de alertas -->
+    <div id='container-alert' class="alert-fixed"></div>
 
     <!-- Loader -->
     <div class="loader-container modal" hidden="hidden">
