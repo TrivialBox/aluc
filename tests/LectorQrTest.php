@@ -53,6 +53,8 @@ class LectorQrTest extends TestCase {
         $new_lab_id = '3';
         $lector = LectorQr::getNewInstance($mac, $ip, $lab_id)->save();
         $token = $lector->getToken();
+
+        $lector = LectorQr::getInstance($mac)->save();
         $lector->ip = $new_ip;
         $lector->id_laboratorio = $new_lab_id;
         $lector->save();
