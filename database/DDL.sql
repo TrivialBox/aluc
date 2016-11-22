@@ -120,21 +120,6 @@ CREATE TABLE `moderador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `prueba`
---
-
-DROP TABLE IF EXISTS `prueba`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `prueba` (
-  `cupos` int(11) DEFAULT NULL,
-  `ocupados` int(11) DEFAULT NULL,
-  `valor` int(11) DEFAULT NULL,
-  `pruebacol` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `reserva`
 --
 
@@ -253,6 +238,7 @@ SET character_set_client = utf8;
  1 AS `estado`,
  1 AS `fecha`,
  1 AS `hora_inicio`,
+ 1 AS `hora_fin`,
  1 AS `codigo_secreto`*/;
 SET character_set_client = @saved_cs_client;
 
@@ -263,6 +249,143 @@ SET character_set_client = @saved_cs_client;
 --
 -- Dumping routines for database 'ALUC'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `editar_reserva` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `editar_reserva`(
+						IN Sid int,
+						IN Sid_laboratorio INT(11),
+						IN Sdescripcion varchar(60),		
+						IN Sn_usuarios int(11),
+						IN Stipo_uso varchar(45),
+						IN Sfecha DATE,
+						IN Shora_inicio TIME,
+						IN Shora_fin TIME)
+BEGIN
+
+	/*Variables para el desarrollo*/
+	declare cupos int;
+    declare ocupados int;
+    declare valor int;
+    declare tipo varchar(45);
+    declare horas int;
+    declare horas_peticion int;
+    declare bandera int;
+    declare Rn_usuarios int;
+    declare Rhoras int;
+    declare Rrango int;
+    declare dias int;
+    declare Rid_usuario varchar(10);
+    
+    
+    start transaction;
+    
+    /*Validar que la reserva este en el rango apto para editar*/
+    select timediff(timestamp(fecha,hora_inicio),now()) into Rrango
+		from reservacion 
+        where id_reserva = Sid;
+    
+    if (Rrango < 10) then
+		signal sqlstate "45000" set message_text = "100000";
+    end if;
+    
+    /*Validar el tiempo de edición de la reserva*/
+    select datediff(Sfecha,curdate()) into dias;
+    if (dias > 5)then
+		signal sqlstate "45000" set message_text = "90000";
+    end if;
+    
+    
+    /*Validar que no haya clases Excluyente*/
+    SELECT tipo_uso into tipo
+		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
+		where id_laboratorio = Sid_laboratorio and estado = "Reservado" 
+        and TIMESTAMP(fecha,hora_fin) 
+		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+		and TIMESTAMP(Sfecha,Shora_fin) group by (tipo_uso);
+        
+	if (tipo = "Clases") then
+		signal sqlstate "45000" set message_text = "50000";
+    end if;
+    
+    /*Validacion que las horas que ingrese este dentro de los rango del laboratorio*/
+    select id into bandera
+    from view_laboratorio 
+		where id = Sid_laboratorio
+        and ((Shora_inicio + interval 1 minute between j1_hora_apertura and j1_hora_cierre) 
+		and (Shora_fin - interval 1 minute between j1_hora_apertura and j1_hora_cierre))
+		or ((Shora_inicio + interval 1 minute between j2_hora_apertura and j2_hora_cierre) 
+		and (Shora_fin - interval 1 minute between j2_hora_apertura and j2_hora_cierre));
+    
+    if (bandera) then
+		set bandera=bandera;
+    else
+		signal sqlstate "45000" set message_text = "60000";
+    end if;
+    
+    /*Extraer las horas de una resevación realizada*/
+    select timediff(hora_fin,hora_inicio) into Rhoras
+		from view_reserva 
+        where id = Sid;
+    
+    /*validar que no se exceda de 2 horas diarias en sus reservaciones*/
+    select id_usuario into Rid_usuario 
+		from reservacion 
+        where id_reserva = Sid;
+        
+    select sum(timediff(hora_fin,hora_inicio))  into horas
+		from reserva join reservacion on reserva.id = reservacion.id_reserva
+		where id_usuario = Rid_usuario and fecha = Sfecha;
+    
+    set horas_peticion = timediff(Shora_fin,Shora_inicio);
+    if ((horas + horas_peticion - Rhoras) > "20000") then
+		signal sqlstate "45000" set message_text = "70000";
+    end if;
+    
+    /*declaracion de las excepsiones*/
+    set valor = 0;
+    select n_usuarios into Rn_usuarios
+    from view_reserva 
+    where id = Sid;
+    
+    SELECT capacidad into cupos
+		from laboratorio 
+		where id = Sid_laboratorio;
+                    
+    SELECT ifnull(sum(n_usuarios),0) into ocupados
+		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
+		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and tipo_uso !="Clases" and 
+		TIMESTAMP(fecha,hora_inicio) 
+		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+		and TIMESTAMP(Sfecha,Shora_fin);
+    
+    set valor = cupos - ocupados + Rn_usuarios;
+    
+    if (valor > 0 and Sn_usuarios <= valor ) then
+		Update ALUC.reserva  
+			set n_usuarios = Sn_usuarios, descripcion = Sdescripcion,
+				tipo_uso = Stipo_uso where id  = Sid;
+        Update ALUC.reservacion 
+			set id_laboratorio = Sid_laboratorio, fecha = Sfecha, hora_inicio = Shora_inicio,
+            hora_fin = Shora_fin where id_reserva = Sid;
+		commit;
+	else
+		signal sqlstate "45000" set message_text = "80000";
+	end if;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `insertar_reserva` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -294,8 +417,15 @@ BEGIN
     declare horas int;
     declare horas_peticion int;
     declare bandera int;
+    declare dias int;
     
     start transaction;
+    
+    /*Validar el tiempo de creación de la reserva*/
+    select datediff(Sfecha,curdate()) into dias;
+    if (dias > 5)then
+		signal sqlstate "45000" set message_text = "90000";
+    end if;
     
     /*Validar que no haya clases Excluyente*/
     SELECT tipo_uso into tipo
@@ -306,7 +436,7 @@ BEGIN
 		and TIMESTAMP(Sfecha,Shora_fin) group by (tipo_uso);
         
 	if (tipo = "Clases") then
-		signal sqlstate "45000" set message_text = "Hay clases,no puede ingresar";
+		signal sqlstate "45000" set message_text = "50000";
     end if;
     
     /*Validacion que las horas que ingrese este dentro de los rango del laboratorio*/
@@ -321,7 +451,7 @@ BEGIN
     if (bandera) then
 		set bandera=bandera;
     else
-		signal sqlstate "45000" set message_text = "No disponible el laboratorio";
+		signal sqlstate "45000" set message_text = "60000";
     end if;
     
     /*validar que no se exceda de 2 horas diarias en sus reservaciones*/
@@ -331,7 +461,7 @@ BEGIN
     
     set horas_peticion = timediff(Shora_fin,Shora_inicio);
     if ((horas + horas_peticion) > "20000") then
-		signal sqlstate "45000" set message_text = "Excede las horas permitidas";
+		signal sqlstate "45000" set message_text = "70000";
     end if;
     
     
@@ -358,7 +488,7 @@ BEGIN
 			values(NULL, Sid_laboratorio,Sid_usuario, Sestado, Sfecha, Shora_inicio, Shora_fin);
 		commit;
 	else
-		signal sqlstate "45000" set message_text = "No hay cupos ";
+		signal sqlstate "45000" set message_text = "80000";
 	end if;
     
     
@@ -437,7 +567,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_reserva` AS select `reserva`.`id` AS `id`,`reservacion`.`id_usuario` AS `id_usuario`,`reservacion`.`id_laboratorio` AS `id_laboratorio`,`reserva`.`descripcion` AS `descripcion`,`reserva`.`n_usuarios` AS `n_usuarios`,`reserva`.`tipo_uso` AS `tipo_uso`,`reservacion`.`estado` AS `estado`,`reservacion`.`fecha` AS `fecha`,`reservacion`.`hora_inicio` AS `hora_inicio`,`reservacion`.`hora_fin` AS `codigo_secreto` from (`reserva` join `reservacion`) */;
+/*!50001 VIEW `view_reserva` AS select `reserva`.`id` AS `id`,`reservacion`.`id_usuario` AS `id_usuario`,`reservacion`.`id_laboratorio` AS `id_laboratorio`,`reserva`.`descripcion` AS `descripcion`,`reserva`.`n_usuarios` AS `n_usuarios`,`reserva`.`tipo_uso` AS `tipo_uso`,`reservacion`.`estado` AS `estado`,`reservacion`.`fecha` AS `fecha`,`reservacion`.`hora_inicio` AS `hora_inicio`,`reservacion`.`hora_fin` AS `hora_fin`,`reserva`.`codigo_secreto` AS `codigo_secreto` from (`reserva` join `reservacion` on((`reserva`.`id` = `reservacion`.`id_reserva`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -451,4 +581,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-20 22:46:07
+-- Dump completed on 2016-11-22  1:11:19
