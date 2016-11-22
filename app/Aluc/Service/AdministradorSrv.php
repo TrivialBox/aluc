@@ -217,7 +217,7 @@ class AdministradorSrv {
     }
 
     /**
-     * /admin/lectores
+     * /admin/lectores-qr
      *
      * Muestra una lista de todos los lectores QR.
      * Sólo el administrador tiene acceso.
@@ -240,7 +240,7 @@ class AdministradorSrv {
 
 
     /**
-     * /admin/lectores/nuevo
+     * /admin/lectores-qr/nuevo
      *
      * Crea un nuevo lector QR.
      * La petición se debe hacer vía post.
@@ -274,7 +274,7 @@ class AdministradorSrv {
     }
 
     /**
-     * /admin/lectores/actualizar
+     * /admin/lectores-qr/actualizar
      *
      * Edita la información de un lector.
      * Si el valor de new_token es true se genera un nuevo
@@ -316,17 +316,23 @@ class AdministradorSrv {
     public static function lectores_actualizar_token($data) {
         self::admin_do(
             function () use ($data) {
-                $mac = $data['mac'];
-                $lector = LectorQr::getInstance($mac);
-                $lector->renovarToken();
-                $lector->save();
-                self::$view_lector_qr
-                    ->listAll()
-                    ->render();
+                if (!empty($data) and Tools::check_method('post')) {
+                    $mac = $data['mac'];
+                    $lector = LectorQr::getInstance($mac);
+                    $lector->renovarToken();
+                    $lector->save();
+                    self::$view_lector_qr
+                        ->getList(['mac' => $mac])
+                        ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );

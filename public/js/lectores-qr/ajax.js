@@ -35,3 +35,11 @@ sendRequestLectores('#form-edit-lector-qr', 'actualizar', function (data, status
     $('table tbody').prepend(data);
     $('#modal-edit-lector-qr').modal('hide');
 });
+
+sendRequestLectores('#form-update-token-lector-qr', 'actualizar-token', function (data, status) {
+    showAlert('alert-success', 'Token renovado.');
+    var mac = $('#form-update-token-lector-qr #mac').val();
+    deleteRowLector(mac);
+    $('table tbody').prepend(data);
+    $('#modal-confirm-update-token-lector-qr').modal('hide');
+});

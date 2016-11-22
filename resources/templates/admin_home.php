@@ -4,6 +4,6 @@
         <a href="/admin/moderadores">Moderadores</a>
     </li>
     <li>
-        <a href="/admin/lectoresqr">Lectores QR</a>
+        <a href="/admin/lectores-qr">Lectores QR</a>
     </li>
 </ul>

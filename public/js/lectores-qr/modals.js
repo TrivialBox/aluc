@@ -39,3 +39,18 @@ $('#modal-edit-lector-qr').on(
     function (e) {
         $('#modal-edit-lector-qr #ip').focus();
 });
+
+// Modal update-token-lector-qr
+$('#modal-confirm-update-token-lector-qr').on(
+    'show.bs.modal',
+    function (e) {
+        var mac = $(e.relatedTarget).parent().parent().parent().parent().parent().data('mac');
+        $('#modal-confirm-update-token-lector-qr #mac-lector-qr').html(mac);
+        $('#form-update-token-lector-qr #mac').val(mac);
+});
+
+$('#modal-confirm-update-token-lector-qr').on(
+    'shown.bs.modal',
+    function (e) {
+        $('#modal-confirm-update-token-lector-qr .btn-secondary').focus();
+});

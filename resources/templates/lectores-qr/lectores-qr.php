@@ -190,6 +190,41 @@ use Aluc\Common\TemplateGenerator;
     </div>
     <!-- END modal-confirm-delete-lector-qr -->
 
+    <!-- Modal confirm-update-token-lector-qr -->
+    <div class="modal fade in" tabindex="-1" role="dialog" id="modal-confirm-update-token-lector-qr">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        ¿Renovar token del lector QR <span id="mac-lector-qr" class="text-danger"></span>?
+                    </h4>
+                </div>
+
+                <form id="form-update-token-lector-qr">
+                    <input value="" type="hidden" id="mac" name="mac">
+                    <div class="modal-body bg-warning">
+                        Al renovar el token de un lector QR este ya no podrá
+                        enviar solicitudes de validación de entradas al servidor,
+                        deberá actualizar el nuevo token manualmente en el dispositivo.
+                        Esta acción es <strong>irreversible</strong>.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            No, conservar token actual
+                        </button>
+                        <button type="submit" id="submit-update-token-lector-qr" class="btn btn-danger">
+                            Si, renovar token
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END modal-confirm-delete-lector-qr -->
+
 <!-- Recursos adicionales -->
 <?php
     TemplateGenerator::generate([], 'common/html-resources.php');
