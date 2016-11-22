@@ -383,8 +383,8 @@ BEGIN
     SELECT ifnull(sum(n_usuarios),0) into ocupados
 		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
 		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and tipo_uso !="Clases" and 
-		TIMESTAMP(fecha,hora_inicio) 
-		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+		TIMESTAMP(fecha,hora_inicio + interval 1 minute) 
+		between TIMESTAMP(Sfecha,Shora_inicio)  
 		and TIMESTAMP(Sfecha,Shora_fin);
     
     set valor = cupos - ocupados + Rn_usuarios;
@@ -600,4 +600,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-22  4:26:47
+-- Dump completed on 2016-11-22  4:28:57
