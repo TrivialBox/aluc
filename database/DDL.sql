@@ -133,7 +133,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -494,13 +494,12 @@ BEGIN
                     
     SELECT ifnull(sum(n_usuarios),0) into ocupados
 		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
-		where id_laboratorio = Sid_laboratorio  and estado = "Reservado" and tipo_uso !="Clases" and 
-		TIMESTAMP(fecha,hora_inicio) 
-		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
+		where id_laboratorio = Sid_laboratorio and estado = "reservado" and 
+		TIMESTAMP(fecha,hora_inicio + interval 1 minute) 
+		between TIMESTAMP(Sfecha,Shora_inicio) 
 		and TIMESTAMP(Sfecha,Shora_fin);
     
     set valor = cupos - ocupados;
-    
     if (valor > 0 and Sn_usuarios <= valor ) then
 		INSERT INTO ALUC.reserva  
 			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto);
@@ -601,4 +600,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-22  3:44:39
+-- Dump completed on 2016-11-22  4:26:47
