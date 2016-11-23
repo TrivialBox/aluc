@@ -39,6 +39,32 @@ class Reserva {
         $this->is_save = $this->is_save && $is_save;
     }
 
+    public static function getNewInstance(
+        $usuario_id, $laboratorio_id,
+        $fecha_n, $hora_inicio, $hora_fin,
+        $descripcion, $numero_usuarios, $tipo_uso
+    ) {
+        $fecha = new Fecha($fecha_n, $hora_inicio, $hora_fin);
+
+        return new self(
+            $usuario_id, $laboratorio_id, $fecha,
+            $descripcion,$numero_usuarios,$tipo_uso,
+            self::generarCodigoSecreto(), 'reservado'
+        );
+    }
+
+    public static function getInstance($usuario_id) {
+        return self::getReserva($usuario_id);
+    }
+
+    public static function getReservaEstado($usuario_id, $estado){
+        return self::getReserva($usuario_id, $estado);
+    }
+
+    public static function getReservaId($id){
+        return self::getReserva(null, null, $id);
+    }
+
     private static function get_object($array, $get_element = true){
         if ($get_element){
             $fecha = new Fecha(
@@ -67,32 +93,12 @@ class Reserva {
         }
     }
 
-    public static function getNewInstance(
-        $usuario_id, $laboratorio_id,
-        $fecha_n, $hora_inicio, $hora_fin,
-        $descripcion, $numero_usuarios, $tipo_uso
-    ) {
-        $fecha = new Fecha($fecha_n, $hora_inicio, $hora_fin);
-
-        return new self(
-            $usuario_id, $laboratorio_id, $fecha,
-            $descripcion,$numero_usuarios,$tipo_uso,
-            self::generarCodigoSecreto(), 'reservado'
-            );
-    }
-
-    public static function getInstance($usuario_id, $estado=null) {
-        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado);
+    private static function getReserva($usuario_id, $estado= null, $id=null){
+        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id);
         if (count($reservas) == 1){
             return Reserva::get_object($reservas);
         }
         return Reserva::get_object($reservas, false);
-    }
-
-    public static function getReserva($id){
-        $reservas = ReservaDao::getInstance()->get(null, null, $id);
-        return Reserva::get_object($reservas);
-
     }
 
     private static function generarCodigoSecreto() {
