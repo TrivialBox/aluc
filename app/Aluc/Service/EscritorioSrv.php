@@ -66,6 +66,16 @@ class EscritorioSrv {
     public static function reportes($data) {
         self::user_do(
             function () use ($data) {
+                if (!empty($data) and Tools::check_method('post')) {
+                    $type = $data['type'];
+                    static::$view_reportes
+                        ->listAll()
+                        ->render();
+                } else if (Tools::check_method('post')) {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
                 static::$view_reportes
                     ->listAll()
                     ->render();
@@ -79,6 +89,44 @@ class EscritorioSrv {
     }
 
     /**
+     * /escritorio/exportar
+     *
+     * Permite exportar un reporte en formato
+     * pdf y csv. Se realiza una solicitud vía get.
+     * Sólo un moderador o administrador
+     * puede realzar esta acción.
+     * @param $data
+     */
+    public static function reportes_exportar($data) {
+        self::user_do(
+            function () use ($data) {
+                if (!empty($data) and Tools::check_method('get')) {
+                    $file_type = $data['file_type'];
+                    if ($file_type == 'pdf') {
+                        self::$view_reportes
+                            ->pdf
+                            ->render();
+                    } else if ($file_type == 'csv') {
+                        self::$view_reportes
+                            ->csv()
+                            ->render();
+                    }
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
+            },
+            function ($e) {
+                self::$view_general
+                    ->error404()
+                    ->render();
+            }
+        );
+    }
+
+
+    /**
      * URLS para el direccionamiento (url routing).
      * @return array
      */
@@ -86,7 +134,10 @@ class EscritorioSrv {
         $class_name =  __CLASS__;
         return [
             '/^$/i' => "{$class_name}::escritorio",
-            '/^reportes\/$/i' => "{$class_name}::reportes",
+            '/^reportes\//i' => [
+                '/^$/' => "{$class_name}::reportes",
+                '/^exportar\/$/i' => "{$class_name}::reportes_exportar"
+            ]
         ];
     }
 }
