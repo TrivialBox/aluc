@@ -81,8 +81,8 @@ class Reserva {
             );
     }
 
-    public static function getInstance($usuario_id, $where=null) {
-        $reservas = ReservaDao::getInstance()->get($usuario_id, $where);
+    public static function getInstance($usuario_id, $estado=null) {
+        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado);
         if (count($reservas) == 1){
             return Reserva::get_object($reservas);
         }
