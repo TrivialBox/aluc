@@ -1,5 +1,8 @@
 <?php
 use League\Csv\Writer;
+use Aluc\Common\TemplateGenerator;
+
+TemplateGenerator::generate([], 'common/no-cache.php');
 
 header("Content-type: text/csv");
 
