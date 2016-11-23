@@ -325,7 +325,7 @@ BEGIN
     start transaction;
     
     /*Validar que la reserva este en el rango apto para editar*/
-	if (now() >= timestamp(Sfecha,Sfecha_inicio)) then
+	if (now() >= timestamp(Sfecha,Shora_inicio)) then
 		signal sqlstate "45000" set message_text = "100000";
     end if;
     
@@ -642,4 +642,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-23 13:15:10
+-- Dump completed on 2016-11-23 13:28:05
