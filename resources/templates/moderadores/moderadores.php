@@ -4,9 +4,14 @@ use Aluc\Common\TemplateGenerator;
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Data table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
+
+    <!-- Commont -->
     <?php
         TemplateGenerator::generate([], 'common/header.php');
     ?>
+
     <title>
         Administrar moderadores
     </title>
@@ -35,13 +40,13 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de moderadores -->
-                <table class="table table-hover table-condensed">
+                <table class="table table-hover table-condensed" id="table-moderadores">
                     <thead>
                         <tr>
                             <th>ID </th>
                             <th>Nombre</th>
                             <th>Laboratorio</th>
-                            <th>Acción</th>
+                            <th><span class="pull-right">Acción</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,6 +194,10 @@ use Aluc\Common\TemplateGenerator;
 <script src="/js/moderadores/modals.js"></script>
 <script src="/js/moderadores/shortcuts.js"></script>
 <script src="/js/moderadores/ajax.js"></script>
+
+<!-- Data tables -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
+<script src="/js/moderadores/tables.js"></script>
 
 </body>
 </html>

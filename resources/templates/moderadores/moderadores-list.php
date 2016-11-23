@@ -13,7 +13,7 @@ foreach ($get('moderadores') as $moderador) {
         {$laboratorio->nombre} ({$laboratorio->id})
     </td>
     <td>
-        <div class="btn-group btn-group-sm" role="group">
+        <div class="btn-group btn-group-sm pull-right" role="group">
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-moderador">
                 Editar
             </button>

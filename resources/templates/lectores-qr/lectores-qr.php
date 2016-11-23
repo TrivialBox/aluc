@@ -4,6 +4,10 @@ use Aluc\Common\TemplateGenerator;
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Data table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.css"/>
+
+    <!-- Commont -->
     <?php
         TemplateGenerator::generate([], 'common/header.php');
     ?>
@@ -35,14 +39,14 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de lectores -->
-                <table class="table table-hover table-condensed">
+                <table id="table-lectores-qr" class="table table-hover table-condensed">
                     <thead>
                         <tr>
                             <th>MAC</th>
                             <th>IP</th>
                             <th>Laboratorio</th>
                             <th>Token</th>
-                            <th>Acción</th>
+                            <th><span class="pull-right">Acción</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -233,6 +237,10 @@ use Aluc\Common\TemplateGenerator;
 <script src="/js/lectores-qr/modals.js"></script>
 <script src="/js/lectores-qr/shortcuts.js"></script>
 <script src="/js/lectores-qr/ajax.js"></script>
+
+<!-- Data tables -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.min.js"></script>
+<script src="/js/lectores-qr/tables.js"></script>
 
 </body>
 </html>

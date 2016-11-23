@@ -32,7 +32,7 @@ foreach ($get('lectores_qr') as $lector) {
         </div>
     </td>
     <td>
-        <div class="btn-group btn-group-sm" role="group">
+        <div class="btn-group btn-group-sm pull-right" role="group">
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-lector-qr">
                 Editar
             </button>
