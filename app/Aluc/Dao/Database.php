@@ -55,7 +55,7 @@ class Database {
         }
     }
 
-    private function query($sql) {
+    public function query($sql) {
         return $this->conn->query($sql);
     }
 
@@ -71,11 +71,11 @@ class Database {
         $items = $this->quote_array_string($values);
         $values = implode(',', $items);
 
-        $sql = "CALL {$procedure_name}({$values})";
+        $sql = "CALL {$procedure_name($values)}";
+
         if (!$this->query($sql)) {
             throw new \Exception(
-                $this->error(),
-                $this->errno()
+                "Error al insertar {$values}. {$this->error()}", $this->errno()
             );
         }
     }
@@ -87,8 +87,7 @@ class Database {
         $sql = "INSERT INTO {$table_name} ({$keys}) VALUES ({$values})";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al insertar {$values}. {$this->error()}",
-                $this->errno()
+                "Error al insertar {$values}. {$this->error()}", $this->errno()
             );
         }
     }
@@ -136,8 +135,7 @@ class Database {
         $sql = "DELETE FROM {$view_name} WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al eliminar {$this->error()}",
-                $this->errno()
+                "Error al eliminar {$this->error()}", $this->errno()
             );
         }
     }
@@ -152,8 +150,7 @@ class Database {
         $sql .= " WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al actualizar {$this->error()}",
-                $this->errno()
+                "Error al actualizar {$this->error()}", $this->errno()
             );
         }
     }
@@ -170,7 +167,7 @@ class Database {
             case 5000:
                 return "El {$data['elemento_null'][0]} no se encuentra {$data['elemento_null'][1]}";
             default:
-                return "No se puede agregar su {$data['clave_pk_duplicate'][0]}";
+                return "No se puede agregar su moderador";
         }
     }
 
