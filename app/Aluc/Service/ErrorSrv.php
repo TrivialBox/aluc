@@ -16,12 +16,16 @@ class ErrorSrv {
     }
 
     public static function error404($data) {
+        // No queremos que los demás vean nuestro
+        // desastre, no?
+        ob_clean();
         self::$view_general
             ->error404()
             ->render();
     }
 
     public static function redirect404($data = null) {
+        ob_clean();
         echo "Redireccionando...";
         Urls::redirect('/error/404');
     }

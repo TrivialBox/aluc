@@ -12,3 +12,7 @@ header("HTTP/1.0 404 Not Found");
         <h2>Sorry :(</h2>
     </body>
 </html>
+<?php
+// Hasta aquí llega todo
+die();
+?>
