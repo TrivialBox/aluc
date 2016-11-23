@@ -14,5 +14,5 @@ header("HTTP/1.0 404 Not Found");
 </html>
 <?php
 // Hasta aquí llega todo
-die();
+// die();
 ?>
