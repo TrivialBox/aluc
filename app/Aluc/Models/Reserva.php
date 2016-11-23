@@ -139,6 +139,10 @@ class Reserva {
         $this->is_save = false;
         return $this;
     }
+    public function updateEstado($estado){
+        $this->estado = $estado;
+        ReservaDao::getInstance()->updateEstado($this);
+    }
 }
 
 
