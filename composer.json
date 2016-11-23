@@ -10,6 +10,7 @@
     },
     "require": {
         "sinergi/token": "^0.1.0",
-        "league/csv": "^8.1"
+        "league/csv": "^8.1",
+        "spipu/html2pdf": "^4.6"
     }
 }
