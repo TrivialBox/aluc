@@ -52,8 +52,10 @@ class Reserva {
             self::generarCodigoSecreto(), 'reservado'
         );
     }
-
-    public static function getInstance($usuario_id) {
+    public static function getInstance($id){
+        return self::getReserva(null, null, $id);
+    }
+    public static function getReservaUsuario($usuario_id) {
         return self::getReserva($usuario_id);
     }
 
@@ -61,9 +63,7 @@ class Reserva {
         return self::getReserva($usuario_id, $estado);
     }
 
-    public static function getReservaId($id){
-        return self::getReserva(null, null, $id);
-    }
+
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
