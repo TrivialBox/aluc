@@ -39,7 +39,7 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de lectores -->
-                <table id="table-lectores-qr" class="table table-hover table-condensed">
+                <table id="table-lectores-qr" class="table table-hover table-condensed table-responsive">
                     <thead>
                         <tr>
                             <th>MAC</th>

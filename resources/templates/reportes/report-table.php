@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped table-hover table-condensed">
+<table class="table table-bordered table-striped table-hover table-condensed table-responsive">
     <thead>
     <tr>
         <?php

@@ -40,7 +40,7 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de moderadores -->
-                <table class="table table-hover table-condensed" id="table-moderadores">
+                <table class="table table-hover table-condensed table-responsive" id="table-moderadores">
                     <thead>
                         <tr>
                             <th>ID </th>
