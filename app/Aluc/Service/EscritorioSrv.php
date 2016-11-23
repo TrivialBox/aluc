@@ -104,7 +104,7 @@ class EscritorioSrv {
                     $file_type = $data['file_type'];
                     if ($file_type == 'pdf') {
                         self::$view_reportes
-                            ->pdf
+                            ->pdf()
                             ->render();
                     } else if ($file_type == 'csv') {
                         self::$view_reportes
