@@ -143,6 +143,14 @@ class Reserva {
         $this->is_save = false;
         return $this;
     }
+
+    public function getAll($order_atributo){
+        return self::get_object(
+            ReservaDao::getInstance()->getAll($order_atributo),
+            false
+        );
+    }
+
     public function updateEstado($estado){
         $this->estado = $estado;
         ReservaDao::getInstance()->updateEstado($this);
