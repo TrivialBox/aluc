@@ -52,6 +52,22 @@ class ReservaDao{
         ];
         return $array;
     }
+
+    private function generarExcepcion($e){
+        $error = $e->getMessage();
+
+        if(strval(intval($error))!==$error){
+
+            throw new AlucException(Database::getMgs(
+                $e->getCode(),$this->getModel()),
+                $e->getMessage()
+            );
+        }
+        throw new AlucException($this->getMsgInsert(
+            (int)$e->getMessage()),
+            $e->getMessage()
+        );
+    }
     public function save($object, $type_save = true){
         try{
             if ($type_save){
@@ -62,19 +78,7 @@ class ReservaDao{
 
             }
         }catch (\Exception $e){
-            $error = $e->getMessage();
-
-            if(strval(intval($error))!==$error){
-
-                throw new AlucException(Database::getMgs(
-                    $e->getCode(),$this->getModel()),
-                    $e->getMessage()
-                );
-            }
-            throw new AlucException($this->getMsgInsert(
-                (int)$e->getMessage()),
-                $e->getMessage()
-            );
+            $this->generarExcepcion($e);
         }
     }
 
@@ -114,8 +118,14 @@ class ReservaDao{
         return $list_reservas;
     }
 
-    public function cancelarReserva($id,$token,$estado){
-        //todo Franklin cara de la viejita de santos no acaba con esto.
+    public function updateEstado($object){
+
+        try {
+            $where = " id = '{$object->getId()}'";
+            $this->database->update('reservacion', $this->convertObjectArray($object), $where);
+        } catch (\Exception $e) {
+            $this->generarExcepcion($e);
+        }
     }
     private function getModel(){
         return [
