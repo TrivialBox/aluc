@@ -82,7 +82,7 @@ class ReservaDao{
         }
     }
 
-    public function get($usuario_id = null, $estado = null, $id = null){
+    public function get($usuario_id = null, $estado = null, $id = null, $laboratorio_id = null){
         $where = "";
 
         if ($usuario_id != null){
@@ -95,6 +95,9 @@ class ReservaDao{
 
         if ($id != null){
             $where .= "id = '{$id}'";
+        }
+        if ($laboratorio_id != null){
+            $where .= "id_laboratorio = '{$laboratorio_id}'";
         }
         $reservas = $this->database->select('view_reserva','*', $where, 'fecha asc');
 

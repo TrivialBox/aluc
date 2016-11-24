@@ -62,6 +62,9 @@ class Reserva {
     public static function getReservaEstado($usuario_id, $estado){
         return self::getReserva($usuario_id, $estado);
     }
+    public static function getReservaLaboratorio($laboratorio_id){
+        return self::getReserva(null,null,null,$laboratorio_id);
+    }
 
 
 
@@ -93,8 +96,8 @@ class Reserva {
         }
     }
 
-    private static function getReserva($usuario_id, $estado= null, $id=null){
-        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id);
+    private static function getReserva($usuario_id, $estado= null, $id=null, $id_lab=null){
+        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id, $id_lab);
         if (count($reservas) == 1){
             return Reserva::get_object($reservas);
         }
