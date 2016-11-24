@@ -10,17 +10,26 @@ use Aluc\Common\TemplateGenerator;
         <title>Reportes</title>
     </head>
     <body>
-
+        <!-- Navbar -->
+        <?php
+            TemplateGenerator::generate([
+                'user' => $_SESSION['id']
+            ],
+                'common/navbar.php'
+            );
+        ?>
         <div class="container">
-
-            <!-- Aquí iría el el navbar... si tuviera uno -->
-
             <!-- contenedor principal -->
             <div class="container">
                 <div class="row">
                     <!-- sidebar -->
                     <div class="col-sm-3">
-                        Sidebar
+                        <?php
+                            TemplateGenerator::generate([
+                                ],
+                                'common/sidebar.php'
+                            );
+                        ?>
                     </div>
                     <!-- END sidebar -->
 

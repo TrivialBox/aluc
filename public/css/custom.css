@@ -40,3 +40,11 @@
 .loader-container {
     background:rgba(255, 255, 255, 0.5);
 }
+
+.page-header {
+    margin-top: 0;
+}
+
+.affix {
+    top: 20px;
+}

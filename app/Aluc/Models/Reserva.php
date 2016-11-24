@@ -7,7 +7,7 @@ use Sinergi\Token\StringGenerator;
  * Representación de una reserva en el sistema.
  */
 class Reserva {
-    private $id;
+    public $id;
     private $usuario_id;
     public $laboratorio_id;
     public $descripcion;
@@ -56,6 +56,7 @@ class Reserva {
     public static function getInstance($id){
         return self::getReserva(null, null, $id);
     }
+
     public static function getReservaUsuario($usuario_id) {
         return self::getReserva($usuario_id);
     }
@@ -67,9 +68,8 @@ class Reserva {
         return self::getReserva(null,null,null,$laboratorio_id);
     }
 
-
-
     public static function get_object($array, $get_element = true){
+
         if ($get_element){
             $fecha = new Fecha(
                 $array[0]['fecha'],
@@ -112,12 +112,11 @@ class Reserva {
     public function getCodigoSecreto() {
         return $this->codigo_secreto;
     }
-    public function getId(){
-        return $this->id;
-    }
+
     public function getUsuarioId(){
         return $this->usuario_id;
     }
+
     public function getFecha() {
         return $this->fecha;
     }

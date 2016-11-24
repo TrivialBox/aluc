@@ -2,16 +2,20 @@
 namespace Aluc\Service;
 
 use Aluc\Common\Tools;
+use Aluc\Models\Reserva;
 use Aluc\Views\GeneralView;
+use Aluc\Views\ReservaView;
 
 /**
  * Clase que maneja todas las solicitudes a /reservas
  */
 class ReservasSrv {
     private static $view_general;
+    private static $view_reserva;
 
     public static function init() {
         static::$view_general = GeneralView::getInstance();
+        static::$view_reserva = ReservaView::getInstance();
     }
 
     private static function user_do($func, $error) {
@@ -39,7 +43,7 @@ class ReservasSrv {
     public static function home($data) {
         self::user_do(
             function () use ($data){
-                self::$view_user
+                self::$view_reserva
                     ->home()
                     ->render();
             },
@@ -62,13 +66,33 @@ class ReservasSrv {
     public static function nueva($data) {
         self::user_do(
             function () use ($data) {
-                self::$view_user
-                    ->listAll()
-                    ->render();
+                if (!empty($data) and Tools::check_method('post')) {
+                    $id_laboratorio = $data['id_laboratorio'];
+                    $tipo_uso = $_SESSION['type'] === 'profesor' ? $data['tipo_uso'] : 'practica';
+                    $numero_usuarios = $data['numero_usuarios'];
+                    $fecha = $data['fecha'];
+                    $hora_inicio = $data['hora_inicio'];
+                    $hora_fin = $data['hora_fin'];
+                    $descripcion = $data['descripcion'];
+                    $usuario_id = $_SESSION['id'];
+                    $reserva = Reserva::getNewInstance(
+                        $usuario_id, $id_laboratorio,
+                        $fecha, $hora_inicio, $hora_fin,
+                        $descripcion, $numero_usuarios,
+                        $tipo_uso
+                    )->save();
+                    self::$view_reserva
+                        ->listReserva($reserva->id)
+                        ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
             },
             function ($e) {
                 self::$view_general
-                    ->error404()
+                    ->error_json_default($e)
                     ->render();
             }
         );

@@ -6,6 +6,7 @@ use Aluc\Service\AdministradorSrv;
 use Aluc\Service\ErrorSrv;
 use Aluc\Common\Urls;
 use Aluc\Service\EscritorioSrv;
+use Aluc\Service\ReservasSrv;
 
 $_SESSION['id'] = '1234';
 $_SESSION['type'] = 'admin';
@@ -18,6 +19,7 @@ function home() {
 
 Urls::serveRequest([
     '/^$/' => 'home',
+    '/^reservas\//i' => ReservasSrv::urls(),
     '/^admin\//i' => AdministradorSrv::urls(),
     '/^escritorio\//i' => EscritorioSrv::urls(),
     '/^error\//i' => ErrorSrv::urls(),
