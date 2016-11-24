@@ -123,6 +123,10 @@ class Reserva {
         $this->fecha = $fecha_c;
     }
 
+    public function getLaboratorio() {
+        return Laboratorio::getInstance($this->laboratorio_id);
+    }
+
     public function save(){
         $obj = static::get_object(
             ReservaDao::getInstance()->save($this, $this->is_save)
