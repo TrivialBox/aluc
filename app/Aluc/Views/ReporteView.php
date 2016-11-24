@@ -44,7 +44,9 @@ class ReporteView extends View {
         return $this;
     }
 
-    public function csv($data = []) {
+    public function csv($name = 'reporte.csv') {
+        $data = [];
+        $data['name'] = $name;
         $data['headers'] = ['ID', 'Nombre', 'Apellido'];
         $data['rows'] = [
             ['1', '4', '3'],
@@ -71,7 +73,9 @@ class ReporteView extends View {
         return $this;
     }
 
-    public function pdf($data = []) {
+    public function pdf($name = 'reporte.pdf') {
+        $data = [];
+        $data['name'] = $name;
         $data['headers'] = ['ID', 'Nombre', 'Apellido'];
         $data['rows'] = [
             ['1', '4', '3'],

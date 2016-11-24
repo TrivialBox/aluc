@@ -12,5 +12,6 @@ $writer->setNewline("\r\n");
 $writer->setOutputBOM(Writer::BOM_UTF8);
 $writer->insertOne($get('headers'));
 $writer->insertAll($get('rows'));
-$writer->output('reporte.csv');
+
+$writer->output($get('name'));
 
