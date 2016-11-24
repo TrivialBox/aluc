@@ -64,6 +64,9 @@ class Reserva {
     public static function getReservaEstado($usuario_id, $estado){
         return self::getReserva($usuario_id, $estado);
     }
+    public static function getReservaLaboratorio($laboratorio_id){
+        return self::getReserva(null,null,null,$laboratorio_id);
+    }
 
     private static function get_object($array, $get_element = true){
         if ($get_element){
@@ -93,8 +96,8 @@ class Reserva {
         }
     }
 
-    private static function getReserva($usuario_id, $estado= null, $id=null){
-        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id);
+    private static function getReserva($usuario_id, $estado= null, $id=null, $id_lab=null){
+        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id, $id_lab);
         if (count($reservas) == 1){
             return Reserva::get_object($reservas);
         }
@@ -122,6 +125,10 @@ class Reserva {
         $this->fecha = $fecha_c;
     }
 
+    public function getLaboratorio() {
+        return Laboratorio::getInstance($this->laboratorio_id);
+    }
+
     public function save(){
         $obj = static::get_object(
             ReservaDao::getInstance()->save($this, $this->is_save)
@@ -138,6 +145,14 @@ class Reserva {
         $this->is_save = false;
         return $this;
     }
+
+    public function getAll($order_atributo){
+        return self::get_object(
+            ReservaDao::getInstance()->getAll($order_atributo),
+            false
+        );
+    }
+
     public function updateEstado($estado){
         $this->estado = $estado;
         ReservaDao::getInstance()->updateEstado($this);
