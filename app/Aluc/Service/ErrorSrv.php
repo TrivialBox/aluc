@@ -16,8 +16,6 @@ class ErrorSrv {
     }
 
     public static function error404($data) {
-        // No queremos que los demás vean nuestro
-        // desastre, no?
         self::$view_general
             ->error404()
             ->render();
