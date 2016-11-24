@@ -20,6 +20,23 @@ class Moderador extends Persona {
     public static function getNewInstace($id, $id_laboratorio) {
         return new self($id, $id_laboratorio);
     }
+    private static function getModerador($moderador){
+        if (count($moderador) > 0){
+            if (count($moderador) == 1){
+                return Moderador::get_object(
+                    $moderador,
+                    true
+                );
+            }else {
+                return Moderador::get_object(
+                    $moderador,
+                    false
+                );
+            }
+        }else{
+            return [];
+        }
+    }
 
     public static function get_object($array, $get_element = true){
         if ($get_element){
@@ -35,7 +52,7 @@ class Moderador extends Persona {
     }
 
     public static function getInstance($id) {
-        return Moderador::get_object(ModeradorDao::getInstance()->get($id));
+        return self::getModerador(ModeradorDao::getInstance()->get($id));
     }
 
     public function getLaboratorio() {
@@ -43,10 +60,8 @@ class Moderador extends Persona {
     }
 
     public static function getAll($order_atribute = null) {
-        return Moderador::get_object(
-            ModeradorDao::getInstance()->getAll($order_atribute),
-            false
-        );
+        return self::getModerador(ModeradorDao::getInstance()->getAll($order_atribute));
+
     }
 
     public function save() {

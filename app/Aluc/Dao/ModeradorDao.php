@@ -53,12 +53,6 @@ class ModeradorDao {
 
         $where = "id = " . "'" . $id . "'";
         $moderador = $this->database->select("view_moderador", "*", $where, null);
-        if (count($moderador) === 0){
-            throw new AlucException(
-                Database::getMgs(5000,$this->getModel()),
-                "elemento no existe en la base de datos"
-            );
-        }
         return $moderador;
     }
 
