@@ -23,7 +23,7 @@ class ReservaDao{
     }
 
 
-    private function convertObjectArray($object){
+    public static function convertObjectArray($object){
         $array = [
             'id_usuario' => $object->getUsuarioId(),
             'id_laboratorio' => $object->laboratorio_id,
@@ -39,7 +39,7 @@ class ReservaDao{
         return $array;
     }
 
-    private function convertEditarReserva($object){
+    public static function convertEditarReserva($object){
         $array = [
             'id' => $object->getId(),
             'id_laboratorio' => $object->laboratorio_id,
@@ -53,17 +53,17 @@ class ReservaDao{
         return $array;
     }
 
-    private function generarExcepcion($e){
+    public static function generarExcepcion($e){
         $error = $e->getMessage();
 
         if(strval(intval($error))!==$error){
 
             throw new AlucException(Database::getMgs(
-                $e->getCode(),$this->getModel()),
+                $e->getCode(), static::getModel()),
                 $e->getMessage()
             );
         }
-        throw new AlucException($this->getMsgInsert(
+        throw new AlucException(static::getMsgInsert(
             (int)$e->getMessage()),
             $e->getMessage()
         );
@@ -71,10 +71,10 @@ class ReservaDao{
     public function save($object, $type_save = true){
         try{
             if ($type_save){
-                $this->database->call('insertar_reserva',$this->convertObjectArray($object));
+                $this->database->call('insertar_reserva', static::convertObjectArray($object));
 
             }else{
-                $this->database->call('editar_reserva', $this->convertEditarReserva($object));
+                $this->database->call('editar_reserva', static::convertEditarReserva($object));
 
             }
         }catch (\Exception $e){
@@ -101,12 +101,6 @@ class ReservaDao{
         }
         $reservas = $this->database->select('view_reserva','*', $where, 'fecha asc');
 
-        if (count($reservas) === 0){
-            throw new AlucException(
-                'No se ha encontrado reservas',
-                'No se enontrado reservas'
-            );
-        }
         return $reservas;
     }
 
@@ -125,12 +119,12 @@ class ReservaDao{
 
         try {
             $where = " id = '{$object->getId()}'";
-            $this->database->update('reservacion', $this->convertObjectArray($object), $where);
+            $this->database->update('reservacion', static::convertObjectArray($object), $where);
         } catch (\Exception $e) {
             $this->generarExcepcion($e);
         }
     }
-    private function getModel(){
+    private static function getModel(){
         return [
             'clave_foranea' => ['Usuario o laboratorio','registrado'],
             'clave_pk_duplicate' => ['Usuario'],
@@ -139,7 +133,7 @@ class ReservaDao{
         ];
     }
 
-    private function getMsgInsert($code) {
+    private  static function getMsgInsert($code) {
         switch ($code) {
             case 1452:
                 return "El laboratorio no se encuentra registrado";

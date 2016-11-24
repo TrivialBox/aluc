@@ -38,6 +38,23 @@ class Reserva {
 
         $this->is_save = $this->is_save && $is_save;
     }
+    private static function getReserva($reserva){
+        if (count($reserva) > 0){
+            if (count($reserva) == 1){
+                return Reserva::get_object(
+                    $reserva,
+                    true
+                );
+            }else {
+                return Reserva::get_object(
+                    $reserva,
+                    false
+                );
+            }
+        }else{
+            return [];
+        }
+    }
 
     public static function getNewInstance(
         $usuario_id, $laboratorio_id,
@@ -82,27 +99,29 @@ class Reserva {
                 $array[0]['codigo_secreto'], $array[0]['estado'],  $array[0]['id'], false
                  );
         }else{
+            $reservas = [];
             foreach ($array as $fila){
                 $fecha = new Fecha(
                     $fila['fecha'],
                     $fila['hora_inicio'],
                     $fila['hora_fin']
                 );
-                return new Reserva(
-                    $fila['id_usuario'], $fila['id_laboratorio'], $fecha,
-                    $fila['descripcion'], $fila['n_usuarios'], $fila['tipo_uso'],
-                    $fila['codigo_secreto'], $fila['estado'],  $fila['id'], false
+                array_push(
+                    $reservas,
+                    new Reserva(
+                        $fila['id_usuario'], $fila['id_laboratorio'], $fecha,
+                        $fila['descripcion'], $fila['n_usuarios'], $fila['tipo_uso'],
+                        $fila['codigo_secreto'], $fila['estado'],  $fila['id'], false
+                    )
                 );
             }
+            return $reservas;
         }
     }
 
-    private static function getReserva($usuario_id, $estado= null, $id=null, $id_lab=null){
+    private static function get($usuario_id, $estado= null, $id=null, $id_lab=null){
         $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id, $id_lab);
-        if (count($reservas) == 1){
-            return Reserva::get_object($reservas);
-        }
-        return Reserva::get_object($reservas, false);
+        return self::getReserva($reservas);
     }
 
     private static function generarCodigoSecreto() {
