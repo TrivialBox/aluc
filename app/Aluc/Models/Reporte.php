@@ -8,21 +8,24 @@ use Aluc\Dao\ReporteDao;
 class Reporte{
 
     private static function getReserva($reserva){
-        if (count($reserva) > 0){
-            if (count($reserva) == 1){
-                return Reserva::get_object(
-                    $reserva,
-                    true
-                );
-            }else {
-                return Reserva::get_object(
-                    $reserva,
-                    false
-                );
-            }
-        }else{
-            return [];
+        $reporte = [
+           0 =>[
+            'id',
+            'id_usuario',
+            'id_laboratorio',
+            'descripción',
+            'n_usuarios',
+            'tipo_uso',
+            'estado',
+            'fecha',
+            'hora_inicio',
+            'hora_fin',
+            'codigo_secreto']
+        ];
+        foreach ($reserva as $fila){
+            array_push($reporte,$fila);
         }
+        return $reporte;
     }
 
     public static function getInstance(
