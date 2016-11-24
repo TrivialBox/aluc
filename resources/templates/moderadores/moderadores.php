@@ -17,16 +17,28 @@ use Aluc\Common\TemplateGenerator;
     </title>
 </head>
 <body>
-    <!-- Aquí iría el el navbar... si tuviera uno -->
+
+    <!-- Navbar -->
+    <?php
+        TemplateGenerator::generate([
+            'user' => $_SESSION['id']
+        ],
+            'common/navbar.php'
+        );
+    ?>
 
     <!-- contenedor principal -->
     <div class="container">
         <div class="row">
             <!-- sidebar -->
             <div class="col-sm-3">
-                Sidebar
+                <?php
+                    TemplateGenerator::generate([
+                        ],
+                        'common/sidebar.php'
+                    );
+                ?>
             </div>
-            <!-- END sidebar -->
 
             <!-- main content -->
             <div class="col-sm-9">
