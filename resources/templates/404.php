@@ -21,7 +21,7 @@ header("HTTP/1.0 404 Not Found");
                             <div class="panel-body">
                                 <h2 class="text-success">Página no encontrada</h2>
                             </div>
-                            <div class="panel-footer">Mientras tanto visita <a href="www.trivialbox.com">Trivial Box</a></div>
+                            <div class="panel-footer">Mientras tanto visita <a href="http://www.trivialbox.com">Trivial Box</a></div>
                         </div>
                     </div>
                 </div>
