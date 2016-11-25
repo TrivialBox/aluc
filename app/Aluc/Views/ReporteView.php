@@ -73,8 +73,9 @@ class ReporteView extends View {
         return $this;
     }
 
-    public function pdf($name = 'reporte.pdf') {
+    public function pdf($name = 'reporte.pdf',$name_admin= 'administador') {
         $data = [];
+        $data['name_admin'] = $name_admin;
         $data['name'] = $name;
         $data['headers'] = ['ID', 'Nombre', 'Apellido'];
         $data['rows'] = [
