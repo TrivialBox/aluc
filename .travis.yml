@@ -2,10 +2,10 @@ language: php
 php:
   - '5.6'
   - '7.0'
-services:
-  - mysql
 before_install:
   - sudo cp /usr/share/zoneinfo/Etc/GMT+6 /etc/localtime
+services:
+  - mysql
 install:
   - composer install
   - composer dump-autoload
