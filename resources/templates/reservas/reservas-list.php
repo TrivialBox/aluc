@@ -4,8 +4,10 @@
         $laboratorio = $reserva->getLaboratorio();
         $fecha = $reserva->getFecha();
         $panel_status = "panel-default";
+        $disable = "";
         if ($reserva->estado !== 'reservado') {
             $panel_status = "panel-danger";
+            $disable = "disabled";
         }
     echo <<<TAG
     <div class="col-sm-3 text-center">
@@ -40,13 +42,13 @@
             </div>
             <div class="panel-footer">
                 <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm">
-                    <button type="button" class="btn btn-secondary" data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
+                    <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </button>
-                    <button type="button" class="btn btn-warning">
+                    <button type="button" class="btn btn-warning {$disable}" {$disable}>
                         Editar
                     </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm-cancel-reserva">
+                    <button type="button" class="btn btn-danger {$disable}" {$disable} data-toggle="modal" data-target="#modal-confirm-cancel-reserva">
                         Cancelar
                     </button>
                 </div>

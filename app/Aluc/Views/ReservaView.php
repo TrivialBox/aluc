@@ -45,4 +45,12 @@ class ReservaView extends View {
             'reservas' => Reserva::getReservaUsuario($user_id)
         ]);
     }
+
+    public function codigo_qr($reserva) {
+        $this->setTemplate(
+            ['reserva' => $reserva],
+            'reservas/codigo-qr.php'
+        );
+        return $this;
+    }
 }

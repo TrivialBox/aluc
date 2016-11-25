@@ -266,17 +266,18 @@ use Aluc\Common\TemplateGenerator;
                     <span>&times;</span>
                 </button>
                 <h4 class="modal-title">
-                    Código QR
+                    Código QR de Acceso
                 </h4>
             </div>
-            <div class="modal-body">
-
+            <div class="modal-body text-center">
+                <div id="qr-code-img">
+                </div>
                 <small class="text-muted">
                     Presente éste código desde su teléfono o impreso antes de acceder al laboratorio.
                 </small>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-primary">
+                <a href="#" class="btn btn-primary" id="btn-download-qr" download="codigo_qr.png">
                     Descargar
                 </a>
             </div>

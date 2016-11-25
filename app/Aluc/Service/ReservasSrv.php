@@ -138,6 +138,42 @@ class ReservasSrv {
     }
 
     /**
+     * /reservas/codigo-qr
+     *
+     * Obtiene el código qr de una
+     * reserva, se realiza una solicitud vía
+     * get.
+     */
+    public static function codigo_qr($data) {
+        self::user_do(
+            function () use ($data) {
+                if (!empty($data) and Tools::check_method('get')) {
+                    $id = $data['id'];
+                    $reserva = Reserva::getInstance($id);
+                    if ($reserva->getUsuarioId() === $_SESSION['id']) {
+                        self::$view_reserva
+                            ->codigo_qr($reserva)
+                            ->render();
+                    } else {
+                        self::$view_general
+                            ->error404()
+                            ->render();
+                    }
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
+            },
+            function ($e) {
+                self::$view_general
+                    ->error_json_default($e)
+                    ->render();
+            }
+        );
+    }
+
+    /**
      * URLS para el direccionamiento (url routing).
      * @return array
      */
@@ -149,7 +185,8 @@ class ReservasSrv {
             '/^actualizar\/$/i' => "{$class_name}::actualizar",
             '/^cancelar\/$/i' => "{$class_name}::cancelar",
             '/^verificar\/$/i' => "{$class_name}::verificar",
-            '/^filtrar\/$/i' => "{$class_name}::filtrar",
+            '/^codigo-qr\/$/i' => "{$class_name}::codigo_qr",
+            '/^filtrar\/$/i' => "{$class_name}::filtrar"
         ];
     }
 }
