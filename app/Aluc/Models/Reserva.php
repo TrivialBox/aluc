@@ -38,6 +38,23 @@ class Reserva {
 
         $this->is_save = $this->is_save && $is_save;
     }
+    private static function getReserva($reserva){
+        if (count($reserva) > 0){
+            if (count($reserva) == 1){
+                return Reserva::get_object(
+                    $reserva,
+                    true
+                );
+            }else {
+                return Reserva::get_object(
+                    $reserva,
+                    false
+                );
+            }
+        }else{
+            return [];
+        }
+    }
 
     public static function getNewInstance(
         $usuario_id, $laboratorio_id,
@@ -54,33 +71,37 @@ class Reserva {
     }
 
     public static function getInstance($id){
-        return self::get(null, null, $id);
+        return self::getReserva(self::get(null, null, $id));
     }
 
     public static function getReservaUsuario($usuario_id) {
-        return self::get($usuario_id);
+        return self::getReserva(self::get($usuario_id));
     }
 
     public static function getReservaEstado($usuario_id, $estado){
-        return self::get($usuario_id, $estado);
+        return self::getReserva(self::get($usuario_id, $estado));
     }
     public static function getReservaLaboratorio($laboratorio_id){
-        return self::get(null,null,null,$laboratorio_id);
+        return self::getReserva(self::get(null,null,null,$laboratorio_id));
     }
 
     public static function get_object($array, $get_element = true){
 
         if ($get_element){
+            $obj= [];
             $fecha = new Fecha(
                 $array[0]['fecha'],
                 $array[0]['hora_inicio'],
                 $array[0]['hora_fin']
             );
-            return new Reserva(
+
+            $reserva = new Reserva(
                 $array[0]['id_usuario'], $array[0]['id_laboratorio'], $fecha,
                 $array[0]['descripcion'], $array[0]['n_usuarios'], $array[0]['tipo_uso'],
                 $array[0]['codigo_secreto'], $array[0]['estado'],  $array[0]['id'], false
                  );
+            array_push($obj, $reserva);
+            return $obj;
         }else{
             $reservas = [];
             foreach ($array as $fila){
