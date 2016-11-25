@@ -5,8 +5,8 @@ php:
 services:
   - mysql
 before_install:
-  - echo 'US/Eastern' >/etc/timezone
-  - apt-get install --reinstall tzdata
+  - sudo echo 'US/Eastern' >/etc/timezone
+  - sudo apt-get install --reinstall tzdata
 install:
   - composer install
   - composer dump-autoload
