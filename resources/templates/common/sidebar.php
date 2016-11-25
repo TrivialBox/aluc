@@ -16,13 +16,13 @@
         </a>
     </li>
     <li class="">
-        <a href="/reservas">
-            Reservas
+        <a href="/escritorio">
+            Escritorio
         </a>
     </li>
     <li class="">
-        <a href="/escritorio">
-            Escritorio
+        <a href="/reservas">
+            Reservas
         </a>
     </li>
 </ul>
