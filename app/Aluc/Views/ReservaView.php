@@ -20,6 +20,7 @@ class ReservaView extends View {
     public function home($data = []) {
         $reservas = Reserva::getReservaEstado($_SESSION['id'], 'reservado');
         $data['reservas'] = $reservas;
+        $data['laboratorios'] = Laboratorio::getAll();
         $this->setTemplate(
             $data,
             'reservas/reservas.php'

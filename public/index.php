@@ -8,8 +8,8 @@ use Aluc\Common\Urls;
 use Aluc\Service\EscritorioSrv;
 use Aluc\Service\ReservasSrv;
 
-$_SESSION['id'] = '1400567572';
-$_SESSION['type'] = 'moderador';
+$_SESSION['id'] = '0105070353';
+$_SESSION['type'] = 'admin';
 
 function home() {
     echo 'Página de inicio';

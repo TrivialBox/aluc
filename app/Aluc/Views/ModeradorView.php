@@ -27,6 +27,7 @@ class ModeradorView extends View {
      */
     public function listAll($data = []) {
         $data['moderadores'] = Moderador::getAll();
+        $data['laboratorios'] = Laboratorio::getAll();
         $this->setTemplate(
             $data,
             'moderadores/moderadores.php'
