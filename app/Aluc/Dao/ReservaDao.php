@@ -55,7 +55,6 @@ class ReservaDao{
 
     public static function generarExcepcion($e){
         $error = $e->getMessage();
-
         if(strval(intval($error))!==$error){
 
             throw new AlucException(Database::getMgs(
@@ -63,8 +62,9 @@ class ReservaDao{
                 $e->getMessage()
             );
         }
-        throw new AlucException(static::getMsgInsert(
-            (int)$e->getMessage()),
+        $mensaje = self::getMsgInsert((int)$e->getMessage());
+        throw new AlucException(
+            $mensaje,
             $e->getMessage()
         );
     }
@@ -123,7 +123,7 @@ class ReservaDao{
             ];
             $this->database->update('reservacion', $array, $where);
         } catch (\Exception $e) {
-            $this->generarExcepcion($e);
+            self::generarExcepcion($e);
         }
     }
     private static function getModel(){
