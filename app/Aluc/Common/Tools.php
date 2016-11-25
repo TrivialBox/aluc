@@ -4,7 +4,6 @@ use Aluc\Models\Reserva;
 use Arcanedev\QrCode\QrCode;
 
 
-
 /**
  * Herramientas de uso general para todo el sistema.
  */
@@ -39,12 +38,15 @@ class Tools {
         $string = filter_var($string, FILTER_SANITIZE_STRING);
         return $string;
     }
-    public static function generarQr($id){
-        $codigo = Reserva::getInstance($id)
-            ->getCodigoSecreto();
+
+    public static function getCanonicalFecha($fecha) {
+        return date("Y-m-d", strtotime($fecha));
+    }
+
+    public static function generarQr($str){
         $qrCode = new QRcode();
-        $qrCode->setText($codigo);
-        $qrCode->setSize(100);
-        return $qrCode->image("image alt", ['class' => 'qr-code-img']);
+        $qrCode->setText($str);
+        $qrCode->setSize(300);
+        return $qrCode->image("código QR", ['class' => 'img-responsive center-block']);
     }
 }
