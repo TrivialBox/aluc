@@ -190,7 +190,14 @@ class Reserva {
         $this->updateEstado('cancelado');
     }
 
-    public static function validarQr($mac, $ip, $token){
+    /**
+     * @param $mac
+     * @param $ip
+     * @param $token Token del lector QR
+     * @param $secret_code Código secreto asociado a una reserva
+     * @throws AlucException
+     */
+    public static function validarQr($mac, $ip, $token, $secret_code){
 
         $lector = LectorQr::getInstance($mac);
 
