@@ -151,7 +151,8 @@ class Reserva {
 
     public function save(){
         $obj = static::get_object(
-            ReservaDao::getInstance()->save($this, $this->is_save)
+            ReservaDao::getInstance()->save($this, $this->is_save)git status
+
         );
         $this->id = $obj->id;
         $this->usuario_id = $obj->usuario_id;

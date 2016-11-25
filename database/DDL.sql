@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `ALUC` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `ALUC`;
 -- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: ALUC
@@ -148,7 +146,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +170,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -306,7 +304,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `editar_reserva`(
 						IN Shora_fin TIME)
 BEGIN
 
-	/*Variables para el desarrollo*/
+	
 	declare cupos int;
     declare ocupados int;
     declare valor int;
@@ -324,12 +322,12 @@ BEGIN
     
     start transaction;
     
-    /*Validar que la reserva este en el rango apto para editar*/
+    
 	if (now() >= timestamp(Sfecha,Shora_inicio)) then
 		signal sqlstate "45000" set message_text = "100000";
     end if;
     
-    /*Validar el tiempo de edición de la reserva*/
+    
     select datediff(Sfecha,curdate()) into dias;
     if (dias > 5)then
 		signal sqlstate "45000" set message_text = "90000";
@@ -337,7 +335,7 @@ BEGIN
     
     if (Stipo_uso != 'clases' ) then
 		
-		/*Validar que no haya clases Excluyente*/
+		
 		SELECT tipo_uso into tipo
 			FROM reserva join reservacion on reserva.id = reservacion.id_reserva
 			where id_laboratorio = Sid_laboratorio and estado = "reservado" 
@@ -351,7 +349,7 @@ BEGIN
 	end if;
     
     
-    /*sacar el id para comprobar que existe*/
+    
     select id into bandera
     from laboratorio
 		where id = Sid_laboratorio;
@@ -362,7 +360,7 @@ BEGIN
     end if;
     
     
-    /*Validacion que las horas que ingrese este dentro de los rango del laboratorio*/
+    
     select id into bandera
     from view_laboratorio 
 		where id = Sid_laboratorio
@@ -377,12 +375,12 @@ BEGIN
 		signal sqlstate "45000" set message_text = "60000";
     end if;
     
-    /*Extraer las horas de una resevación realizada*/
+    
     select timediff(hora_fin,hora_inicio) into Rhoras
 		from view_reserva 
         where id = Sid;
     
-    /*validar que no se exceda de 2 horas diarias en sus reservaciones*/
+    
     select id_usuario into Rid_usuario 
 		from reservacion 
         where id_reserva = Sid;
@@ -396,7 +394,7 @@ BEGIN
 		signal sqlstate "45000" set message_text = "70000";
     end if;
     
-    /*declaracion de las excepsiones*/
+    
     set valor = 0;
     set Rn_usuarios = 0;
     select id_laboratorio into bandera
@@ -467,7 +465,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_reserva`(
 						IN Shora_fin TIME,
 						IN Scodigo_secreto varchar(100))
 BEGIN
-    /*Variables para el desarrollo*/
+    
 	declare cupos int;
     declare ocupados int;
     declare valor int;
@@ -477,20 +475,29 @@ BEGIN
     declare bandera int;
     declare dias int;
     
+    
     start transaction;
     
-    /*Validar el tiempo que sea mayor al de your now*/
+    
     if (now() >= timestamp(Sfecha,Shora_inicio))then
 		signal sqlstate "45000" set message_text = "100000";
     end if;
     
-    /*Validar el tiempo de creación de la reserva*/
+    select id into bandera
+		from ALUC.view_reserva 
+		where id_usuario = Sid_usuario and fecha =  Sfecha 
+		and hora_inicio = Shora_inicio and id_laboratorio = Sid_laboratorio;
+    
+    if (bandera != '')then
+		signal sqlstate "45000" set message_text = "120000";
+    end if;
+    
     select datediff(Sfecha,curdate()) into dias;
     if (dias > 5)then
 		signal sqlstate "45000" set message_text = "90000";
     end if;
     
-    /*Validar que no haya clases Excluyente*/
+    
     SELECT tipo_uso into tipo
 		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
 		where id_laboratorio = Sid_laboratorio and estado = "Reservado" 
@@ -502,7 +509,7 @@ BEGIN
 		signal sqlstate "45000" set message_text = "50000";
     end if;
     
-    /*Validacion que las horas que ingrese este dentro de los rango del laboratorio*/
+    
     select id into bandera
     from view_laboratorio 
 		where id = Sid_laboratorio
@@ -517,7 +524,7 @@ BEGIN
 		signal sqlstate "45000" set message_text = "60000";
     end if;
     
-    /*validar que no se exceda de 2 horas diarias en sus reservaciones*/
+    
     select sum(timediff(hora_fin,hora_inicio))  into horas
 		from reserva join reservacion on reserva.id = reservacion.id_reserva
 		where id_usuario = Sid_usuario and fecha = Sfecha;
@@ -642,4 +649,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-23 13:28:05
+-- Dump completed on 2016-11-24 22:44:41
