@@ -1,5 +1,6 @@
 <?php
 namespace Aluc\Models;
+use Aluc\Common\AlucException;
 use Aluc\Dao\ReservaDao;
 use Sinergi\Token\StringGenerator;
 
@@ -187,6 +188,21 @@ class Reserva {
 
     public function cancelar() {
         $this->updateEstado('cancelado');
+    }
+
+    public static function validarQr($mac, $ip, $token){
+
+        $lector = LectorQr::getInstance($mac);
+
+        if ($lector->ip != $ip){
+            throw new AlucException(
+                'La ip que se ha conectado el dispositivo no es valida',
+                'la ip es diferente la del usuario registrado'
+            );
+        }
+        $reserva = ReservaDao::getInstance()->getRservaToken($token);
+
+        ReservaDao::getInstance()->procesarReserva($reserva[0]['id']);
     }
 }
 
