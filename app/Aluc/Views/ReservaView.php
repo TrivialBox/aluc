@@ -65,7 +65,8 @@ class ReservaView extends View {
 
     public function listReservasLaboratorio($laboratorio_id) {
         return $this->listAll([
-            'reservas' => Reserva::getReservaLaboratorio($laboratorio_id)
+            'reservas' => Reserva::getReservaLaboratorio($laboratorio_id),
+            'row_h' => '4'
         ]);
     }
 

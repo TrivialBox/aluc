@@ -26,6 +26,10 @@
                             {$reserva->descripcion}
                         </p>
                     </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Usuario">
+                        {$reserva->getUsuarioId()}
+                        <span class="glyphicon glyphicon-user pull-right"></span>
+                    </li>
                     <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Número de usuarios">
                         {$reserva->numero_usuarios}
                         <span class="glyphicon glyphicon-user pull-right"></span>
@@ -47,7 +51,7 @@
             <div class="panel-footer">
                 <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm">
                     <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
-                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span class="glyphicon glyphicon-qrcode"></span>
                     </button>
                     <!--
                     <button type="button" class="btn btn-warning {$disable}" {$disable}>
