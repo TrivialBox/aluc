@@ -154,18 +154,7 @@ class Reserva {
     }
 
     public function save(){
-        $obj = static::get_object(
-            ReservaDao::getInstance()->save($this, $this->is_save)
-        );
-        $this->id = $obj->id;
-        $this->usuario_id = $obj->usuario_id;
-        $this->laboratorio_id = $obj->laboratorio_id;
-        $this->descripcion = $obj->descripcion;
-        $this->numero_usuarios = $obj->numero_usuarios;
-        $this->tipo_uso = $obj->tipo_uso;
-        $this->estado = $obj->estado;
-        $this->fecha = $obj->fecha;
-        $this->codigo_secreto = $obj->codigo_secreto;
+        ReservaDao::getInstance()->save($this, $this->is_save);
         $this->is_save = false;
         return $this;
     }
