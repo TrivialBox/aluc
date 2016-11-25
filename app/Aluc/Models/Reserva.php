@@ -121,7 +121,7 @@ class Reserva {
 
     private static function get($usuario_id, $estado= null, $id=null, $id_lab=null){
         $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id, $id_lab);
-        return self::getReserva($reservas);
+        return $reservas;
     }
 
     private static function generarCodigoSecreto() {
