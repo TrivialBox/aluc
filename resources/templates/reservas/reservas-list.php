@@ -9,8 +9,12 @@
             $panel_status = "panel-danger";
             $disable = "disabled";
         }
+        $row_h = $get('row_h');
+        if (empty($row_h)) {
+            $row_h = '3';
+        }
     echo <<<TAG
-    <div class="col-sm-3 text-center">
+    <div class="col-sm-{$row_h} text-center">
         <div class="panel {$panel_status}">
             <div class="panel-heading">
                 {$laboratorio->nombre} ({$laboratorio->id})

@@ -20,5 +20,10 @@
             Reservas
         </a>
     </li>
+    <li class="">
+        <a href="/escritorio">
+            Escritorio
+        </a>
+    </li>
 </ul>
 </nav>

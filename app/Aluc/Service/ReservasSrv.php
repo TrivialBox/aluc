@@ -121,7 +121,9 @@ class ReservasSrv {
                 if (!empty($data) and Tools::check_method('post')) {
                     $id = $data['id'];
                     $reserva = Reserva::getInstance($id);
-                    if ($reserva->getUsuarioId() === $_SESSION['id']) {
+                    if (Tools::check_session('moderador', 'admin') ||
+                        (Tools::check_session('user') and $reserva->getUsuarioId() === $_SESSION['id'])
+                    ) {
                         $reserva->cancelar();
                         self::$view_general
                             ->success_json()
@@ -158,7 +160,9 @@ class ReservasSrv {
                 if (!empty($data) and Tools::check_method('get')) {
                     $id = $data['id'];
                     $reserva = Reserva::getInstance($id);
-                    if ($reserva->getUsuarioId() === $_SESSION['id']) {
+                    if (Tools::check_session('moderador', 'admin') ||
+                        (Tools::check_session('user') and $reserva->getUsuarioId() === $_SESSION['id'])
+                    ) {
                         self::$view_reserva
                             ->codigo_qr($reserva)
                             ->render();

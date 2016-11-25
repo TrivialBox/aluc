@@ -1,6 +1,9 @@
 <?php
 namespace Aluc\Views;
 
+use Aluc\Common\Tools;
+use Aluc\Models\Laboratorio;
+use Aluc\Models\Moderador;
 use Aluc\Models\Reserva;
 
 
@@ -60,10 +63,29 @@ class ReservaView extends View {
         }
     }
 
+    public function listReservasLaboratorio($laboratorio_id) {
+        return $this->listAll([
+            'reservas' => Reserva::getReservaLaboratorio($laboratorio_id)
+        ]);
+    }
+
     public function codigo_qr($reserva) {
         $this->setTemplate(
             ['reserva' => $reserva],
             'reservas/codigo-qr.php'
+        );
+        return $this;
+    }
+
+    public function homeModerador() {
+        if (Tools::check_session('admin')) {
+            $laboratorios = Laboratorio::getAll();
+        } else {
+            $laboratorios = [Moderador::getInstance($_SESSION['id'])->getLaboratorio()];
+        }
+        $this->setTemplate(
+            ['laboratorios' => $laboratorios],
+            'escritorio/reservas.php'
         );
         return $this;
     }
