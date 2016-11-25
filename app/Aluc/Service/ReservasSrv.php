@@ -185,6 +185,40 @@ class ReservasSrv {
         );
     }
 
+
+    /**
+     * /reservas/verificar
+     *
+     * Verifica una reservación
+     * mediante un lector qr ubicado
+     * en el laboratorio. Esta acción
+     * sólo la puede hacer un lector QR
+     * registrado.Se realiza una
+     * solicitud vía post.
+     */
+    public static function verificar($data) {
+        try {
+            if (!empty($data) and Tools::check_method('post')) {
+                $mac = $data['mac'];
+                $ip = Tools::get_ip();
+                $token = $data['token'];
+                $secret_code = $data['secret_code'];
+                Reserva::validarQr($mac, $ip, $token, $secret_code);
+                self::$view_general
+                    ->success_json()
+                    ->render();
+            } else {
+                self::$view_general
+                    ->error404()
+                    ->render();
+            }
+        } catch (\Exception $e) {
+            self::$view_general
+                ->error_json_default($e)
+                ->render();
+        }
+    }
+
     /**
      * URLS para el direccionamiento (url routing).
      * @return array

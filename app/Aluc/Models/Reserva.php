@@ -190,6 +190,7 @@ class Reserva {
         $this->updateEstado('cancelado');
     }
 
+
     public static function validarQr($mac, $ip, $token,$codigo_secreto){
 
         $lector = LectorQr::getInstance($mac);
