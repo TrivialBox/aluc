@@ -5,10 +5,8 @@ php:
 services:
   - mysql
 before_install:
-  - tz=America/Guayaquil
-  - sudo cp -vf /usr/share/zoneinfo/$tz /etc/localtime
-  - echo $tz | sudo tee /etc/timezone
-  - date
+  - echo 'US/Eastern' >/etc/timezone
+  - apt-get install --reinstall tzdata
 install:
   - composer install
   - composer dump-autoload
