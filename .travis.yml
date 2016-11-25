@@ -10,10 +10,10 @@ install:
   - composer install
   - composer dump-autoload
 before_script:
-  - mysql -e SET GLOBAL time_zone = "America/Guayaquil" -u root
   - mysql -e "create database IF NOT EXISTS ALUC;" -u root
   - mysql -u root ALUC < database/DDL.sql
   - mysql -u root ALUC < database/populate.sql
   - mysqladmin -u root password '1234'
+  - mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p'1234'
 script:
   - make test

@@ -115,10 +115,13 @@ class ReservaDao{
     }
 
     public function updateEstado($object){
-
         try {
-            $where = " id = '{$object->getId()}'";
-            $this->database->update('reservacion', static::convertObjectArray($object), $where);
+
+            $where = " id_reserva = '{$object->getId()}'";
+            $array = [
+                'estado' => $object->estado
+            ];
+            $this->database->update('reservacion', $array, $where);
         } catch (\Exception $e) {
             $this->generarExcepcion($e);
         }

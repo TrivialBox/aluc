@@ -7,7 +7,7 @@ use Sinergi\Token\StringGenerator;
  * Representación de una reserva en el sistema.
  */
 class Reserva {
-    public $id;
+    private $id;
     private $usuario_id;
     public $laboratorio_id;
     public $descripcion;
@@ -177,7 +177,9 @@ class Reserva {
             false
         );
     }
-
+    public function getId(){
+        return $this->id;
+    }
     public function updateEstado($estado){
         $this->estado = $estado;
         ReservaDao::getInstance()->updateEstado($this);
