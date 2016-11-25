@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 24/11/16
- * Time: 19:43
- */
-
 use PHPUnit\Framework\TestCase;
 use Aluc\Models\Reserva;
 
@@ -21,7 +14,7 @@ class ReservaTest extends TestCase{
         $descripcion = 'djdj';
         $numero_usuarios = '2';
         $tipo_uso = 'práctica';
-        Reserva::getNewInstance(
+        $reserva= Reserva::getNewInstance(
             $usuario_id,
             $laboratorio_id,
             $fecha_n,
