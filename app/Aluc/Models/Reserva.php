@@ -71,18 +71,18 @@ class Reserva {
     }
 
     public static function getInstance($id){
-        return self::getReserva(null, null, $id);
+        return self::getReserva(self::get(null, null, $id));
     }
 
     public static function getReservaUsuario($usuario_id) {
-        return self::getReserva($usuario_id);
+        return self::getReserva(self::get($usuario_id));
     }
 
     public static function getReservaEstado($usuario_id, $estado){
-        return self::getReserva($usuario_id, $estado);
+        return self::getReserva(self::get($usuario_id, $estado));
     }
     public static function getReservaLaboratorio($laboratorio_id){
-        return self::getReserva(null,null,null,$laboratorio_id);
+        return self::getReserva(self::get(null,null,null,$laboratorio_id));
     }
 
     public static function get_object($array, $get_element = true){
