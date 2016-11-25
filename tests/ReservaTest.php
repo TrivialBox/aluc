@@ -8,7 +8,7 @@ class ReservaTest extends TestCase{
     public function testCreateValidReserva(){
         $usuario_id= '0104633177';
         $laboratorio_id = '1';
-        $fecha_n = '2016-11-25';
+        $fecha_n = '2016-11-28';
         $hora_inicio = '09:00:00';
         $hora_fin = '11:00:00';
         $descripcion = 'djdj';
