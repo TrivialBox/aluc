@@ -1,6 +1,7 @@
 <?php
 namespace Aluc\Views;
 
+use Aluc\Models\Laboratorio;
 use Aluc\Models\LectorQr;
 
 /**
@@ -19,6 +20,7 @@ class LectorQrView extends View {
 
     public function listAll($data = []) {
         $data['lectores_qr'] = LectorQr::getAll();
+        $data['laboratorios'] = Laboratorio::getAll();
         $this->setTemplate(
             $data,
             'lectores-qr/lectores-qr.php'

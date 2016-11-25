@@ -111,13 +111,21 @@ use Aluc\Common\TemplateGenerator;
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="id_laboratorio">Id del Laboratorio</label>
-                        <input required="required" pattern="\d*" type="text" id="id_laboratorio" name="id_laboratorio" placeholder="Ingrese el id del laboratorio" class="form-control">
+                        <select  class="form-control" id="id_laboratorio" name="id_laboratorio">
+                            <?php
+                            foreach ($get('laboratorios') as $laboratorio) {
+                                echo <<<TAG
+                                <option value="{$laboratorio->id}">{$laboratorio->nombre} ({$laboratorio->id})</option>
+TAG;
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="tipo_uso">Tipo de Uso</label>
                         <select class="form-control" id="tipo_uso" name="tipo_uso">
-                          <option value="clases">Clases</option>
-                          <option value="práctica">Práctica</option>
+                            <option value="práctica">Práctica</option>
+                            <option value="clases">Clases</option>
                         </select>
                     </div>
                     <div class="form-group">

@@ -8,13 +8,11 @@ use Aluc\Common\Urls;
 use Aluc\Service\EscritorioSrv;
 use Aluc\Service\ReservasSrv;
 
-$_SESSION['id'] = '0103813291';
+$_SESSION['id'] = '0105070353';
 $_SESSION['type'] = 'admin';
 
 function home() {
     echo 'Página de inicio';
-    echo '</br>';
-    echo 'No hay plata para un diseñador';
 }
 
 Urls::serveRequest([
