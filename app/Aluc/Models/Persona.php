@@ -9,7 +9,7 @@ abstract class Persona  {
     public $nombre;
     protected $is_save = true;
 
-    protected function __construct($id, $nombre, $is_save) {
+    protected function __construct($id, $nombre, $is_save = null) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->is_save = $this->is_save && $is_save;
