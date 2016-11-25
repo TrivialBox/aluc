@@ -45,9 +45,11 @@
                     <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </button>
+                    <!--
                     <button type="button" class="btn btn-warning {$disable}" {$disable}>
                         Editar
                     </button>
+                    -->
                     <button type="button" class="btn btn-danger {$disable}" {$disable} data-toggle="modal" data-target="#modal-confirm-cancel-reserva">
                         Cancelar
                     </button>
