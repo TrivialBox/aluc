@@ -1,13 +1,13 @@
 <nav class="hidden-xs">
 <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="40">
     <li class="">
-        <a href="/admin/lectores-qr">
-            Lectores QR
+        <a href="/admin/moderadores">
+            Moderadores
         </a>
     </li>
     <li class="">
-        <a href="/admin/moderadores">
-            Moderadores
+        <a href="/admin/lectores-qr">
+            Lectores QR
         </a>
     </li>
     <li class="">
