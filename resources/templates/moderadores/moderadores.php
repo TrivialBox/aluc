@@ -33,9 +33,7 @@ use Aluc\Common\TemplateGenerator;
             <!-- sidebar -->
             <div class="col-sm-3">
                 <?php
-                    TemplateGenerator::generate([
-                        ],
-                        'common/sidebar.php'
+                    TemplateGenerator::generate([], 'common/sidebar.php'
                     );
                 ?>
             </div>

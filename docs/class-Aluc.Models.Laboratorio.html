@@ -58,6 +58,10 @@
 						</a>
 							<ul>
 					<li>
+						<a href="namespace-Aluc.Common.html">
+							Common						</a>
+							</li>
+					<li>
 						<a href="namespace-Aluc.Dao.html">
 							Dao						</a>
 							</li>
@@ -70,14 +74,14 @@
 							Service						</a>
 							</li>
 					<li>
-						<a href="namespace-Aluc.Tools.html">
-							Tools						</a>
-							</li>
-					<li>
 						<a href="namespace-Aluc.Views.html">
 							Views						</a>
 							</li>
 								</ul></li>
+					<li>
+						<a href="namespace-None.html">
+							None						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -89,9 +93,10 @@
 				<li><a href="class-Aluc.Models.Fecha.html">Fecha</a></li>
 				<li><a href="class-Aluc.Models.Horario.html">Horario</a></li>
 				<li class="active"><a href="class-Aluc.Models.Laboratorio.html">Laboratorio</a></li>
-				<li><a href="class-Aluc.Models.Lector.html">Lector</a></li>
+				<li><a href="class-Aluc.Models.LectorQr.html">LectorQr</a></li>
 				<li><a href="class-Aluc.Models.Moderador.html">Moderador</a></li>
 				<li><a href="class-Aluc.Models.Persona.html">Persona</a></li>
+				<li><a href="class-Aluc.Models.Reporte.html">Reporte</a></li>
 				<li><a href="class-Aluc.Models.Reserva.html">Reserva</a></li>
 				<li><a href="class-Aluc.Models.Usuario.html">Usuario</a></li>
 			</ul>
@@ -135,7 +140,7 @@ por al menos un moderador.</p>
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Models.html">Models</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Models.Laboratorio.html#6-63" title="Go to source code">Aluc/Models/Laboratorio.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Models.Laboratorio.html#7-73" title="Go to source code">Aluc/Models/Laboratorio.php</a>
 		<br>
 	</div>
 
@@ -155,7 +160,7 @@ por al menos un moderador.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Models.Laboratorio.html#48-50" title="Go to source code">getInstance</a>( <span> <var>$id</var></span> )</code>
+			<code><a href="source-class-Aluc.Models.Laboratorio.html#52-54" title="Go to source code">getInstance</a>( <span> <var>$id</var></span> )</code>
 
 			<div class="description short">
 				
@@ -184,7 +189,7 @@ por al menos un moderador.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getModeradores">#</a>
-			<code><a href="source-class-Aluc.Models.Laboratorio.html#52-54" title="Go to source code">getModeradores</a>( )</code>
+			<code><a href="source-class-Aluc.Models.Laboratorio.html#65-67" title="Go to source code">getModeradores</a>( )</code>
 
 			<div class="description short">
 				
@@ -202,47 +207,18 @@ por al menos un moderador.</p>
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="addModerador" id="_addModerador">
+		<tr data-order="getAll" id="_getAll">
 
 			<td class="attributes"><code>
-				 public 
+				 public static
 				
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_addModerador">#</a>
-			<code><a href="source-class-Aluc.Models.Laboratorio.html#56-58" title="Go to source code">addModerador</a>( <span> <var>$id</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="delModerador" id="_delModerador">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_delModerador">#</a>
-			<code><a href="source-class-Aluc.Models.Laboratorio.html#60-62" title="Go to source code">delModerador</a>( <span> <var>$id</var></span> )</code>
+			<a class="anchor" href="#_getAll">#</a>
+			<code><a href="source-class-Aluc.Models.Laboratorio.html#69-71" title="Go to source code">getAll</a>( <span> <var>$order_atribute</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				
@@ -283,7 +259,7 @@ por al menos un moderador.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Laboratorio.html#11" title="Go to source code"><var>$id</var></a>
+					<a href="source-class-Aluc.Models.Laboratorio.html#12" title="Go to source code"><var>$id</var></a>
 
 				<div class="description short">
 					
@@ -308,7 +284,7 @@ por al menos un moderador.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Laboratorio.html#12" title="Go to source code"><var>$nombre</var></a>
+					<a href="source-class-Aluc.Models.Laboratorio.html#13" title="Go to source code"><var>$nombre</var></a>
 
 				<div class="description short">
 					
@@ -333,7 +309,7 @@ por al menos un moderador.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Laboratorio.html#13" title="Go to source code"><var>$capacidad</var></a>
+					<a href="source-class-Aluc.Models.Laboratorio.html#14" title="Go to source code"><var>$capacidad</var></a>
 
 				<div class="description short">
 					
@@ -358,7 +334,7 @@ por al menos un moderador.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Laboratorio.html#14" title="Go to source code"><var>$descripcion</var></a>
+					<a href="source-class-Aluc.Models.Laboratorio.html#15" title="Go to source code"><var>$descripcion</var></a>
 
 				<div class="description short">
 					
@@ -383,7 +359,7 @@ por al menos un moderador.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Laboratorio.html#15" title="Go to source code"><var>$horario</var></a>
+					<a href="source-class-Aluc.Models.Laboratorio.html#16" title="Go to source code"><var>$horario</var></a>
 
 				<div class="description short">
 					
@@ -417,6 +393,6 @@ por al menos un moderador.</p>
 	</div>
 </div>
 <script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?39a4ff92ae9d0775b65d82a2b5f28c77fab29e87"></script>
+<script src="elementlist.js?ac737646b0f212c2e67bd3cacece318e2563ff87"></script>
 </body>
 </html>

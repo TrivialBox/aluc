@@ -33,6 +33,10 @@ class Database {
         $this->disconnect();
     }
 
+    /**
+     * Conectar la base de datos
+     * @throws \Exception
+     */
     public function connect() {
         $this->conn = new \mysqli(
             $this->host,
@@ -49,25 +53,50 @@ class Database {
         }
     }
 
+    /**
+     * Desconectar la base de datos.
+     */
     public function disconnect() {
         if (isset($this->conn)) {
             $this->conn->close();
         }
     }
 
+    /**
+     * Consulta sql genérica.
+     * @param $sql
+     * @return mixed
+     */
     private function query($sql) {
         return $this->conn->query($sql);
     }
 
+    /**
+     * Obtener mensaje el error de la base de datos.
+     * @return mixed
+     */
     public function error() {
         return $this->conn->error;
     }
 
+    /**
+     * Obtener código de error de la base de datos.
+     * @return mixed
+     */
     public function errno() {
         return $this->conn->errno;
     }
 
-    public function call($procedure_name, $values) {
+    /**
+     * Método para llamar procedimientos en la base de datos.
+     * @param $procedure_name
+     * @param $values
+     * @throws \Exception
+     */
+    public function call(
+        $procedure_name,
+        $values
+    ){
         $items = $this->quote_array_string($values);
         $values = implode(',', $items);
 
@@ -80,6 +109,12 @@ class Database {
         }
     }
 
+    /**
+     * Método para insertar sql's en la base de datos.
+     * @param $table_name
+     * @param $values
+     * @throws \Exception
+     */
     public function insert($table_name, $values) {
         $items = $this->catValues($values);
         $keys = implode(',', $items['keys']);
@@ -93,6 +128,11 @@ class Database {
         }
     }
 
+    /**
+     * Copiar los valores de un arreglo.
+     * @param $array
+     * @return array
+     */
     private function catValues($array) {
         $keys = array_keys($array);
         $values = $this->quote_array_string(array_values($array));
@@ -102,6 +142,12 @@ class Database {
         );
     }
 
+
+    /**
+     * Citar un string en un arreglo.
+     * @param $array
+     * @return array
+     */
     private function quote_array_string($array) {
         $values = array();
         foreach ($array as $value) {
@@ -110,11 +156,28 @@ class Database {
         return $values;
     }
 
+    /**
+     * @param $string
+     * @return string
+     */
     private function quote_string($string) {
         return "'{$string}'";
     }
 
-    public function select($table_name, $columns = '*', $where = null, $order = null) {
+    /**
+     * Método para realizar consultas select en la base de datos.
+     * @param $table_name
+     * @param string $columns
+     * @param null $where
+     * @param null $order
+     * @return mixed
+     */
+    public function select(
+        $table_name,
+        $columns = '*',
+        $where = null,
+        $order = null
+    ){
         if ($columns !== '*') {
             $columns = implode(',', $columns);
         }
@@ -127,12 +190,22 @@ class Database {
         if ($order != null) {
             $sql .= " ORDER BY {$order}";
         }
+        $result = $this->query($sql)
+            ->fetch_all(MYSQLI_ASSOC);
 
-        $result = $this->query($sql)->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
 
-    public function delete($view_name, $where) {
+    /**
+     * Método para la eliminación en la base de datos.
+     * @param $view_name
+     * @param $where
+     * @throws \Exception
+     */
+    public function delete(
+        $view_name,
+        $where
+    ){
         $sql = "DELETE FROM {$view_name} WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
@@ -142,14 +215,29 @@ class Database {
         }
     }
 
-    public function update($view_name, $columns, $where) {
+    /**
+     * Método para actualizar filas en la base de datos.
+     * @param $view_name
+     * @param $columns
+     * @param $where
+     * @throws \Exception
+     */
+    public function update(
+        $view_name,
+        $columns,
+        $where
+    ){
         $sql = "UPDATE {$view_name}";
         $columns_set = array();
         foreach ($columns as $key => $value){
-            array_push($columns_set,$key . '=' . $this->quote_string($value));
+            array_push(
+                $columns_set,
+                $key . '=' . $this->quote_string($value)
+            );
         }
         $sql .= " SET " . implode(',', $columns_set);
         $sql .= " WHERE {$where}";
+
         if (!$this->query($sql)) {
             throw new \Exception(
                 $this->error(),
@@ -158,7 +246,17 @@ class Database {
         }
     }
 
-    public static function getMgs($code, $data) {
+    /**
+     * Códigos de errores en la base de datos.
+     * Cada código tiene su respectivo mensaje de retorno.
+     * @param $code
+     * @param $data
+     * @return string
+     */
+    public static function getMgs(
+        $code,
+        $data
+    ){
         switch ($code) {
             // Clave foránea no existente
             case 1452:
@@ -170,7 +268,7 @@ class Database {
             case 5000:
                 return "El {$data['elemento_null'][0]} no se encuentra {$data['elemento_null'][1]}";
             default:
-                return "No se puede agregar su {$data['clave_pk_duplicate'][0]}";
+                return "No se puede agregar el {$data['clave_pk_duplicate'][0]}";
         }
     }
 

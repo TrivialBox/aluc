@@ -4,7 +4,9 @@ use Aluc\Common\TemplateGenerator;
 ob_start();
 TemplateGenerator::generate([
         'headers' => $get('headers'),
-        'rows' =>$get('rows')
+        'rows' =>$get('rows'),
+        'name' =>$get('name'),
+        'name_admin' => $get('name_admin')
     ],
     'reportes/html-to-pdf.php'
 );

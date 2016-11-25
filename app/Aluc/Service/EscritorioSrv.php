@@ -2,8 +2,11 @@
 namespace Aluc\Service;
 
 use Aluc\Common\Tools;
+use Aluc\Models\Moderador;
+use Aluc\Models\Reserva;
 use Aluc\Views\GeneralView;
 use Aluc\Views\ReporteView;
+use Aluc\Views\ReservaView;
 
 /**
  * Clase que maneja todas las solicitudes a /escritorio
@@ -11,10 +14,12 @@ use Aluc\Views\ReporteView;
 class EscritorioSrv {
     private static $view_general;
     private static $view_reportes;
+    private static $view_reserva;
 
     public static function init() {
         static::$view_general = GeneralView::getInstance();
         static::$view_reportes = ReporteView::getInstance();
+        static::$view_reserva = ReservaView::getInstance();
     }
 
     private static function user_do($func, $error) {
@@ -44,7 +49,21 @@ class EscritorioSrv {
     public static function escritorio($data) {
         self::user_do(
             function () use ($data){
-                echo "escritorio";
+                if (!empty($data) and Tools::check_method('get')) {
+                    if (Tools::check_session('moderador')) {
+                        $id_laboratorio = Moderador::getInstance($_SESSION['id'])->id_laboratorio;
+                    } else {
+                        // Es administrador
+                        $id_laboratorio = $data['id_laboratorio'];
+                    }
+                    self::$view_reserva
+                        ->listReservasLaboratorio($id_laboratorio)
+                        ->render();
+                } else {
+                    self::$view_reserva
+                        ->homeModerador()
+                        ->render();
+                }
             },
             function ($e) {
                 self::$view_general

@@ -1,3 +1,6 @@
+<?php
+use Aluc\Models\Usuario;
+?>
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default">
   <div class="container">
@@ -14,17 +17,12 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <?php
-                echo $_SESSION['id'];
+              $user = Usuario::getInstance($_SESSION['id']);
+              echo $user->nombre;
               ?>
               <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">Salir</a></li>
           </ul>
         </li>
       </ul>

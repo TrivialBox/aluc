@@ -16,6 +16,11 @@
         </a>
     </li>
     <li class="">
+        <a href="/escritorio">
+            Escritorio
+        </a>
+    </li>
+    <li class="">
         <a href="/reservas">
             Reservas
         </a>

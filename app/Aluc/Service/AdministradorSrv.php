@@ -371,7 +371,7 @@ class AdministradorSrv {
     public static function urls() {
         $class_name =  __CLASS__;
         return [
-            '/^$/i' => "{$class_name}::home",
+            '/^$/i' => "{$class_name}::moderadores",
             '/^moderadores\//i' => [
                 '/^$/i' => "{$class_name}::moderadores",
                 '/^nuevo\/$/i' => "{$class_name}::moderadores_nuevo",

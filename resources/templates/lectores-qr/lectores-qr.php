@@ -19,11 +19,7 @@ use Aluc\Common\TemplateGenerator;
 
     <!-- Navbar -->
     <?php
-        TemplateGenerator::generate([
-            'user' => $_SESSION['id']
-        ],
-            'common/navbar.php'
-        );
+        TemplateGenerator::generate([], 'common/navbar.php');
     ?>
 
     <!-- contenedor principal -->

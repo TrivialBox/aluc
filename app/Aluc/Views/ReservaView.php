@@ -1,6 +1,9 @@
 <?php
 namespace Aluc\Views;
 
+use Aluc\Common\Tools;
+use Aluc\Models\Laboratorio;
+use Aluc\Models\Moderador;
 use Aluc\Models\Reserva;
 
 
@@ -15,7 +18,7 @@ class ReservaView extends View {
     }
 
     public function home($data = []) {
-        $reservas = Reserva::getReservaUsuario($_SESSION['id']);
+        $reservas = Reserva::getReservaEstado($_SESSION['id'], 'reservado');
         $data['reservas'] = $reservas;
         $this->setTemplate(
             $data,
@@ -34,15 +37,36 @@ class ReservaView extends View {
 
     public function listReserva($id) {
         $reserva = Reserva::getInstance($id);
-        var_dump($reserva);
         return $this->listAll([
             'reservas' => [$reserva]
         ]);
     }
 
-    public function listReservasUsuario($user_id) {
+    public function listReservasUsuario($user_id, $type = 'all') {
+        if ($type === 'all') {
+            return $this->listAll([
+                'reservas' => Reserva::getReservaUsuario($user_id)
+            ]);
+        } else if ($type === 'new') {
+            $type = 'reservado';
+            return $this->listAll([
+                'reservas' => Reserva::getReservaEstado($user_id, $type)
+            ]);
+        } else if ($type === 'old') {
+            return $this->listAll([
+                'reservas' => array_merge(
+                    Reserva::getReservaEstado($user_id, 'cancelado'),
+                    Reserva::getReservaEstado($user_id, 'cancelado_ausencia'),
+                    Reserva::getReservaEstado($user_id, 'procesado')
+                )
+            ]);
+        }
+    }
+
+    public function listReservasLaboratorio($laboratorio_id) {
         return $this->listAll([
-            'reservas' => Reserva::getReservaUsuario($user_id)
+            'reservas' => Reserva::getReservaLaboratorio($laboratorio_id),
+            'row_h' => '4'
         ]);
     }
 
@@ -50,6 +74,19 @@ class ReservaView extends View {
         $this->setTemplate(
             ['reserva' => $reserva],
             'reservas/codigo-qr.php'
+        );
+        return $this;
+    }
+
+    public function homeModerador() {
+        if (Tools::check_session('admin')) {
+            $laboratorios = Laboratorio::getAll();
+        } else {
+            $laboratorios = [Moderador::getInstance($_SESSION['id'])->getLaboratorio()];
+        }
+        $this->setTemplate(
+            ['laboratorios' => $laboratorios],
+            'escritorio/reservas.php'
         );
         return $this;
     }

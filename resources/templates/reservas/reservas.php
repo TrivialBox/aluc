@@ -25,11 +25,7 @@ use Aluc\Common\TemplateGenerator;
 <body>
     <!-- Navbar -->
     <?php
-        TemplateGenerator::generate([
-            'user' => $_SESSION['id']
-        ],
-            'common/navbar.php'
-        );
+        TemplateGenerator::generate([], 'common/navbar.php');
     ?>
 
 <!-- contenedor principal -->
@@ -55,12 +51,12 @@ use Aluc\Common\TemplateGenerator;
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
                 <li class="nav-item active">
-                    <a class="nav-link" data-toggle="tab" href="#reservas-nuevas-content">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-nuevas-content" id="reservas-nuevas-tab">
                         Nuevas
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#reservas-pasadas-content">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-pasadas-content" id="reservas-pasadas-tab">
                         Pasadas
                     </a>
                 </li>
@@ -120,8 +116,8 @@ use Aluc\Common\TemplateGenerator;
                     <div class="form-group">
                         <label for="tipo_uso">Tipo de Uso</label>
                         <select class="form-control" id="tipo_uso" name="tipo_uso">
-                          <option value="clases">Clases</option>
-                          <option value="práctica">Práctica</option>
+                            <option value="práctica">Práctica</option>
+                            <option value="clases">Clases</option>
                         </select>
                     </div>
                     <div class="form-group">

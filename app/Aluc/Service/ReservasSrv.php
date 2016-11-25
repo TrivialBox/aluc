@@ -43,9 +43,17 @@ class ReservasSrv {
     public static function home($data) {
         self::user_do(
             function () use ($data){
-                self::$view_reserva
-                    ->home()
-                    ->render();
+                if (!empty($data) and Tools::check_method('get')) {
+                    $type = $data['type'];
+                    $user_id = $_SESSION['id'];
+                    self::$view_reserva
+                        ->listReservasUsuario($user_id, $type)
+                        ->render();
+                } else {
+                    self::$view_reserva
+                        ->home()
+                        ->render();
+                }
             },
             function ($e) {
                 self::$view_general
@@ -113,7 +121,9 @@ class ReservasSrv {
                 if (!empty($data) and Tools::check_method('post')) {
                     $id = $data['id'];
                     $reserva = Reserva::getInstance($id);
-                    if ($reserva->getUsuarioId() === $_SESSION['id']) {
+                    if (Tools::check_session('moderador', 'admin') ||
+                        (Tools::check_session('user') and $reserva->getUsuarioId() === $_SESSION['id'])
+                    ) {
                         $reserva->cancelar();
                         self::$view_general
                             ->success_json()
@@ -150,7 +160,9 @@ class ReservasSrv {
                 if (!empty($data) and Tools::check_method('get')) {
                     $id = $data['id'];
                     $reserva = Reserva::getInstance($id);
-                    if ($reserva->getUsuarioId() === $_SESSION['id']) {
+                    if (Tools::check_session('moderador', 'admin') ||
+                        (Tools::check_session('user') and $reserva->getUsuarioId() === $_SESSION['id'])
+                    ) {
                         self::$view_reserva
                             ->codigo_qr($reserva)
                             ->render();
