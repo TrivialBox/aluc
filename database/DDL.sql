@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ALUC` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ALUC`;
 -- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: ALUC
@@ -183,7 +185,7 @@ CREATE TABLE `reservacion` (
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ALUC`.`reservacion_BEFORE_UPDATE` BEFORE UPDATE ON `reservacion` FOR EACH ROW
 BEGIN
-	if OLD.estado = 'cancelado' and NEW.estado != 'cancelado' then
+	if OLD.estado = 'cancelado' then
 		set NEW.estado = 'cancelado';
         signal sqlstate "45000" set message_text = "110000";
     end if;
@@ -649,4 +651,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-24 22:44:41
+-- Dump completed on 2016-11-24 22:52:41
