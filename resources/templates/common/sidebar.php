@@ -25,5 +25,10 @@
             Reservas
         </a>
     </li>
+    <li class="">
+        <a href="https://trivialbox.github.io/aluc/">
+            Ver Documentación
+        </a>
+    </li>
 </ul>
 </nav>
