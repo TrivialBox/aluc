@@ -3,16 +3,26 @@
 namespace Aluc\Dao;
 
 
+/**
+ * Clase para para manejo de base de datos de los Reportes
+ */
 class ReporteDao{
     private $database;
     private static $instance = null;
 
 
+    /**
+     * ReporteDao constructor.
+     */
     private function __construct() {
         $this->database = new Database();
         $this->database->connect();
     }
 
+    /**
+     * Obtener la instancia de la clase.
+     * @return null
+     */
     public static function getInstance() {
         if (static::$instance == null) {
             static::$instance = new self();
@@ -21,12 +31,18 @@ class ReporteDao{
     }
 
 
+    /**
+     * Método para obtener reportes a partir del año y el id_usuario.
+     * @param $year
+     * @param $id_usuario
+     * @return mixed
+     */
     public function getReportes(
-        $anio,
+        $year,
         $id_usuario
     ){
         try{
-            $where = "year(fecha) = '{$anio}'";
+            $where = "year(fecha) = '{$year}'";
 
             if ($id_usuario != null){
                 $where .= " and id_usuario = '{$id_usuario}'";
@@ -45,6 +61,14 @@ class ReporteDao{
         }
     }
 
+    /**
+     * Método para obtener reportes de un día en específico
+     * el cual también se puede pasar parámetros para filtar la búsqueda.
+     * @param $fecha
+     * @param $id_usuario
+     * @param $id_laboratorio
+     * @return mixed
+     */
     public function getReporteDia(
         $fecha,
         $id_usuario,
@@ -71,10 +95,24 @@ class ReporteDao{
         }
     }
 
-    public function getReporteSemana($semana, $anio,$id_usuario, $id_laboratorio){
+    /**
+     * Método para obtener reportes de una semana en específico
+     * el cual también se puede pasar parámetros para filtar la búsqueda.
+     * @param $semana
+     * @param $year
+     * @param $id_usuario
+     * @param $id_laboratorio
+     * @return mixed
+     */
+    public function getReporteSemana(
+        $semana,
+        $year,
+        $id_usuario,
+        $id_laboratorio
+    ){
         try{
             $where = " week(fecha) = '{$semana}' 
-                    and  year(fecha) = '{$anio}'";
+                    and  year(fecha) = '{$year}'";
 
             if ($id_usuario != null){
                 $where .= " and id_usuario = '{$id_usuario}'";
@@ -95,15 +133,24 @@ class ReporteDao{
         }
     }
 
+    /**
+     * Método para obtener reportes de un mes en específico
+     * el cual también se puede pasar parámetros para filtar la búsqueda.
+     * @param $month
+     * @param $year
+     * @param $id_usuario
+     * @param $id_laboratorio
+     * @return mixed
+     */
     public function getReporteMes(
         $month,
-        $anio,
+        $year,
         $id_usuario,
         $id_laboratorio
     ){
         try{
             $where = "month(fecha) = '{$month}' 
-                    and  year(fecha) = '{$anio}'";
+                    and  year(fecha) = '{$year}'";
 
             if ($id_usuario != null){
                 $where .= " and id_usuario = '{$id_usuario}'";
