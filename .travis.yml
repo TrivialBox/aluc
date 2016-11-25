@@ -5,7 +5,7 @@ php:
 services:
   - mysql
 before_install:
-  - cp /usr/share/zoneinfo/Etc/GMT+6 /etc/localtime
+  - sudo cp /usr/share/zoneinfo/Etc/GMT+6 /etc/localtime
 install:
   - composer install
   - composer dump-autoload
