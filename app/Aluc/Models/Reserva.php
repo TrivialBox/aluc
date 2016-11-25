@@ -71,7 +71,19 @@ class Reserva {
     }
 
     public static function getInstance($id){
-        return self::getReserva(self::get(null, null, $id));
+        $array = self::get(null, null, $id);
+        $fecha = new Fecha(
+            $array[0]['fecha'],
+            $array[0]['hora_inicio'],
+            $array[0]['hora_fin']
+        );
+        $reserva = new Reserva(
+            $array[0]['id_usuario'], $array[0]['id_laboratorio'], $fecha,
+            $array[0]['descripcion'], $array[0]['n_usuarios'], $array[0]['tipo_uso'],
+            $array[0]['codigo_secreto'], $array[0]['estado'],  $array[0]['id'], false
+        );
+        return $reserva;
+
     }
 
     public static function getReservaUsuario($usuario_id) {
