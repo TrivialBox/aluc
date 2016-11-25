@@ -72,7 +72,6 @@ class ReservaDao{
         try{
             if ($type_save){
                 $this->database->call('insertar_reserva', static::convertObjectArray($object));
-
             }else{
                 $this->database->call('editar_reserva', static::convertEditarReserva($object));
 

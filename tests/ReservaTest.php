@@ -25,9 +25,9 @@ class ReservaTest extends TestCase{
             $tipo_uso
         )->save();
         $reserva = Reserva::getReservaUsuario('0104633177');
-        $this->assertEquals($reserva[0]['id_laboratorio'], $laboratorio_id);
-        $this->assertEquals($reserva[0]['id_usuario'], $usuario_id);
-        $this->assertEquals($reserva[0]['hora_inicio'], $hora_inicio);
+        $this->assertEquals($reserva[0]->laboratorio_id, $laboratorio_id);
+        $this->assertEquals($reserva[0]->getUsuarioId(), $usuario_id);
+        $this->assertEquals($reserva[0]->getFecha()->hora_inicio, $hora_inicio);
     }
     /*public function testCambiarLaboratorioLLeno(){
         $reserva = Reserva::getReservaUsuario('0104633177');

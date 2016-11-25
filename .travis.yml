@@ -2,17 +2,15 @@ language: php
 php:
   - '5.6'
   - '7.0'
+before_install:
+  - sudo cp /usr/share/zoneinfo/Etc/GMT+6 /etc/localtime
 services:
   - mysql
-before_install:
-  - tz=America/Guayaquil
-  - sudo cp -vf /usr/share/zoneinfo/$tz /etc/localtime
-  - echo $tz | sudo tee /etc/timezone
-  - date
 install:
   - composer install
   - composer dump-autoload
 before_script:
+  - mysql -e SET GLOBAL time_zone = "America/Guayaquil" -u root
   - mysql -e "create database IF NOT EXISTS ALUC;" -u root
   - mysql -u root ALUC < database/DDL.sql
   - mysql -u root ALUC < database/populate.sql
