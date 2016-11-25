@@ -282,6 +282,8 @@ class ReservaDao{
                 return "No se puede realizar su actualización antes de hora";
             case 110000:
                 return "Su reserva se encuentra cancelada";
+            case 120000:
+                return "No se puede sobre escribir una reserva con el mismo usuario";
             default:
                 return "Ha ocurrido un error, disculpas por lo acontecido!";
         }
