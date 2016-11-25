@@ -152,7 +152,7 @@ class Database {
         $sql .= " WHERE {$where}";
         if (!$this->query($sql)) {
             throw new \Exception(
-                "Error al actualizar {$this->error()}",
+                $this->error(),
                 $this->errno()
             );
         }
