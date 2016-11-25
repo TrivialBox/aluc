@@ -1,5 +1,8 @@
 <?php
 namespace Aluc\Common;
+use Aluc\Models\Reserva;
+use Arcanedev\QrCode\QrCode;
+
 
 
 /**
@@ -35,5 +38,13 @@ class Tools {
         $string = htmlspecialchars($string);
         $string = filter_var($string, FILTER_SANITIZE_STRING);
         return $string;
+    }
+    public static function generarQr($id){
+        $codigo = Reserva::getInstance($id)
+            ->getCodigoSecreto();
+        $qrCode = new QRcode();
+        $qrCode->setText($codigo);
+        $qrCode->setSize(100);
+        return $qrCode->image("image alt", ['class' => 'qr-code-img']);
     }
 }
