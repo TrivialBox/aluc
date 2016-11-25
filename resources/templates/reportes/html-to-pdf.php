@@ -1,8 +1,22 @@
 <html>
     <head>
         <style>
-            h1 { text-align: center; font-size: 20mm}
-            h3 { text-align: center; font-size: 14mm}
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even){background-color: #f2f2f2}
+
+            th {
+                background-color: #00AAFF;
+                color: white;
+            }
         </style>
     </head>
     <body>
