@@ -17,24 +17,24 @@
             </div>
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Descripción">
                         <p>
                             {$reserva->descripcion}
                         </p>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Número de usuarios">
                         {$reserva->numero_usuarios}
                         <span class="glyphicon glyphicon-user pull-right"></span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Fecha de reserva"">
                         {$fecha->fecha}
                         <span class="glyphicon glyphicon-calendar pull-right"></span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de inicio">
                         {$fecha->hora_inicio}
-                        <span class="glyphicon glyphicon-time pull-right"></span>
+                        <span class="glyphicon glyphicon-time pull-right" ></span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de finalización"">
                         {$fecha->hora_fin}
                         <span class="glyphicon glyphicon-time pull-right"></span>
                     </li>
