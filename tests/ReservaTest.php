@@ -29,7 +29,7 @@ class ReservaTest extends TestCase{
         $this->assertEquals($reserva[0]['id_usuario'], $usuario_id);
         $this->assertEquals($reserva[0]['hora_inicio'], $hora_inicio);
     }
-    public function testCambiarLaboratorioLLeno(){
+    /*public function testCambiarLaboratorioLLeno(){
         $reserva = Reserva::getReservaUsuario('0104633177');
 
     }
@@ -37,6 +37,7 @@ class ReservaTest extends TestCase{
     /**
      * @expectedException Exception
     */
+    /*
     public function testIngresarReservaUsuarioMax2Horas(){
         $array = self::getReservas()['1'];
         $reserva = Reserva::getNewInstance(
@@ -49,7 +50,7 @@ class ReservaTest extends TestCase{
             $array['numero_usuarios'],
             $array['tipo_uso']
         )->save();
-    }
+    }*/
 
     private static function getReservas(){
         return [
