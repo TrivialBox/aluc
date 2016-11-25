@@ -11,27 +11,39 @@ class Administrador extends Persona {
     }
 
     /**
-     * Metodo para obtener el objeto Administrador del array devuelto de la
+     * Método para obtener el objeto Administrador del array devuelto de la
      * base de datos.
      * @param $array
      * @param bool $get_element
      * @return Administrador|array
      */
-    public static function get_object($array, $get_element = true){
+    public static function get_object(
+        $array,
+        $get_element = true
+    ){
         if ($get_element){
-            return new Administrador($array[0]["id"], $array[0]['nombre']);
+            return new Administrador(
+                $array[0]["id"],
+                $array[0]['nombre']
+            );
 
         }else {
             $admins = array();
             foreach ($array as $fila){
-                array_push($admins,new Administrador($fila['id'], $fila['nombre']));
+                array_push(
+                    $admins,
+                    new Administrador(
+                        $fila['id'],
+                        $fila['nombre']
+                    )
+                );
             }
             return $admins;
         }
     }
 
     /**
-     * Metodo para obtener un administrador de la base de datos.
+     * Método para obtener un administrador de la base de datos.
      * @param $id
      * @return Administrador|array
      */
@@ -40,7 +52,7 @@ class Administrador extends Persona {
     }
 
     /**
-     * Metodo para obtener una lista de todos los administradores.
+     * Método para obtener una lista de todos los administradores.
      * @param null $order_attribute
      * @return Administrador|array
      */
