@@ -7,7 +7,7 @@ use Sinergi\Token\StringGenerator;
  * Representación de una reserva en el sistema.
  */
 class Reserva {
-    public $id;
+    private $id;
     private $usuario_id;
     public $laboratorio_id;
     public $descripcion;
@@ -71,7 +71,19 @@ class Reserva {
     }
 
     public static function getInstance($id){
-        return self::getReserva(self::get(null, null, $id));
+        $array = self::get(null, null, $id);
+        $fecha = new Fecha(
+            $array[0]['fecha'],
+            $array[0]['hora_inicio'],
+            $array[0]['hora_fin']
+        );
+        $reserva = new Reserva(
+            $array[0]['id_usuario'], $array[0]['id_laboratorio'], $fecha,
+            $array[0]['descripcion'], $array[0]['n_usuarios'], $array[0]['tipo_uso'],
+            $array[0]['codigo_secreto'], $array[0]['estado'],  $array[0]['id'], false
+        );
+        return $reserva;
+
     }
 
     public static function getReservaUsuario($usuario_id) {
@@ -88,16 +100,20 @@ class Reserva {
     public static function get_object($array, $get_element = true){
 
         if ($get_element){
+            $obj= [];
             $fecha = new Fecha(
                 $array[0]['fecha'],
                 $array[0]['hora_inicio'],
                 $array[0]['hora_fin']
             );
-            return new Reserva(
+
+            $reserva = new Reserva(
                 $array[0]['id_usuario'], $array[0]['id_laboratorio'], $fecha,
                 $array[0]['descripcion'], $array[0]['n_usuarios'], $array[0]['tipo_uso'],
                 $array[0]['codigo_secreto'], $array[0]['estado'],  $array[0]['id'], false
                  );
+            array_push($obj, $reserva);
+            return $obj;
         }else{
             $reservas = [];
             foreach ($array as $fila){
@@ -150,19 +166,7 @@ class Reserva {
     }
 
     public function save(){
-        $obj = static::get_object(
-            ReservaDao::getInstance()->save($this, $this->is_save)git status
-
-        );
-        $this->id = $obj->id;
-        $this->usuario_id = $obj->usuario_id;
-        $this->laboratorio_id = $obj->laboratorio_id;
-        $this->descripcion = $obj->descripcion;
-        $this->numero_usuarios = $obj->numero_usuarios;
-        $this->tipo_uso = $obj->tipo_uso;
-        $this->estado = $obj->estado;
-        $this->fecha = $obj->fecha;
-        $this->codigo_secreto = $obj->codigo_secreto;
+        ReservaDao::getInstance()->save($this, $this->is_save);
         $this->is_save = false;
         return $this;
     }
@@ -173,7 +177,9 @@ class Reserva {
             false
         );
     }
-
+    public function getId(){
+        return $this->id;
+    }
     public function updateEstado($estado){
         $this->estado = $estado;
         ReservaDao::getInstance()->updateEstado($this);

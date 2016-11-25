@@ -72,7 +72,6 @@ class ReservaDao{
         try{
             if ($type_save){
                 $this->database->call('insertar_reserva', static::convertObjectArray($object));
-
             }else{
                 $this->database->call('editar_reserva', static::convertEditarReserva($object));
 
@@ -116,10 +115,13 @@ class ReservaDao{
     }
 
     public function updateEstado($object){
-
         try {
-            $where = " id = '{$object->getId()}'";
-            $this->database->update('reservacion', static::convertObjectArray($object), $where);
+
+            $where = " id_reserva = '{$object->getId()}'";
+            $array = [
+                'estado' => $object->estado
+            ];
+            $this->database->update('reservacion', $array, $where);
         } catch (\Exception $e) {
             $this->generarExcepcion($e);
         }

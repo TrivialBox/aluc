@@ -2,6 +2,8 @@ language: php
 php:
   - '5.6'
   - '7.0'
+before_install:
+  - sudo cp /usr/share/zoneinfo/Etc/GMT+6 /etc/localtime
 services:
   - mysql
 install:
@@ -12,5 +14,6 @@ before_script:
   - mysql -u root ALUC < database/DDL.sql
   - mysql -u root ALUC < database/populate.sql
   - mysqladmin -u root password '1234'
+  - mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p'1234'
 script:
   - make test
