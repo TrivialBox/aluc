@@ -58,6 +58,10 @@
 						</a>
 							<ul>
 					<li>
+						<a href="namespace-Aluc.Common.html">
+							Common						</a>
+							</li>
+					<li>
 						<a href="namespace-Aluc.Dao.html">
 							Dao						</a>
 							</li>
@@ -70,14 +74,14 @@
 							Service						</a>
 							</li>
 					<li>
-						<a href="namespace-Aluc.Tools.html">
-							Tools						</a>
-							</li>
-					<li>
 						<a href="namespace-Aluc.Views.html">
 							Views						</a>
 							</li>
 								</ul></li>
+					<li>
+						<a href="namespace-None.html">
+							None						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -89,9 +93,10 @@
 				<li><a href="class-Aluc.Models.Fecha.html">Fecha</a></li>
 				<li><a href="class-Aluc.Models.Horario.html">Horario</a></li>
 				<li><a href="class-Aluc.Models.Laboratorio.html">Laboratorio</a></li>
-				<li><a href="class-Aluc.Models.Lector.html">Lector</a></li>
+				<li><a href="class-Aluc.Models.LectorQr.html">LectorQr</a></li>
 				<li><a href="class-Aluc.Models.Moderador.html">Moderador</a></li>
 				<li><a href="class-Aluc.Models.Persona.html">Persona</a></li>
+				<li><a href="class-Aluc.Models.Reporte.html">Reporte</a></li>
 				<li class="active"><a href="class-Aluc.Models.Reserva.html">Reserva</a></li>
 				<li><a href="class-Aluc.Models.Usuario.html">Usuario</a></li>
 			</ul>
@@ -134,7 +139,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Models.html">Models</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Models.Reserva.html#4-61" title="Go to source code">Aluc/Models/Reserva.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Models.Reserva.html#6-191" title="Go to source code">Aluc/Models/Reserva.php</a>
 		<br>
 	</div>
 
@@ -154,7 +159,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getNewInstance">#</a>
-			<code><a href="source-class-Aluc.Models.Reserva.html#35-39" title="Go to source code">getNewInstance</a>( <span> <var>$usuario_id</var></span>, <span> <var>$laboratorio_id</var></span>, <span><code><a href="class-Aluc.Models.Fecha.html">Aluc\Models\Fecha</a></code> <var>$fecha</var></span>, <span> <var>$descripcion</var></span>, <span> <var>$numero_usuarios</var></span>, <span> <var>$tipo_uso</var></span> )</code>
+			<code><a href="source-class-Aluc.Models.Reserva.html#59-71" title="Go to source code">getNewInstance</a>( <span> <var>$usuario_id</var></span>, <span> <var>$laboratorio_id</var></span>, <span> <var>$fecha_n</var></span>, <span> <var>$hora_inicio</var></span>, <span> <var>$hora_fin</var></span>, <span> <var>$descripcion</var></span>, <span> <var>$numero_usuarios</var></span>, <span> <var>$tipo_uso</var></span> )</code>
 
 			<div class="description short">
 				
@@ -183,7 +188,123 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Models.Reserva.html#41-42" title="Go to source code">getInstance</a>( <span> <var>$id</var></span> )</code>
+			<code><a href="source-class-Aluc.Models.Reserva.html#73-87" title="Go to source code">getInstance</a>( <span> <var>$id</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getReservaUsuario" id="_getReservaUsuario">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getReservaUsuario">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#89-91" title="Go to source code">getReservaUsuario</a>( <span> <var>$usuario_id</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getReservaEstado" id="_getReservaEstado">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getReservaEstado">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#93-95" title="Go to source code">getReservaEstado</a>( <span> <var>$usuario_id</var></span>, <span> <var>$estado</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getReservaLaboratorio" id="_getReservaLaboratorio">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getReservaLaboratorio">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#96-98" title="Go to source code">getReservaLaboratorio</a>( <span> <var>$laboratorio_id</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="get_object" id="_get_object">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_get_object">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#100-136" title="Go to source code">get_object</a>( <span> <var>$array</var></span>, <span> <var>$get_element</var> = <span class="php-keyword1">true</span></span> )</code>
 
 			<div class="description short">
 				
@@ -212,7 +333,36 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getCodigoSecreto">#</a>
-			<code><a href="source-class-Aluc.Models.Reserva.html#47-49" title="Go to source code">getCodigoSecreto</a>( )</code>
+			<code><a href="source-class-Aluc.Models.Reserva.html#147-149" title="Go to source code">getCodigoSecreto</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getUsuarioId" id="_getUsuarioId">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getUsuarioId">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#151-153" title="Go to source code">getUsuarioId</a>( )</code>
 
 			<div class="description short">
 				
@@ -241,7 +391,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getFecha">#</a>
-			<code><a href="source-class-Aluc.Models.Reserva.html#51-53" title="Go to source code">getFecha</a>( )</code>
+			<code><a href="source-class-Aluc.Models.Reserva.html#155-157" title="Go to source code">getFecha</a>( )</code>
 
 			<div class="description short">
 				
@@ -270,7 +420,181 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setFecha">#</a>
-			<code><a href="source-class-Aluc.Models.Reserva.html#55-56" title="Go to source code">setFecha</a>( <span><code><a href="class-Aluc.Models.Fecha.html">Aluc\Models\Fecha</a></code> <var>$nueva_fecha</var></span> )</code>
+			<code><a href="source-class-Aluc.Models.Reserva.html#159-162" title="Go to source code">setFecha</a>( <span> <var>$fecha</var></span>, <span> <var>$hora_inicio</var></span>, <span> <var>$hora_fin</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getLaboratorio" id="_getLaboratorio">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getLaboratorio">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#164-166" title="Go to source code">getLaboratorio</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="save" id="_save">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_save">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#168-172" title="Go to source code">save</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getAll" id="_getAll">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getAll">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#174-179" title="Go to source code">getAll</a>( <span> <var>$order_atributo</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getId" id="_getId">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getId">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#180-182" title="Go to source code">getId</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="updateEstado" id="_updateEstado">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_updateEstado">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#183-186" title="Go to source code">updateEstado</a>( <span> <var>$estado</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="cancelar" id="_cancelar">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_cancelar">#</a>
+			<code><a href="source-class-Aluc.Models.Reserva.html#188-190" title="Go to source code">cancelar</a>( )</code>
 
 			<div class="description short">
 				
@@ -304,56 +628,6 @@
 		<div class="panel panel-default">
             <div class="panel-heading"><h2>Properties summary</h2></div>
 			<table class="summary table table-bordered table-striped properties" id="properties">
-		<tr data-order="id" id="$id">
-			<td class="attributes"><code>
-				public  
-				
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#8" title="Go to source code"><var>$id</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$id" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
-		<tr data-order="usuario_id" id="$usuario_id">
-			<td class="attributes"><code>
-				public  
-				
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#9" title="Go to source code"><var>$usuario_id</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$usuario_id" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
 		<tr data-order="laboratorio_id" id="$laboratorio_id">
 			<td class="attributes"><code>
 				public  
@@ -361,7 +635,7 @@
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#10" title="Go to source code"><var>$laboratorio_id</var></a>
+					<a href="source-class-Aluc.Models.Reserva.html#12" title="Go to source code"><var>$laboratorio_id</var></a>
 
 				<div class="description short">
 					
@@ -386,7 +660,7 @@
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#11" title="Go to source code"><var>$descripcion</var></a>
+					<a href="source-class-Aluc.Models.Reserva.html#13" title="Go to source code"><var>$descripcion</var></a>
 
 				<div class="description short">
 					
@@ -411,7 +685,7 @@
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#12" title="Go to source code"><var>$numero_usuarios</var></a>
+					<a href="source-class-Aluc.Models.Reserva.html#14" title="Go to source code"><var>$numero_usuarios</var></a>
 
 				<div class="description short">
 					
@@ -436,7 +710,7 @@
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#13" title="Go to source code"><var>$tipo_uso</var></a>
+					<a href="source-class-Aluc.Models.Reserva.html#15" title="Go to source code"><var>$tipo_uso</var></a>
 
 				<div class="description short">
 					
@@ -461,7 +735,7 @@
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Aluc.Models.Reserva.html#14" title="Go to source code"><var>$estado</var></a>
+					<a href="source-class-Aluc.Models.Reserva.html#16" title="Go to source code"><var>$estado</var></a>
 
 				<div class="description short">
 					
@@ -495,6 +769,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?39a4ff92ae9d0775b65d82a2b5f28c77fab29e87"></script>
+<script src="elementlist.js?ac737646b0f212c2e67bd3cacece318e2563ff87"></script>
 </body>
 </html>

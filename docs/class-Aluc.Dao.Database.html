@@ -57,6 +57,10 @@
 							Aluc<span></span>
 						</a>
 							<ul>
+					<li>
+						<a href="namespace-Aluc.Common.html">
+							Common						</a>
+							</li>
 					<li class="active">
 						<a href="namespace-Aluc.Dao.html">
 							Dao						</a>
@@ -70,14 +74,14 @@
 							Service						</a>
 							</li>
 					<li>
-						<a href="namespace-Aluc.Tools.html">
-							Tools						</a>
-							</li>
-					<li>
 						<a href="namespace-Aluc.Views.html">
 							Views						</a>
 							</li>
 								</ul></li>
+					<li>
+						<a href="namespace-None.html">
+							None						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -85,9 +89,13 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Aluc.Dao.AdministradorDao.html">AdministradorDao</a></li>
 				<li class="active"><a href="class-Aluc.Dao.Database.html">Database</a></li>
 				<li><a href="class-Aluc.Dao.LaboratorioDao.html">LaboratorioDao</a></li>
+				<li><a href="class-Aluc.Dao.LectorQrDao.html">LectorQrDao</a></li>
 				<li><a href="class-Aluc.Dao.ModeradorDao.html">ModeradorDao</a></li>
+				<li><a href="class-Aluc.Dao.ReporteDao.html">ReporteDao</a></li>
+				<li><a href="class-Aluc.Dao.ReservaDao.html">ReservaDao</a></li>
 			</ul>
 
 
@@ -124,7 +132,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Dao.html">Dao</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Dao.Database.html#6-164" title="Go to source code">Aluc/Dao/Database.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Dao.Database.html#6-180" title="Go to source code">Aluc/Dao/Database.php</a>
 		<br>
 	</div>
 
@@ -162,6 +170,35 @@
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="__destruct" id="___destruct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___destruct">#</a>
+			<code><a href="source-class-Aluc.Dao.Database.html#32-34" title="Go to source code">__destruct</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="connect" id="_connect">
 
 			<td class="attributes"><code>
@@ -173,7 +210,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_connect">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#33-47" title="Go to source code">connect</a>( )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#36-50" title="Go to source code">connect</a>( )</code>
 
 			<div class="description short">
 				
@@ -202,36 +239,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_disconnect">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#49-53" title="Go to source code">disconnect</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="query" id="_query">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_query">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#55-57" title="Go to source code">query</a>( <span> <var>$sql</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#52-56" title="Go to source code">disconnect</a>( )</code>
 
 			<div class="description short">
 				
@@ -260,7 +268,36 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_error">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#59-61" title="Go to source code">error</a>( )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#62-64" title="Go to source code">error</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="errno" id="_errno">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_errno">#</a>
+			<code><a href="source-class-Aluc.Dao.Database.html#66-68" title="Go to source code">errno</a>( )</code>
 
 			<div class="description short">
 				
@@ -289,7 +326,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_call">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#63-74" title="Go to source code">call</a>( <span> <var>$procedure_name</var></span>, <span> <var>$values</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#70-81" title="Go to source code">call</a>( <span> <var>$procedure_name</var></span>, <span> <var>$values</var></span> )</code>
 
 			<div class="description short">
 				
@@ -318,7 +355,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_insert">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#76-86" title="Go to source code">insert</a>( <span> <var>$table_name</var></span>, <span> <var>$values</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#83-94" title="Go to source code">insert</a>( <span> <var>$table_name</var></span>, <span> <var>$values</var></span> )</code>
 
 			<div class="description short">
 				
@@ -347,7 +384,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_select">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#116-133" title="Go to source code">select</a>( <span> <var>$table_name</var></span>, <span> <var>$columns</var> = <span class="php-quote">'*'</span></span>, <span> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span> <var>$order</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#117-133" title="Go to source code">select</a>( <span> <var>$table_name</var></span>, <span> <var>$columns</var> = <span class="php-quote">'*'</span></span>, <span> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span> <var>$order</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				
@@ -376,7 +413,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_delete">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#135-142" title="Go to source code">delete</a>( <span> <var>$view_name</var></span>, <span> <var>$where</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#135-143" title="Go to source code">delete</a>( <span> <var>$view_name</var></span>, <span> <var>$where</var></span> )</code>
 
 			<div class="description short">
 				
@@ -405,7 +442,36 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_update">#</a>
-			<code><a href="source-class-Aluc.Dao.Database.html#144-159" title="Go to source code">update</a>( <span> <var>$view_name</var></span>, <span> <var>$columns</var></span>, <span> <var>$where</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.Database.html#145-159" title="Go to source code">update</a>( <span> <var>$view_name</var></span>, <span> <var>$columns</var></span>, <span> <var>$where</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getMgs" id="_getMgs">
+
+			<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getMgs">#</a>
+			<code><a href="source-class-Aluc.Dao.Database.html#161-175" title="Go to source code">getMgs</a>( <span> <var>$code</var></span>, <span> <var>$data</var></span> )</code>
 
 			<div class="description short">
 				
@@ -444,6 +510,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?39a4ff92ae9d0775b65d82a2b5f28c77fab29e87"></script>
+<script src="elementlist.js?ac737646b0f212c2e67bd3cacece318e2563ff87"></script>
 </body>
 </html>
