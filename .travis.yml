@@ -5,6 +5,9 @@ php:
 services:
   - mysql
 before_install:
+  - tz=America/Guayaquil
+  - sudo cp -vf /usr/share/zoneinfo/$tz /etc/localtime
+  - echo $tz | sudo tee /etc/timezone
   - date
 install:
   - composer install
