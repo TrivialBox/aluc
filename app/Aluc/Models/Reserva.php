@@ -181,6 +181,10 @@ class Reserva {
         $this->estado = $estado;
         ReservaDao::getInstance()->updateEstado($this);
     }
+
+    public function cancelar() {
+        $this->updateEstado('cancelado');
+    }
 }
 
 
