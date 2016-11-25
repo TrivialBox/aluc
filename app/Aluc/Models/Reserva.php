@@ -190,7 +190,7 @@ class Reserva {
         $this->updateEstado('cancelado');
     }
 
-    public static function validarQr($mac, $ip, $token){
+    public static function validarQr($mac, $ip, $token,$codigo_secreto){
 
         $lector = LectorQr::getInstance($mac);
 
@@ -200,7 +200,14 @@ class Reserva {
                 'la ip es diferente la del usuario registrado'
             );
         }
-        $reserva = ReservaDao::getInstance()->getRservaToken($token);
+        if ($lector->getToken() != $token){
+            throw new AlucException(
+                'El token del dispositivo que se ha conectado no es valido',
+                'El token del dispositivo que se ha conectado no es valido'
+
+            );
+        }
+        $reserva = ReservaDao::getInstance()->getRservaToken($codigo_secreto);
 
         ReservaDao::getInstance()->procesarReserva($reserva[0]['id']);
     }
