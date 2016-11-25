@@ -121,7 +121,7 @@ use Aluc\Common\TemplateGenerator;
                         <label for="tipo_uso">Tipo de Uso</label>
                         <select class="form-control" id="tipo_uso" name="tipo_uso">
                           <option value="clases">Clases</option>
-                          <option value="practica">Práctica</option>
+                          <option value="práctica">Práctica</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -222,8 +222,8 @@ use Aluc\Common\TemplateGenerator;
 </div>
 <!-- END modal add-reserva -->
 
-<!-- Modal confirm-delete-reserva -->
-<div class="modal fade in" tabindex="-1" role="dialog" id="modal-confirm-delete-reserva">
+<!-- Modal confirm-cancel-reserva -->
+<div class="modal fade in" tabindex="-1" role="dialog" id="modal-confirm-cancel-reserva">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -231,30 +231,59 @@ use Aluc\Common\TemplateGenerator;
                     <span>&times;</span>
                 </button>
                 <h4 class="modal-title">
-                    ¿Eliminar reserva <span id="id-reserva" class="text-danger"></span>?
+                    ¿Cancelar reserva?
                 </h4>
             </div>
 
-            <form id="form-delete-reserva">
+            <form id="form-cancel-reserva">
                 <input value="" type="hidden" id="id" name="id">
                 <div class="modal-body bg-warning">
-                    Al eliminar un reserva este podrá seguir usando el sistema,
-                    pero no tendrá acceso a la zona administrativa. Esta acción
-                    es <strong>irreversible</strong>.
+                    Al cancelar una reserva esta ya no podrá ser usada,
+                    si desea tener nuevamente esta reserva, deberá
+                    crear una nueva. Esta acción es <strong>irreversible</strong>.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         No, conservar reserva
                     </button>
-                    <button type="submit" id="submit-delete-reserva" class="btn btn-danger">
-                        Si, eliminar reserva
+                    <button type="submit" id="submit-cancel-reserva" class="btn btn-danger">
+                        Si, cancelar reserva
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- END modal-confirm-delete-reserva -->
+<!-- END modal-confirm-cancel-reserva -->
+
+
+<!-- Modal show-qr -->
+<div class="modal fade in" tabindex="-1" role="dialog" id="modal-show-qr">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    Código QR
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <small class="text-muted">
+                    Presente éste código desde su teléfono o impreso antes de acceder al laboratorio.
+                </small>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary">
+                    Descargar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END modal-show-qr -->
 
 <!-- Recursos adicionales -->
 <?php

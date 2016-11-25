@@ -68,9 +68,9 @@ class ReservasSrv {
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('post')) {
                     $id_laboratorio = $data['id_laboratorio'];
-                    $tipo_uso = $_SESSION['type'] === 'profesor' ? $data['tipo_uso'] : 'practica';
+                    $tipo_uso = Tools::check_session('profesor') ? $data['tipo_uso'] : 'práctica';
                     $numero_usuarios = $data['numero_usuarios'];
-                    $fecha = $data['fecha'];
+                    $fecha = Tools::getCanonicalFecha($data['fecha']);
                     $hora_inicio = $data['hora_inicio'];
                     $hora_fin = $data['hora_fin'];
                     $descripcion = $data['descripcion'];
@@ -82,8 +82,47 @@ class ReservasSrv {
                         $tipo_uso
                     )->save();
                     self::$view_reserva
-                        ->listReserva($reserva->id)
+                        ->listReserva($reserva->getId())
                         ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
+            },
+            function ($e) {
+                self::$view_general
+                    ->error_json_default($e)
+                    ->render();
+            }
+        );
+    }
+
+
+    /**
+     * /reservas/cancelar
+     *
+     * Cancela una reserva.
+     * El usuario debe estar logeado para
+     * realizar esta acción, se realiza una
+     * solicitud vía post.
+     */
+    public static function cancelar($data) {
+        self::user_do(
+            function () use ($data) {
+                if (!empty($data) and Tools::check_method('post')) {
+                    $id = $data['id'];
+                    $reserva = Reserva::getInstance($id);
+                    if ($reserva->getUsuarioId() === $_SESSION['id']) {
+                        $reserva->cancelar();
+                        self::$view_general
+                            ->success_json()
+                            ->render();
+                    } else {
+                        self::$view_general
+                            ->error404()
+                            ->render();
+                    }
                 } else {
                     self::$view_general
                         ->error404()

@@ -15,6 +15,8 @@ class ReservaView extends View {
     }
 
     public function home($data = []) {
+        $reservas = Reserva::getReservaUsuario($_SESSION['id']);
+        $data['reservas'] = $reservas;
         $this->setTemplate(
             $data,
             'reservas/reservas.php'
@@ -31,8 +33,10 @@ class ReservaView extends View {
     }
 
     public function listReserva($id) {
+        $reserva = Reserva::getInstance($id);
+        var_dump($reserva);
         return $this->listAll([
-            'reserva' => Reserva::getInstance($id)
+            'reservas' => [$reserva]
         ]);
     }
 

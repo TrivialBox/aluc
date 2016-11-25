@@ -15,3 +15,8 @@ sendRequestReservas('#form-add-reserva', 'nueva', function (data, status) {
     $('#modal-add-reserva').modal('hide');
     $('#form-add-reserva')[0].reset();
 });
+
+sendRequestReservas('#form-cancel-reserva', 'cancelar', function (data, status) {
+    showAlert('alert-success', 'Reserva cancelada.');
+    $('#modal-confirm-cancel-reserva').modal('hide');
+});

@@ -36,4 +36,8 @@ class Tools {
         $string = filter_var($string, FILTER_SANITIZE_STRING);
         return $string;
     }
+
+    public static function getCanonicalFecha($fecha) {
+        return date("Y-m-d", strtotime($fecha));
+    }
 }
