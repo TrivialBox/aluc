@@ -15,7 +15,7 @@ class ReservaView extends View {
     }
 
     public function home($data = []) {
-        $reservas = Reserva::getReservaUsuario($_SESSION['id']);
+        $reservas = Reserva::getReservaEstado($_SESSION['id'], 'reservado');
         $data['reservas'] = $reservas;
         $this->setTemplate(
             $data,
@@ -34,16 +34,30 @@ class ReservaView extends View {
 
     public function listReserva($id) {
         $reserva = Reserva::getInstance($id);
-        var_dump($reserva);
         return $this->listAll([
             'reservas' => [$reserva]
         ]);
     }
 
-    public function listReservasUsuario($user_id) {
-        return $this->listAll([
-            'reservas' => Reserva::getReservaUsuario($user_id)
-        ]);
+    public function listReservasUsuario($user_id, $type = 'all') {
+        if ($type === 'all') {
+            return $this->listAll([
+                'reservas' => Reserva::getReservaUsuario($user_id)
+            ]);
+        } else if ($type === 'new') {
+            $type = 'reservado';
+            return $this->listAll([
+                'reservas' => Reserva::getReservaEstado($user_id, $type)
+            ]);
+        } else if ($type === 'old') {
+            return $this->listAll([
+                'reservas' => array_merge(
+                    Reserva::getReservaEstado($user_id, 'cancelado'),
+                    Reserva::getReservaEstado($user_id, 'cancelado_ausencia'),
+                    Reserva::getReservaEstado($user_id, 'procesado')
+                )
+            ]);
+        }
     }
 
     public function codigo_qr($reserva) {

@@ -55,12 +55,12 @@ use Aluc\Common\TemplateGenerator;
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
                 <li class="nav-item active">
-                    <a class="nav-link" data-toggle="tab" href="#reservas-nuevas-content">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-nuevas-content" id="reservas-nuevas-tab">
                         Nuevas
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#reservas-pasadas-content">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-pasadas-content" id="reservas-pasadas-tab">
                         Pasadas
                     </a>
                 </li>

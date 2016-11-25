@@ -43,9 +43,17 @@ class ReservasSrv {
     public static function home($data) {
         self::user_do(
             function () use ($data){
-                self::$view_reserva
-                    ->home()
-                    ->render();
+                if (!empty($data) and Tools::check_method('get')) {
+                    $type = $data['type'];
+                    $user_id = $_SESSION['id'];
+                    self::$view_reserva
+                        ->listReservasUsuario($user_id, $type)
+                        ->render();
+                } else {
+                    self::$view_reserva
+                        ->home()
+                        ->render();
+                }
             },
             function ($e) {
                 self::$view_general
