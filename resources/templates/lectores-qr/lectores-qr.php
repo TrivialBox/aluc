@@ -48,8 +48,9 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de lectores -->
-                <table id="table-lectores-qr" class="table table-hover table-condensed table-responsive">
-                    <thead>
+                <div class="table-responsive">
+                    <table id="table-lectores-qr" class="table table-hover table-condensed">
+                        <thead>
                         <tr>
                             <th>MAC</th>
                             <th>IP</th>
@@ -57,17 +58,18 @@ use Aluc\Common\TemplateGenerator;
                             <th>Token</th>
                             <th><span class="pull-right">Acción</span></th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    TemplateGenerator::generate([
+                        </thead>
+                        <tbody>
+                        <?php
+                        TemplateGenerator::generate([
                             'lectores_qr' => $get('lectores_qr')
                         ],
-                        'lectores-qr/lectores-qr-list.php'
-                    );
-                    ?>
-                    </tbody>
-                </table>
+                            'lectores-qr/lectores-qr-list.php'
+                        );
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
                 <!-- END Tabla editable de lectores -->
 
                 <?php

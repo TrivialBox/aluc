@@ -50,25 +50,27 @@ use Aluc\Common\TemplateGenerator;
                 </div>
 
                 <!-- Tabla editable de moderadores -->
-                <table class="table table-hover table-condensed table-responsive" id="table-moderadores">
-                    <thead>
-                        <tr>
-                            <th>ID </th>
-                            <th>Nombre</th>
-                            <th>Laboratorio</th>
-                            <th><span class="pull-right">Acción</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    TemplateGenerator::generate([
-                            'moderadores' => $get('moderadores')
-                        ],
-                        'moderadores/moderadores-list.php'
-                    );
-                    ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed" id="table-moderadores">
+                        <thead>
+                            <tr>
+                                <th>ID </th>
+                                <th>Nombre</th>
+                                <th>Laboratorio</th>
+                                <th><span class="pull-right">Acción</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        TemplateGenerator::generate([
+                                'moderadores' => $get('moderadores')
+                            ],
+                            'moderadores/moderadores-list.php'
+                        );
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
                 <!-- END Tabla editable de moderadores -->
 
                 <?php
