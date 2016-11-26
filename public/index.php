@@ -9,7 +9,7 @@ use Aluc\Service\EscritorioSrv;
 use Aluc\Service\ReservasSrv;
 
 $_SESSION['id'] = '0105070353';
-$_SESSION['type'] = 'admin';
+$_SESSION['type'] = 'admin';  // admin, moderador, user, profesor
 
 function home() {
     echo 'Página de inicio';
