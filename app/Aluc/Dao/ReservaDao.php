@@ -267,25 +267,27 @@ class ReservaDao{
     private  static function getMsgInsert($code) {
         switch ($code) {
             case 1452:
-                return "El laboratorio no se encuentra registrado";
+                return "El laboratorio no se encuentra registrado.";
             case 50000:
-                return "En la hora que quiere realizar su reserva el laboratorio se encuentra en horario de clases";
+                return "En la hora que quiere realizar su reserva el laboratorio se encuentra en horario de clases.";
             case 60000:
-                return "En la hora que quiere realizar su reserva el laboratorio no se encuentra en hora de apertura";
+                return "En la hora que quiere realizar su reserva el laboratorio no se encuentra en hora de apertura.";
             case 70000:
-                return "Tiene un máximo de dos horas diarias, limite excedido!";
+                return "Tiene un máximo de dos horas diarias, limite excedido!.";
             case 80000:
-                return "El laboratorio tiene una capacidad, limite excedido!";
+                return "El laboratorio tiene una capacidad, limite excedido!.";
             case 90000:
-                return "Solo se pueden hacer reservas pasado un rango de 5 días máximo";
+                return "Solo se pueden hacer reservas pasado un rango de 5 días máximo.";
             case 100000:
-                return "No se puede realizar su actualización antes de hora";
+                return "En la fecha que quiere realizar su reserva es anterior a la actual.";
             case 110000:
-                return "Su reserva se encuentra cancelada";
+                return "Su reserva se encuentra cancelada.";
             case 120000:
-                return "No se puede sobre escribir una reserva con el mismo usuario";
+                return "No se puede sobre escribir una reserva con el mismo usuario.";
+            case 130000:
+                return "La hora de final de la reseva tiene que ser mayor a la de inicio.";
             default:
-                return "Ha ocurrido un error, disculpas por lo acontecido!";
+                return "Ha ocurrido un error, disculpas por lo acontecido!.";
         }
     }
 
