@@ -48,3 +48,7 @@
 .affix {
     top: 20px;
 }
+
+.btn-group {
+  display: flex;
+}
