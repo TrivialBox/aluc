@@ -148,7 +148,7 @@ CREATE TABLE `reserva` (
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -480,11 +480,11 @@ BEGIN
     
     start transaction;
     
-    if(Shora_inicio <= Shora_fin) then
+    if(Shora_fin <= Shora_inicio) then
 		signal sqlstate "45000" set message_text = "130000";
 	end if;
     
-    if (now() >= timestamp(Sfecha,Shora_inicio))then
+    if (timediff(Shora_fin,Shota_inicio) < 3000 and now() >= timestamp(Sfecha,Shora_inicio))then
 		signal sqlstate "45000" set message_text = "100000";
     end if;
     
@@ -654,4 +654,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-28 12:12:07
+-- Dump completed on 2016-11-29  6:50:41
