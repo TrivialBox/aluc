@@ -96,6 +96,7 @@
 				<li><a href="class-Aluc.Dao.ModeradorDao.html">ModeradorDao</a></li>
 				<li><a href="class-Aluc.Dao.ReporteDao.html">ReporteDao</a></li>
 				<li><a href="class-Aluc.Dao.ReservaDao.html">ReservaDao</a></li>
+				<li><a href="class-Aluc.Dao.UsuarioDao.html">UsuarioDao</a></li>
 			</ul>
 
 
@@ -114,6 +115,9 @@
 	<h1>Class LectorQrDao</h1>
 
 
+	<div class="description">
+	<p>Clase para para manejo de base de datos de los lectores QR</p>
+	</div>
 
 
 
@@ -129,7 +133,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Dao.html">Dao</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Dao.LectorQrDao.html#8-100" title="Go to source code">Aluc/Dao/LectorQrDao.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Dao.LectorQrDao.html#8-184" title="Go to source code">Aluc/Dao/LectorQrDao.php</a>
 		<br>
 	</div>
 
@@ -142,24 +146,28 @@
 
 			<td class="attributes"><code>
 				 public static
-				
+				null
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#18-23" title="Go to source code">getInstance</a>( )</code>
+			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#24-33" title="Go to source code">getInstance</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Obtener la instancia de la clase.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Obtener la instancia de la clase.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						null
+					</div>
 
 
 
@@ -171,25 +179,42 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_save">#</a>
-			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#37-58" title="Go to source code">save</a>( <span> <var>$object</var></span>, <span> <var>$type_save</var> = <span class="php-keyword1">true</span></span> )</code>
+			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#51-100" title="Go to source code">save</a>( <span> <var>$object</var></span>, <span>boolean <var>$type_save</var> = <span class="php-keyword1">true</span> </span> )</code>
 
 			<div class="description short">
-				
+				<p>Él método save cumple dos funciones, insertar y actualizar
+en la base de datos, dependiendo del parámetro $is_save.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Él método save cumple dos funciones, insertar y actualizar
+en la base de datos, dependiendo del parámetro $is_save.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+						<dt><var>$type_save</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Aluc.Common.AlucException.html">Aluc\Common\AlucException</a></code>
+					</div>
 
 
 
@@ -200,25 +225,38 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_get">#</a>
-			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#60-70" title="Go to source code">get</a>( <span> <var>$mac</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#102-128" title="Go to source code">get</a>( <span> <var>$mac</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener un lector QR en específico.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener un lector QR en específico.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$mac</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Aluc.Common.AlucException.html">Aluc\Common\AlucException</a></code>
+					</div>
 
 
 
@@ -229,24 +267,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getAll">#</a>
-			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#72-80" title="Go to source code">getAll</a>( <span> <var>$order_atribute</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#130-149" title="Go to source code">getAll</a>( <span> <var>$order_attribute</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener todos los lectores Qr registrados.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener todos los lectores Qr registrados.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$order_attribute</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -265,18 +312,27 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_delete">#</a>
-			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#82-90" title="Go to source code">delete</a>( <span> <var>$mac</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.LectorQrDao.html#151-170" title="Go to source code">delete</a>( <span> <var>$mac</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para eliminar un lector Qr</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para eliminar un lector Qr</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$mac</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Aluc.Common.AlucException.html">Aluc\Common\AlucException</a></code>
+					</div>
 
 
 
@@ -303,7 +359,7 @@
 		ALUC API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
-<script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?ac737646b0f212c2e67bd3cacece318e2563ff87"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

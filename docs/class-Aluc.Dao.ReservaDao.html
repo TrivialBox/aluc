@@ -96,6 +96,7 @@
 				<li><a href="class-Aluc.Dao.ModeradorDao.html">ModeradorDao</a></li>
 				<li><a href="class-Aluc.Dao.ReporteDao.html">ReporteDao</a></li>
 				<li class="active"><a href="class-Aluc.Dao.ReservaDao.html">ReservaDao</a></li>
+				<li><a href="class-Aluc.Dao.UsuarioDao.html">UsuarioDao</a></li>
 			</ul>
 
 
@@ -114,6 +115,9 @@
 	<h1>Class ReservaDao</h1>
 
 
+	<div class="description">
+	<p>Clase para para manejo de base de datos de las reservas</p>
+	</div>
 
 
 
@@ -129,7 +133,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Dao.html">Dao</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Dao.ReservaDao.html#8-163" title="Go to source code">Aluc/Dao/ReservaDao.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Dao.ReservaDao.html#8-296" title="Go to source code">Aluc/Dao/ReservaDao.php</a>
 		<br>
 	</div>
 
@@ -142,24 +146,28 @@
 
 			<td class="attributes"><code>
 				 public static
-				
+				null
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#18-23" title="Go to source code">getInstance</a>( )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#24-33" title="Go to source code">getInstance</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Obtener la instancia de la clase.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Obtener la instancia de la clase.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						null
+					</div>
 
 
 
@@ -171,24 +179,33 @@
 
 			<td class="attributes"><code>
 				 public static
-				
+				array
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_convertObjectArray">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#26-40" title="Go to source code">convertObjectArray</a>( <span> <var>$object</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#36-55" title="Go to source code">convertObjectArray</a>( <span> <var>$object</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para convertir un objeto en array asociativo.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para convertir un objeto en array asociativo.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
 
 
 
@@ -200,24 +217,35 @@
 
 			<td class="attributes"><code>
 				 public static
-				
+				array
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_convertEditarReserva">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#42-54" title="Go to source code">convertEditarReserva</a>( <span> <var>$object</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#57-75" title="Go to source code">convertEditarReserva</a>( <span> <var>$object</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para convertir un objeto en array asociativo
+con parámetros en específico.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para convertir un objeto en array asociativo
+con parámetros en específico.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
 
 
 
@@ -236,18 +264,27 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_generarExcepcion">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#56-70" title="Go to source code">generarExcepcion</a>( <span> <var>$e</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#77-96" title="Go to source code">generarExcepcion</a>( <span> <var>$e</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método genérico para generar excepciones.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método genérico para generar excepciones.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$e</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Aluc.Common.AlucException.html">Aluc\Common\AlucException</a></code>
+					</div>
 
 
 
@@ -265,16 +302,25 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_save">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#71-82" title="Go to source code">save</a>( <span> <var>$object</var></span>, <span> <var>$type_save</var> = <span class="php-keyword1">true</span></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#98-121" title="Go to source code">save</a>( <span> <var>$object</var></span>, <span>boolean <var>$type_save</var> = <span class="php-keyword1">true</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Él método save cumple dos funciones, insertar y actualizar
+en la base de datos, dependiendo del parámetro $is_save.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Él método save cumple dos funciones, insertar y actualizar
+en la base de datos, dependiendo del parámetro $is_save.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+						<dt><var>$type_save</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -287,24 +333,39 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_get">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#84-104" title="Go to source code">get</a>( <span> <var>$usuario_id</var> = <span class="php-keyword1">null</span></span>, <span> <var>$estado</var> = <span class="php-keyword1">null</span></span>, <span> <var>$id</var> = <span class="php-keyword1">null</span></span>, <span> <var>$laboratorio_id</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#123-158" title="Go to source code">get</a>( <span>null <var>$usuario_id</var> = <span class="php-keyword1">null</span></span>, <span>null <var>$estado</var> = <span class="php-keyword1">null</span></span>, <span>null <var>$id</var> = <span class="php-keyword1">null</span></span>, <span>null <var>$laboratorio_id</var> = <span class="php-keyword1">null</span> </span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener reservas.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener reservas.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$usuario_id</var></dt>
+						<dd></dd>
+						<dt><var>$estado</var></dt>
+						<dd></dd>
+						<dt><var>$id</var></dt>
+						<dd></dd>
+						<dt><var>$laboratorio_id</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -316,24 +377,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getAll">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#106-115" title="Go to source code">getAll</a>( <span> <var>$order_atribute</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#160-180" title="Go to source code">getAll</a>( <span> <var>$order_attribute</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener todos las reservas registradas.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener todos las reservas registradas.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$order_attribute</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -352,16 +422,99 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_updateEstado">#</a>
-			<code><a href="source-class-Aluc.Dao.ReservaDao.html#117-128" title="Go to source code">updateEstado</a>( <span> <var>$object</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#182-201" title="Go to source code">updateEstado</a>( <span> <var>$object</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para actualizar el estado de una reserva.</p>
 			</div>
 
 			<div class="description detailed hidden">
+				<p>Método para actualizar el estado de una reserva.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="getRservaToken" id="_getRservaToken">
+
+			<td class="attributes"><code>
+				 public 
+				mixed
 				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_getRservaToken">#</a>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#203-226" title="Go to source code">getRservaToken</a>( <span> <var>$token</var></span> )</code>
+
+			<div class="description short">
+				<p>Método para obtener el id de reserva de un token específico.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Método para obtener el id de reserva de un token específico.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$token</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Aluc.Common.AlucException.html">Aluc\Common\AlucException</a></code>
+					</div>
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="procesarReserva" id="_procesarReserva">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_procesarReserva">#</a>
+			<code><a href="source-class-Aluc.Dao.ReservaDao.html#228-247" title="Go to source code">procesarReserva</a>( <span> <var>$id</var></span> )</code>
+
+			<div class="description short">
+				<p>Método para procesar reserva, cuando el usuario acceda ha su
+reserva el estado de la misma pasa ha procesada.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Método para procesar reserva, cuando el usuario acceda ha su
+reserva el estado de la misma pasa ha procesada.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$id</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -390,7 +543,7 @@
 		ALUC API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
-<script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?ac737646b0f212c2e67bd3cacece318e2563ff87"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>
