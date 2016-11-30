@@ -11,3 +11,5 @@
 <script src="/js/common/alerts.js"></script>
 <script src="/js/common/ajax.js"></script>
 <script src="/js/common/tables.js"></script>
+<script src="/js/common/shortcuts.js"></script>
+
