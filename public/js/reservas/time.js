@@ -1,7 +1,8 @@
 $(function () {
     $('#date-picker-reserva').datetimepicker({
         locale: 'es',
-        format: 'DD-MM-YYYY'
+        format: 'DD-MM-YYYY',
+        daysOfWeekDisabled: [0]
     });
 });
 
@@ -22,4 +23,3 @@ $(function () {
         $('#hora-inicio-reserva').data("DateTimePicker").maxDate(e.date);
     });
 });
-
