@@ -32,7 +32,7 @@
                     </li>
                     <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Número de usuarios">
                         {$reserva->numero_usuarios}
-                        <span class="glyphicon glyphicon-user pull-right"></span>
+                        <span class="glyphicon pull-right">#</span>
                     </li>
                     <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Fecha de reserva"">
                         {$fecha->fecha}
