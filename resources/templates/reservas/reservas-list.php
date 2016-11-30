@@ -44,8 +44,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="panel-footer">
-                <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm">
+            <div class="panel-footer clearfix">
+                <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm pull-right">
                     <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
                         Ver QR
                     </button>
