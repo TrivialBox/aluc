@@ -121,13 +121,19 @@ TAG;
                             ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="tipo_uso">Tipo de Uso</label>
-                        <select class="form-control" id="tipo_uso" name="tipo_uso">
-                            <option value="práctica">Práctica</option>
-                            <option value="clases">Clases</option>
-                        </select>
-                    </div>
+                    <?php
+                        if (\Aluc\Common\Tools::check_session('profesor')) {
+                            ?>
+                            <div class="form-group">
+                                <label for="tipo_uso">Tipo de Uso</label>
+                                <select class="form-control" id="tipo_uso" name="tipo_uso">
+                                    <option value="práctica">Práctica</option>
+                                    <option value="clases">Clases</option>
+                                </select>
+                            </div>
+                            <?php
+                        }
+                    ?>
                     <div class="form-group">
                         <label for="numero_usuarios">Número de Usuarios</label>
                         <input required="required" name="numero_usuarios" class="form-control" type="number" max="100" min="1" value="1" id="numero_usuarios" placeholder="Ingrese el número de usuarios">

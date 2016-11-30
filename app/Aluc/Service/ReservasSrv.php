@@ -20,7 +20,7 @@ class ReservasSrv {
 
     private static function user_do($func, $error) {
         try {
-            if (Tools::check_session('admin', 'moderador', 'user')) {
+            if (Tools::check_session('admin', 'moderador', 'user', 'profesor')) {
                 $func();
             } else {
                 ErrorSrv::redirect404();
@@ -161,7 +161,7 @@ class ReservasSrv {
                     $id = $data['id'];
                     $reserva = Reserva::getInstance($id);
                     if (Tools::check_session('moderador', 'admin') ||
-                        (Tools::check_session('user') and $reserva->getUsuarioId() === $_SESSION['id'])
+                        (Tools::check_session('user', 'profesor') and $reserva->getUsuarioId() === $_SESSION['id'])
                     ) {
                         self::$view_reserva
                             ->codigo_qr($reserva)
