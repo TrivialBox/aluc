@@ -304,6 +304,7 @@ TemplateGenerator::generate([], 'common/js-resources.php');
 <script src="/js/reservas/modals.js"></script>
 <script src="/js/reservas/shortcuts.js"></script>
 <script src="/js/reservas/ajax.js"></script>
+<script src="/js/reservas/tabs.js"></script>
 
 <!-- Timepicker -->
 <script src="/bower_components/moment/min/moment.min.js"></script>
