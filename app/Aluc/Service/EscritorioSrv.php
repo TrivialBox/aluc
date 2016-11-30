@@ -49,9 +49,10 @@ class EscritorioSrv {
     public static function escritorio($data) {
         self::user_do(
             function () use ($data){
+                $id = $_SESSION['id'];
                 if (!empty($data) and Tools::check_method('get')) {
                     if (Tools::check_session('moderador')) {
-                        $id_laboratorio = Moderador::getInstance($_SESSION['id'])->id_laboratorio;
+                        $id_laboratorio = Moderador::getInstance($id)->id_laboratorio;
                     } else {
                         // Es administrador
                         $id_laboratorio = $data['id_laboratorio'];
@@ -61,7 +62,7 @@ class EscritorioSrv {
                         ->render();
                 } else {
                     self::$view_reserva
-                        ->homeModerador()
+                        ->homeModerador($id)
                         ->render();
                 }
             },

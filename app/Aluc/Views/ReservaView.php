@@ -79,11 +79,11 @@ class ReservaView extends View {
         return $this;
     }
 
-    public function homeModerador() {
+    public function homeModerador($id) {
         if (Tools::check_session('admin')) {
             $laboratorios = Laboratorio::getAll();
         } else {
-            $laboratorios = [Moderador::getInstance($_SESSION['id'])->getLaboratorio()];
+            $laboratorios = [Moderador::getInstance($id)->getLaboratorio()];
         }
         $this->setTemplate(
             ['laboratorios' => $laboratorios],
