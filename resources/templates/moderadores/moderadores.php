@@ -101,14 +101,14 @@ use Aluc\Common\TemplateGenerator;
                 <form id="form-add-moderador">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="id">Id del Usuario</label>
+                            <label for="id">ID del Usuario</label>
                             <input required="required" id="id" type="text" name="id" placeholder="Ingrese el id del usuario" class="form-control">
                             <small class="form-text text-muted">
-                                El id puede ser el número de cédula.
+                                El ID puede ser el número de cédula.
                             </small>
                         </div>
                         <div class="form-group">
-                            <label for="id_laboratorio">Id del Laboratorio</label>
+                            <label for="id_laboratorio">Laboratorio</label>
                             <select  class="form-control" id="id_laboratorio" name="id_laboratorio">
                                 <?php
                                 foreach ($get('laboratorios') as $laboratorio) {
@@ -150,12 +150,20 @@ TAG;
                 <form id="form-edit-moderador">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="id">Id del Usuario</label>
+                            <label for="id">ID del Usuario</label>
                             <input required="required" id="id" type="text" name="id" class="form-control" readonly="readonly">
                         </div>
                         <div class="form-group">
-                            <label for="id_laboratorio">Id del Laboratorio</label>
-                            <input required="required" pattern="\d*" type="text" id="id_laboratorio" name="id_laboratorio" placeholder="Ingrese el id del laboratorio" class="form-control">
+                            <label for="id_laboratorio">Laboratorio</label>
+                            <select  class="form-control" id="id_laboratorio" name="id_laboratorio">
+                                <?php
+                                foreach ($get('laboratorios') as $laboratorio) {
+                                    echo <<<TAG
+                                <option value="{$laboratorio->id}">{$laboratorio->nombre} ({$laboratorio->id})</option>
+TAG;
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -170,7 +178,7 @@ TAG;
             </div>
         </div>
     </div>
-    <!-- END modal add-moderador -->
+    <!-- END modal edit-moderador -->
 
     <!-- Modal confirm-delete-moderador -->
     <div class="modal fade in" tabindex="-1" role="dialog" id="modal-confirm-delete-moderador">
