@@ -51,7 +51,7 @@
             <div class="panel-footer">
                 <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm">
                     <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
-                        <span class="glyphicon glyphicon-qrcode"></span>
+                        Ver QR
                     </button>
                     <!--
                     <button type="button" class="btn btn-warning {$disable}" {$disable}>
