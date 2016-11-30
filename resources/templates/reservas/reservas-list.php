@@ -38,13 +38,9 @@
                         {$fecha->fecha}
                         <span class="glyphicon glyphicon-calendar pull-right"></span>
                     </li>
-                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de inicio">
-                        {$fecha->hora_inicio}
+                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de inicio/fin">
+                        {$fecha->hora_inicio} - {$fecha->hora_fin}
                         <span class="glyphicon glyphicon-time pull-right" ></span>
-                    </li>
-                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de finalización"">
-                        {$fecha->hora_fin}
-                        <span class="glyphicon glyphicon-time pull-right"></span>
                     </li>
                 </ul>
             </div>
