@@ -41,3 +41,7 @@ sendRequestReservas('#form-cancel-reserva', 'cancelar', function (data, status) 
     $('#modal-confirm-cancel-reserva').modal('hide');
     $('#laboratorios').trigger('change');
 });
+
+$(document).ready(function () {
+    $('#laboratorios').trigger('change');
+});
