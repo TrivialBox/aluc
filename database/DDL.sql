@@ -484,7 +484,7 @@ BEGIN
 		signal sqlstate "45000" set message_text = "130000";
 	end if;
     
-    if (timediff(Shora_fin,Shota_inicio) < 3000 and now() >= timestamp(Sfecha,Shora_inicio))then
+    if (timediff(Shora_fin,Shora_inicio) < 3000 and now() >= timestamp(Sfecha,Shora_inicio))then
 		signal sqlstate "45000" set message_text = "100000";
     end if;
     
