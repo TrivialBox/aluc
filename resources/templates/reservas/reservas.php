@@ -154,7 +154,7 @@ TAG;
                                 <div class="form-group">
                                     <label for="hora-inicio">Hora de Inicio</label>
                                     <div class='input-group date' id='hora-inicio-reserva'>
-                                        <input id="hora-inicio" name="hora_inicio" type='text' class="form-control" placeholder="Hora de inicio"/>
+                                        <input required="required" id="hora-inicio" name="hora_inicio" type='text' class="form-control" placeholder="Hora de inicio"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -166,7 +166,7 @@ TAG;
                                 <div class="form-group">
                                     <label for="hora-fin">Hora de Fin</label>
                                     <div class='input-group date' id='hora-fin-reserva'>
-                                        <input id="hora-fin" name="hora_fin" type='text' class="form-control" placeholder="Hora de fin"/>
+                                        <input required="required" id="hora-fin" name="hora_fin" type='text' class="form-control" placeholder="Hora de fin"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
