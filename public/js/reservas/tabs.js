@@ -12,7 +12,7 @@ $('#reservas-nuevas-tab').on(
                 if (data.status && data.status === 'error') {
                     showAlert('alert-danger', data.description);
                 } else {
-                    $('#reservas-nuevas-content').html(data);
+                    $('#reservas-content').html(data);
                 }
             },
             'error': function () {
@@ -39,7 +39,7 @@ $('#reservas-pasadas-tab').on(
                 if (data.status && data.status === 'error') {
                     showAlert('alert-danger', data.description);
                 } else {
-                    $('#reservas-pasadas-content').html(data);
+                    $('#reservas-content').html(data);
                 }
             },
             'error': function () {

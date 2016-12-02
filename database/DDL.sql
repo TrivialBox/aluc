@@ -97,6 +97,7 @@ CREATE TABLE `lector` (
   `ip` varchar(55) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`mac`),
+  UNIQUE KEY `token_UNIQUE` (`token`),
   KEY `fk_lector_1_idx` (`id_laboratorio`),
   CONSTRAINT `fk_lector_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -113,24 +114,10 @@ CREATE TABLE `moderador` (
   `id` varchar(10) NOT NULL,
   `id_laboratorio` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_moderador_2_idx` (`id_laboratorio`),
   CONSTRAINT `fk_moderador_1` FOREIGN KEY (`id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_moderador_2` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `prueba`
---
-
-DROP TABLE IF EXISTS `prueba`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `prueba` (
-  `cupos` int(11) DEFAULT NULL,
-  `ocupados` int(11) DEFAULT NULL,
-  `valor` int(11) DEFAULT NULL,
-  `pruebacol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -147,8 +134,10 @@ CREATE TABLE `reserva` (
   `descripcion` varchar(60) DEFAULT NULL,
   `tipo_uso` varchar(45) DEFAULT NULL,
   `codigo_secreto` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+  `fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo_secreto_UNIQUE` (`codigo_secreto`)
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +161,7 @@ CREATE TABLE `reservacion` (
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -275,7 +264,8 @@ SET character_set_client = utf8;
  1 AS `fecha`,
  1 AS `hora_inicio`,
  1 AS `hora_fin`,
- 1 AS `codigo_secreto`*/;
+ 1 AS `codigo_secreto`,
+ 1 AS `fecha_creacion`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -371,7 +361,7 @@ BEGIN
 		or ((Shora_inicio + interval 1 minute between j2_hora_apertura and j2_hora_cierre) 
 		and (Shora_fin - interval 1 minute between j2_hora_apertura and j2_hora_cierre)));
     
-    if (bandera) then
+    if (bandera and dayname(Sfecha)= 'Sunday') then
 		set bandera=bandera;
     else
 		signal sqlstate "45000" set message_text = "60000";
@@ -429,7 +419,7 @@ BEGIN
     if (valor > 0 and Sn_usuarios <= valor ) then
 		Update ALUC.reserva  
 			set n_usuarios = Sn_usuarios, descripcion = Sdescripcion,
-				tipo_uso = Stipo_uso where id  = Sid;
+				tipo_uso = Stipo_uso, fecha_creacion = now() where id  = Sid;
         Update ALUC.reservacion 
 			set id_laboratorio = Sid_laboratorio, fecha = Sfecha, hora_inicio = Shora_inicio,
             hora_fin = Shora_fin where id_reserva = Sid;
@@ -491,7 +481,7 @@ BEGIN
     select id into bandera
 		from ALUC.view_reserva 
 		where id_usuario = Sid_usuario and fecha =  Sfecha 
-		and hora_inicio = Shora_inicio and id_laboratorio = Sid_laboratorio;
+		and hora_inicio = Shora_inicio;
     
     if (bandera != '')then
 		signal sqlstate "45000" set message_text = "120000";
@@ -505,7 +495,7 @@ BEGIN
     
     SELECT tipo_uso into tipo
 		FROM reserva join reservacion on reserva.id = reservacion.id_reserva
-		where id_laboratorio = Sid_laboratorio and estado = "Reservado" 
+		where id_laboratorio = Sid_laboratorio and estado = "reservado" 
         and TIMESTAMP(fecha,hora_fin) 
 		between TIMESTAMP(Sfecha,Shora_inicio) + interval 1 minute 
 		and TIMESTAMP(Sfecha,Shora_fin);
@@ -523,9 +513,7 @@ BEGIN
 		or ((Shora_inicio + interval 1 minute between j2_hora_apertura and j2_hora_cierre) 
 		and (Shora_fin - interval 1 minute between j2_hora_apertura and j2_hora_cierre)));
     
-    if (bandera) then
-		set bandera=bandera;
-    else
+    if (not bandera and dayname(Sfecha)= 'Sunday') then
 		signal sqlstate "45000" set message_text = "60000";
     end if;
     
@@ -556,7 +544,7 @@ BEGIN
     set valor = cupos - ocupados;
     if (valor > 0 and Sn_usuarios <= valor ) then
 		INSERT INTO ALUC.reserva  
-			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto);
+			values(NULL,Sn_usuarios,Sdescripcion,Stipo_uso,Scodigo_secreto,now());
         INSERT INTO ALUC.reservacion 
 			values(NULL, Sid_laboratorio,Sid_usuario, Sestado, Sfecha, Shora_inicio, Shora_fin);
 		commit;
@@ -640,7 +628,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_reserva` AS select `reserva`.`id` AS `id`,`reservacion`.`id_usuario` AS `id_usuario`,`reservacion`.`id_laboratorio` AS `id_laboratorio`,`reserva`.`descripcion` AS `descripcion`,`reserva`.`n_usuarios` AS `n_usuarios`,`reserva`.`tipo_uso` AS `tipo_uso`,`reservacion`.`estado` AS `estado`,`reservacion`.`fecha` AS `fecha`,`reservacion`.`hora_inicio` AS `hora_inicio`,`reservacion`.`hora_fin` AS `hora_fin`,`reserva`.`codigo_secreto` AS `codigo_secreto` from (`reserva` join `reservacion` on((`reserva`.`id` = `reservacion`.`id_reserva`))) */;
+/*!50001 VIEW `view_reserva` AS select `reserva`.`id` AS `id`,`reservacion`.`id_usuario` AS `id_usuario`,`reservacion`.`id_laboratorio` AS `id_laboratorio`,`reserva`.`descripcion` AS `descripcion`,`reserva`.`n_usuarios` AS `n_usuarios`,`reserva`.`tipo_uso` AS `tipo_uso`,`reservacion`.`estado` AS `estado`,`reservacion`.`fecha` AS `fecha`,`reservacion`.`hora_inicio` AS `hora_inicio`,`reservacion`.`hora_fin` AS `hora_fin`,`reserva`.`codigo_secreto` AS `codigo_secreto`,`reserva`.`fecha_creacion` AS `fecha_creacion` from (`reserva` join `reservacion` on((`reserva`.`id` = `reservacion`.`id_reserva`))) order by timestamp(`reservacion`.`fecha`,`reservacion`.`hora_inicio`) desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -654,4 +642,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-29  6:50:41
+-- Dump completed on 2016-12-01 23:32:31
