@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Aluc\Models;
 
 use Aluc\Common\AlucException;
