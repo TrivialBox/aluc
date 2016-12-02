@@ -1,19 +1,27 @@
+<?php
+use Aluc\Common\TemplateGenerator;
+
+if (empty($get('reservas'))) {
+    TemplateGenerator::generate([], 'reservas/tip-container.php');
+} else {
+    echo <<<'TAG'
 <div class="row">
-    <?php
+TAG;
+
     foreach ($get('reservas') as $reserva) {
         $laboratorio = $reserva->getLaboratorio();
         $fecha = $reserva->getFecha();
-        $panel_status = "panel-default";
-        $disable = "";
+        $panel_status = 'panel-default';
+        $disable = '';
         if ($reserva->estado !== 'reservado') {
-            $panel_status = "panel-danger";
-            $disable = "disabled";
+            $panel_status = 'panel-danger';
+            $disable = 'disabled';
         }
         $row_h = $get('row_h');
         if (empty($row_h)) {
             $row_h = '3';
         }
-    echo <<<TAG
+        echo <<<TAG
     <div class="col-sm-{$row_h} text-center">
         <div class="panel {$panel_status}">
             <div class="panel-heading">
@@ -63,5 +71,8 @@
     </div>
 TAG;
     }
-    ?>
+    echo <<<'TAG'
 </div>
+TAG;
+}
+?>

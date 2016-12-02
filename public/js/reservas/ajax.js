@@ -22,3 +22,7 @@ sendRequestReservas('#form-cancel-reserva', 'cancelar', function (data, status) 
     $('#modal-confirm-cancel-reserva').modal('hide');
     $('#reservas-nuevas-tab').trigger('show.bs.tab');
 });
+
+$(document).ready(function () {
+    $('#reservas-nuevas-tab').trigger('show.bs.tab');
+});
