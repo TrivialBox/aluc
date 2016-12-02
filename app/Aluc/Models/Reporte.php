@@ -28,23 +28,21 @@ class Reporte{
         return $reporte;
     }
 
-    public static function getInstance(
-        $anio,
+    public static function getReporteAnio(
         $id_usuario =  null
     ){
         $reserva = ReporteDao::getInstance()
-            ->getReportes($anio, $id_usuario);
+            ->getReportes(self::getAnioActual(), $id_usuario);
         return self::getReserva($reserva);
     }
 
     public static function getReporteDia(
-        $fecha,
         $id_usuario = null,
         $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
             ->getReporteDia(
-                $fecha,
+                self::getDiaActual(),
                 $id_usuario,
                 $id_laboratorio
             );
@@ -52,15 +50,13 @@ class Reporte{
     }
 
     public static function getReporteSemana(
-        $num_semana,
-        $anio,
         $id_usuario = null,
         $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
             ->getReporteSemana(
-                $num_semana,
-                $anio,
+                self::getSemanaActual(),
+                self::getAnioActual(),
                 $id_usuario,
                 $id_laboratorio
             );
@@ -68,31 +64,33 @@ class Reporte{
     }
 
     public static function getReporteMes(
-        $num_mes,
-        $anio,
         $id_usuario = null,
         $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
             ->getReporteMes(
-                $num_mes,
-                $anio,
+                self::getMesActual(),
+               self::getAnioActual(),
                 $id_usuario,
                 $id_laboratorio
             );
         return self::getReserva($reserva);
     }
-    public static function subirReportes($name_archivo){
 
-        $dir_subida = '/var/www/uploads/';
-        $fichero_subido = $dir_subida . basename($_FILES['fichero_usuario']['name']);
+    private static function getDiaActual(){
+        return date("Y-n-j");
+    }
 
-        echo '<pre>';
-        if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)) {
-            echo "El fichero es válido y se subió con éxito.\n";
-        } else {
-            echo "¡Posible ataque de subida de ficheros!\n";
-        }
+    private static function getAnioActual(){
+        return date("Y");
+    }
+
+    private static function getMesActual(){
+        return date("n");
+    }
+
+    private static function getSemanaActual(){
+        return date("W");
     }
 
 
