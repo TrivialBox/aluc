@@ -33,7 +33,7 @@ class Reporte{
         $id_usuario =  null
     ){
         $reserva = ReporteDao::getInstance()
-            ->getReportes(self::getAnioActual(), $id_usuario);
+            ->getReportesAnio(self::getAnioActual(), $id_usuario);
         return self::getReserva($reserva);
     }
 
