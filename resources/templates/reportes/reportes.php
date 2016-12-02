@@ -39,7 +39,7 @@ use Aluc\Common\TemplateGenerator;
                                         <button id="btn-export-table-as" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
                                             Exportar <span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu dropdown-menu-right">
                                             <li>
                                                 <a class="dropdown-item" target="_blank" href="/escritorio/reportes/exportar?file_type=pdf">
                                                     PDF
