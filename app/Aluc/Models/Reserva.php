@@ -94,8 +94,8 @@ class Reserva {
     public static function getReservaEstado($usuario_id, $estado){
         return self::getReserva(self::get($usuario_id, $estado));
     }
-    public static function getReservaLaboratorio($laboratorio_id){
-        return self::getReserva(self::get(null,null,null,$laboratorio_id));
+    public static function getReservaLaboratorio($laboratorio_id, $estado = null){
+        return self::getReserva(self::get(null,$estado,null,$laboratorio_id));
     }
 
     public static function get_object($array, $get_element = true){
