@@ -131,12 +131,16 @@ TAG;
                                 <!-- Tabla editable -->
                                 <div class="table-responsive">
                                     <?php
-                                    TemplateGenerator::generate([
-                                        'headers' => $get('headers'),
-                                        'rows' => $get('rows')
-                                    ],
-                                        'reportes/report-table.php'
-                                    );
+                                    if (empty($get('rows'))) {
+                                        TemplateGenerator::generate([], 'reportes/tip-container.php');
+                                    } else {
+                                        TemplateGenerator::generate([
+                                            'headers' => $get('headers'),
+                                            'rows' => $get('rows')
+                                        ],
+                                            'reportes/report-table.php'
+                                        );
+                                    }
                                     ?>
                                 </div>
                                 <!-- END Tabla -->
