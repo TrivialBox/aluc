@@ -1,5 +1,6 @@
 <?php
 use Aluc\Models\Usuario;
+use Aluc\Common\TemplateGenerator;
 ?>
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default">
@@ -13,6 +14,11 @@ use Aluc\Models\Usuario;
       <a class="navbar-brand" href="/">ALUC</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav nav-pills nav-stacked visible-xs">
+            <?php
+            TemplateGenerator::generate([], 'common/menu.php');
+            ?>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

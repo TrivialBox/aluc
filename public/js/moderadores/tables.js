@@ -10,4 +10,5 @@ $(document).ready( function () {
         lengthMenu: [[10, 50, 100, -1], [10, 50, 100, "Todo"]],
         pageLength: -1,
         language: translattionTable
-})});
+    });
+});

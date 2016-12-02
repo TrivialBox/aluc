@@ -62,14 +62,7 @@ TAG;
                 <?php
                 if (empty($get('laboratorios'))) {
                     TemplateGenerator::generate([], 'escritorio/tip-container.php');
-                } else {
-                    TemplateGenerator::generate([
-                        'reservas' =>  Reserva::getReservaLaboratorio($get('laboratorios')[0]->id),
-                        'row_h' => '4'
-                    ],
-                        'reservas/reservas-list.php'
-                    );
-                }
+                } 
                 ?>
             </div>
             <!-- END panes -->

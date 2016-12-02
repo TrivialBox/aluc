@@ -26,10 +26,9 @@ use Aluc\Common\TemplateGenerator;
     <div class="container">
         <div class="row">
             <!-- sidebar -->
-            <div class="col-sm-3">
+            <div class="container col-sm-3">
                 <?php
-                TemplateGenerator::generate([
-                ],
+                TemplateGenerator::generate([],
                     'common/sidebar.php'
                 );
                 ?>
@@ -62,8 +61,8 @@ use Aluc\Common\TemplateGenerator;
                         <tbody>
                         <?php
                         TemplateGenerator::generate([
-                            'lectores_qr' => $get('lectores_qr')
-                        ],
+                                'lectores_qr' => $get('lectores_qr')
+                            ],
                             'lectores-qr/lectores-qr-list.php'
                         );
                         ?>
@@ -74,7 +73,9 @@ use Aluc\Common\TemplateGenerator;
 
                 <?php
                 if (empty($get('lectores_qr'))) {
-                    TemplateGenerator::generate([], 'lectores-qr/tip-container.php');
+                    TemplateGenerator::generate([],
+                        'lectores-qr/tip-container.php'
+                    );
                 }
                 ?>
 
@@ -111,7 +112,7 @@ use Aluc\Common\TemplateGenerator;
                             </small>
                         </div>
                         <div class="form-group">
-                            <label for="id_laboratorio">Id del Laboratorio</label>
+                            <label for="id_laboratorio">Laboratorio</label>
                             <select  class="form-control" id="id_laboratorio" name="id_laboratorio">
                                 <?php
                                 foreach ($get('laboratorios') as $laboratorio) {
@@ -161,8 +162,16 @@ TAG;
                             <input required="required" id="ip" type="text" name="ip" placeholder="Ingrese la IP asociada al dispositivo" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="id_laboratorio">Id del Laboratorio</label>
-                            <input required="required" pattern="\d*" type="text" id="id_laboratorio" name="id_laboratorio" placeholder="Ingrese el id del laboratorio" class="form-control">
+                            <label for="id_laboratorio">Laboratorio</label>
+                            <select  class="form-control" id="id_laboratorio" name="id_laboratorio">
+                                <?php
+                                foreach ($get('laboratorios') as $laboratorio) {
+                                    echo <<<TAG
+                                <option value="{$laboratorio->id}">{$laboratorio->nombre} ({$laboratorio->id})</option>
+TAG;
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

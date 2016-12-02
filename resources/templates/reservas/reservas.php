@@ -121,13 +121,19 @@ TAG;
                             ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="tipo_uso">Tipo de Uso</label>
-                        <select class="form-control" id="tipo_uso" name="tipo_uso">
-                            <option value="práctica">Práctica</option>
-                            <option value="clases">Clases</option>
-                        </select>
-                    </div>
+                    <?php
+                        if (\Aluc\Common\Tools::check_session('profesor')) {
+                            ?>
+                            <div class="form-group">
+                                <label for="tipo_uso">Tipo de Uso</label>
+                                <select class="form-control" id="tipo_uso" name="tipo_uso">
+                                    <option value="práctica">Práctica</option>
+                                    <option value="clases">Clases</option>
+                                </select>
+                            </div>
+                            <?php
+                        }
+                    ?>
                     <div class="form-group">
                         <label for="numero_usuarios">Número de Usuarios</label>
                         <input required="required" name="numero_usuarios" class="form-control" type="number" max="100" min="1" value="1" id="numero_usuarios" placeholder="Ingrese el número de usuarios">
@@ -148,7 +154,7 @@ TAG;
                                 <div class="form-group">
                                     <label for="hora-inicio">Hora de Inicio</label>
                                     <div class='input-group date' id='hora-inicio-reserva'>
-                                        <input id="hora-inicio" name="hora_inicio" type='text' class="form-control" placeholder="Hora de inicio"/>
+                                        <input required="required" id="hora-inicio" name="hora_inicio" type='text' class="form-control" placeholder="Hora de inicio"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -160,7 +166,7 @@ TAG;
                                 <div class="form-group">
                                     <label for="hora-fin">Hora de Fin</label>
                                     <div class='input-group date' id='hora-fin-reserva'>
-                                        <input id="hora-fin" name="hora_fin" type='text' class="form-control" placeholder="Hora de fin"/>
+                                        <input required="required" id="hora-fin" name="hora_fin" type='text' class="form-control" placeholder="Hora de fin"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -298,6 +304,7 @@ TemplateGenerator::generate([], 'common/js-resources.php');
 <script src="/js/reservas/modals.js"></script>
 <script src="/js/reservas/shortcuts.js"></script>
 <script src="/js/reservas/ajax.js"></script>
+<script src="/js/reservas/tabs.js"></script>
 
 <!-- Timepicker -->
 <script src="/bower_components/moment/min/moment.min.js"></script>

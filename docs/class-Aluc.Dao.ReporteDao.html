@@ -96,6 +96,7 @@
 				<li><a href="class-Aluc.Dao.ModeradorDao.html">ModeradorDao</a></li>
 				<li class="active"><a href="class-Aluc.Dao.ReporteDao.html">ReporteDao</a></li>
 				<li><a href="class-Aluc.Dao.ReservaDao.html">ReservaDao</a></li>
+				<li><a href="class-Aluc.Dao.UsuarioDao.html">UsuarioDao</a></li>
 			</ul>
 
 
@@ -114,6 +115,9 @@
 	<h1>Class ReporteDao</h1>
 
 
+	<div class="description">
+	<p>Clase para para manejo de base de datos de los Reportes</p>
+	</div>
 
 
 
@@ -129,7 +133,7 @@
 		<b>Namespace:</b> <a href="namespace-Aluc.html">Aluc</a>\<a href="namespace-Aluc.Dao.html">Dao</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Aluc.Dao.ReporteDao.html#6-129" title="Go to source code">Aluc/Dao/ReporteDao.php</a>
+			<b>Located at</b> <a href="source-class-Aluc.Dao.ReporteDao.html#6-176" title="Go to source code">Aluc/Dao/ReporteDao.php</a>
 		<br>
 	</div>
 
@@ -142,24 +146,28 @@
 
 			<td class="attributes"><code>
 				 public static
-				
+				null
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getInstance">#</a>
-			<code><a href="source-class-Aluc.Dao.ReporteDao.html#16-21" title="Go to source code">getInstance</a>( )</code>
+			<code><a href="source-class-Aluc.Dao.ReporteDao.html#22-31" title="Go to source code">getInstance</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Obtener la instancia de la clase.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Obtener la instancia de la clase.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						null
+					</div>
 
 
 
@@ -171,24 +179,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getReportes">#</a>
-			<code><a href="source-class-Aluc.Dao.ReporteDao.html#24-46" title="Go to source code">getReportes</a>( <span> <var>$anio</var></span>, <span> <var>$id_usuario</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReporteDao.html#34-62" title="Go to source code">getReportes</a>( <span> <var>$year</var></span>, <span> <var>$id_usuario</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener reportes a partir del año y el id_usuario.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener reportes a partir del año y el id_usuario.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$year</var></dt>
+						<dd></dd>
+						<dt><var>$id_usuario</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -200,24 +219,39 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getReporteDia">#</a>
-			<code><a href="source-class-Aluc.Dao.ReporteDao.html#48-72" title="Go to source code">getReporteDia</a>( <span> <var>$fecha</var></span>, <span> <var>$id_usuario</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReporteDao.html#64-96" title="Go to source code">getReporteDia</a>( <span> <var>$fecha</var></span>, <span> <var>$id_usuario</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener reportes de un día en específico
+el cual también se puede pasar parámetros para filtar la búsqueda.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener reportes de un día en específico
+el cual también se puede pasar parámetros para filtar la búsqueda.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$fecha</var></dt>
+						<dd></dd>
+						<dt><var>$id_usuario</var></dt>
+						<dd></dd>
+						<dt><var>$id_laboratorio</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -229,24 +263,41 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getReporteSemana">#</a>
-			<code><a href="source-class-Aluc.Dao.ReporteDao.html#74-96" title="Go to source code">getReporteSemana</a>( <span> <var>$semana</var></span>, <span> <var>$anio</var></span>, <span> <var>$id_usuario</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReporteDao.html#98-134" title="Go to source code">getReporteSemana</a>( <span> <var>$semana</var></span>, <span> <var>$year</var></span>, <span> <var>$id_usuario</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener reportes de una semana en específico
+el cual también se puede pasar parámetros para filtar la búsqueda.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener reportes de una semana en específico
+el cual también se puede pasar parámetros para filtar la búsqueda.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$semana</var></dt>
+						<dd></dd>
+						<dt><var>$year</var></dt>
+						<dd></dd>
+						<dt><var>$id_usuario</var></dt>
+						<dd></dd>
+						<dt><var>$id_laboratorio</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -258,24 +309,41 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getReporteMes">#</a>
-			<code><a href="source-class-Aluc.Dao.ReporteDao.html#98-125" title="Go to source code">getReporteMes</a>( <span> <var>$month</var></span>, <span> <var>$anio</var></span>, <span> <var>$id_usuario</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
+			<code><a href="source-class-Aluc.Dao.ReporteDao.html#136-172" title="Go to source code">getReporteMes</a>( <span> <var>$month</var></span>, <span> <var>$year</var></span>, <span> <var>$id_usuario</var></span>, <span> <var>$id_laboratorio</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Método para obtener reportes de un mes en específico
+el cual también se puede pasar parámetros para filtar la búsqueda.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Método para obtener reportes de un mes en específico
+el cual también se puede pasar parámetros para filtar la búsqueda.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$month</var></dt>
+						<dd></dd>
+						<dt><var>$year</var></dt>
+						<dd></dd>
+						<dt><var>$id_usuario</var></dt>
+						<dd></dd>
+						<dt><var>$id_laboratorio</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -303,7 +371,7 @@
 		ALUC API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
-<script src="resources/combined.js?821b4c077416fa6120e0ffc805d804bf81adde41"></script>
-<script src="elementlist.js?ac737646b0f212c2e67bd3cacece318e2563ff87"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

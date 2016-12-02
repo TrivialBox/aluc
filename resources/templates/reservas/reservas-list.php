@@ -32,26 +32,22 @@
                     </li>
                     <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Número de usuarios">
                         {$reserva->numero_usuarios}
-                        <span class="glyphicon glyphicon-user pull-right"></span>
+                        <span class="glyphicon pull-right">#</span>
                     </li>
                     <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Fecha de reserva"">
                         {$fecha->fecha}
                         <span class="glyphicon glyphicon-calendar pull-right"></span>
                     </li>
-                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de inicio">
-                        {$fecha->hora_inicio}
+                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de inicio/fin">
+                        {$fecha->hora_inicio} - {$fecha->hora_fin}
                         <span class="glyphicon glyphicon-time pull-right" ></span>
-                    </li>
-                    <li class="list-group-item data-toggle="tooltip" data-placement="top" title="Hora de finalización"">
-                        {$fecha->hora_fin}
-                        <span class="glyphicon glyphicon-time pull-right"></span>
                     </li>
                 </ul>
             </div>
-            <div class="panel-footer">
-                <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm">
+            <div class="panel-footer clearfix">
+                <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm pull-right">
                     <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
-                        <span class="glyphicon glyphicon-qrcode"></span>
+                        Ver QR
                     </button>
                     <!--
                     <button type="button" class="btn btn-warning {$disable}" {$disable}>
