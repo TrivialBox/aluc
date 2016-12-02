@@ -32,12 +32,49 @@ class ReporteDao{
 
 
     /**
+     * Método para obtener las reservas dado un intervalo de fechas, y opcional
+     * se puede poner condiciones de un id_usuario o id_laboratorio específico.
+     * @param $fecha_inicial
+     * @param $fecha_final
+     * @param $id_usuario
+     * @param $id_laboratorio
+     * @return mixed
+     */
+    public function getReporte(
+        $fecha_inicial,
+        $fecha_final,
+        $id_usuario,
+        $id_laboratorio
+    ){
+        try{
+            $where = " fecha between '{$fecha_inicial}' AND '{$fecha_final}' ";
+
+            if ($id_usuario != null){
+                $where .= " and id_usuario = '{$id_usuario}'";
+            }
+            if ($id_laboratorio != null){
+                $where .= " and id_laboratorio = '{$id_laboratorio}'";
+            }
+            return $reporteDia = $this->database
+                ->select(
+                    "view_reserva",
+                    '*',
+                    $where,
+                    'fecha asc'
+                );
+
+        }catch (\Exception $e){
+            ReservaDao::generarExcepcion($e);
+        }
+    }
+
+    /**
      * Método para obtener reportes a partir del año y el id_usuario.
      * @param $year
      * @param $id_usuario
      * @return mixed
      */
-    public function getReportes(
+    public function getReportesAnio(
         $year,
         $id_usuario
     ){
