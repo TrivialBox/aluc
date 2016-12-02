@@ -1,5 +1,6 @@
 <?php
 use Aluc\Common\TemplateGenerator;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,13 +69,6 @@ use Aluc\Common\TemplateGenerator;
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="reservas-nuevas-content" role="tabpanel">
                     <div class="container">
-                        <?php
-                        TemplateGenerator::generate([
-                            'reservas' => $get('reservas'),
-                        ],
-                            'reservas/reservas-list.php'
-                        );
-                        ?>
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="reservas-pasadas-content" role="tabpanel">
