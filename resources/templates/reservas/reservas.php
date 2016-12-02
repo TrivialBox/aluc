@@ -67,18 +67,8 @@ use Aluc\Common\TemplateGenerator;
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="reservas-nuevas-content" role="tabpanel">
-                    <div class="container">
-                    </div>
+                <div class="tab-pane fade in active" id="reservas-content" role="tabpanel">
                 </div>
-                <div class="tab-pane fade in" id="reservas-pasadas-content" role="tabpanel">
-                    <!-- Reservas pasadas del pasado presente -->
-                </div>
-                <?php
-                if (empty($get('reservas'))) {
-                    TemplateGenerator::generate([], 'reservas/tip-container.php');
-                }
-                ?>
             </div>
             <!-- END panes -->
 
