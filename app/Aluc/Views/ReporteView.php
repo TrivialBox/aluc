@@ -32,9 +32,9 @@ class ReporteView extends View {
         $class_name = 'Aluc\Models\Reporte';
         $types = [
             'today' => "{$class_name}::getReporteDia",
-            'this week' => "{$class_name}::getReporteSemana",
-            'this month' => "{$class_name}::getReporteMes",
-            'this year' => "{$class_name}::getReporteAnio",
+            'this-week' => "{$class_name}::getReporteSemana",
+            'this-month' => "{$class_name}::getReporteMes",
+            'this-year' => "{$class_name}::getReporteAnio",
             'other' => "{$class_name}::getReportes"
         ];
         $func = $types['today'];
@@ -43,8 +43,9 @@ class ReporteView extends View {
         }
         if ($type == "other") {
             return self::listAll($func($fecha_inicio, $fecha_fin, $id_user, $id_laboratorio));
+        } else {
+            return self::listAll($func($id_user, $id_laboratorio));
         }
-        return self::listAll($func($id_user, $id_laboratorio));
     }
 
     public function csv($name = 'reporte.csv') {
@@ -106,4 +107,3 @@ class ReporteView extends View {
         return $this;
     }
 }
-

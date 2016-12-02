@@ -5,3 +5,7 @@ $('#fecha').change(function (e) {
         $('#custom-date').collapse('hide');
     }
 });
+
+$(document).ready(function () {
+    $('#fecha').trigger('change');
+});

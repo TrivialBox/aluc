@@ -1,5 +1,6 @@
 <?php
 use Aluc\Common\TemplateGenerator;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,14 +63,14 @@ use Aluc\Common\TemplateGenerator;
                             </h4>
                         </div>
                         <div class="navbar navbar-default">
-                            <form class="navbar-form">
+                            <form id="filter-form" class="navbar-form">
                                 <div class="form-group">
                                   <label for="fecha">Fecha</label>
                                   <select class="form-control" id="fecha" name="fecha">
                                     <option value="today">Hoy</option>
-                                    <option value="this week">Esta semana</option>
-                                    <option value="this month">Este mes</option>
-                                    <option value="this year">Este año</option>
+                                    <option value="this-week">Esta semana</option>
+                                    <option value="this-month">Este mes</option>
+                                    <option value="this-year">Este año</option>
                                     <option value="other">Otra</option>
                                   </select>
                                 </div>
@@ -136,7 +137,7 @@ TAG;
                                     } else {
                                         TemplateGenerator::generate([
                                             'headers' => $get('headers'),
-                                            'rows' => $get('rows')
+                                            'rows' => $get('rows'),
                                         ],
                                             'reportes/report-table.php'
                                         );
@@ -161,13 +162,14 @@ TAG;
     TemplateGenerator::generate([], 'common/html-resources.php');
     TemplateGenerator::generate([], 'common/js-resources.php');
 ?>
-<script src="/js/reportes/modals.js"></script>
 
 <!-- Timepicker -->
 <script src="/bower_components/moment/min/moment.min.js"></script>
 <script src="/bower_components/moment/locale/es.js"></script>
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/reportes/time.js"></script>
+<script src="/js/common/forms.js"></script>
+<script src="/js/reportes/modals.js"></script>
 
 </body>
 </html>

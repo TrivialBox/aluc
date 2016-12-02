@@ -94,7 +94,7 @@ use Aluc\Common\TemplateGenerator;
             <form id="form-add-reserva">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="id_laboratorio">Id del Laboratorio</label>
+                        <label for="id_laboratorio">Laboratorio</label>
                         <select  class="form-control" id="id_laboratorio" name="id_laboratorio">
                             <?php
                             foreach ($get('laboratorios') as $laboratorio) {
