@@ -121,6 +121,37 @@ class ReservaDao{
     }
 
     /**
+     * Método para obtener reservas pasadas (canceladas, canceladas_ausencia,
+     * procesado), pasando como parámetro usuario_id o laboratorio_id.
+     * @param $usuario_id
+     * @param $laboratorio_id
+     * @return mixed
+     */
+    public function getReservaPasadas(
+        $usuario_id,
+        $laboratorio_id
+    ){
+        $where = "";
+        if ($usuario_id != null){
+            $where .= " id_usuario = '{$usuario_id}' and ";
+
+        }
+        if ($laboratorio_id != null){
+            $where .= " id_laboratorio = '{$laboratorio_id}' and ";
+        }
+
+        $where .= " estado != 'reservado' ORDER BY fecha DESC LIMIT 10";
+
+        $reservas = $this->database->select(
+            'view_reserva',
+            '*',
+            $where
+        );
+        return $reservas;
+
+    }
+
+    /**
      * Método para obtener reservas.
      * @param null $usuario_id
      * @param null $estado
@@ -134,19 +165,13 @@ class ReservaDao{
         $id = null,
         $laboratorio_id = null
     ){
-        $where = "";
-        if ($usuario_id != null){
-            $where = "id_usuario = '{$usuario_id}'";
-        }
-        if ($estado != null){
-            $where .= " and estado = '{$estado}'";
-        }
-        if ($id != null){
-            $where .= "id = '{$id}'";
-        }
-        if ($laboratorio_id != null){
-            $where .= "id_laboratorio = '{$laboratorio_id}'";
-        }
+       $where = self::getWhere(
+           $usuario_id,
+           $estado,
+           $id,
+           $laboratorio_id
+       );
+
         $reservas = $this->database->select(
             'view_reserva',
             '*',
@@ -244,6 +269,40 @@ class ReservaDao{
         } catch (\Exception $e) {
             self::generarExcepcion($e);
         }
+    }
+
+    /**
+     * Método para generar el where del método get().
+     * @param null $usuario_id
+     * @param null $estado
+     * @param null $id
+     * @param null $laboratorio_id
+     * @return string
+     */
+    private static function getWhere(
+        $usuario_id = null,
+        $estado = null,
+        $id = null,
+        $laboratorio_id = null
+    ){
+        $where = "";
+        if ($usuario_id != null){
+            $where .= "id_usuario = '{$usuario_id}'";
+        }
+
+        if ($id != null){
+            $where .= "id = '{$id}'";
+        }
+
+        if ($laboratorio_id != null){
+            $where .= "id_laboratorio = '{$laboratorio_id}'";
+        }
+
+        if ($estado != null){
+            $where .= " and estado = '{$estado}'";
+        }
+
+        return $where;
     }
 
     /**
