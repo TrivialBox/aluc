@@ -250,6 +250,23 @@ class ReservaDao{
         return $reserva;
     }
 
+    public function getEstado($id){
+        try{
+            $where = " id_reserva = '{$id}'";
+            $array = [
+                'estado'
+            ];
+            return $this->database->select(
+                'reservacion',
+                $array,
+                $where
+            );
+
+        }catch (\Exception $e) {
+            self::generarExcepcion($e);
+        }
+    }
+
     /**
      * Método para procesar reserva, cuando el usuario acceda ha su
      * reserva el estado de la misma pasa ha procesada.
