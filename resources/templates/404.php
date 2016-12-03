@@ -14,16 +14,22 @@ header("HTTP/1.0 404 Not Found");
             <div class="col-lg-12"><br>
                 <div class="centering text-center">
                     <div class="text-center">
-                        <div class="panel panel-danger ">
+                        <div class="panel panel-primary">
                             <div class="panel-heading jumbotron">
-                                <h1 class="without-margin panel-title">No te preocupes,<br>
-                                    es sólmanete un error <span class="text-success"><strong>404</strong></span>.
-                                </h1>
+                                <h1 class="without-margin panel-title">Página no encontrada.</h1>
                             </div>
                             <div class="panel-body">
-                                <h2 class="text-success">Página no encontrada.</h2>
+                                <h2 class="text-primary">No te preocupes, es sólo un error
+                                    <span class="text-danger"><strong>404</strong></span>.
+                                </h2>
                             </div>
-                            <div class="panel-footer">Mientras tanto visita <a href="http://www.trivialbox.com">Trivial Box</a>.</div>
+                            <div class="panel-footer">
+                                <div class="text-muted">
+                                    Mientras tanto visita <a href="http://www.trivialbox.com">Trivial Box</a>.
+                                    <br>
+                                    También puedes regresar a <a href="/">inicio</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

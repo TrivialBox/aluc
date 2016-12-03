@@ -86,19 +86,35 @@ class EscritorioSrv {
     public static function reportes($data) {
         self::user_do(
             function () use ($data) {
-                if (!empty($data) and Tools::check_method('post')) {
-                    $type = $data['type'];
-                    static::$view_reportes
-                        ->listAll()
-                        ->render();
+                if (Tools::check_method('get')) {
+                    $fecha = 'today';
+                    $id_laboratorio = null;
+                    $id_usuario = null;
+                    if (array_key_exists('fecha', $data)) {
+                        $fecha = $data['fecha'];
+                    }
+                    if (array_key_exists('id_laboratorio', $data) && $data['id_laboratorio'] != "-1") {
+                        $id_laboratorio = $data['id_laboratorio'];
+                    }
+                    if (array_key_exists('id_usuario', $data) && !empty($data['id_usuario'])) {
+                        $id_usuario = $data['id_usuario'];
+                    }
+                    if ($fecha == 'other') {
+                        $fecha_inicio = Tools::getCanonicalFecha($data['fecha_inicio']);
+                        $fecha_fin = Tools::getCanonicalFecha($data['fecha_fin']);
+                        static::$view_reportes
+                            ->listByType($fecha, $id_usuario, $id_laboratorio, $fecha_inicio, $fecha_fin)
+                            ->render();
+                    } else {
+                        static::$view_reportes
+                            ->listByType($fecha, $id_usuario, $id_laboratorio)
+                            ->render();
+                    }
                 } else if (Tools::check_method('post')) {
                     self::$view_general
                         ->error404()
                         ->render();
                 }
-                static::$view_reportes
-                    ->listAll()
-                    ->render();
             },
             function ($e) {
                 self::$view_general

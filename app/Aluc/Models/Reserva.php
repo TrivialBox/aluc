@@ -39,7 +39,9 @@ class Reserva {
 
         $this->is_save = $this->is_save && $is_save;
     }
-    private static function getReserva($reserva){
+    private static function getReserva(
+        $reserva
+    ){
         if (count($reserva) > 0){
             if (count($reserva) == 1){
                 return Reserva::get_object(
@@ -87,19 +89,51 @@ class Reserva {
 
     }
 
-    public static function getReservaUsuario($usuario_id) {
+    public static function getReservaUsuario(
+        $usuario_id
+    ){
         return self::getReserva(self::get($usuario_id));
     }
 
-    public static function getReservaEstado($usuario_id, $estado){
-        return self::getReserva(self::get($usuario_id, $estado));
-    }
-    public static function getReservaLaboratorio($laboratorio_id){
-        return self::getReserva(self::get(null,null,null,$laboratorio_id));
+    public static function getReservaEstado(
+        $usuario_id,
+        $estado
+    ){
+        return self::getReserva(
+            self::get($usuario_id, $estado)
+        );
     }
 
-    public static function get_object($array, $get_element = true){
+    public static function getReservaPasadas(
+        $id_usuario = null,
+        $id_laboratorio = null
+    ){
+        return self::getReserva(
+            ReservaDao::getInstance()
+                ->getReservaPasadas(
+                    $id_usuario,
+                    $id_laboratorio
+                )
+        );
+    }
+    public static function getReservaLaboratorio(
+        $laboratorio_id,
+        $estado = null
+    ){
+        return self::getReserva(
+            self::get(
+                null,
+                $estado,
+                null,
+                $laboratorio_id
+            )
+        );
+    }
 
+    public static function get_object(
+        $array,
+        $get_element = true
+    ){
         if ($get_element){
             $obj= [];
             $fecha = new Fecha(
@@ -136,63 +170,115 @@ class Reserva {
         }
     }
 
-    private static function get($usuario_id, $estado= null, $id=null, $id_lab=null){
-        $reservas = ReservaDao::getInstance()->get($usuario_id, $estado, $id, $id_lab);
+    private static function get(
+        $usuario_id,
+        $estado= null,
+        $id=null,
+        $id_lab=null
+    ){
+        $reservas = ReservaDao::getInstance()
+            ->get(
+                $usuario_id,
+                $estado,
+                $id,
+                $id_lab
+            );
+
         return $reservas;
     }
 
-    private static function generarCodigoSecreto() {
+    private static function generarCodigoSecreto(
+
+    ){
+
         return StringGenerator::randomAlnum(15);
     }
 
-    public function getCodigoSecreto() {
+    public function getCodigoSecreto(
+
+    ) {
         return $this->codigo_secreto;
     }
 
-    public function getUsuarioId(){
+    public function getUsuarioId(
+
+    ){
         return $this->usuario_id;
     }
 
-    public function getFecha() {
+    public function getFecha(
+
+    ){
         return $this->fecha;
     }
 
-    public function setFecha($fecha, $hora_inicio, $hora_fin) {
-        $fecha_c = new Fecha($fecha, $hora_inicio, $hora_fin);
+    public function setFecha(
+        $fecha,
+        $hora_inicio,
+        $hora_fin
+    ){
+        $fecha_c = new Fecha(
+            $fecha,
+            $hora_inicio,
+            $hora_fin
+        );
         $this->fecha = $fecha_c;
     }
 
-    public function getLaboratorio() {
+    public function getLaboratorio(
+
+    ){
         return Laboratorio::getInstance($this->laboratorio_id);
     }
 
-    public function save(){
-        ReservaDao::getInstance()->save($this, $this->is_save);
+    public function save(
+
+    ){
+        ReservaDao::getInstance()
+            ->save(
+                $this,
+                $this->is_save
+            );
+
         $this->is_save = false;
         return $this;
     }
 
-    public function getAll($order_atributo){
+    public function getAll(
+        $order_atributo
+    ){
         return self::get_object(
-            ReservaDao::getInstance()->getAll($order_atributo),
+            ReservaDao::getInstance()
+                ->getAll($order_atributo),
             false
         );
     }
-    public function getId(){
+    public function getId(
+
+    ){
         return $this->id;
     }
-    public function updateEstado($estado){
+    public function updateEstado(
+        $estado
+    ){
         $this->estado = $estado;
-        ReservaDao::getInstance()->updateEstado($this);
+        ReservaDao::getInstance()
+            ->updateEstado($this);
     }
 
-    public function cancelar() {
+    public function cancelar(
+
+    ){
         $this->updateEstado('cancelado');
     }
 
 
-    public static function validarQr($mac, $ip, $token,$codigo_secreto){
-
+    public static function validarQr(
+        $mac,
+        $ip,
+        $token,
+        $codigo_secreto
+    ){
         $lector = LectorQr::getInstance($mac);
 
         if ($lector->ip != $ip){
@@ -208,9 +294,19 @@ class Reserva {
 
             );
         }
-        $reserva = ReservaDao::getInstance()->getRservaToken($codigo_secreto);
+        $reserva = ReservaDao::getInstance()
+            ->getRservaToken($codigo_secreto);
+        $estado = ReservaDao::getInstance()->getEstado($reserva[0]['id'])[0]['estado'];
 
-        ReservaDao::getInstance()->procesarReserva($reserva[0]['id']);
+        if ( $estado === 'procesado'){
+            throw new AlucException(
+                "La reserva ya esta procesada",
+                "La reserva ya esta procesada"
+            );
+        }
+
+        ReservaDao::getInstance()
+            ->procesarReserva($reserva[0]['id']);
     }
 }
 

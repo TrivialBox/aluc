@@ -205,7 +205,7 @@ class ReservasSrv {
                 $secret_code = $data['secret_code'];
                 Reserva::validarQr($mac, $ip, $token, $secret_code);
                 self::$view_general
-                    ->success_json()
+                    ->success_json("Reserva verificada con éxito.")
                     ->render();
             } else {
                 self::$view_general

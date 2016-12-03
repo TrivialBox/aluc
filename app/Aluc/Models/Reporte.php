@@ -1,8 +1,7 @@
 <?php
-
-
 namespace Aluc\Models;
 
+use Aluc\Common\AlucException;
 use Aluc\Dao\ReporteDao;
 
 class Reporte{
@@ -28,23 +27,27 @@ class Reporte{
         return $reporte;
     }
 
-    public static function getInstance(
-        $anio,
-        $id_usuario =  null
+    public static function getReporteAnio(
+        $id_usuario =  null,
+        $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
-            ->getReportes($anio, $id_usuario);
+            ->getReportesAnio(
+                self::getAnioActual(),
+                $id_usuario,
+                $id_laboratorio
+            );
+
         return self::getReserva($reserva);
     }
 
     public static function getReporteDia(
-        $fecha,
         $id_usuario = null,
         $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
             ->getReporteDia(
-                $fecha,
+                self::getDiaActual(),
                 $id_usuario,
                 $id_laboratorio
             );
@@ -52,15 +55,13 @@ class Reporte{
     }
 
     public static function getReporteSemana(
-        $num_semana,
-        $anio,
         $id_usuario = null,
         $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
             ->getReporteSemana(
-                $num_semana,
-                $anio,
+                self::getSemanaActual(),
+                self::getAnioActual(),
                 $id_usuario,
                 $id_laboratorio
             );
@@ -68,34 +69,65 @@ class Reporte{
     }
 
     public static function getReporteMes(
-        $num_mes,
-        $anio,
         $id_usuario = null,
         $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
             ->getReporteMes(
-                $num_mes,
-                $anio,
+                self::getMesActual(),
+               self::getAnioActual(),
                 $id_usuario,
                 $id_laboratorio
             );
         return self::getReserva($reserva);
     }
-    public static function subirReportes($name_archivo){
 
-        $dir_subida = '/var/www/uploads/';
-        $fichero_subido = $dir_subida . basename($_FILES['fichero_usuario']['name']);
-
-        echo '<pre>';
-        if (move_uploaded_file($_FILES['fichero_usuario']['tmp_name'], $fichero_subido)) {
-            echo "El fichero es válido y se subió con éxito.\n";
-        } else {
-            echo "¡Posible ataque de subida de ficheros!\n";
+    public static function getReportes(
+        $fecha_inicial,
+        $fecha_final,
+        $id_usuario = null,
+        $id_laboratorio = null
+    ){
+        if (!self::validarFecha($fecha_inicial, $fecha_final)){
+            throw new AlucException(
+                "La fecha final es menor a la fecha inicial",
+                "La fecha final es menor a la fecha inicial"
+            );
         }
+        $reserva = ReporteDao::getInstance()
+            ->getReporte(
+                $fecha_inicial,
+                $fecha_final,
+                $id_usuario,
+                $id_laboratorio
+            );
+        return self::getReserva($reserva);
+
     }
 
+    private static function validarFecha(
+        $fecha_inicial,
+        $fecha_final
+    ){
+        if (strtotime($fecha_final) >= strtotime($fecha_inicial)){
+            return true;
+        }
+        return false;
+    }
 
+    private static function getDiaActual(){
+        return date("Y-n-j");
+    }
 
+    private static function getAnioActual(){
+        return date("Y");
+    }
 
+    private static function getMesActual(){
+        return date("n");
+    }
+
+    private static function getSemanaActual(){
+        return date("W");
+    }
 }

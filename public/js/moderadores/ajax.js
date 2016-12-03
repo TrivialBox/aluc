@@ -10,12 +10,25 @@ function sendRequestModeradores(form, action, success) {
 }
 
 function deleteRowModerador(id) {
-    $('table tbody [data-id="' + id + '"]').remove();
+    var target = $('table tbody [data-id="' + id + '"]');
+    target.addClass("bg-danger");
+    target.fadeOut(700, function () {
+        $(this).remove();
+    });
+}
+
+function addRowMoredador(data) {
+    $('table tbody').prepend(data);
+    var target = $('table tbody tr:first');
+    target.addClass("bg-success");
+    setTimeout(function () {
+        target.removeClass("bg-success");
+    }, 900);
 }
 
 sendRequestModeradores('#form-add-moderador', 'nuevo', function (data, status) {
     showAlert('alert-success', 'Moderador agregado.');
-    $('table tbody').prepend(data);
+    addRowMoredador(data);
     $('.tip-container').remove();
     $('#modal-add-moderador').modal('hide');
     $('#form-add-moderador')[0].reset();
@@ -33,6 +46,6 @@ sendRequestModeradores('#form-edit-moderador', 'actualizar', function (data, sta
     showAlert('alert-success', 'Moderador actualizado.');
     var id = $('#form-edit-moderador #id').val();
     deleteRowModerador(id);
-    $('table tbody').prepend(data);
+    addRowMoredador(data);
     $('#modal-edit-moderador').modal('hide');
 });
