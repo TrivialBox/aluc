@@ -7,17 +7,14 @@ use Aluc\Common\TemplateGenerator;
         TemplateGenerator::generate([], 'common/menu.php');
     ?>
     <li class="">
-        <a href="https://trivialbox.github.io/aluc/">
-            Ver Documentación
-        </a>
-    </li>
-    <li class="">
         <hr>
         <footer>
             <small class="text-muted">
                 Copyright (c) 2016 <a href="http://trivialbox.com" target="_blank">Trivial Box</a>.
                 <br>
                 Bugs y sugerencias en <a href="https://github.com/trivialbox/aluc/issues/new" target="_blank">GitHub</a>.
+                <br>
+                Leer la <a href="https://trivialbox.github.io/aluc/">documentación</a>.
             </small>
         </footer>
     </li>
