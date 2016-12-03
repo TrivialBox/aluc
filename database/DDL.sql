@@ -40,8 +40,8 @@ DROP TABLE IF EXISTS `horario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `horario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_jornada1` int(11) DEFAULT NULL,
-  `id_jornada2` int(11) DEFAULT NULL,
+  `id_jornada1` int(11) NOT NULL,
+  `id_jornada2` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_horario_1_idx` (`id_jornada1`),
   KEY `fk_horario_2_idx` (`id_jornada2`),
@@ -59,8 +59,8 @@ DROP TABLE IF EXISTS `jornada`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `jornada` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hora_apertura` time DEFAULT NULL,
-  `hora_cierre` time DEFAULT NULL,
+  `hora_apertura` time NOT NULL,
+  `hora_cierre` time NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -74,10 +74,10 @@ DROP TABLE IF EXISTS `laboratorio`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `laboratorio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `capacidad` int(11) DEFAULT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `capacidad` int(11) NOT NULL,
   `descripcion` varchar(70) DEFAULT NULL,
-  `id_horario` int(11) DEFAULT NULL,
+  `id_horario` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_laboratorio_1_idx` (`id_horario`),
   CONSTRAINT `fk_laboratorio_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -93,9 +93,9 @@ DROP TABLE IF EXISTS `lector`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lector` (
   `mac` varchar(70) NOT NULL,
-  `id_laboratorio` int(11) DEFAULT NULL,
-  `ip` varchar(55) DEFAULT NULL,
-  `token` varchar(100) DEFAULT NULL,
+  `id_laboratorio` int(11) NOT NULL,
+  `ip` varchar(55) NOT NULL,
+  `token` varchar(100) NOT NULL,
   PRIMARY KEY (`mac`),
   UNIQUE KEY `token_UNIQUE` (`token`),
   KEY `fk_lector_1_idx` (`id_laboratorio`),
@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS `moderador`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `moderador` (
   `id` varchar(10) NOT NULL,
-  `id_laboratorio` int(11) DEFAULT NULL,
+  `id_laboratorio` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_moderador_2_idx` (`id_laboratorio`),
@@ -130,14 +130,14 @@ DROP TABLE IF EXISTS `reserva`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reserva` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
-  `n_usuarios` int(11) DEFAULT NULL,
+  `n_usuarios` int(11) NOT NULL,
   `descripcion` varchar(60) DEFAULT NULL,
-  `tipo_uso` varchar(45) DEFAULT NULL,
-  `codigo_secreto` varchar(100) DEFAULT NULL,
+  `tipo_uso` enum('clases','práctica') NOT NULL,
+  `codigo_secreto` varchar(100) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo_secreto_UNIQUE` (`codigo_secreto`)
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,17 +151,17 @@ CREATE TABLE `reservacion` (
   `id_reserva` int(100) NOT NULL AUTO_INCREMENT,
   `id_laboratorio` int(11) NOT NULL,
   `id_usuario` varchar(10) NOT NULL,
-  `estado` varchar(45) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `hora_inicio` time DEFAULT NULL,
-  `hora_fin` time DEFAULT NULL,
+  `estado` enum('reservado','cancelado','cancelado ausencia') NOT NULL,
+  `fecha` date NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL,
   PRIMARY KEY (`id_reserva`,`id_laboratorio`,`id_usuario`),
   KEY `fk_new_table_1_idx` (`id_usuario`),
   KEY `fk_reservacion_1_idx` (`id_laboratorio`),
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -176,6 +176,11 @@ DELIMITER ;;
 BEGIN
 	if OLD.estado = 'cancelado' then
 		set NEW.estado = 'cancelado';
+        signal sqlstate "45000" set message_text = "110000";
+    end if;
+    
+    if OLD.estado = 'cancelado ausencia' then
+		set NEW.estado = 'cancelado ausencia';
         signal sqlstate "45000" set message_text = "110000";
     end if;
 END */;;
@@ -642,4 +647,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-01 23:32:31
+-- Dump completed on 2016-12-03  7:52:39
