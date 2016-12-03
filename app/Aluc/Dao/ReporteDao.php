@@ -76,13 +76,18 @@ class ReporteDao{
      */
     public function getReportesAnio(
         $year,
-        $id_usuario
+        $id_usuario,
+        $id_laboratorio
     ){
         try{
             $where = "year(fecha) = '{$year}'";
 
             if ($id_usuario != null){
                 $where .= " and id_usuario = '{$id_usuario}'";
+            }
+
+            if ($id_laboratorio != null){
+                $where .= " and id_laboratorio = '{$id_laboratorio}'";
             }
 
             return $reporteDia = $this->database

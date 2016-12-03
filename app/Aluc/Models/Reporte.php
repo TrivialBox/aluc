@@ -28,10 +28,16 @@ class Reporte{
     }
 
     public static function getReporteAnio(
-        $id_usuario =  null
+        $id_usuario =  null,
+        $id_laboratorio = null
     ){
         $reserva = ReporteDao::getInstance()
-            ->getReportesAnio(self::getAnioActual(), $id_usuario);
+            ->getReportesAnio(
+                self::getAnioActual(),
+                $id_usuario,
+                $id_laboratorio
+            );
+
         return self::getReserva($reserva);
     }
 
