@@ -296,6 +296,14 @@ class Reserva {
         }
         $reserva = ReservaDao::getInstance()
             ->getRservaToken($codigo_secreto);
+        $estado = ReservaDao::getInstance()->getEstado($reserva[0]['id'])[0]['estado'];
+
+        if ( $estado === 'procesado'){
+            throw new AlucException(
+                "La reserva ya esta procesada",
+                "La reserva ya esta procesada"
+            );
+        }
 
         ReservaDao::getInstance()
             ->procesarReserva($reserva[0]['id']);
