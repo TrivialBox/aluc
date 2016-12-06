@@ -12,4 +12,6 @@ composer_2.phar
 # bower
 /public/bower_components
 
-.swp
+*~
+*.swp
+*.swo
