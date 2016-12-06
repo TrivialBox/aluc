@@ -54,7 +54,7 @@ class ReservaView extends View {
             ]);
         } else if ($type === 'old') {
             return $this->listAll([
-                'reservas' => Reserva::getReservaPasadas($usuario_id)
+                'reservas' => Reserva::getReservaPasadas($user_id)
             ]);
         }
     }
