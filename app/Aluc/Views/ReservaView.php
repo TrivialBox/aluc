@@ -71,6 +71,14 @@ class ReservaView extends View {
         ]);
     }
 
+    public function listReservasLaboratorioCompact($laboratorio_id) {
+        $this->setTemplate(
+            ['reservas' => Reserva::getReservaLaboratorio($laboratorio_id)],
+            'escritorio/reservas-list.php'
+        );
+        return $this;
+    }
+
     public function codigo_qr($reserva) {
         $this->setTemplate(
             ['reserva' => $reserva],

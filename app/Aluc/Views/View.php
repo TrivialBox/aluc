@@ -26,3 +26,4 @@ abstract class View {
         $this->template = $template;
     }
 }
+

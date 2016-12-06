@@ -24,3 +24,4 @@ class AdministradorView  extends View {
         return $this;
     }
 }
+
