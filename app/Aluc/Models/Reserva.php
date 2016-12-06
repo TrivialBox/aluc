@@ -253,11 +253,10 @@ class Reserva {
             false
         );
     }
-    public function getId(
-
-    ){
+    public function getId() {
         return $this->id;
     }
+
     public function updateEstado(
         $estado
     ){
@@ -266,9 +265,7 @@ class Reserva {
             ->updateEstado($this);
     }
 
-    public function cancelar(
-
-    ){
+    public function cancelar(){
         $this->updateEstado('cancelado');
     }
 

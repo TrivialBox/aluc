@@ -140,7 +140,7 @@ class ReservaDao{
             $where .= " id_laboratorio = '{$laboratorio_id}' and ";
         }
 
-        $where .= " estado != 'reservado' ORDER BY fecha DESC LIMIT 10";
+        $where .= " estado != 'reservado' ORDER BY fecha DESC";
 
         $reservas = $this->database->select(
             'view_reserva',
@@ -148,7 +148,6 @@ class ReservaDao{
             $where
         );
         return $reservas;
-
     }
 
     /**
@@ -366,7 +365,4 @@ class ReservaDao{
                 return "Ha ocurrido un error, disculpas por lo acontecido!.";
         }
     }
-
-    
-
 }

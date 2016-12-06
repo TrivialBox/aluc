@@ -20,9 +20,7 @@ if (empty($get('reservas'))) {
     </thead>
     <tbody>
 TAG;
-    $i = 0;
     foreach ($get('reservas') as $reserva) {
-        $i++;
         $laboratorio = $reserva->getLaboratorio();
         $fecha = $reserva->getFecha();
         $disable = '';
@@ -39,7 +37,7 @@ TAG;
         <td>{$fecha->hora_fin}</td>
         <td>
             <div data-id="{$reserva->getId()}" class="btn-group btn-group-sm pull-right">
-                <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-{$i}">
+                <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-{$reserva->getId()}">
                     Ver más
                 </button>
                 <button type="button" class="btn btn-secondary {$disable}" {$disable} data-placement="top" title="Mostrar código QR" data-toggle="modal" data-target="#modal-show-qr">
@@ -58,7 +56,7 @@ TAG;
     </tr>
     <tr>
         <td colspan="7">
-            <div id="collapse-{$i}" class="collapse">
+            <div id="collapse-{$reserva->getId()}" class="collapse">
                 <dl>
                     <dt>ID Reserva</dt>
                     <dd>{$reserva->getId()}</dd>

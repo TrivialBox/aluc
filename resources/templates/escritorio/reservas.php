@@ -60,12 +60,12 @@ TAG;
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
                 <li class="nav-item active">
-                    <a class="nav-link" data-toggle="tab" href="#reservas-content" id="reservas-nuevas-tab">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-nuevas-content" id="reservas-nuevas-tab">
                         Nuevas
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#reservas-content" id="reservas-pasadas-tab">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-pasadas-content" id="reservas-pasadas-tab">
                         Pasadas
                     </a>
                 </li>
@@ -73,11 +73,7 @@ TAG;
             <!-- END nav-tabs -->
 
             <!-- Contenido -->
-            <div class="tab-content">
-                <div id="reservas-content">
-                </div>
-                <div id="reservas-pasadas-content">
-                </div>
+            <div class="tab-content" id="reservas-content">
             </div>
             <!-- END panes -->
 
