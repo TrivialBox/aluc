@@ -18,7 +18,7 @@ class ReservaView extends View {
     }
 
     public function home($data = []) {
-        $reservas = Reserva::getReservaEstado($_SESSION['id'], 'reservado');
+        $reservas = Reserva::getReservas($_SESSION['id'], 'reservado');
         $data['reservas'] = $reservas;
         $data['laboratorios'] = Laboratorio::getAll();
         $this->setTemplate(
@@ -50,7 +50,7 @@ class ReservaView extends View {
             ]);
         } else if ($type === 'new') {
             return $this->listAll([
-                'reservas' => Reserva::getReservaEstado($user_id, 'reservado')
+                'reservas' => Reserva::getReservas($user_id, 'reservado')
             ]);
         } else if ($type === 'old') {
             return $this->listAll([
