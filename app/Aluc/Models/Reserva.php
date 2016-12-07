@@ -8,8 +8,7 @@ use Sinergi\Token\StringGenerator;
 /**
  * Representación de una reserva en el sistema.
  */
-class Reserva
-{
+class Reserva {
     private $id;
     private $usuario_id;
     public $laboratorio_id;
