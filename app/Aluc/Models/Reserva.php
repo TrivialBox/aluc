@@ -99,64 +99,39 @@ class Reserva {
         return self::getReserva(self::get($usuario_id));
     }
 
-    public static function getReservaEstado(
+    public static function getReservas(
         $usuario_id,
-        $estado
+        $estado,
+        $laboratorio_id = null
     )
     {
         return self::getReserva(
             self::get(
                 $usuario_id,
-                $estado
+                $estado,
+                null,
+                $laboratorio_id
             )
         );
     }
 
-    public static function getReservasUsLabEs(
-        $id_usuario,
-        $id_laboratorio,
-        $estado
-    )
-    {
-        return self::getReserva(
-            self::get(
-                $id_usuario,
-                $estado,
-                null,
-                $id_laboratorio
-            )
-        );
-    }
 
     public static function getReservaPasadas(
         $id_usuario = null,
-        $id_laboratorio = null
+        $id_laboratorio = null,
+        $estado = null
     )
     {
         return self::getReserva(
             ReservaDao::getInstance()
                 ->getReservaPasadas(
                     $id_usuario,
-                    $id_laboratorio
-                )
-        );
-    }
-
-    public static function getReservaPasadaUsLabEs(
-        $id_usuario,
-        $id_laboratorio,
-        $estado
-    )
-    {
-        return self::getReserva(
-            ReservaDao::getInstance()
-                ->getReservaPasadaUsLabEs(
-                    $id_usuario,
                     $id_laboratorio,
                     $estado
                 )
         );
     }
+
 
     public static function getReservaLaboratorio(
         $laboratorio_id,
