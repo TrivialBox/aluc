@@ -8,7 +8,8 @@ use Aluc\Common\AlucException;
 /**
  * Clase para para manejo de base de datos de las reservas
  */
-class ReservaDao{
+class ReservaDao
+{
     private $database;
     private static $instance = null;
 
@@ -16,7 +17,8 @@ class ReservaDao{
     /**
      * ReservaDao constructor.
      */
-    private function __construct() {
+    private function __construct()
+    {
         $this->database = new Database();
         $this->database->connect();
     }
@@ -25,7 +27,8 @@ class ReservaDao{
      * Obtener la instancia de la clase.
      * @return null
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (static::$instance == null) {
             static::$instance = new self();
         }
@@ -38,7 +41,10 @@ class ReservaDao{
      * @param $object
      * @return array
      */
-    public static function convertObjectArray($object){
+    public static function convertObjectArray(
+        $object
+    )
+    {
         $array = [
             'id_usuario' => $object->getUsuarioId(),
             'id_laboratorio' => $object->laboratorio_id,
@@ -60,7 +66,10 @@ class ReservaDao{
      * @param $object
      * @return array
      */
-    public static function convertEditarReserva($object){
+    public static function convertEditarReserva(
+        $object
+    )
+    {
         $array = [
             'id' => $object->getId(),
             'id_laboratorio' => $object->laboratorio_id,
@@ -79,9 +88,12 @@ class ReservaDao{
      * @param $e
      * @throws AlucException
      */
-    public static function generarExcepcion($e){
+    public static function generarExcepcion(
+        $e
+    )
+    {
         $error = $e->getMessage();
-        if(strval(intval($error))!==$error){
+        if (strval(intval($error)) !== $error) {
 
             throw new AlucException(Database::getMgs(
                 $e->getCode(), static::getModel()),
@@ -101,21 +113,25 @@ class ReservaDao{
      * @param $object
      * @param bool $type_save
      */
-    public function save($object, $type_save = true){
-        try{
-            if ($type_save){
+    public function save(
+        $object,
+        $type_save = true
+    )
+    {
+        try {
+            if ($type_save) {
                 $this->database->call(
                     'insertar_reserva',
                     static::convertObjectArray($object)
                 );
-            }else{
+            } else {
                 $this->database->call(
                     'editar_reserva',
                     static::convertEditarReserva($object)
                 );
 
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->generarExcepcion($e);
         }
     }
@@ -130,13 +146,14 @@ class ReservaDao{
     public function getReservaPasadas(
         $usuario_id,
         $laboratorio_id
-    ){
+    )
+    {
         $where = "";
-        if ($usuario_id != null){
+        if ($usuario_id != null) {
             $where .= " id_usuario = '{$usuario_id}' and ";
 
         }
-        if ($laboratorio_id != null){
+        if ($laboratorio_id != null) {
             $where .= " id_laboratorio = '{$laboratorio_id}' and ";
         }
 
@@ -149,6 +166,35 @@ class ReservaDao{
         );
         return $reservas;
 
+    }
+
+    public function getReservaPasadaUsLabEs(
+        $usuario_id,
+        $laboratorio_id,
+        $estado
+    )
+    {
+        $where = "";
+        if ($usuario_id != null) {
+            $where .= " id_usuario = '{$usuario_id}' and ";
+
+        }
+        if ($laboratorio_id != null) {
+            $where .= " id_laboratorio = '{$laboratorio_id}' and ";
+        }
+
+        if ($estado != null) {
+            $where .= " estado = '{$estado}' and ";
+        }
+
+        $where .= " estado != 'reservado' ORDER BY fecha DESC LIMIT 10";
+
+        $reservas = $this->database->select(
+            'view_reserva',
+            '*',
+            $where
+        );
+        return $reservas;
     }
 
     /**
@@ -164,13 +210,14 @@ class ReservaDao{
         $estado = null,
         $id = null,
         $laboratorio_id = null
-    ){
-       $where = self::getWhere(
-           $usuario_id,
-           $estado,
-           $id,
-           $laboratorio_id
-       );
+    )
+    {
+        $where = self::getWhere(
+            $usuario_id,
+            $estado,
+            $id,
+            $laboratorio_id
+        );
 
         $reservas = $this->database->select(
             'view_reserva',
@@ -187,11 +234,14 @@ class ReservaDao{
      * @param $order_attribute
      * @return mixed
      */
-    public function getAll($order_attribute){
+    public function getAll(
+        $order_attribute
+    )
+    {
         $order_by = null;
 
-        if ($order_attribute != null){
-            $order_by =  "order by " . $order_attribute . " asc";
+        if ($order_attribute != null) {
+            $order_by = "order by " . $order_attribute . " asc";
         }
         $list_reservas = $this->database
             ->select(
@@ -208,7 +258,10 @@ class ReservaDao{
      * Método para actualizar el estado de una reserva.
      * @param $object
      */
-    public function updateEstado($object){
+    public function updateEstado(
+        $object
+    )
+    {
         try {
 
             $where = " id_reserva = '{$object->getId()}'";
@@ -231,27 +284,33 @@ class ReservaDao{
      * @return mixed
      * @throws AlucException
      */
-    public function getRservaToken($token){
+    public function getRservaToken(
+        $token
+    )
+    {
         $where = "codigo_secreto = '{$token}'";
 
         $reserva = $this->database
             ->select(
                 'reserva',
                 ['id'],
-                $where,null
+                $where, null
             );
 
-        if(count($reserva) == 0){
+        if (count($reserva) == 0) {
             throw new AlucException(
                 'No se encuentra registrada la reserva',
                 'No se ha encontrado en la base de datos el token'
-                );
+            );
         }
         return $reserva;
     }
 
-    public function getEstado($id){
-        try{
+    public function getEstado(
+        $id
+    )
+    {
+        try {
             $where = " id_reserva = '{$id}'";
             $array = [
                 'estado'
@@ -262,7 +321,7 @@ class ReservaDao{
                 $where
             );
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             self::generarExcepcion($e);
         }
     }
@@ -272,7 +331,10 @@ class ReservaDao{
      * reserva el estado de la misma pasa ha procesada.
      * @param $id
      */
-    public function procesarReserva($id){
+    public function procesarReserva(
+        $id
+    )
+    {
         try {
             $where = " id_reserva = '{$id}'";
             $array = [
@@ -301,21 +363,22 @@ class ReservaDao{
         $estado = null,
         $id = null,
         $laboratorio_id = null
-    ){
+    )
+    {
         $where = "";
-        if ($usuario_id != null){
+        if ($usuario_id != null) {
             $where .= "id_usuario = '{$usuario_id}'";
         }
 
-        if ($id != null){
+        if ($id != null) {
             $where .= "id = '{$id}'";
         }
 
-        if ($laboratorio_id != null){
+        if ($laboratorio_id != null) {
             $where .= "id_laboratorio = '{$laboratorio_id}'";
         }
 
-        if ($estado != null){
+        if ($estado != null) {
             $where .= " and estado = '{$estado}'";
         }
 
@@ -326,11 +389,12 @@ class ReservaDao{
      * Método para armar códigos de errores de la clase.
      * @return array
      */
-    private static function getModel(){
+    private static function getModel()
+    {
         return [
-            'clave_foranea' => ['Usuario o laboratorio','registrado'],
+            'clave_foranea' => ['Usuario o laboratorio', 'registrado'],
             'clave_pk_duplicate' => ['Usuario'],
-            'elemento_null' => ['Usuario','registrado']
+            'elemento_null' => ['Usuario', 'registrado']
 
         ];
     }
@@ -340,7 +404,10 @@ class ReservaDao{
      * @param $code
      * @return string
      */
-    private  static function getMsgInsert($code) {
+    private static function getMsgInsert(
+        $code
+    )
+    {
         switch ($code) {
             case 1452:
                 return "El laboratorio no se encuentra registrado.";
@@ -367,6 +434,5 @@ class ReservaDao{
         }
     }
 
-    
 
 }
