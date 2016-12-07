@@ -34,9 +34,9 @@ TAG;
                             {$reserva->descripcion}
                         </p>
                     </li>
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Usuario">
-                        {$reserva->getUsuarioId()}
-                        <span class="glyphicon glyphicon-user pull-right"></span>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Estado">
+                        {$reserva->estado}
+                        <span class="glyphicon glyphicon-tag pull-right"></span>
                     </li>
                     <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Número de usuarios">
                         {$reserva->numero_usuarios}

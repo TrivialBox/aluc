@@ -5,10 +5,10 @@ use Aluc\Models\Reserva;
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Commont -->
-    <?php
-    TemplateGenerator::generate([], 'common/header.php');
-    ?>
+    <!-- Common -->
+<?php
+TemplateGenerator::generate([], 'common/header.php');
+?>
     <!-- Timepicker -->
     <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 
@@ -46,24 +46,34 @@ TemplateGenerator::generate([], 'common/navbar.php');
                 <h1>
                     <span>Reservas</span>
                 </h1>
-                <select id="laboratorios">
-                    <?php
-                    foreach ($get('laboratorios') as $laboratorio) {
-                        echo <<<TAG
+                <select class="form-control" id="laboratorios">
+<?php
+foreach ($get('laboratorios') as $laboratorio) {
+    echo <<<TAG
                                 <option value="{$laboratorio->id}">{$laboratorio->nombre} ({$laboratorio->id})</option>
 TAG;
-                    }
-                    ?>
+}
+?>
                 </select>
             </div>
 
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item active">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-nuevas-content" id="reservas-nuevas-tab">
+                        Nuevas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#reservas-pasadas-content" id="reservas-pasadas-tab">
+                        Pasadas
+                    </a>
+                </li>
+            </ul>
+            <!-- END nav-tabs -->
+
             <!-- Contenido -->
-            <div id="reservas-content">
-                <?php
-                if (empty($get('laboratorios'))) {
-                    TemplateGenerator::generate([], 'escritorio/tip-container.php');
-                } 
-                ?>
+            <div class="tab-content" id="reservas-content">
             </div>
             <!-- END panes -->
 

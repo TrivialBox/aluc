@@ -96,19 +96,19 @@ class AdministradorSrv {
     public static function moderadores_nuevo($data) {
         self::admin_do (
             function () use ($data) {
-                 if (!empty($data) and Tools::check_method('post')) {
-                     $id = $data['id'];
-                     $id_laboratorio = $data['id_laboratorio'];
-                     $moderador = Moderador::getNewInstace($id, $id_laboratorio);
-                     $moderador->save();
-                     self::$view_moderador
-                         ->getList(['id' => $id])
-                         ->render();
-                 } else {
-                     self::$view_general
-                         ->error404()
-                         ->render();
-                 }
+                if (!empty($data) and Tools::check_method('post')) {
+                    $id = $data['id'];
+                    $id_laboratorio = $data['id_laboratorio'];
+                    $moderador = Moderador::getNewInstace($id, $id_laboratorio);
+                    $moderador->save();
+                    self::$view_moderador
+                        ->getList(['id' => $id])
+                        ->render();
+                } else {
+                    self::$view_general
+                        ->error404()
+                        ->render();
+                }
             },
             function ($e) {
                 self::$view_general
@@ -257,8 +257,8 @@ class AdministradorSrv {
                     $lector = LectorQr::getNewInstance($mac, $ip, $id_laboratorio);
                     $lector->save();
                     self::$view_lector_qr
-                         ->getList(['mac' => $mac])
-                         ->render();
+                        ->getList(['mac' => $mac])
+                        ->render();
                 } else {
                     self::$view_general
                         ->error404()

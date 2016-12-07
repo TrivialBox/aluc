@@ -49,17 +49,12 @@ class ReservaView extends View {
                 'reservas' => Reserva::getReservaUsuario($user_id)
             ]);
         } else if ($type === 'new') {
-            $type = 'reservado';
             return $this->listAll([
-                'reservas' => Reserva::getReservaEstado($user_id, $type)
+                'reservas' => Reserva::getReservaEstado($user_id, 'reservado')
             ]);
         } else if ($type === 'old') {
             return $this->listAll([
-                'reservas' => array_merge(
-                    Reserva::getReservaEstado($user_id, 'cancelado'),
-                    Reserva::getReservaEstado($user_id, 'cancelado_ausencia'),
-                    Reserva::getReservaEstado($user_id, 'procesado')
-                )
+                'reservas' => Reserva::getReservaPasadas($user_id)
             ]);
         }
     }
@@ -69,6 +64,16 @@ class ReservaView extends View {
             'reservas' => Reserva::getReservaLaboratorio($laboratorio_id),
             'row_h' => '4'
         ]);
+    }
+
+    public function listReservasLaboratorioCompact($laboratorio_id) {
+        $this->setTemplate([
+                'reservas_pasadas' => Reserva::getReservaPasadas(null, $laboratorio_id),
+                'reservas_nuevas' => Reserva::getReservaLaboratorio($laboratorio_id, 'reservado')
+            ],
+            'escritorio/reservas-tabs.php'
+        );
+        return $this;
     }
 
     public function codigo_qr($reserva) {
