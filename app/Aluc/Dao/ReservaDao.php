@@ -145,30 +145,6 @@ class ReservaDao
      */
     public function getReservaPasadas(
         $usuario_id,
-        $laboratorio_id
-    )
-    {
-        $where = "";
-        if ($usuario_id != null) {
-            $where .= " id_usuario = '{$usuario_id}' and ";
-
-        }
-        if ($laboratorio_id != null) {
-            $where .= " id_laboratorio = '{$laboratorio_id}' and ";
-        }
-
-        $where .= " estado != 'reservado' ORDER BY fecha DESC";
-
-        $reservas = $this->database->select(
-            'view_reserva',
-            '*',
-            $where
-        );
-        return $reservas;
-    }
-
-    public function getReservaPasadaUsLabEs(
-        $usuario_id,
         $laboratorio_id,
         $estado
     )
@@ -186,7 +162,7 @@ class ReservaDao
             $where .= " estado = '{$estado}' and ";
         }
 
-        $where .= " estado != 'reservado' ORDER BY fecha DESC LIMIT 10";
+        $where .= " estado != 'reservado' ORDER BY fecha DESC";
 
         $reservas = $this->database->select(
             'view_reserva',
@@ -195,6 +171,7 @@ class ReservaDao
         );
         return $reservas;
     }
+
 
     /**
      * Método para obtener reservas.
