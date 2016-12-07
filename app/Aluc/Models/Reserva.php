@@ -89,9 +89,7 @@ class Reserva {
 
     }
 
-    public static function getReservaUsuario(
-        $usuario_id
-    ){
+    public static function getReservaUsuario( $usuario_id) {
         return self::getReserva(self::get($usuario_id));
     }
 
@@ -116,6 +114,7 @@ class Reserva {
                 )
         );
     }
+
     public static function getReservaLaboratorio(
         $laboratorio_id,
         $estado = null
@@ -187,10 +186,7 @@ class Reserva {
         return $reservas;
     }
 
-    private static function generarCodigoSecreto(
-
-    ){
-
+    private static function generarCodigoSecreto() {
         return StringGenerator::randomAlnum(15);
     }
 
