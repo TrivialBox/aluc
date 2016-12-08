@@ -58,7 +58,7 @@ class EscritorioSrv {
                         $id_laboratorio = $data['id_laboratorio'];
                     }
                     self::$view_reserva
-                        ->listReservasLaboratorio($id_laboratorio)
+                        ->listReservasLaboratorioCompact($id_laboratorio)
                         ->render();
                 } else {
                     self::$view_reserva

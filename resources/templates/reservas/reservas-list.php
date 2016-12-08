@@ -17,12 +17,8 @@ TAG;
             $panel_status = 'panel-danger';
             $disable = 'disabled';
         }
-        $row_h = $get('row_h');
-        if (empty($row_h)) {
-            $row_h = '3';
-        }
         echo <<<TAG
-    <div class="col-sm-{$row_h} text-center">
+    <div class="col-sm-4 text-center">
         <div class="panel {$panel_status}">
             <div class="panel-heading">
                 {$laboratorio->nombre} ({$laboratorio->id})
@@ -34,9 +30,9 @@ TAG;
                             {$reserva->descripcion}
                         </p>
                     </li>
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Usuario">
-                        {$reserva->getUsuarioId()}
-                        <span class="glyphicon glyphicon-user pull-right"></span>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Estado">
+                        {$reserva->estado}
+                        <span class="glyphicon glyphicon-tag pull-right"></span>
                     </li>
                     <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Número de usuarios">
                         {$reserva->numero_usuarios}

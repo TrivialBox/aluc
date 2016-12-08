@@ -73,7 +73,6 @@ class AdministradorDao{
             );
 
         return $list_admin;
-
     }
 
     private function getModel(){
@@ -82,5 +81,4 @@ class AdministradorDao{
 
         ];
     }
-
 }
