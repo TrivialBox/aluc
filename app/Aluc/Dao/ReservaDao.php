@@ -346,7 +346,7 @@ class ReservaDao
             $where .= "id = '{$id}'";
         }
 
-        if ($laboratorio_id != null && strlen($where) < 1) {
+        if ($laboratorio_id != null) {
             if(strlen($where) < 1){
                 $where .= " id_laboratorio = '{$laboratorio_id}'";
             } else {
