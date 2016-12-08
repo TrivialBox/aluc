@@ -346,8 +346,12 @@ class ReservaDao
             $where .= "id = '{$id}'";
         }
 
-        if ($laboratorio_id != null) {
-            $where .= " id_laboratorio = '{$laboratorio_id}'";
+        if ($laboratorio_id != null && strlen($where) < 1) {
+            if(strlen($where) < 1){
+                $where .= " id_laboratorio = '{$laboratorio_id}'";
+            } else {
+                $where .= " and id_laboratorio = '{$laboratorio_id}'";
+            }
         }
 
         if ($estado != null) {
