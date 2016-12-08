@@ -43,18 +43,18 @@ class ReservaView extends View {
         ]);
     }
 
-    public function listReservasUsuario($user_id, $type = 'all') {
+    public function listReservasUsuario($user_id, $lab_id, $type = 'all') {
         if ($type === 'all') {
             return $this->listAll([
                 'reservas' => Reserva::getReservaUsuario($user_id)
             ]);
         } else if ($type === 'new') {
             return $this->listAll([
-                'reservas' => Reserva::getReservas($user_id, 'reservado')
+                'reservas' => Reserva::getReservas($user_id, 'reservado', $lab_id)
             ]);
         } else if ($type === 'old') {
             return $this->listAll([
-                'reservas' => Reserva::getReservaPasadas($user_id)
+                'reservas' => Reserva::getReservaPasadas($user_id, $lab_id)
             ]);
         }
     }

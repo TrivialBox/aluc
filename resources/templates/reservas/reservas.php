@@ -32,14 +32,20 @@ use Aluc\Common\TemplateGenerator;
 <!-- contenedor principal -->
 <div class="container">
     <div class="row">
-        <!-- sidebar, debería ir un sidebar aquí? -->
-<!--        <div class="col-sm-3">
-            Sidebar
-        </div>-->
+        <!-- sidebar -->
+        <div class="col-sm-3">
+        <?php
+        TemplateGenerator::generate([
+                'laboratorios' => $get('laboratorios')
+            ],
+            'reservas/sidebar.php'
+        );
+        ?>
+        </div>
         <!-- END sidebar -->
 
         <!-- main content -->
-        <div class="col-sm-12">
+        <div class="col-sm-9">
             <div class="page-header clearfix">
                 <h1>
                     <span>Reservas</span>

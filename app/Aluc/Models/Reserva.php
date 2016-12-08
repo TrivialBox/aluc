@@ -8,8 +8,7 @@ use Sinergi\Token\StringGenerator;
 /**
  * Representación de una reserva en el sistema.
  */
-class Reserva
-{
+class Reserva {
     private $id;
     private $usuario_id;
     public $laboratorio_id;
@@ -28,8 +27,7 @@ class Reserva
         $descripcion, $numero_usuarios, $tipo_uso,
         $codigo_secreto, $estado = null, $id = null,
         $is_save = true
-    )
-    {
+    ) {
         $this->id = $id;
         $this->usuario_id = $usuario_id;
         $this->laboratorio_id = $laboratorio_id;
@@ -45,8 +43,7 @@ class Reserva
 
     private static function getReserva(
         $reserva
-    )
-    {
+    ) {
         if (count($reserva) > 0) {
             if (count($reserva) == 1) {
                 return Reserva::get_object(
@@ -68,8 +65,7 @@ class Reserva
         $usuario_id, $laboratorio_id,
         $fecha_n, $hora_inicio, $hora_fin,
         $descripcion, $numero_usuarios, $tipo_uso
-    )
-    {
+    ) {
         $fecha = new Fecha($fecha_n, $hora_inicio, $hora_fin);
 
         return new self(
@@ -79,8 +75,7 @@ class Reserva
         );
     }
 
-    public static function getInstance($id)
-    {
+    public static function getInstance($id) {
         $array = self::get(null, null, $id);
         $fecha = new Fecha(
             $array[0]['fecha'],
@@ -96,10 +91,7 @@ class Reserva
 
     }
 
-    public static function getReservaUsuario(
-        $usuario_id
-    )
-    {
+    public static function getReservaUsuario($usuario_id) {
         return self::getReserva(self::get($usuario_id));
     }
 
@@ -107,8 +99,7 @@ class Reserva
         $usuario_id,
         $estado,
         $laboratorio_id = null
-    )
-    {
+    ) {
         return self::getReserva(
             self::get(
                 $usuario_id,
@@ -123,8 +114,7 @@ class Reserva
     public static function getReservaPasadas(
         $id_usuario = null,
         $id_laboratorio = null
-    )
-    {
+    ) {
         return self::getReserva(
             ReservaDao::getInstance()
                 ->getReservaPasadas(
@@ -138,8 +128,7 @@ class Reserva
     public static function getReservaLaboratorio(
         $laboratorio_id,
         $estado = null
-    )
-    {
+    ) {
         return self::getReserva(
             self::get(
                 null,
@@ -153,8 +142,7 @@ class Reserva
     public static function get_object(
         $array,
         $get_element = true
-    )
-    {
+    ) {
         if ($get_element) {
             $obj = [];
             $fecha = new Fecha(
@@ -196,8 +184,7 @@ class Reserva
         $estado = null,
         $id = null,
         $id_lab = null
-    )
-    {
+    ) {
         $reservas = ReservaDao::getInstance()
             ->get(
                 $usuario_id,
@@ -205,28 +192,22 @@ class Reserva
                 $id,
                 $id_lab
             );
-
         return $reservas;
     }
 
-    private static function generarCodigoSecreto()
-    {
-
+    private static function generarCodigoSecreto() {
         return StringGenerator::randomAlnum(15);
     }
 
-    public function getCodigoSecreto()
-    {
+    public function getCodigoSecreto() {
         return $this->codigo_secreto;
     }
 
-    public function getUsuarioId()
-    {
+    public function getUsuarioId() {
         return $this->usuario_id;
     }
 
-    public function getFecha()
-    {
+    public function getFecha() {
         return $this->fecha;
     }
 
@@ -234,8 +215,7 @@ class Reserva
         $fecha,
         $hora_inicio,
         $hora_fin
-    )
-    {
+    ) {
         $fecha_c = new Fecha(
             $fecha,
             $hora_inicio,
@@ -244,13 +224,11 @@ class Reserva
         $this->fecha = $fecha_c;
     }
 
-    public function getLaboratorio()
-    {
+    public function getLaboratorio() {
         return Laboratorio::getInstance($this->laboratorio_id);
     }
 
-    public function save()
-    {
+    public function save() {
         ReservaDao::getInstance()
             ->save(
                 $this,
@@ -263,8 +241,7 @@ class Reserva
 
     public function getAll(
         $order_atributo
-    )
-    {
+    ) {
         return self::get_object(
             ReservaDao::getInstance()
                 ->getAll($order_atributo),
@@ -273,25 +250,20 @@ class Reserva
     }
 
 
-    public function getId()
-    {
-
+    public function getId() {
         return $this->id;
     }
 
     public function updateEstado(
         $estado
-    )
-    {
+    ) {
         $this->estado = $estado;
         ReservaDao::getInstance()
             ->updateEstado($this);
     }
 
 
-    public function cancelar()
-    {
-
+    public function cancelar() {
         $this->updateEstado('cancelado');
     }
 
@@ -301,8 +273,7 @@ class Reserva
         $ip,
         $token,
         $codigo_secreto
-    )
-    {
+    ) {
         $lector = LectorQr::getInstance($mac);
 
         if ($lector->ip != $ip) {

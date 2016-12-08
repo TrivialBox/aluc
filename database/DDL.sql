@@ -151,17 +151,18 @@ CREATE TABLE `reservacion` (
   `id_reserva` int(100) NOT NULL AUTO_INCREMENT,
   `id_laboratorio` int(11) NOT NULL,
   `id_usuario` varchar(10) NOT NULL,
-  `estado` enum('reservado','cancelado','cancelado ausencia') NOT NULL,
+  `estado` enum('reservado','procesado','cancelado','cancelado ausencia') NOT NULL,
   `fecha` date NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
+  `hora_activacion` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_reserva`,`id_laboratorio`,`id_usuario`),
   KEY `fk_new_table_1_idx` (`id_usuario`),
   KEY `fk_reservacion_1_idx` (`id_laboratorio`),
   CONSTRAINT `fk_new_table_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_1` FOREIGN KEY (`id_laboratorio`) REFERENCES `laboratorio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservacion_2` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -174,7 +175,11 @@ CREATE TABLE `reservacion` (
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ALUC`.`reservacion_BEFORE_UPDATE` BEFORE UPDATE ON `reservacion` FOR EACH ROW
 BEGIN
-	if OLD.estado = 'cancelado' then
+	
+    declare Shora_inicio time;
+    declare Shora_fin time;
+
+    if OLD.estado = 'cancelado' then
 		set NEW.estado = 'cancelado';
         signal sqlstate "45000" set message_text = "110000";
     end if;
@@ -183,6 +188,24 @@ BEGIN
 		set NEW.estado = 'cancelado ausencia';
         signal sqlstate "45000" set message_text = "110000";
     end if;
+
+    select hora_inicio into Shora_inicio 
+		from view_reserva where id = new.id_reserva;
+    
+    select hora_inicio into  Shora_fin
+		from view_reserva where id = new.id_reserva;
+        
+        
+    if new.estado = 'procesado' then
+		
+        if (now() between Shora_inicio and Shora_fin) then
+			update reservacion set fecha_activacion = now() where id = NEW.id_reserva;
+		else
+			signal sqlstate "45000" set message_text = '160000'; 
+            
+		end if;
+    end if;
+    
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -647,4 +670,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-03  7:52:39
+-- Dump completed on 2016-12-07 17:59:43
