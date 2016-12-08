@@ -45,9 +45,10 @@ class ReservasSrv {
             function () use ($data){
                 if (!empty($data) and Tools::check_method('get')) {
                     $type = $data['type'];
+                    $lab_id = $data['laboratorio_id'];
                     $user_id = $_SESSION['id'];
                     self::$view_reserva
-                        ->listReservasUsuario($user_id, $type)
+                        ->listReservasUsuario($user_id, $lab_id, $type)
                         ->render();
                 } else {
                     self::$view_reserva
