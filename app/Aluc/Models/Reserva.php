@@ -122,16 +122,14 @@ class Reserva
 
     public static function getReservaPasadas(
         $id_usuario = null,
-        $id_laboratorio = null,
-        $estado = null
+        $id_laboratorio = null
     )
     {
         return self::getReserva(
             ReservaDao::getInstance()
                 ->getReservaPasadas(
                     $id_usuario,
-                    $id_laboratorio,
-                    $estado
+                    $id_laboratorio
                 )
         );
     }
