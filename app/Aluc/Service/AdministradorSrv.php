@@ -364,6 +364,26 @@ class AdministradorSrv {
         );
     }
 
+    public static function verificarmod($data){
+        try {
+            if (!empty($data) and Tools::check_method('post')) {
+                $cedula = $data['cedula'];
+                $sesion = Moderador::verificarMod($cedula);
+                self::$view_general
+                    ->success_json($sesion)
+                    ->render();
+            } else {
+                self::$view_general
+                    ->error404()
+                    ->render();
+            }
+        } catch (\Exception $e) {
+            self::$view_general
+                ->error_json_default($e)
+                ->render();
+        }
+    }
+
     /**
      * URLS para el direccionamiento (url routing).
      * @return array
@@ -385,7 +405,8 @@ class AdministradorSrv {
                 '/^actualizar\/$/i' => "{$class_name}::lectores_actualizar",
                 '/^actualizar-token\/$/i' => "{$class_name}::lectores_actualizar_token",
                 '/^eliminar\/$/i' => "{$class_name}::lectores_eliminar",
-            ]
+            ],
+            '/^login-mod\/$/i' => "{$class_name}::verificarmod",
         ];
     }
 }

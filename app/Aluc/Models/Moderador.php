@@ -2,6 +2,7 @@
 
 namespace Aluc\Models;
 
+use Aluc\Common\AlucException;
 use Aluc\Dao\ModeradorDao;
 use Aluc\Models\Laboratorio;
 
@@ -62,5 +63,18 @@ class Moderador extends Persona {
 
     public function delete(){
         ModeradorDao::getInstance()->delete($this->id);
+    }
+
+    public static function verificarMod(
+        $cedula
+    )
+    {
+        $moderador = Moderador::getInstance($cedula);
+
+        if (count($moderador) == 1){
+            return true;
+        }else {
+            throw new AlucException(false, false);
+        }
     }
 }
