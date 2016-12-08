@@ -145,8 +145,7 @@ class ReservaDao
      */
     public function getReservaPasadas(
         $usuario_id,
-        $laboratorio_id,
-        $estado
+        $laboratorio_id
     )
     {
         $where = "";
@@ -158,9 +157,6 @@ class ReservaDao
             $where .= " id_laboratorio = '{$laboratorio_id}' and ";
         }
 
-        if ($estado != null) {
-            $where .= " estado = '{$estado}' and ";
-        }
 
         $where .= " estado != 'reservado' ORDER BY fecha DESC";
 
@@ -351,7 +347,11 @@ class ReservaDao
         }
 
         if ($laboratorio_id != null) {
-            $where .= "id_laboratorio = '{$laboratorio_id}'";
+            if(strlen($where) < 1){
+                $where .= " id_laboratorio = '{$laboratorio_id}'";
+            } else {
+                $where .= " and id_laboratorio = '{$laboratorio_id}'";
+            }
         }
 
         if ($estado != null) {
