@@ -53,7 +53,7 @@ class GeneralView extends View {
     }
 
     public function error_json_default($e) {
-        $msg = $e instanceof AlucException ? $e->short_message : 'Ups, algo salió mal' . $e->getMessage();
+        $msg = $e instanceof AlucException ? $e->short_message : ' Ups, algo salió mal ' . $e->getMessage();
         return $this->error_json($msg);
     }
 }
