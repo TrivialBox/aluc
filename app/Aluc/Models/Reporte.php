@@ -20,23 +20,15 @@ class Reporte
 
 
         foreach ($reserva_view as $fila) {
-            $fecha = [];
-            if ($fila['hora_activacion'] == null){
-                unset($fila['hora_activacion']);
-                $fecha = [
-                    'Fecha de reservación' => $fila['fecha'],
-                    'Hora de inicio de reserva' => $fila['hora_inicio'],
-                    'Hora final de reserva' => $fila['hora_fin'],
-                    'Fecha de creacion' => $fila['fecha_creacion']
-                ];
-            }else {
-                $fecha = [
-                    'Fecha de reservación' => $fila['fecha'],
-                    'Hora de inicio de reserva' => $fila['hora_inicio'],
-                    'Hora final de reserva' => $fila['hora_fin'],
-                    'Fecha de creacion' => $fila['fecha_creacion'],
-                    'Hora de activación' => $fila['hora_activacion']
-                ];
+            $fecha = [
+                'Fecha de reservación' => $fila['fecha'],
+                'Hora de inicio de reserva' => $fila['hora_inicio'],
+                'Hora final de reserva' => $fila['hora_fin'],
+                'Fecha de creacion' => $fila['fecha_creacion'],
+                'Hora de activación' => $fila['hora_activacion']
+            ];
+            if ($fecha['Hora de activación'] == null){
+                unset($fecha['Hora de activación']);
             }
 
             $reserva = [
