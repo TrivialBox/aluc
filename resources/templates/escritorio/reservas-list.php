@@ -2,7 +2,7 @@
 use Aluc\Common\TemplateGenerator;
 
 if (empty($get('reservas'))) {
-    TemplateGenerator::generate([], 'reservas/tip-container.php');
+    TemplateGenerator::generate([], 'escritorio/tip-container.php');
 } else {
     echo <<<'TAG'
 <div class="table-responsive">
