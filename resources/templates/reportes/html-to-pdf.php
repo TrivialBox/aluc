@@ -44,9 +44,21 @@
                 <tbody>
                 <?php
                 foreach ($get('rows') as $row) {
-                    echo "<tr >";
+                    echo "<tr>";
                     foreach ($row as $value) {
-                        echo "<td >{$value}</td>";
+                        echo '<td>';
+                        if (is_array($value)) {
+                            foreach ($value as $name => $val) {
+                                echo <<<TAG
+                        <strong>{$name}:</strong>
+                        <span>{$val}</span>
+                        <br>
+TAG;
+                            }
+                        } else {
+                            echo $value;
+                        }
+                        echo '</td>';
                     }
                     echo '</tr>';
                 }
@@ -64,3 +76,4 @@
     </body>
 
 </html>
+
