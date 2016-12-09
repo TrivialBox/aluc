@@ -12,7 +12,7 @@ class Reporte
         $reporte = [
             0 => [
                'Reserva',
-                'Reservacion' ,
+                'Reservación' ,
                 'Fecha'
             ]
         ];
@@ -20,27 +20,40 @@ class Reporte
 
 
         foreach ($reserva_view as $fila) {
+            $fecha = [];
+            if ($fila['hora_activacion'] == null){
+                unset($fila['hora_activacion']);
+                $fecha = [
+                    'Fecha de reservación' => $fila['fecha'],
+                    'Hora de inicio de reserva' => $fila['hora_inicio'],
+                    'Hora final de reserva' => $fila['hora_fin'],
+                    'Fecha de creacion' => $fila['fecha_creacion']
+                ];
+            }else {
+                $fecha = [
+                    'Fecha de reservación' => $fila['fecha'],
+                    'Hora de inicio de reserva' => $fila['hora_inicio'],
+                    'Hora final de reserva' => $fila['hora_fin'],
+                    'Fecha de creacion' => $fila['fecha_creacion'],
+                    'Hora de activación' => $fila['hora_activacion']
+                ];
+            }
+
             $reserva = [
-                'id reserva' => $fila['id'],
-                'número de usuarios' => $fila['n_usuarios'],
-                'descripcion' => $fila['descripcion'],
-                'tipo de uso' => $fila['tipo_uso'],
-                'codigo secreto' => $fila['codigo_secreto']
+                'Id reserva' => $fila['id'],
+                'Número de usuarios' => $fila['n_usuarios'],
+                'Descripción' => $fila['descripcion'],
+                'Tipo de uso' => $fila['tipo_uso'],
+                'Código secreto' => $fila['codigo_secreto']
             ];
 
             $reservacion = [
-                'id usuario' => $fila['id_usuario'],
-                'id laboratorio' => $fila['id_laboratorio'],
-                'estado' => $fila['estado']
+                'Id usuario' => $fila['id_usuario'],
+                'Id laboratorio' => $fila['id_laboratorio'],
+                'Estado' => $fila['estado']
             ];
 
-            $fecha = [
-                'fecha' => $fila['fecha'],
-                'hora de inicio' => $fila['hora_inicio'],
-                'hora final' => $fila['hora_fin'],
-                'fecha de creacion' => $fila['fecha_creacion'],
-                'hora de activacion' => $fila['hora_activacion']
-            ];
+
 
             $reporte_file = [
                 'Reserva' => $reserva,
