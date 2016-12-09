@@ -14,11 +14,9 @@ class LaboratorioView extends View {
     }
 
     public function show($id_lab) {
-        $data = [
-            'laboratorio' => Laboratorio::getInstance($id_lab)
-        ];
-        $this->setTemplate(
-            $data,
+        $this->setTemplate([
+                'laboratorio' => Laboratorio::getInstance($id_lab)
+            ],
             'laboratorios/laboratorio.php'
         );
         return $this;

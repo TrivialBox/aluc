@@ -1,8 +1,17 @@
-// Modal add-moderador
+// Modal add-reserva
 $('#modal-add-reserva').on(
     'shown.bs.modal',
     function (e) {
-        $('#modal-add-reserva #id_laboratorio').focus();
+        var combo = $('#modal-add-reserva #id_laboratorio');
+        combo.focus();
+    }
+);
+
+$('#modal-add-reserva').on(
+    'show.bs.modal',
+    function (e) {
+        var combo = $('#modal-add-reserva #id_laboratorio');
+        combo.val($('#laboratorios').val());
     }
 );
 
@@ -51,3 +60,4 @@ $('#modal-show-qr').on(
         });
     }
 );
+

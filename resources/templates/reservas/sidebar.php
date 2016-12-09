@@ -3,7 +3,7 @@
     <li>
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <form>
+                <form id="form-laboratorio">
                     <div class="form-group">
                         <!--
                         <label for="laboratorios">Laboratorio</label>

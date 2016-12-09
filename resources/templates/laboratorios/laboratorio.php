@@ -1,8 +1,8 @@
 <?php
 $laboratorio = $get('laboratorio');
 $horario = $laboratorio->horario;
-$jornada1 = $horario->joranda1;
-$jornada2 = $horario->joranda2;
+$jornada1 = $horario->jornada1;
+$jornada2 = $horario->jornada2;
 ?>
 <div>
 <ul class="list-group">
