@@ -32,7 +32,8 @@ INSERT INTO lector(mac,id_laboratorio,ip,token) VALUES('00:21:49:00:01:02','5','
 INSERT INTO lector(mac,id_laboratorio,ip,token) VALUES('00:22:49:00:01:02','6','192.168.1.13','aSgFERTYFRsffge');
 
 -- Reservas
-
+ALTER TABLE ALUC.reserva AUTO_INCREMENT=0;
+ALTER TABLE ALUC.reservacion AUTO_INCREMENT=0;
 -- clases
 CALL ALUC.insertar_reserva('0604107607','1','Clases normales ','10','clases','reservado','2016-12-02','15:00:00','16:00:00','Ds3lO3TT1UtO6RO');
 CALL ALUC.insertar_reserva('1400967715','2','Clases normales ','10','clases','reservado','2016-12-02','15:30:00','16:30:00','Ds3lO4TT1UtO6RO');
