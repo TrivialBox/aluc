@@ -29,7 +29,7 @@
             bottom: -40px;
             width: auto;
             height: auto;
-            background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
+            background-image: url(https://www.ucuenca.edu.ec/images/sss_2.jpg);
             background-size: cover;
             -webkit-filter: blur(5px);
             z-index: 0;
@@ -159,13 +159,13 @@
 <div class="body"></div>
 <div class="grad"></div>
 <div class="header">
-    <div>Site<span>Random</span></div>
+    <div><b>A</b><span><b>luc</b></span></div>
 </div>
 <br>
 <div class="login">
-    <input type="text" placeholder="username" name="user"><br>
-    <input type="password" placeholder="password" name="password"><br>
-    <input type="button" value="Login">
+    <input type="text" placeholder="usuario" name="user"><br>
+    <input type="password" placeholder="contraseña" name="password"><br>
+    <input type="button" value="Iniciar sesión">
 </div>
 
 <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
