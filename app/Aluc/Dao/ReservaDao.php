@@ -387,6 +387,8 @@ class ReservaDao
         switch ($code) {
             case 1452:
                 return "El laboratorio no se encuentra registrado.";
+            case 1265:
+                return "El valor ingresado en el tipo de la reserva es incorrecto.";
             case 50000:
                 return "En la hora que quiere realizar su reserva el laboratorio se encuentra en horario de clases.";
             case 60000:
@@ -405,6 +407,8 @@ class ReservaDao
                 return "No se puede sobre escribir una reserva con el mismo usuario.";
             case 130000:
                 return "La hora de final de la reseva tiene que ser mayor a la de inicio.";
+            case 160000:
+                return "No puede validar su reserva fuera del horario de su reserva.";
             default:
                 return "Ha ocurrido un error, disculpas por lo acontecido!.";
         }
