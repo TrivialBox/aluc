@@ -11,41 +11,46 @@ class Reporte
     {
         $reporte = [
             0 => [
-               'reserva',
-                'reservacion' ,
-                'fecha'
+               'Reserva',
+                'Reservación' ,
+                'Fecha'
             ]
         ];
 
 
 
         foreach ($reserva_view as $fila) {
+            $fecha = [
+                'Fecha de reservación' => $fila['fecha'],
+                'Hora de inicio de reserva' => $fila['hora_inicio'],
+                'Hora final de reserva' => $fila['hora_fin'],
+                'Fecha de creación' => $fila['fecha_creacion'],
+                'Hora de activación' => $fila['hora_activacion']
+            ];
+            if ($fecha['Hora de activación'] == null){
+                unset($fecha['Hora de activación']);
+            }
+
             $reserva = [
-                'id' => $fila['id'],
-                'n_usuarios' => $fila['n_usuarios'],
-                'descripcion' => $fila['descripcion'],
-                'tipo_uso' => $fila['tipo_uso'],
-                'codigo_secreto' => $fila['codigo_secreto']
+                'Id reserva' => $fila['id'],
+                'Número de usuarios' => $fila['n_usuarios'],
+                'Descripción' => $fila['descripcion'],
+                'Tipo de uso' => $fila['tipo_uso'],
+                'Código secreto' => $fila['codigo_secreto']
             ];
 
             $reservacion = [
-                'id_usuario' => $fila['id_usuario'],
-                'id_laboratorio' => $fila['id_laboratorio'],
-                'estado' => $fila['estado']
+                'Id usuario' => $fila['id_usuario'],
+                'Id laboratorio' => $fila['id_laboratorio'],
+                'Estado' => $fila['estado']
             ];
 
-            $fecha = [
-                'fecha' => $fila['fecha'],
-                'hora_inicio' => $fila['hora_inicio'],
-                'hora_fin' => $fila['hora_fin'],
-                'fecha_creacion' => $fila['fecha_creacion'],
-                'hora_activacion' => $fila['hora_activacion']
-            ];
+
 
             $reporte_file = [
-                'reserva' => $reserva,
-                'reservacion' => $reservacion,
-                'fecha' => $fecha
+                'Reserva' => $reserva,
+                'Reservacion' => $reservacion,
+                'Fecha' => $fecha
             ];
 
 
