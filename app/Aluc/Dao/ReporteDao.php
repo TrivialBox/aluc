@@ -6,7 +6,8 @@ namespace Aluc\Dao;
 /**
  * Clase para para manejo de base de datos de los Reportes
  */
-class ReporteDao{
+class ReporteDao
+{
     private $database;
     private static $instance = null;
 
@@ -14,7 +15,8 @@ class ReporteDao{
     /**
      * ReporteDao constructor.
      */
-    private function __construct() {
+    private function __construct()
+    {
         $this->database = new Database();
         $this->database->connect();
     }
@@ -23,7 +25,8 @@ class ReporteDao{
      * Obtener la instancia de la clase.
      * @return null
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (static::$instance == null) {
             static::$instance = new self();
         }
@@ -45,14 +48,15 @@ class ReporteDao{
         $fecha_final,
         $id_usuario,
         $id_laboratorio
-    ){
-        try{
+    )
+    {
+        try {
             $where = " fecha between '{$fecha_inicial}' AND '{$fecha_final}' ";
 
-            if ($id_usuario != null){
+            if ($id_usuario != null) {
                 $where .= " and id_usuario = '{$id_usuario}'";
             }
-            if ($id_laboratorio != null){
+            if ($id_laboratorio != null) {
                 $where .= " and id_laboratorio = '{$id_laboratorio}'";
             }
             return $reporteDia = $this->database
@@ -63,7 +67,7 @@ class ReporteDao{
                     'fecha asc'
                 );
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             ReservaDao::generarExcepcion($e);
         }
     }
@@ -72,21 +76,23 @@ class ReporteDao{
      * Método para obtener reportes a partir del año y el id_usuario.
      * @param $year
      * @param $id_usuario
+     * @param $id_laboratorio
      * @return mixed
      */
     public function getReportesAnio(
         $year,
         $id_usuario,
         $id_laboratorio
-    ){
-        try{
+    )
+    {
+        try {
             $where = "year(fecha) = '{$year}'";
 
-            if ($id_usuario != null){
+            if ($id_usuario != null) {
                 $where .= " and id_usuario = '{$id_usuario}'";
             }
 
-            if ($id_laboratorio != null){
+            if ($id_laboratorio != null) {
                 $where .= " and id_laboratorio = '{$id_laboratorio}'";
             }
 
@@ -98,7 +104,7 @@ class ReporteDao{
                     'fecha asc'
                 );
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             ReservaDao::generarExcepcion($e);
         }
     }
@@ -115,13 +121,14 @@ class ReporteDao{
         $fecha,
         $id_usuario,
         $id_laboratorio
-    ){
-        try{
+    )
+    {
+        try {
             $where = "fecha = '{$fecha}'";
-            if ($id_usuario != null){
+            if ($id_usuario != null) {
                 $where .= " and id_usuario = '{$id_usuario}'";
             }
-            if ($id_laboratorio != null){
+            if ($id_laboratorio != null) {
                 $where .= " and id_laboratorio = '{$id_laboratorio}'";
             }
             return $reporteDia = $this->database
@@ -132,7 +139,7 @@ class ReporteDao{
                     'fecha asc'
                 );
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             ReservaDao::generarExcepcion($e);
         }
     }
@@ -151,15 +158,16 @@ class ReporteDao{
         $year,
         $id_usuario,
         $id_laboratorio
-    ){
-        try{
+    )
+    {
+        try {
             $where = " week(fecha) = '{$semana}' 
                     and  year(fecha) = '{$year}'";
 
-            if ($id_usuario != null){
+            if ($id_usuario != null) {
                 $where .= " and id_usuario = '{$id_usuario}'";
             }
-            if ($id_laboratorio != null){
+            if ($id_laboratorio != null) {
                 $where .= " and id_laboratorio = '{$id_laboratorio}'";
             }
             return $reporteDia = $this->database
@@ -170,7 +178,7 @@ class ReporteDao{
                     'fecha asc'
                 );
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             ReservaDao::generarExcepcion($e);
         }
     }
@@ -189,30 +197,30 @@ class ReporteDao{
         $year,
         $id_usuario,
         $id_laboratorio
-    ){
-        try{
+    )
+    {
+        try {
             $where = "month(fecha) = '{$month}' 
                     and  year(fecha) = '{$year}'";
 
-            if ($id_usuario != null){
+            if ($id_usuario != null) {
                 $where .= " and id_usuario = '{$id_usuario}'";
             }
-            if ($id_laboratorio != null){
+            if ($id_laboratorio != null) {
                 $where .= " and id_laboratorio = '{$id_laboratorio}'";
             }
             return $reporteDia = $this->database
                 ->select(
-                "   view_reserva",
+                    "   view_reserva",
                     '*',
                     $where,
                     'fecha asc'
                 );
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             ReservaDao::generarExcepcion($e);
         }
     }
-
 
 
 }
