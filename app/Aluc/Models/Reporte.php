@@ -56,14 +56,16 @@ class Reporte
 
     public static function getReporteAnio(
         $id_usuario = null,
-        $id_laboratorio = null
+        $id_laboratorio = null,
+        $estado = null
     )
     {
         $reserva = ReporteDao::getInstance()
             ->getReportesAnio(
                 self::getAnioActual(),
                 $id_usuario,
-                $id_laboratorio
+                $id_laboratorio,
+                $estado
             );
 
         return self::getReserva($reserva);
@@ -71,21 +73,24 @@ class Reporte
 
     public static function getReporteDia(
         $id_usuario = null,
-        $id_laboratorio = null
+        $id_laboratorio = null,
+        $estado = null
     )
     {
         $reserva = ReporteDao::getInstance()
             ->getReporteDia(
                 self::getDiaActual(),
                 $id_usuario,
-                $id_laboratorio
+                $id_laboratorio,
+                $estado
             );
         return self::getReserva($reserva);
     }
 
     public static function getReporteSemana(
         $id_usuario = null,
-        $id_laboratorio = null
+        $id_laboratorio = null,
+        $estado = null
     )
     {
         $reserva = ReporteDao::getInstance()
@@ -93,14 +98,16 @@ class Reporte
                 self::getSemanaActual(),
                 self::getAnioActual(),
                 $id_usuario,
-                $id_laboratorio
+                $id_laboratorio,
+                $estado
             );
         return self::getReserva($reserva);
     }
 
     public static function getReporteMes(
         $id_usuario = null,
-        $id_laboratorio = null
+        $id_laboratorio = null,
+        $estado = null
     )
     {
         $reserva = ReporteDao::getInstance()
@@ -108,16 +115,20 @@ class Reporte
                 self::getMesActual(),
                 self::getAnioActual(),
                 $id_usuario,
-                $id_laboratorio
+                $id_laboratorio,
+                $estado
             );
         return self::getReserva($reserva);
     }
+
+
 
     public static function getReportes(
         $fecha_inicial,
         $fecha_final,
         $id_usuario = null,
-        $id_laboratorio = null
+        $id_laboratorio = null,
+        $estado = null
     )
     {
         if (!self::validarFecha($fecha_inicial, $fecha_final)) {
@@ -131,7 +142,8 @@ class Reporte
                 $fecha_inicial,
                 $fecha_final,
                 $id_usuario,
-                $id_laboratorio
+                $id_laboratorio,
+                $estado
             );
         return self::getReserva($reserva);
 
