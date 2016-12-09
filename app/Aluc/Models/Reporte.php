@@ -11,9 +11,9 @@ class Reporte
     {
         $reporte = [
             0 => [
-               'reserva',
-                'reservacion' ,
-                'fecha'
+               'Reserva',
+                'Reservacion' ,
+                'Fecha'
             ]
         ];
 
@@ -21,31 +21,31 @@ class Reporte
 
         foreach ($reserva_view as $fila) {
             $reserva = [
-                'id' => $fila['id'],
-                'n_usuarios' => $fila['n_usuarios'],
+                'id reserva' => $fila['id'],
+                'número de usuarios' => $fila['n_usuarios'],
                 'descripcion' => $fila['descripcion'],
-                'tipo_uso' => $fila['tipo_uso'],
-                'codigo_secreto' => $fila['codigo_secreto']
+                'tipo de uso' => $fila['tipo_uso'],
+                'codigo secreto' => $fila['codigo_secreto']
             ];
 
             $reservacion = [
-                'id_usuario' => $fila['id_usuario'],
-                'id_laboratorio' => $fila['id_laboratorio'],
+                'id usuario' => $fila['id_usuario'],
+                'id laboratorio' => $fila['id_laboratorio'],
                 'estado' => $fila['estado']
             ];
 
             $fecha = [
                 'fecha' => $fila['fecha'],
-                'hora_inicio' => $fila['hora_inicio'],
-                'hora_fin' => $fila['hora_fin'],
-                'fecha_creacion' => $fila['fecha_creacion'],
-                'hora_activacion' => $fila['hora_activacion']
+                'hora de inicio' => $fila['hora_inicio'],
+                'hora final' => $fila['hora_fin'],
+                'fecha de creacion' => $fila['fecha_creacion'],
+                'hora de activacion' => $fila['hora_activacion']
             ];
 
             $reporte_file = [
-                'reserva' => $reserva,
-                'reservacion' => $reservacion,
-                'fecha' => $fecha
+                'Reserva' => $reserva,
+                'Reservacion' => $reservacion,
+                'Fecha' => $fecha
             ];
 
 
