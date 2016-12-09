@@ -9,36 +9,14 @@ class Reporte
 
     private static function getReserva($reserva_view)
     {
-
-        $fecha_metadata = [
-            'fecha' => 'fecha',
-            'hora_inicio' => 'hora de inicio',
-            'hora_fin' => 'hora de fin',
-            'fecha_creacion' => 'fecha de creación',
-            'hora_activacion' => 'hora de verificación'
-        ];
-
-        $reserva_metadata = [
-            'id' => 'id reserva',
-            'n_usuarios' => 'número de usuarios',
-            'descripcion' => 'descripción',
-            'tipo_uso' => 'tipo de uso',
-            'codigo_secreto' => 'codigo secreto'
-
-        ];
-
-        $reservacion_metadata = [
-            'id_usuario' => 'id usuario',
-            'id_laboratorio' => 'id laboratorio',
-            'estado' => 'estado'
-        ];
         $reporte = [
             0 => [
-                'reserva' => $reserva_metadata,
-                'reservacion' => $reservacion_metadata,
-                'fecha' => $fecha_metadata
+               'reserva',
+                'reservacion' ,
+                'fecha'
             ]
         ];
+
 
 
         foreach ($reserva_view as $fila) {
@@ -69,6 +47,7 @@ class Reporte
                 'reservacion' => $reservacion,
                 'fecha' => $fecha
             ];
+
 
             array_push($reporte, $reporte_file);
         }
@@ -128,21 +107,6 @@ class Reporte
             ->getReporteMes(
                 self::getMesActual(),
                 self::getAnioActual(),
-                $id_usuario,
-                $id_laboratorio
-            );
-        return self::getReserva($reserva);
-    }
-
-    public static function getReportesEstado(
-        $estado,
-        $id_usuario = null,
-        $id_laboratorio = null
-    )
-    {
-        $reserva = ReporteDao::getInstance()
-            ->getReportesEstado(
-                $estado,
                 $id_usuario,
                 $id_laboratorio
             );
