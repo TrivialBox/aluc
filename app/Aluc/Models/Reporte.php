@@ -24,7 +24,7 @@ class Reporte
                 'Fecha de reservación' => $fila['fecha'],
                 'Hora de inicio de reserva' => $fila['hora_inicio'],
                 'Hora final de reserva' => $fila['hora_fin'],
-                'Fecha de creacion' => $fila['fecha_creacion'],
+                'Fecha de creación' => $fila['fecha_creacion'],
                 'Hora de activación' => $fila['hora_activacion']
             ];
             if ($fecha['Hora de activación'] == null){
