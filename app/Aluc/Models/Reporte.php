@@ -134,6 +134,21 @@ class Reporte
         return self::getReserva($reserva);
     }
 
+    public static function getReportesEstado(
+        $estado,
+        $id_usuario = null,
+        $id_laboratorio = null
+    )
+    {
+        $reserva = ReporteDao::getInstance()
+            ->getReportesEstado(
+                $estado,
+                $id_usuario,
+                $id_laboratorio
+            );
+        return self::getReserva($reserva);
+    }
+
     public static function getReportes(
         $fecha_inicial,
         $fecha_final,

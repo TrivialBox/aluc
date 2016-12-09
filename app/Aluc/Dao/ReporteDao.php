@@ -222,5 +222,35 @@ class ReporteDao
         }
     }
 
+    public function getReportesEstado(
+        $estado,
+        $id_usuario,
+        $id_laboratorio
+    )
+    {
+        try {
+
+
+            $where = " estado = '{$estado}'";
+
+            if ($id_usuario != null) {
+                $where .= " and id_usuario = '{$id_usuario}'";
+            }
+            if ($id_laboratorio != null) {
+                $where .= " and id_laboratorio = '{$id_laboratorio}'";
+            }
+            return $reporteEstado = $this->database
+                ->select(
+                    "   view_reserva",
+                    '*',
+                    $where,
+                    'fecha asc'
+                );
+
+        } catch (\Exception $e) {
+            ReservaDao::generarExcepcion($e);
+        }
+    }
+
 
 }
