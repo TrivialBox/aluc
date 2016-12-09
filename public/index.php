@@ -7,6 +7,7 @@ use Aluc\Service\ErrorSrv;
 use Aluc\Common\Urls;
 use Aluc\Service\EscritorioSrv;
 use Aluc\Service\ReservasSrv;
+use Aluc\Service\LaboratorioSrv;
 
 $_SESSION['id'] = '1105871089';
 $_SESSION['type'] = 'admin';  // admin, moderador, user, profesor
@@ -20,6 +21,7 @@ Urls::serveRequest([
     '/^reservas\//i' => ReservasSrv::urls(),
     '/^admin\//i' => AdministradorSrv::urls(),
     '/^escritorio\//i' => EscritorioSrv::urls(),
+    '/^laboratorios\//i' => LaboratorioSrv::urls(),
     '/^error\//i' => ErrorSrv::urls(),
     '/.*/' => ErrorSrv::url404()
 ]);
