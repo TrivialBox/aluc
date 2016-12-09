@@ -21,5 +21,5 @@ $html2pdf->writeHTML($content);
 TemplateGenerator::generate([], 'common/no-cache.php');
 header("Content-type:application/pdf");
 
-$html2pdf->Output($get('name'));
+$html2pdf->Output('reporte.pdf');
 

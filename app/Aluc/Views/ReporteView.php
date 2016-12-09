@@ -77,29 +77,31 @@ class ReporteView extends View {
         return $this;
     }
 
-    public function pdf($name = 'reporte.pdf',$name_admin= 'administador') {
+    public function pdf($type, $id_user, $id_laboratorio, $fecha_inicio = null, $fecha_fin = null) {
+        $class_name = 'Aluc\Models\Reporte';
+        $types = [
+            'today' => "{$class_name}::getReporteDia",
+            'this-week' => "{$class_name}::getReporteSemana",
+            'this-month' => "{$class_name}::getReporteMes",
+            'this-year' => "{$class_name}::getReporteAnio",
+            'other' => "{$class_name}::getReportes"
+        ];
+        $func = $types['today'];
+        if (array_key_exists($type, $types)) {
+            $func = $types[$type];
+        }
+        if ($type == "other") {
+            $report = $func($fecha_inicio, $fecha_fin, $id_user, $id_laboratorio);
+        } else {
+            $report = $func($id_user, $id_laboratorio);
+        }
+        $name_admin = 'Administrador';
+        $name = 'Reporte';
         $data = [];
         $data['name_admin'] = $name_admin;
         $data['name'] = $name;
-        $data['headers'] = ['ID', 'Nombre', 'Apellido'];
-        $data['rows'] = [
-            ['1', '4', '3'],
-            ['1', '4', '3'],
-            ['1', '8', '6'],
-            ['5', '3', '3'],
-            ['1', '4', '4'],
-            ['1', '4', '9'],
-            ['1', '4', '7'],
-            ['4', '5', '4'],
-            ['2', '5', '4'],
-            ['1', '4', '4'],
-            ['2', '14', '3'],
-            ['1', '3', '3'],
-            ['2', '3', '3'],
-            ['2', '2', '3'],
-            ['1', '2', '3'],
-            ['2', '2', '3']
-        ];
+        $data['headers'] = array_shift($report);
+        $data['rows'] = $report;
         $this->setTemplate(
             $data,
             'reportes/pdf.php'

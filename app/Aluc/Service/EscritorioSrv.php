@@ -137,10 +137,28 @@ class EscritorioSrv {
         self::user_do(
             function () use ($data) {
                 if (!empty($data) and Tools::check_method('get')) {
-                    $file_type = $data['file_type'];
+                    $file_type = $data['type'];
+                    $fecha = 'today';
+                    $id_laboratorio = null;
+                    $id_usuario = null;
+                    $fecha_inicio = null;
+                    $fecha_fin = null;
+                    if (array_key_exists('fecha', $data)) {
+                        $fecha = $data['fecha'];
+                    }
+                    if (array_key_exists('id_laboratorio', $data) && $data['id_laboratorio'] != "-1") {
+                        $id_laboratorio = $data['id_laboratorio'];
+                    }
+                    if (array_key_exists('id_usuario', $data) && !empty($data['id_usuario'])) {
+                        $id_usuario = $data['id_usuario'];
+                    }
+                    if ($fecha == 'other') {
+                        $fecha_inicio = Tools::getCanonicalFecha($data['fecha_inicio']);
+                        $fecha_fin = Tools::getCanonicalFecha($data['fecha_fin']);
+                    }
                     if ($file_type == 'pdf') {
                         self::$view_reportes
-                            ->pdf()
+                            ->pdf($fecha, $id_usuario, $id_laboratorio, $fecha_inicio, $fecha_fin)
                             ->render();
                     } else if ($file_type == 'csv') {
                         self::$view_reportes

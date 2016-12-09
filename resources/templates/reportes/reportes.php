@@ -42,12 +42,12 @@ use Aluc\Common\TemplateGenerator;
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>
-                                                <a class="dropdown-item" target="_blank" href="/escritorio/reportes/exportar?file_type=pdf">
+                                                <a class="dropdown-item" target="_blank" href="#" id="export-pdf">
                                                     PDF
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" target="_blank" href="/escritorio/reportes/exportar?file_type=csv">
+                                                <a class="dropdown-item" target="_blank" href="#" id="export-csv">
                                                     CSV
                                                 </a>
                                             </li>
