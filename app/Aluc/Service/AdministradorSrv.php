@@ -313,6 +313,7 @@ class AdministradorSrv {
         );
     }
 
+
     public static function lectores_actualizar_token($data) {
         self::admin_do(
             function () use ($data) {

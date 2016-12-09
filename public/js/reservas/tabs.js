@@ -1,10 +1,14 @@
 $('#reservas-nuevas-tab').on(
     'show.bs.tab',
     function (e) {
+        var laboratorio_id = $('#laboratorios').val();
         $.ajax({
             'type': 'get',
             'url': 'reservas',
-            'data': {'type': 'new'},
+            'data': {
+                'type': 'new',
+                'laboratorio_id': laboratorio_id
+            },
             'beforeSend': function () {
                 $('.loader-container').show();
             },
@@ -28,10 +32,14 @@ $('#reservas-nuevas-tab').on(
 $('#reservas-pasadas-tab').on(
     'show.bs.tab',
     function (e) {
+        var laboratorio_id = $('#laboratorios').val();
         $.ajax({
             'type': 'get',
             'url': 'reservas',
-            'data': {'type': 'old'},
+            'data': {
+                'type': 'old',
+                'laboratorio_id': laboratorio_id
+            },
             'beforeSend': function () {
                 $('.loader-container').show();
             },

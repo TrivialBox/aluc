@@ -23,6 +23,14 @@ sendRequestReservas('#form-cancel-reserva', 'cancelar', function (data, status) 
     $('#reservas-nuevas-tab').trigger('show.bs.tab');
 });
 
+
+$('#laboratorios').on(
+    'change',
+    function (e) {
+        $('#reservas-nuevas-tab').trigger('show.bs.tab');
+    }
+);
+
 $(document).ready(function () {
-    $('#reservas-nuevas-tab').trigger('show.bs.tab');
+    $('#laboratorios').trigger('change');
 });
