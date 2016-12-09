@@ -199,7 +199,7 @@ BEGIN
     if new.estado = 'procesado' then
 		
         if (now() between Shora_inicio and Shora_fin) then
-			update reservacion set fecha_activacion = now() where id = NEW.id_reserva;
+			update reservacion set hora_activacion = now() where id = NEW.id_reserva;
 		else
 			signal sqlstate "45000" set message_text = '160000'; 
 		end if;
@@ -514,4 +514,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-08 21:26:58
+-- Dump completed on 2016-12-08 21:54:27
