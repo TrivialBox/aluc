@@ -74,7 +74,7 @@ use Aluc\Common\TemplateGenerator;
                                     <option value="other">Otra</option>
                                   </select>
                                 </div>
-                              <div id="custom-date" class="collapse">
+                              <div id="custom-date" class="collapse" style="padding: 2%">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="fecha-inicio">Fecha de Inicio</label>
