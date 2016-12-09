@@ -28,7 +28,7 @@ use Aluc\Common\TemplateGenerator;
               ?>
               <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Salir</a></li>
+            <li><a href="/logout">Salir</a></li>
           </ul>
         </li>
       </ul>

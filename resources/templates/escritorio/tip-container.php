@@ -8,3 +8,4 @@ TemplateGenerator::generate([
 ],
     'common/tip-container.php'
 );
+
