@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <title>CodePen - Random Login Form</title>
+    <title>Gestión de laboratorios de la Universidad de Cuenca</title>
 
     <style>
         @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
@@ -150,14 +150,14 @@
         }
     </style>
 
-    <script src="js/prefixfree.min.js"></script>
 
 </head>
 
 <body>
 
-<div class="body"></div>
-<div class="grad"></div>
+
+<div class="body container"></div>
+<div class="grad container"></div>
 <div class="header">
     <div><b>A</b><span><b>luc</b></span></div>
 </div>
