@@ -4,8 +4,7 @@ php:
   - '7.0'
 
 before_install:
-  - curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-
+  - sudo cp /usr/share/zoneinfo/Etc/GMT+6 /etc/localtime
 
 services:
   - mysql
