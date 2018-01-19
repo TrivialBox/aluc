@@ -1,7 +1,7 @@
 {
   "host": "localhost",
   "user": "root",
-  "pass": "1234",
+  "pass": "root",
   "name": "ALUC",
   "port": 3306
 }

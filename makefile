@@ -1,6 +1,6 @@
 PHP = php
 TEST_RUNNER = ./vendor/bin/phpunit
-DB_PASS = 1234
+DB_PASS = root
 
 test:
 	$(TEST_RUNNER)
